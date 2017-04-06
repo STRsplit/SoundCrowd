@@ -6,7 +6,7 @@
 
   - [Eugene Penaranda](https://github.com/epenaranda007)
   - [Laura Greenbaum](https://github.com/lgbaum)
-  - [Juanjose Gutierrez](https://github.com/jjwatt99)
+  - [JJ Gutierrez](https://github.com/jjwatt99)
   - [Steven Reed](https://github.com/Streed12)
 
 ## Table of Contents
