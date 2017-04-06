@@ -3,25 +3,37 @@ import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import App from './components/App.jsx';
+import keys from './config/keys.js';
+import axios from 'axios';
 import $ from 'jquery';
 
 class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: true
+			loggedIn: true,
+			location: '',
+			weather: ''
 		}
-		this.getWeather = this.getWeather.bind(this);
 	}
 
-	getWeather() {
-		console.log('in get weather');
-    $.ajax({
-			url: '',
-			success: function(data) {
-				console.log('main data', data);	
-			}
-		});
+	componentWillMount() {
+		axios.get('http://ip-api.com/json')
+		.then(function(res) {
+			this.setState({
+				location: res['data']['city']
+			});
+			console.log(this.state.location);
+		}.bind(this))
+		.then(function() {
+			axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.state.location + '&appid=' + keys['weather'])
+			.then(function(res) {
+				this.setState({
+					weather: res['data']['weather'][0]['main']
+				})
+				console.log(this.state.weather);
+			}.bind(this))
+		}.bind(this));
 	}
 
 	render() {
@@ -36,9 +48,3 @@ class Main extends React.Component {
 }
   
 ReactDOM.render(<Main />, document.getElementById('app'));
-
-// <BrowserRouter>
-//     <Route exact path="/" render={() => (
-//     	this.state.loggedIn ? <App /> : <App />
-//     )}/>
-// </BrowserRouter>
