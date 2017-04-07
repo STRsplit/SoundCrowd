@@ -22,24 +22,26 @@ class Main extends React.Component {
 		axios.get('/api/verifyuser')
 		.then(result => {
 			console.log('result', result);
-			this.setState({loggedIn: true});
+			if (result.data) {
+				this.setState({loggedIn: true});
 
-			axios.get('http://ip-api.com/json')
-			.then(function(res) {
-				this.setState({
-					location: res['data']['city']
-				});
-				console.log(this.state.location);
-			}.bind(this))
-			.then(function() {
-				axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.state.location + '&appid=' + keys['weather'])
+				axios.get('http://ip-api.com/json')
 				.then(function(res) {
 					this.setState({
-						weather: res['data']['weather'][0]['main']
-					})
-					console.log(this.state.weather);
+						location: res['data']['city']
+					});
+					console.log(this.state.location);
 				}.bind(this))
-			}.bind(this));
+				.then(function() {
+					axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.state.location + '&appid=' + keys['weather'])
+					.then(function(res) {
+						this.setState({
+							weather: res['data']['weather'][0]['main']
+						})
+						console.log(this.state.weather);
+					}.bind(this))
+				}.bind(this));
+			}
 		})
 		.catch(err => console.log('main.js error componentDidMount: ', err));
 		
