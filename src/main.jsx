@@ -7,7 +7,7 @@ import axios from 'axios';
 import $ from 'jquery';
 
 import App from './components/App.jsx';
-
+import SearchContainer from './components/SearchContainer.jsx'
 
 
 class Main extends React.Component {
@@ -43,7 +43,7 @@ class Main extends React.Component {
 		return (
 			<BrowserRouter>
 	      <Route exact path="/" render={() => (
-	     	  this.state.loggedIn ? <App /> : <App />
+	     	  this.state.loggedIn ? <SearchContainer /> : <SearchContainer />
 	      )}/>
 	    </BrowserRouter>
 		)
