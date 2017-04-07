@@ -1,12 +1,16 @@
 {
-  "name": "hrsf72-mvp",
+  "name": "hrsf72-thesis",
   "version": "1.0.0",
   "description": "View your currencies on the best interface!",
   "main": "index.js",
   "scripts": {
     "compile": "webpack",
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run init-webpack && npm run init-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/server.js",
+    "init-webpack": "webpack -p",
+    "init-server": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
