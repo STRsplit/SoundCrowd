@@ -6,6 +6,7 @@ var spotify = new SpotifyWebApi({
   redirectUri : 'http://localhost:3000/auth/spotify/callback'
 });
 
+
 module.exports.searchFor = (req, res) => {
   console.log('REQUESTTTTTTTTTT', req.params);
   const input = req.params.search
@@ -20,4 +21,6 @@ module.exports.searchFor = (req, res) => {
   });
 }
 
-// module.exports.search = search;
+
+module.exports.search = search;
+
