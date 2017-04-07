@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "webpack",
-    "start": "npm run init-webpack && npm run init-server",
+    "start": "npm run react-dev && npm run server-dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
@@ -38,5 +38,8 @@
     "react-router-dom": "^4.0.0",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.10.1"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.2"
   }
 }
