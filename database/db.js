@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('music', 'root', '');
+const db = new Sequelize('music', 'root', 'root');
 
 const User = db.define('User', {
   id: {type: Sequelize.STRING, primaryKey: true},
@@ -30,7 +30,7 @@ var database = 'music';
 
 var connection = mysql.createConnection({
   user: 'root',
-  password: ''
+  password: 'root'
 });
 
 var db = Promise.promisifyAll(connection, {multiArgs: true});
