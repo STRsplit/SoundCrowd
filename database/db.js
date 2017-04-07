@@ -1,22 +1,21 @@
-var mongoose = require('mongoose');
-var User = require('./users');
- 
-mongoose.connect('mongodb://localhost/some');
+var mysql = require('mysql');
+var Promise = require('bluebird');
+var schema = require('./schema.js')
+var database = 'music';
 
-var db = mongoose.connection;
-db.on('error', function(error) {
-  console.log('connection error: ', error);
-});
-db.once('open', function() {
-  console.log('We are connected to the So Me database');
-  db.dropDatabase().then(function() {
-  	var start = new User({
-  		playlist: [],
-		  spotifyid: 'test',
-		  email: 'test',
-		  name: 'test'
-  	}).save();
-  });
+var connection = mysql.createConnection({
+  user: 'root',
+  password: ''
 });
 
-module.exports = db;
+var db = Promise.promisifyAll(connection, {multiArgs: true});
+
+db.connectAsync().then(function() {
+  return db.queryAsync('DROP DATABASE IF EXISTS ' + database);
+}).then(function() {
+  return db.queryAsync('CREATE DATABASE ' + database);
+}).then(function() {
+  return db.queryAsync('USE ' + database);
+}).then(function() {
+  return db.queryAsync(schema.session);
+});

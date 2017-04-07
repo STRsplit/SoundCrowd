@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var db = require('../database/db');
-var User = require('../database/users');
 var app = express();
 
 app.use(express.static(__dirname + '/../public'));
