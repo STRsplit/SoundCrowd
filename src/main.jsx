@@ -57,9 +57,14 @@ class Main extends React.Component {
 		console.log('this.state', this.state.loggedIn);
 		return (
 			<BrowserRouter>
-	      <Route exact path="/" render={() => (
-	     	  this.state.loggedIn ? <App /> : <Login />
-	      )}/>
+			  <div>
+				  <Route path="/login" render={() => (
+		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
+		      )}/>
+		      <Route exact path="/" render={() => (
+		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
+		      )}/>
+		    </div>
 	    </BrowserRouter>
 		)
 	}
