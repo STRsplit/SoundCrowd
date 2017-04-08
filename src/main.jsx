@@ -58,6 +58,7 @@ class Main extends React.Component {
 	render() {
 		console.log('this.state', this.state.loggedIn);
 		return (
+			<BrowserRouter>
 			  <div>
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
@@ -66,6 +67,7 @@ class Main extends React.Component {
 		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
 		      )}/>
 		    </div>
+		  </BrowserRouter>
 		)
 	}
 }

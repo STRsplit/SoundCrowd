@@ -5,7 +5,7 @@ var handler = require('./requestHandler');
 var spotify = require('./spotify');
 var db = require('../database/db');
 var app = express();
-
+var port = process.env.PORT || 3000;
 /* * Authentication * */
 var session = require('express-session');
 var passport = require('passport');
@@ -64,6 +64,6 @@ app.get('*', function(req, res) {
 });
 
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(port, function() {
+  console.log(`listening on port!${port}`);
 });
