@@ -7,6 +7,7 @@ import App from './components/App.jsx';
 import Login from './components/login/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
+import Playlist from './components/Playlist.jsx';
 import SearchContainer from './components/SearchContainer.jsx'
 
 
@@ -73,16 +74,17 @@ class Main extends React.Component {
 	}
 
 	render() {
-		console.log('this.state', this.state.loggedIn);
+		console.log('logged in', this.state.loggedIn);
 		return (
       <BrowserRouter>
 			  <div>
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
 		      )}/>
-          <Route path="/playlists" render={() => (
+          <Route path="/playlists" render={() => (<Playlists />
             this.state.loggedIn ? <Playlists /> : <Redirect to="/login" />
           )}/>
+          <Route path="/playlist" render={() =>(<Playlist />)}/>
 		      <Route exact path="/" render={() => (
 		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
 		      )}/>
