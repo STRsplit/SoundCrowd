@@ -11,6 +11,10 @@ const User = db.define('User', {
   } 
 );
 
+// const Vote = db.define('Vote', {
+//   songId: 
+// });
+
 // creates these tables in MySQL if they don't already exist. Pass in {force: true}
 // to drop any existing user and message tables and make new ones.
 User.sync();
@@ -21,31 +25,26 @@ module.exports = {
 
 
 
+/* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED * * 
+const mysql = require('mysql');
+const Promise = require('bluebird');
+const dbName = 'music';
 
-/* * ORIGINAL * *
-var mysql = require('mysql');
-var Promise = require('bluebird');
-var schema = require('./schema.js')
-var database = 'music';
-
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   user: 'root',
   password: ''
 });
 
-var db = Promise.promisifyAll(connection, {multiArgs: true});
+const database = Promise.promisifyAll(connection, {multiArgs: true});
 
-db.connectAsync().then(function() {
-  return db.queryAsync('DROP DATABASE IF EXISTS ' + database);
-}).then(function() {
-  return db.queryAsync('CREATE DATABASE ' + database);
-}).then(function() {
-  return db.queryAsync('USE ' + database);
-}).then(function() {
-  return db.queryAsync(schema.session);
+database.connectAsync()
+.then(() => {
+  return database.queryAsync('DROP DATABASE IF EXISTS ' + dbName);
 })
-.then(() => db.queryAsync(schema.users));
-
-module.exports = db;
-
-* * ORIGINAL * */
+.then(() => {
+  return database.queryAsync('CREATE DATABASE ' + dbName);
+})
+.then(() => {
+  return database.queryAsync('USE ' + dbName);
+});
+* * ADD THIS AT LINE 1 DURING SETUP * */
