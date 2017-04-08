@@ -1,4 +1,4 @@
-var setup = require('./setup');
+var setup = require('./setup.js');
 var db = require('../database/db');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
