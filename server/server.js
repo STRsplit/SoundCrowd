@@ -9,7 +9,7 @@ var app = express();
 /* * Authentication * */
 var session = require('express-session');
 var passport = require('passport');
-var spotifyAuth = require('./spotifyAuthentication');
+// var spotifyAuth = require('./spotifyAuthentication');
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
@@ -33,15 +33,9 @@ app.get('/api/search/', spotify.searchFor);
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
 app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private'], responseType: 'token', showDialog: true}));
 
-app.get('/auth/spotify/callback', function(req, res) {
-  passport.authenticate('spotify', { failureRedirect: '/login' });
-  spotify.authenticate(req.query.code, function(err) {
-    if (err) res.status(err.statusCode).send(err);
-    else {
-      res.redirect('/playlists');
-    }
-  }); 
-});
+app.get('/auth/spotify/callback', 
+  passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
+);
 
 // app.get('/api/trackTest', function(req, res) {
 //   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
