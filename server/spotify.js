@@ -36,16 +36,14 @@ module.exports = {
       });
   },
   searchFor: function(req, res) {
-    console.log('REQUESTTTTTTTTTT', req.params);
-    const input = req.params.search
-    spotify.searchTracks(input)
-      .then(function(data) {
-        let { items } = data.body.tracks;
-        console.log('ITEM 1', items[0]);
-        console.log('TRACKKKKKKKKKKKKKKSSSSSSSS', items)
-        res.send(items)
-      }, function(err) {
-        console.error(err);
+  const { name, filter } = req.query
+
+  spotify.searchTracks(`${filter}:${name}`)
+  .then(function(data) {
+    let { items } = data.body.tracks;
+    res.send(items)
+  }, function(err) {
+      console.error(err);
     });
   }
 };

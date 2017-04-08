@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Match } from 'react-router-dom';
 
 import App from './components/App.jsx';
 import Login from './components/login/Login.jsx';
 import SearchContainer from './components/SearchContainer.jsx'
 
+
 import keys from './config/keys.js';
 import axios from 'axios';
 import $ from 'jquery';
+require("!style-loader!css-loader!sass-loader!./sass/all.scss");
 
 
 
@@ -56,7 +58,6 @@ class Main extends React.Component {
 	render() {
 		console.log('this.state', this.state.loggedIn);
 		return (
-			<BrowserRouter>
 			  <div>
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
@@ -65,7 +66,6 @@ class Main extends React.Component {
 		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
 		      )}/>
 		    </div>
-	    </BrowserRouter>
 		)
 	}
 }
