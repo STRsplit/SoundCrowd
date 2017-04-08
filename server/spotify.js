@@ -1,3 +1,7 @@
+var setup = require('./setup');
+var db = require('../database/db');
+var passport = require('passport');
+var SpotifyStrategy = require('passport-spotify').Strategy;
 var SpotifyWebApi = require('spotify-web-api-node');
 // var spotify = new SpotifyWebApi({ 
 //   clientId : '169b6e558aea4f4a8725d2ad38382923',
@@ -21,6 +25,7 @@ if(!process.env.SPOTIFY_CLIENT_ID){
   });
 }
 module.exports = {
+  /*
   authenticate: function(code, cb) {
     spotify.authorizationCodeGrant(code)
     .then(function(data) {
@@ -32,6 +37,7 @@ module.exports = {
       cb(err);
     });
   },
+  */
   getUserPlaylists: function(username, cb) {
     spotify.getUserPlaylists(username)
       .then(data => {
@@ -50,6 +56,16 @@ module.exports = {
         cb(err, null);
       });
   },
+  moveTrack: function(username, playlistId, cb) {
+    // var options = { 'range_length': 2 };
+    spotify.reorderTracksInPlaylist(username, playlistId, 1, 3)
+      .then(data => {
+        cb(null);
+      })
+      .catch(err => {
+        cb(err);
+      });
+  },
   searchFor: function(req, res) {
   const { name, filter } = req.query
 
@@ -62,3 +78,51 @@ module.exports = {
     });
   }
 };
+
+
+passport.use(new SpotifyStrategy(setup.spotifyAuth,
+  (accessToken, refreshToken, profile, done) => {
+
+    spotify.setAccessToken(accessToken);
+    spotify.setRefreshToken(refreshToken);
+    
+    const { id, display_name, email } = profile._json;
+    const user = {
+      id: id, 
+      name: display_name || '', 
+      email: email 
+    };
+
+    db.User.findOne({where: {id: id}})
+    .then(result => {
+      if (!result) {
+        db.User.create(user)
+        .then(result => {
+          return done(null, result.dataValues);
+        })
+        .catch(err => console.log('User.create err: ', err));
+      } else {
+        return done(null, result.dataValues);        
+      }    
+    })
+    .catch(err => {
+      console.log('spotifyAuthentication catch error: ', err);      
+    });    
+  }) 
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  db.User.findOne({where: {id: id}})
+  .then(result => {
+    return done(null, result.dataValues);
+  })
+  .catch(err => {
+    console.log('passport.deserializeUser err: ', err);
+  });
+});
+
+
