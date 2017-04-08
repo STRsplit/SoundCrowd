@@ -80,7 +80,7 @@ module.exports = {
 };
 
 
-passport.use(new SpotifyStrategy(spotify,
+passport.use(new SpotifyStrategy({clientID: spotify.clientId, clientSecret: spotify.clientSecret, callbackURL: spotify.redirectUri},
   (accessToken, refreshToken, profile, done) => {
 
     spotify.setAccessToken(accessToken);
