@@ -8,17 +8,17 @@ var SpotifyWebApi = require('spotify-web-api-node');
 //   clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
 //   redirectUri : 'http://localhost:3000/auth/spotify/callback'
 // });
-// var spotify;
+var spotify;
 var SpotifyAuth = require('./setup.js').spotifyAuth;
 if(!process.env.SPOTIFY_CLIENT_ID){
   console.log(SpotifyAuth);
-  var spotify = new SpotifyWebApi({
+  spotify = new SpotifyWebApi({
     clientId: SpotifyAuth.clientID,
     clientSecret: SpotifyAuth.clientSecret,
     redirectUri: SpotifyAuth.callbackURL
   });
 } else {
-  var spotify = new SpotifyWebApi({ 
+  spotify = new SpotifyWebApi({ 
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       redirectUri: process.env.SITE_URL
@@ -80,7 +80,7 @@ module.exports = {
 };
 
 
-passport.use(new SpotifyStrategy(setup.spotifyAuth,
+passport.use(new SpotifyStrategy(spotify,
   (accessToken, refreshToken, profile, done) => {
 
     spotify.setAccessToken(accessToken);
