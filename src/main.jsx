@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect, Match } from 'react-router-dom';
 
 import App from './components/App.jsx';
-import Login from './components/login/Login';
+import Login from './components/login/Login.jsx';
 import SearchContainer from './components/SearchContainer.jsx'
 
 
@@ -58,12 +58,14 @@ class Main extends React.Component {
 	render() {
 		console.log('this.state', this.state.loggedIn);
 		return (
-			<BrowserRouter>
-	      <Route exact path="/" render={() => (
-	     	  this.state.loggedIn ? <App /> : <Login />
-	      )}/>
-	      
-	    </BrowserRouter>
+			  <div>
+				  <Route path="/login" render={() => (
+		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
+		      )}/>
+		      <Route exact path="/" render={() => (
+		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
+		      )}/>
+		    </div>
 		)
 	}
 }

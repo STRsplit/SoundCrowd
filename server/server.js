@@ -1,14 +1,15 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-const handler = require('./requestHandler');
-var app = express();
+var handler = require('./requestHandler');
 var spotify = require('./spotify');
+var db = require('../database/db');
+var app = express();
 
 /* * Authentication * */
-const session = require('express-session');
-const passport = require('passport');
-const spotifyAuth = require('./spotifyAuthentication');
+var session = require('express-session');
+var passport = require('passport');
+var spotifyAuth = require('./spotifyAuthentication');
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
@@ -29,17 +30,34 @@ app.use(passport.session());
 app.get('/api/search/', spotify.searchFor);
 
 // REPLACE IF NEEDED
-// passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true})
-app.get('/auth/spotify', passport.authenticate('spotify'));
+// passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
+app.get('/auth/spotify', passport.authenticate('spotify', {responseType: 'token', showDialog: true}));
 
-app.get('/auth/spotify/callback', 
-  passport.authenticate('spotify', {successRedirect: '/', failureRedirect: '/login'})
+app.get('/auth/spotify/callback', function(req, res) {
+    passport.authenticate('spotify', { failureRedirect: '/login' });
+    spotify.authenticate(req.query.code, function(err) {
+      if (err) res.status(err.statusCode).send(err);
+      else {
+        // user from session? on redirect?
+        var user = 'lgreenbaum';
+        spotify.getUserPlaylists(user, function(err, playlists) {
+          if (err) res.status(err.statusCode).send(err);
+          else res.status(200).send(playlists);
+        });
+      }
+    });
+  }
 );
 
-app.get('/api/verifyuser', (handler.verifyUser));
 /* *  Authentication * */
+app.get('/api/verifyuser', handler.verifyUser);
 
-// app.get('/*', (req, res) => res.redirect('/'));
+/* * Spotify API * */
+app.get('/api/playlists/:playlist', function(req, res) {
+  spotify.getPlaylist('username', req.params.playlist, function(err, tracks) {
+    // render tracks from playlist and start voting
+  });
+});
 
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
