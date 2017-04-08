@@ -2,7 +2,7 @@
   "name": "hrsf72-thesis",
   "version": "1.0.0",
   "description": "the best music app",
-  "main": "index.js",
+  "main": "main.jsx",
   "engines": {
     "node": "7.6.0"
   },
