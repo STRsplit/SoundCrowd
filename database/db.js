@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
 var db_config = {
-  host: 'http://localhost:3000/',
+  host: 'localhost',
   user: 'root',
   password: '',
   database: 'music'
 };
-if(!process.env.CLEARDB_DATABASE_URL){
+if(process.env.CLEARDB_DATABASE_URL){
+  console.log('CONFIG VARIABLE FOUND');
   db_config = {
     host: 'us-cdbr-iron-east-03.cleardb.net',
     user: 'be0115d9376ebc',
