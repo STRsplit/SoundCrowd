@@ -28,4 +28,3 @@ node_modules/
 bower_components/
 
 #ENVIRONMENT VARIABLES
-src/config/keys.js
