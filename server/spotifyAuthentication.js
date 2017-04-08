@@ -6,7 +6,6 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 
 passport.use(new SpotifyStrategy(setup.spotifyAuth,
   (accessToken, refreshToken, profile, done) => {
-    console.log('TOKEN:::::::::::::', accessToken);
     console.log('SPOTIFY PROFILE OBJECT RETURNED: ', profile);
     
     const { id, display_name, email } = profile._json;

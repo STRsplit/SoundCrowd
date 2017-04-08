@@ -1,7 +1,4 @@
 var SpotifyWebApi = require('spotify-web-api-node');
-
-var spotifyAuth = require('./setup').spotifyAuth;
-// spotifyAuth.scopes = ['user-read-email', 'user-read-private', 'playlist-read-private'];
 var spotify = new SpotifyWebApi({ 
   clientId : '169b6e558aea4f4a8725d2ad38382923',
   clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
@@ -10,14 +7,11 @@ var spotify = new SpotifyWebApi({
 
 module.exports = {
   authenticate: function(code, cb) {
-    console.log('auth', spotifyAuth);
-    console.log('code', code);
     spotify.authorizationCodeGrant(code)
     .then(function(data) {
-      console.log(data.access_token);
-      cb(data);
-      // console.log('The access token is ' + data['access_token']);
-      // console.log('The refresh token is ' + data['refresh_token']);
+      spotify.setAccessToken(data.body.access_token);
+      spotify.setRefreshToken(data.body.refresh_token);
+      cb(null);
     })
     .catch(err => {
       cb(err);
