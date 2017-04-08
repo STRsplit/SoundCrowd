@@ -35,6 +35,16 @@ module.exports = {
         cb(err, null);
       });
   },
+  moveTrack: function(username, playlistId, cb) {
+    // var options = { 'range_length': 2 };
+    spotify.reorderTracksInPlaylist(username, playlistId, 1, 3)
+      .then(data => {
+        cb(null);
+      })
+      .catch(err => {
+        cb(err);
+      });
+  },
   searchFor: function(req, res) {
   const { name, filter } = req.query
 

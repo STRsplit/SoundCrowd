@@ -31,28 +31,38 @@ app.get('/api/search/', spotify.searchFor);
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
-app.get('/auth/spotify', passport.authenticate('spotify', {responseType: 'token', showDialog: true}));
+app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private'], responseType: 'token', showDialog: true}));
 
 app.get('/auth/spotify/callback', function(req, res) {
-    passport.authenticate('spotify', { failureRedirect: '/login' });
-    spotify.authenticate(req.query.code, function(err) {
-      if (err) res.status(err.statusCode).send(err);
-      else {
-        // user from session? on redirect?
-        var user = 'lgreenbaum';
-        spotify.getUserPlaylists(user, function(err, playlists) {
-          if (err) res.status(err.statusCode).send(err);
-          else res.status(200).send(playlists);
-        });
-      }
-    });
-  }
-);
+  passport.authenticate('spotify', { failureRedirect: '/login' });
+  spotify.authenticate(req.query.code, function(err) {
+    if (err) res.status(err.statusCode).send(err);
+    else {
+      res.redirect('/playlists');
+    }
+  }); 
+});
+
+// app.get('/api/trackTest', function(req, res) {
+//   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
+//     if (err) res.status(err.statusCode).send(err);
+//     else res.status(200).send();
+//   });
+// });
 
 /* *  Authentication * */
 app.get('/api/verifyuser', handler.verifyUser);
 
 /* * Spotify API * */
+app.get('/api/playlists', function(req, res) {
+  // user from session?
+  var user = 'stevie_reed';
+  spotify.getUserPlaylists(user, function(err, playlists) {
+    if (err) res.status(err.statusCode).send(err);
+    else res.status(200).send(playlists);
+  });
+});
+
 app.get('/api/playlists/:playlist', function(req, res) {
   spotify.getPlaylist('username', req.params.playlist, function(err, tracks) {
     // render tracks from playlist and start voting
