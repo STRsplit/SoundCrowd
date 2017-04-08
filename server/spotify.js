@@ -4,12 +4,18 @@ var SpotifyWebApi = require('spotify-web-api-node');
 //   clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
 //   redirectUri : 'http://localhost:3000/auth/spotify/callback'
 // });
-var SpotifyAuth = require('./setup.js');
+// var spotify;
+var SpotifyAuth = require('./setup.js').spotifyAuth;
 if(!process.env.SPOTIFY_CLIENT_ID){
-  var spotify = new SpotifyWebApi(SpotifyAuth);
+  console.log(SpotifyAuth);
+  var spotify = new SpotifyWebApi({
+    clientId: SpotifyAuth.clientID,
+    clientSecret: SpotifyAuth.clientSecret,
+    redirectUri: SpotifyAuth.callbackURL
+  });
 } else {
   var spotify = new SpotifyWebApi({ 
-      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       redirectUri: process.env.SITE_URL
   });

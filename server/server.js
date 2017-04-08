@@ -39,7 +39,7 @@ app.get('/auth/spotify/callback', function(req, res) {
       if (err) res.status(err.statusCode).send(err);
       else {
         // user from session? on redirect?
-        var user = 'lgreenbaum';
+        var user = 'stevie_reed';
         spotify.getUserPlaylists(user, function(err, playlists) {
           if (err) res.status(err.statusCode).send(err);
           else res.status(200).send(playlists);
