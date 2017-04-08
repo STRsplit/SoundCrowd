@@ -14,7 +14,6 @@ app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/api/search/:search', spotify.searchFor);
 
 
 /* *  Authentication * */
@@ -26,6 +25,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+app.get('/api/search/', spotify.searchFor);
+
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'], showDialog: true})
 app.get('/auth/spotify', passport.authenticate('spotify'));
@@ -34,7 +36,7 @@ app.get('/auth/spotify/callback',
   passport.authenticate('spotify', {successRedirect: '/', failureRedirect: '/login'})
 );
 
-app.get('/api/verifyuser', handler.verifyUser);
+app.get('/api/verifyuser', (handler.verifyUser));
 /* *  Authentication * */
 
 // app.get('/*', (req, res) => res.redirect('/'));

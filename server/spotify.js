@@ -8,13 +8,11 @@ var spotify = new SpotifyWebApi({
 
 
 module.exports.searchFor = (req, res) => {
-  console.log('REQUESTTTTTTTTTT', req.params);
-  const input = req.params.search
-  spotify.searchTracks(input)
+  const { name, filter } = req.query
+
+  spotify.searchTracks(`${filter}:${name}`)
   .then(function(data) {
     let { items } = data.body.tracks;
-    console.log('ITEM 1', items[0]);
-    console.log('TRACKKKKKKKKKKKKKKSSSSSSSS', items)
     res.send(items)
   }, function(err) {
     console.error(err);
@@ -22,5 +20,5 @@ module.exports.searchFor = (req, res) => {
 }
 
 
-module.exports.search = search;
+// module.exports.search = search;
 

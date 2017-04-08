@@ -11,17 +11,27 @@ class SearchBar extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
+
   handleClick(event){
     event.preventDefault();
     this.props.handleSearch();
   }
   render() {
-    const { text, handleChange, handleSearch } = this.props
+    const { text, handleChange, handleSearch, handleSelect, selectedOption } = this.props
     return (
       <div>
         <form>
-          <input type="text/css" default="search for a song" onChange={handleChange} value={text}></input>
-          <button onClick={this.handleClick} />
+          <input type="text" default="search for a song" onChange={handleChange} value={text}></input>
+          <br />
+          <br />
+          <label>Song Title: <input type="radio" onClick={handleSelect} value="track" ref="song" name="searchfilter" checked={selectedOption === 'track'}/></label>
+          <br />
+           <label>Artist Name: <input type="radio" onClick={handleSelect} value="artist" ref="artist" name="searchfilter" checked={selectedOption === 'artist'}/></label>
+           <br />
+           <label>Album Title: <input type="radio" onClick={handleSelect} value="album" ref="album" name="searchfilter" checked={selectedOption === 'album'}/></label>
+           <br />
+          <br />
+          <button onClick={this.handleClick}>Search Spotify</button>
           </form>
       </div>
     )
