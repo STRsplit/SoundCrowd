@@ -10,7 +10,6 @@ var session = require('express-session');
 var redis = require('redis');
 var redisStore = require('connect-redis')(session);
 var passport = require('passport');
-var spotifyAuth = require('./spotifyAuthentication');
 var client = redis.createClient();
 
 var app = express();
@@ -28,14 +27,13 @@ app.use(session({
     host: 'localhost',
     port: 6379,
     client: client,
-    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+    ttl: 300 // ttl is session expiration in seconds. 260 seconds default, 86400 sec === 1day
   }),
   resave: false, 
-  saveUninitialized: false
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.get('/api/search/', spotify.searchFor);
 
