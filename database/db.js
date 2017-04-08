@@ -30,7 +30,7 @@ var database = 'music';
 
 var connection = mysql.createConnection({
   user: 'root',
-  password: 'root'
+  password: ''
 });
 
 var db = Promise.promisifyAll(connection, {multiArgs: true});
