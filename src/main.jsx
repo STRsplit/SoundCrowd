@@ -53,8 +53,9 @@ class Main extends React.Component {
 			}
 		})
 		.catch(err => console.log('main.js error componentDidMount: ', err));
-		
 	}
+
+	
 
 	render() {
 		console.log('this.state', this.state.loggedIn);

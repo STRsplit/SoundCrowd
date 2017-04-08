@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+app.get('/test', spotify.test);
+
 
 /* *  Authentication * */
 app.use(session({
