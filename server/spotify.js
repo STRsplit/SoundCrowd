@@ -1,10 +1,19 @@
 var SpotifyWebApi = require('spotify-web-api-node');
-var spotify = new SpotifyWebApi({ 
-  clientId : '169b6e558aea4f4a8725d2ad38382923',
-  clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
-  redirectUri : 'http://localhost:3000/auth/spotify/callback'
-});
-
+// var spotify = new SpotifyWebApi({ 
+//   clientId : '169b6e558aea4f4a8725d2ad38382923',
+//   clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
+//   redirectUri : 'http://localhost:3000/auth/spotify/callback'
+// });
+var SpotifyAuth = require('./setup.js');
+if(!process.env.SPOTIFY_CLIENT_ID){
+  var spotify = new SpotifyWebApi(SpotifyAuth);
+} else {
+  var spotify = new SpotifyWebApi({ 
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      redirectUri: process.env.SITE_URL
+  });
+}
 module.exports = {
   authenticate: function(code, cb) {
     spotify.authorizationCodeGrant(code)
