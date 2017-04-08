@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('music', 'root', 'root');
+const db = new Sequelize('music', 'root', '');
 
 const User = db.define('User', {
   id: {type: Sequelize.STRING, primaryKey: true},

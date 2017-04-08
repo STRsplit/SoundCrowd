@@ -5,7 +5,6 @@ var handler = require('./requestHandler');
 var spotify = require('./spotify');
 var db = require('../database/db');
 var app = express();
-var spotify = require('./spotify');
 
 /* * Authentication * */
 var session = require('express-session');
