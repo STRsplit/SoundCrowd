@@ -4,12 +4,16 @@ var bodyParser = require('body-parser');
 var handler = require('./requestHandler');
 var spotify = require('./spotify');
 var db = require('../database/db');
-var app = express();
 
 /* * Authentication * */
 var session = require('express-session');
+var redis = require('redis');
+var redisStore = require('connect-redis')(session);
 var passport = require('passport');
-// var spotifyAuth = require('./spotifyAuthentication');
+var spotifyAuth = require('./spotifyAuthentication');
+var client = redis.createClient();
+
+var app = express();
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
@@ -20,7 +24,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* *  Authentication * */
 app.use(session({
   secret: 'badum tsss', 
-  resave: true, 
+  store: new redisStore({
+    host: 'localhost',
+    port: 6379,
+    client: client,
+    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+  }),
+  resave: false, 
   saveUninitialized: false
 }));
 app.use(passport.initialize());
@@ -67,6 +77,10 @@ app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
 
+// Unhandled Endpoints
+app.get('/*', function(req, res) {
+  res.redirect('/');
+});
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
