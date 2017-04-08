@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import App from './components/App.jsx';
-import Login from './components/login/Login';
+import Login from './components/login/Login.jsx';
 import SearchContainer from './components/SearchContainer.jsx'
 
 import keys from './config/keys.js';
@@ -57,9 +57,14 @@ class Main extends React.Component {
 		console.log('this.state', this.state.loggedIn);
 		return (
 			<BrowserRouter>
-	      <Route exact path="/" render={() => (
-	     	  this.state.loggedIn ? <App /> : <Login />
-	      )}/>
+			  <div>
+				  <Route path="/login" render={() => (
+		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
+		      )}/>
+		      <Route exact path="/" render={() => (
+		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
+		      )}/>
+		    </div>
 	    </BrowserRouter>
 		)
 	}
