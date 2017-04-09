@@ -18,6 +18,7 @@ if(!process.env.SPOTIFY_CLIENT_ID){
     redirectUri: SpotifyAuth.callbackURL
   });
 } else {
+  console.log(SpotifyAuth);
   spotify = new SpotifyWebApi({ 
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
