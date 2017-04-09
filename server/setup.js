@@ -2,7 +2,7 @@ module.exports = {
   spotifyAuth: {
     clientID: '169b6e558aea4f4a8725d2ad38382923',
     clientSecret: '6c36dcc5feca4ac7bc2f86523af306d8',
-    callbackURL: process.env.SITE_URL || 'http://localhost:3000/'
+    callbackURL: process.env.SITE_URL
   }
 };
 

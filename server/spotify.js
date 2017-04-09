@@ -22,7 +22,7 @@ if(!process.env.SPOTIFY_CLIENT_ID){
   spotify = new SpotifyWebApi({ 
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      redirectUri: 'https://so-me-music.herokuapp.com/auth/spotify/callback'
+      redirectUri: process.env.SITE_URL
   });
 }
 module.exports = {

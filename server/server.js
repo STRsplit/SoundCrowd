@@ -7,11 +7,11 @@ var db = require('../database/db');
 
 /* * Authentication * */
 var session = require('express-session');
-var redis = require('redis');
-var redisStore = require('connect-redis')(session);
+// var redis = require('redis');
+// var redisStore = require('connect-redis')(session);
 var passport = require('passport');
 // var spotifyAuth = require('./spotifyAuthentication');
-var client = redis.createClient();
+// var client = redis.createClient();
 
 var app = express();
 var port = process.env.PORT || 3000;
