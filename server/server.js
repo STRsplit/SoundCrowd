@@ -23,16 +23,21 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 /* *  Authentication * */
+// app.use(session({
+//   secret: 'badum tsss', 
+//   store: new redisStore({
+//     host: 'localhost',
+//     port: 6379,
+//     client: client,
+//     ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+//   }),
+//   resave: false, 
+//   saveUninitialized: false
+// }));
 app.use(session({
   secret: 'badum tsss', 
-  store: new redisStore({
-    host: 'localhost',
-    port: 6379,
-    client: client,
-    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
-  }),
-  resave: false, 
-  saveUninitialized: false
+  resave: true, 
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
