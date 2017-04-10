@@ -31,11 +31,12 @@ app.use(session({
     host: process.env.SITE_URL || 'localhost',
     port: process.env.REDIS_PORT || 6379,
     client: client,
-    ttl: 30 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
   }),
   resave: false, 
   saveUninitialized: true
 }));
+// SETUP FOR NON-REDIS SESSION
 // app.use(session({
 //   secret: 'badum tsss', 
 //   resave: true, 
