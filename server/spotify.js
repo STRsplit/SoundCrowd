@@ -1,30 +1,14 @@
-var setup = require('./setup.js');
 var db = require('../database/db');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var SpotifyWebApi = require('spotify-web-api-node');
-// var spotify = new SpotifyWebApi({ 
-//   clientId : '169b6e558aea4f4a8725d2ad38382923',
-//   clientSecret : '6c36dcc5feca4ac7bc2f86523af306d8',
-//   redirectUri : 'http://localhost:3000/auth/spotify/callback'
-// });
-var spotify;
-var SpotifyAuth = require('./setup.js').spotifyAuth;
-if(!process.env.SPOTIFY_CLIENT_ID){
-  console.log(SpotifyAuth);
-  spotify = new SpotifyWebApi({
-    clientId: SpotifyAuth.clientID,
-    clientSecret: SpotifyAuth.clientSecret,
-    redirectUri: SpotifyAuth.callbackURL
-  });
-} else {
-  console.log(SpotifyAuth);
-  spotify = new SpotifyWebApi({ 
-      clientId: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      redirectUri: process.env.SITE_URL
-  });
-}
+var { clientID, clientSecret, callbackURL } = SpotifyAuth = require('./setup.js').spotifyAuth;
+var spotify = new SpotifyWebApi({
+  clientId: clientID,
+  clientSecret: clientSecret,
+  redirectUri: callbackURL
+});
+
 module.exports = {
   /*
   authenticate: function(code, cb) {
@@ -90,7 +74,7 @@ module.exports = {
 };
 
 
-passport.use(new SpotifyStrategy(setup.spotifyAuth,
+passport.use(new SpotifyStrategy(SpotifyAuth,
   (accessToken, refreshToken, profile, done) => {
 
     spotify.setAccessToken(accessToken);
