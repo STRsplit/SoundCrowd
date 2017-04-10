@@ -27,10 +27,12 @@ class Main extends React.Component {
 			location: '',
 			weather: '',
 			mood: '',
-			activity: ''
+			activity: '',
+      playlist:''
 		}
-		this.handleMood = this.handleMood.bind(this);
-		this.handleActivity = this.handleActivity.bind(this);
+    this.setPlaylist = this.setPlaylist.bind(this);
+    this.handleMood = this.handleMood.bind(this);
+    this.handleActivity = this.handleActivity.bind(this);
 	}
 
 	componentWillMount() {
@@ -61,6 +63,10 @@ class Main extends React.Component {
 		.catch(err => console.log('main.js error componentDidMount: ', err));
 	}
 
+  setPlaylist(playlistId) {
+    this.setState({ playlist: playlistId });
+  }
+
 	handleMood(val) {
 		this.setState({
 			mood: val 
@@ -73,18 +79,18 @@ class Main extends React.Component {
 		});
 	}
 
-	render() {
-		console.log('logged in', this.state.loggedIn);
-		return (
+  render() {
+    console.log('logged in', this.state.loggedIn);
+    return (
       <BrowserRouter>
 			  <div>
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
 		      )}/>
-          <Route path="/playlists" render={() => (<Playlists />
-            this.state.loggedIn ? <Playlists /> : <Redirect to="/login" />
+          <Route path="/playlists" render={() => (
+            this.state.loggedIn ? <Playlists setPlaylist={this.setPlaylist} /> : <Redirect to="/login" />
           )}/>
-          <Route path="/playlist" render={() =>(<Playlist />)}/>
+          <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist}/>)}/>
 		      <Route exact path="/" render={() => (
 		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
 		      )}/>
@@ -93,8 +99,8 @@ class Main extends React.Component {
 		      )}/>
 		    </div>
       </BrowserRouter>
-		)
-	}
+    )
+  }
 }
   
 ReactDOM.render(<Main />, document.getElementById('app'));
