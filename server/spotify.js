@@ -49,9 +49,9 @@ module.exports = {
       });
   },  
   getPlaylist: function(username, playlistId, cb) {
-    spotify.getPlaylistTracks()
+    spotify.getPlaylistTracks(username, playlistId)
       .then(data => {
-        cd(null, data.body);
+        cb(null, data.body);
       })
       .catch(err => {
         cb(err, null);
