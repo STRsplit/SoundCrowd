@@ -15,7 +15,7 @@ class NewPlaylist extends React.Component {
 			console.log('test result: ', result.data);
 			var num = Math.floor(Math.random() / (1 / result.data.length));
 		  this.setState({
-		  	href: result.data[num].href
+		  	href: result.data[num].external_urls.spotify
 		  });
 		});
 	}
