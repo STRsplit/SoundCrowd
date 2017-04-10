@@ -1,18 +1,22 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 		}
+		this.setMood = this.setMood.bind(this);
+		this.setActivity = this.setActivity.bind(this);
 	}
 
-	handleClick() {
-		axios.get('/test')
-		.then(result => {
-			console.log('test result: ', result.data);
-		})
+	setMood(e) {
+		this.props.handleMood(e.target.value);
+	}
+
+	setActivity(e) {
+		this.props.handleActivity(e.target.value);
 	}
 
 	render() {
@@ -20,9 +24,9 @@ class App extends React.Component {
 	  	<div>
 	  	  <h1>Welcome To So Me</h1>
 	  	  {this.props.children}
-	  	  <div>Use My Playlist</div>
-	  	  <div onClick={this.handleClick}>Get Suggested Playlist</div>
-	  	  <div>Mood</div><select id="mood">
+	  	  <div>Use My Playlist</div> 
+	  	  <Link to='/new-playlist'>Get Suggested Playlist</Link>
+	  	  <div>Mood</div><select id="mood" onChange={this.setMood}>
 	  	    <option value="Choose One">Choose One</option>
 	  	    <option value="Happy">Happy</option>
 	  	    <option value="Calm">Calm</option>
@@ -30,7 +34,7 @@ class App extends React.Component {
 	  	    <option value="Focused">Focused</option>
 	  	    <option value="Excited">Excited</option>
 	  	  </select>
-	  	  <div>Activity</div><select id="activity">
+	  	  <div>Activity</div><select id="activity" onChange={this.setActivity}>
 	  	    <option value="Choose One">Choose One</option>
 	  	    <option value="Exercising">Exercising</option>
 	  	    <option value="Studying">Studying</option>
