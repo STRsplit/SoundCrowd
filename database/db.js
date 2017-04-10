@@ -1,5 +1,31 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('music', 'root', '');
+var db_config = {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'music'
+};
+if(process.env.CLEARDB_DATABASE_URL){
+  console.log('CONFIG VARIABLE FOUND');
+  db_config = {
+    host: 'us-cdbr-iron-east-03.cleardb.net',
+    user: 'be0115d9376ebc',
+    password: '1881b50d',
+    database: 'heroku_181cf4138a87279'
+  };
+}
+
+const { host, user, password, database } = db_config
+
+const db = new Sequelize(database, user, password, {
+  host: host,
+  dialect: 'mysql',
+  pool:{
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
 
 const User = db.define('User', {
   id: {type: Sequelize.STRING, primaryKey: true},

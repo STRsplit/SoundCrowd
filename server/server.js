@@ -7,12 +7,15 @@ var db = require('../database/db');
 
 /* * Authentication * */
 var session = require('express-session');
-var redis = require('redis');
-var redisStore = require('connect-redis')(session);
+// var redis = require('redis');
+// var redisStore = require('connect-redis')(session);
 var passport = require('passport');
-var client = redis.createClient();
+// var spotifyAuth = require('./spotifyAuthentication');
+// var client = redis.createClient();
+
 
 var app = express();
+var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
@@ -23,15 +26,20 @@ app.get('/test', spotify.test);
 
 
 /* *  Authentication * */
+// app.use(session({
+//   secret: 'badum tsss', 
+//   store: new redisStore({
+//     host: 'localhost',
+//     port: 6379,
+//     client: client,
+//     ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+//   }),
+//   resave: false, 
+//   saveUninitialized: false
+// }));
 app.use(session({
   secret: 'badum tsss', 
-  store: new redisStore({
-    host: 'localhost',
-    port: 6379,
-    client: client,
-    ttl: 300 // ttl is session expiration in seconds. 260 seconds default, 86400 sec === 1day
-  }),
-  resave: false, 
+  resave: true, 
   saveUninitialized: true
 }));
 app.use(passport.initialize());
@@ -82,6 +90,6 @@ app.get('/*', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(port, function() {
+  console.log(`listening on port!${port}`);
 });
