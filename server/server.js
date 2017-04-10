@@ -13,6 +13,7 @@ var passport = require('passport');
 // var spotifyAuth = require('./spotifyAuthentication');
 // var client = redis.createClient();
 
+
 var app = express();
 var port = process.env.PORT || 3000;
 
@@ -20,6 +21,8 @@ app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
+app.get('/test', spotify.test);
 
 
 /* *  Authentication * */
@@ -41,7 +44,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.get('/api/search/', spotify.searchFor);
 
