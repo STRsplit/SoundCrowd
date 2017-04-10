@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Playlists extends Component {
@@ -27,15 +24,26 @@ class Playlists extends Component {
     });
   }
 
+
+  setPlaylist(playlistId) {
+    this.props.setPlaylist(playlistId);
+  }
+
   componentWillMount() {
     this.getPlaylists();
   }
 
   render() {
-    console.log('playlists in state', this.state.playlists);
-    const userPlaylists = this.state.playlists.map((playlist, idx) => (
-      <div key={idx}>{playlist.name}</div>
-    ));
+    const userPlaylists = this.state.playlists.map(playlist => {
+      return (
+        <div key={playlist.id}>
+          <img src=""/>
+          <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+            {playlist.name}
+          </Link>
+        </div>
+      )
+    });
     return (
       <div>Playlists:
         <div>{userPlaylists}</div>
