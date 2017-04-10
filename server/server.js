@@ -7,11 +7,10 @@ var db = require('../database/db');
 
 /* * Authentication * */
 var session = require('express-session');
-// var redis = require('redis');
-// var redisStore = require('connect-redis')(session);
+var redis = require('redis');
+var redisStore = require('connect-redis')(session);
 var passport = require('passport');
-// var spotifyAuth = require('./spotifyAuthentication');
-// var client = redis.createClient();
+var client = redis.createClient();
 
 
 var app = express();
@@ -26,22 +25,22 @@ app.get('/test', spotify.test);
 
 
 /* *  Authentication * */
-// app.use(session({
-//   secret: 'badum tsss', 
-//   store: new redisStore({
-//     host: 'localhost',
-//     port: 6379,
-//     client: client,
-//     ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
-//   }),
-//   resave: false, 
-//   saveUninitialized: false
-// }));
 app.use(session({
   secret: 'badum tsss', 
-  resave: true, 
-  saveUninitialized: true
+  store: new redisStore({
+    host: process.env.SITE_URL || 'localhost',
+    port: process.env.REDIS_PORT || 6379,
+    client: client,
+    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+  }),
+  resave: false, 
+  saveUninitialized: false
 }));
+// app.use(session({
+//   secret: 'badum tsss', 
+//   resave: true, 
+//   saveUninitialized: true
+// }));
 app.use(passport.initialize());
 app.use(passport.session());
 
