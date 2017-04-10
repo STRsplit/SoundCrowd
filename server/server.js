@@ -66,17 +66,16 @@ app.get('/api/verifyuser', handler.verifyUser);
 
 /* * Spotify API * */
 app.get('/api/playlists', function(req, res) {
-  // user from session?
-  var user = 'stevie_reed';
-  spotify.getUserPlaylists(user, function(err, playlists) {
+  spotify.getUserPlaylists(req.user.id, function(err, playlists) {
     if (err) res.status(err.statusCode).send(err);
     else res.status(200).send(playlists);
   });
 });
 
 app.get('/api/playlists/:playlist', function(req, res) {
-  spotify.getPlaylist('username', req.params.playlist, function(err, tracks) {
-    // render tracks from playlist and start voting
+  spotify.getPlaylist(req.user.id, req.params.playlist, function(err, tracks) {
+    if (err) res.status(err.statusCode).send(err);
+    else res.status(200).send(tracks);
   });
 });
 
