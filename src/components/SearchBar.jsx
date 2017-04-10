@@ -6,6 +6,14 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery';
 
+import { Form, Input, Textarea, Button } from 'muicss/react';
+// import { Button, Alert, Spinner } from 'elemental' 
+
+
+// import Button from 'muicss/lib/react/button.js';
+// import Container from 'muicss/lib/react/container.js';
+
+
 class SearchBar extends Component {
   constructor(props){
     super(props);
@@ -20,6 +28,15 @@ class SearchBar extends Component {
     const { text, handleChange, handleSearch, handleSelect, selectedOption } = this.props
     return (
       <div>
+      <div>
+       <Form>
+        <legend>Title</legend>
+        <Input hint="Input 1" />
+        <Input hint="Input 2" />
+        <Textarea hint="Textarea" />
+        <Button variant="raised">Submit</Button>
+      </Form>
+      </div>
         <form>
           <input type="text" default="search for a song" onChange={handleChange} value={text}></input>
           <br />
