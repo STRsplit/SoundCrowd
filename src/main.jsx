@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Redirect, Match } from 'react-router-dom';
 
 import App from './components/App.jsx';
 import Login from './components/login/Login.jsx';
+import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
 import SearchContainer from './components/SearchContainer.jsx'
 
@@ -23,8 +24,12 @@ class Main extends React.Component {
 		this.state = {
 			loggedIn: false,
 			location: '',
-			weather: ''
+			weather: '',
+			mood: '',
+			activity: ''
 		}
+		this.handleMood = this.handleMood.bind(this);
+		this.handleActivity = this.handleActivity.bind(this);
 	}
 
 	componentWillMount() {
@@ -53,7 +58,18 @@ class Main extends React.Component {
 			}
 		})
 		.catch(err => console.log('main.js error componentDidMount: ', err));
-		
+	}
+
+	handleMood(val) {
+		this.setState({
+			mood: val 
+		});
+	}
+
+	handleActivity(val) {
+		this.setState({
+			activity: val
+		});
 	}
 
 	render() {
@@ -64,11 +80,14 @@ class Main extends React.Component {
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
 		      )}/>
-          <Route exact path="/playlists" render={() => (<Playlists />
-            // this.state.loggedIn ? <Playlists /> : <Redirect to="/login" />
+          <Route path="/playlists" render={() => (
+            this.state.loggedIn ? <Playlists /> : <Redirect to="/login" />
           )}/>
 		      <Route exact path="/" render={() => (
-		     	  this.state.loggedIn ? <App /> : <Redirect to="/login" />
+		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
+		      )}/>
+		      <Route path="/new-playlist" render={() => (
+		     	  this.state.loggedIn ? <NewPlaylist state={this.state}/> : <Redirect to="/login" />
 		      )}/>
 		    </div>
       </BrowserRouter>

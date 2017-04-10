@@ -61,6 +61,15 @@ module.exports = {
   }, function(err) {
       console.error(err);
     });
+  },
+  test: (req, res) => {
+    spotify.getPlaylistsForCategory('party')
+    .then((data) => {
+      console.log('test data: ', data.body.playlists.items);
+      res.send(data.body.playlists.items);
+    }, (err) => {
+      console.log('error: ', err);
+    });
   }
 };
 
