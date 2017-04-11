@@ -14,7 +14,12 @@ import SearchContainer from './components/SearchContainer.jsx'
 import keys from './config/keys.js';
 import axios from 'axios';
 import $ from 'jquery';
-require("!style-loader!css-loader!sass-loader!./sass/all.scss");
+import '../node_modules/elemental/less/elemental.less'
+import Foundation from 'react-foundation';
+
+// import './node_modules/elemental/less/elemental.less'
+require("!style-loader!css-loader!sass-loader!./styles/sass/all.scss");
+
 
 
 
