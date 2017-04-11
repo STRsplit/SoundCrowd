@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Track from './Track.jsx';
+
 class Playlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tracks: []
     };
+    this.getPlaylistTracks();
   }
 
   getPlaylistTracks() {
     var playlistId = this.props.playlist;
-    axios.get('/api/playlists/' + playlistId, {})
+    axios.get('/api/playlists/' + playlistId)
       .then(res => {
-        console.log(res.data);
         let tracks = res.data.items;
         this.setState({ tracks: tracks });
       })
@@ -22,16 +24,10 @@ class Playlist extends Component {
       });
   }
 
-  componentWillMount() {
-    this.getPlaylistTracks();
-  }
-
   render() {
     const tracks = this.state.tracks.map(track => (
       (
-        <div key={track.track.id}>
-          {track.track.name} - {track.track.artists ? track.track.artists[0].name : ''}
-        </div>
+        <Track key={track.track.id} track={track.track}/>
       )
     ))
     return (
