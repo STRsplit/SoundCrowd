@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
  
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -7,6 +9,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
+  },
+  externals: {
+    jQuery: 'jQuery',
+    foundation: 'Foundation'
   },
   module: {
     rules: [
@@ -17,13 +23,27 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      }
-    ],
+      },
+      {
+        test: /\.less$/,
+        use: [{
+            loader: "style-loader"
+        }, {
+            loader: "css-loader"
+        }, {
+            loader: "less-loader", options: {
+                paths: [
+                    path.resolve(__dirname, "node_modules")
+                ]
+            }
+        }]
+    }
+  ],
     loaders: [
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
-      }
+      },
     ]
   },
   resolve: {

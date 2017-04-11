@@ -1,0 +1,52 @@
+{
+  "name": "so-me-music",
+  "description": "Spotify Jukebox: add songs and vote on the order they're played in.",
+  "scripts": {
+  },
+  "env": {
+    "CDB_DATABASE": {
+      "required": true
+    },
+    "CDB_HOST": {
+      "required": true
+    },
+    "CDB_PASSWORD": {
+      "required": true
+    },
+    "CDB_USER": {
+      "required": true
+    },
+    "CLEARDB_DATABASE_URL": {
+      "required": true
+    },
+    "REDIS_PORT": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "SITE_URL": {
+      "required": true
+    },
+    "SPOTIFY_CALLBACK_URL": {
+      "required": true
+    },
+    "SPOTIFY_CLIENT_ID": {
+      "required": true
+    },
+    "SPOTIFY_CLIENT_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "cleardb",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
