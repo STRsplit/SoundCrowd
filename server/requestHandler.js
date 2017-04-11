@@ -8,13 +8,15 @@ const verifyUser = (req, res) => {
 // RETURNS PROMISE OBJECT THAT CONTAINS TRUE IF VOTED ALREADY FALSE OTHERWISE
 // EXPECTED INPUT: songId and playlistId
 // EXPECTED votes column names are song_id, user_id, playlist_id
+
 const validateVote = (req, res) => {
-  const { songId, playlistId } = req.body;
-  if ( req.isAuthenticated() ) {  
-    return db.Vote.find({where: {
+  const { songId, playlistId, vote } = req.body;
+  if ( req.isAuthenticated() ) { 
+    return db.Vote.findOrCreate({where: {
         song_id: songId, 
         user_id: req.user.id,
         playlist_id: playlistId,
+        vote: vote
       }
     })
     .then(result => {
@@ -22,10 +24,11 @@ const validateVote = (req, res) => {
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));
   } else {
-    return db.Vote.find({where: {
+    return db.Vote.findOrCreate({where: {
         song_id: songId, 
         session_id: req.sessionID,
         playlist_id: playlistId,
+        vote: vote
       }
     })
     .then(result => {
