@@ -31,10 +31,6 @@ class Playlists extends Component {
     this.props.setPlaylist(playlistId);
   }
 
-  componentWillMount() {
-    // this.getPlaylists();
-  }
-
   render() {
     const userPlaylists = this.state.playlists.map(playlist => {
       return (

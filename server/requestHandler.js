@@ -8,7 +8,6 @@ const verifyUser = (req, res) => {
 // RETURNS PROMISE OBJECT THAT CONTAINS TRUE IF VOTED ALREADY FALSE OTHERWISE
 // EXPECTED INPUT: songId and playlistId
 // EXPECTED votes column names are song_id, user_id, playlist_id
-
 const validateVote = (req, res) => {
   const { songId, playlistId, vote } = req.body;
   if ( req.isAuthenticated() ) { 
