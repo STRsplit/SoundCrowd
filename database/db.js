@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize');
+const mysql = require('mysql');
+const Promise = require('bluebird');
+const dbName = 'music';
 const db_config = {
   host: process.env.CDB_HOST || 'localhost',
   user: process.env.CDB_USER || 'root',
@@ -7,6 +10,22 @@ const db_config = {
 };
 
 const { host, user, password, database } = db_config;
+
+
+const connection = mysql.createConnection({
+  user: 'root',
+  password: ''
+});
+
+const database = Promise.promisifyAll(connection, {multiArgs: true});
+
+database.connectAsync()
+.then(() => {
+  return database.queryAsync('CREATE DATABASE IF NOT EXISTS ' + dbName);
+})
+.then(() => {
+  return database.queryAsync('USE ' + dbName);
+});
 
 const db = new Sequelize(database, user, password, {
   host: host,
@@ -30,13 +49,21 @@ const User = db.define('User', {
 
 // creates these tables in MySQL if they don't already exist. Pass in {force: true}
 // to drop any existing user and message tables and make new ones.
+
+var Playlist = db.define('Playlist', {
+  number: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+  name: Sequelize.STRING
+}, {timestamps: false});
+
+Playlist.belongsTo(User);
+
 User.sync();
+Playlist.sync({force: true});
 
 module.exports = {
-  User: User
+  User: User,
+  Playlist: Playlist
 };
-
-
 
 /* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED * * 
 const mysql = require('mysql');

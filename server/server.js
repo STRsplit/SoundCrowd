@@ -23,6 +23,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/test', spotify.test);
 
+app.get('/playlist', spotify.getPlaylist);
+
+app.post('/create', spotify.createPlaylist);
+
 
 /* *  Authentication * */
 app.use(session({
