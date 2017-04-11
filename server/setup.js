@@ -7,7 +7,7 @@ module.exports = {
 };
 
 
-/* * * HEROKU PIPELINE TEST * * */
+/* *  HEROKU PIPELINE TEST  * */
 /* * RESERVE FOR DEPLOYMENT * *
 
 process.env.SPOTIFY_CLIENT_ID = '169b6e558aea4f4a8725d2ad38382923';
