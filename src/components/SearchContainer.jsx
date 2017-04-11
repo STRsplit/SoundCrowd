@@ -10,6 +10,8 @@ import SongEntry from './SongEntry.jsx';
 import SearchBar from './SearchBar.jsx';
 
 
+
+
 class SearchContainer extends Component {
   constructor(props){
     super(props);
@@ -66,7 +68,7 @@ class SearchContainer extends Component {
         </div>
     ));
     return (
-      <div> 
+      <div>
         <p onClick={() => this.handleSearch()}>HELLO</p>
         <SearchBar text={this.state.search} selectedOption={this.state.filter} handleSelect={(e) => this.setSelected(e)} handleSearch={this.searchSpotify} handleChange={(e) => this.enterSearch(e)} />
         <div>

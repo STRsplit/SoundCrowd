@@ -33,13 +33,14 @@ module.exports = {
         }, {
             loader: "less-loader", options: {
                 paths: [
-                    path.resolve(__dirname, "node_modules")
+                    path.resolve(__dirname, "node_modules"),
+                    path.resolve(__dirname, "styles/sass")
                 ]
             }
         }]
     }
   ],
-    loaders: [
+  loaders: [
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
