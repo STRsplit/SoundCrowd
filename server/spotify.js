@@ -8,6 +8,7 @@ var spotify = new SpotifyWebApi({
   clientSecret: clientSecret,
   redirectUri: callbackURL
 });
+var userId;
 
 module.exports = {
   /*
@@ -63,10 +64,25 @@ module.exports = {
     });
   },
   test: (req, res) => {
-    spotify.getPlaylistsForCategory('party')
+    spotify.getPlaylistsForCategory('mood')
     .then((data) => {
-      console.log('test data: ', data.body.playlists.items);
       res.send(data.body.playlists.items);
+    }, (err) => {
+      console.log('error: ', err);
+    });
+  },
+  getPlaylist: (req, res) => {
+    db.Playlist.findAll()
+    .then((result) => {
+      res.send(result);
+    });
+  },
+  createPlaylist: (req, res) => {
+    console.log('post ', req.body.number);
+    console.log('create playlist ', userId);
+    spotify.createPlaylist(userId, 'Playlist ' + req.body.number, {public: false})
+    .then((data) => {
+      console.log('created Playlist ' + req.body.number);
     }, (err) => {
       console.log('error: ', err);
     });
@@ -86,6 +102,8 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
       name: display_name || '', 
       email: email 
     };
+
+    userId = id;
 
     db.User.findOne({where: {id: id}})
     .then(result => {

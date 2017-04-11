@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
+const dbName = 'music';
 const db_config = {
   host: process.env.CDB_HOST || 'localhost',
   user: process.env.CDB_USER || 'root',
   password: process.env.CDB_PASSWORD || '',
-  database: process.env.CDB_DATABASE || 'music'
+  database: process.env.CDB_DATABASE || dbName
 };
 
 const { host, user, password, database } = db_config;
@@ -30,13 +31,21 @@ const User = db.define('User', {
 
 // creates these tables in MySQL if they don't already exist. Pass in {force: true}
 // to drop any existing user and message tables and make new ones.
+
+var Playlist = db.define('Playlist', {
+  number: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+  name: Sequelize.STRING
+}, {timestamps: false});
+
+Playlist.belongsTo(User);
+
 User.sync();
+Playlist.sync({force: true});
 
 module.exports = {
-  User: User
+  User: User,
+  Playlist: Playlist
 };
-
-
 
 /* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED * * 
 const mysql = require('mysql');
