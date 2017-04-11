@@ -1,31 +1,13 @@
 const Sequelize = require('sequelize');
-const mysql = require('mysql');
-const Promise = require('bluebird');
 const dbName = 'music';
 const db_config = {
   host: process.env.CDB_HOST || 'localhost',
   user: process.env.CDB_USER || 'root',
   password: process.env.CDB_PASSWORD || '',
-  database: process.env.CDB_DATABASE || 'music'
+  database: process.env.CDB_DATABASE || dbName
 };
 
 const { host, user, password, database } = db_config;
-
-
-const connection = mysql.createConnection({
-  user: 'root',
-  password: ''
-});
-
-const database = Promise.promisifyAll(connection, {multiArgs: true});
-
-database.connectAsync()
-.then(() => {
-  return database.queryAsync('CREATE DATABASE IF NOT EXISTS ' + dbName);
-})
-.then(() => {
-  return database.queryAsync('USE ' + dbName);
-});
 
 const db = new Sequelize(database, user, password, {
   host: host,
