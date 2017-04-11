@@ -64,7 +64,7 @@ module.exports = {
     });
   },
   test: (req, res) => {
-    spotify.getPlaylistsForCategory('mood')
+    spotify.getPlaylistsForCategory('mood', { limit: 50 })
     .then((data) => {
       res.send(data.body.playlists.items);
     }, (err) => {
