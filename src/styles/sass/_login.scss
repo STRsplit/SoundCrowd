@@ -1,0 +1,152 @@
+$radius : 2em;
+$fullWidth: 100%;
+$half: 50%;
+$offsetHalf: 50%;
+$third:  33%;
+$smallPad: 2%;
+$font-stack: Helvetica, sans-serif;
+
+
+// @function property-value($property, $selector: null) {
+//     @return $magic;
+// }
+
+// @function calcEm($target-px, $context) {
+//   @return ($target-px / $context) * 1em;
+// }
+
+@function colorOpacity($color, $opacity) {
+  @return rgba($color, $opacity)
+}
+
+@function centerContent($margin-top){
+  @return $margin-top auto;
+}
+
+@mixin background($imgpath,$position:0 0,$repeat: no-repeat) {
+    background: {
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+    }
+}
+
+@mixin border-radius($value){
+  -moz-border-radius: $value;
+  -webkit--radius: $value;
+  border-radius: $value;
+}
+@mixin center($width: null, $height: null) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @if not $width and not $height {
+    transform: translate(-50%, -50%);
+  } @else if $width and $height {
+    width: $width;
+    height: $height;
+    margin: -($width / 2) #{0 0} -($height / 2);
+  } @else if not $height {
+    width: $width;
+    margin-left: -($width / 2);
+    transform: translateY(-50%);
+  } @else {
+    height: $height;
+    margin-top: -($height / 2);
+    transform: translateX(-50%);
+  }
+}
+@mixin vertical-align($top: null) {
+  position: relative;
+  @if not $top {
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+  } @else if $top {
+    top: $top;
+    transform: translateY(-$top);
+    -webkit-transform: translateY(-$top);
+    -ms-transform: translateY(-$top);
+  }
+}
+@mixin transition($value) {
+  -webkit-transition: $value;
+  transition: $value;
+}
+.login-container {
+  display: block;
+  position: relative;
+  width: 60%;
+  // background-color: colorOpacity(black, 1);
+  @include center;
+}
+
+.login-container-inner {
+  width: 80%;
+  padding: 10% 0;
+  margin: 5%;
+  display: block;
+  position: relative;
+  background-color: colorOpacity(white, 1);
+  overflow-x: hidden;
+  @include transition(background 1s ease);
+  @include center(80%);
+  @include vertical-align(10%);
+}
+.button-container {
+  display: block;
+  margin: 5% 0;
+}
+
+.button {
+  display: block;
+  width: $offsetHalf;
+  max-width: $offsetHalf + 10%;
+  padding: $smallPad;
+  position: relative;
+  margin: 5% auto;
+  @include border-radius($radius);
+    span {
+      @include center
+    }
+}
+.center-content {
+  display: block;
+  margin: 10% auto 0%;
+  text-align: center;
+  width: 100%;
+}
+
+
+h2 {
+  color: colorOpacity(white, 1);
+  font: $font-stack;
+}
+
+.about-brief {
+  width: $offsetHalf;
+  padding: $smallPad;
+  display: block;
+  margin: centerContent(0%);
+}
+.tagline {
+  font: $font-stack;
+  text-align: center;
+}
+
+.spotifyLogoContainer {
+  display: table-cell; 
+  vertical-align: middle; 
+  text-align:center;
+  margin: centerContent(0%);
+
+}
+.spotifyLogo {
+  max-width: 40%;
+  margin: centerContent(0%);
+}
+
+
+
+
