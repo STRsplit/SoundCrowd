@@ -7,10 +7,11 @@
     "node": "7.6.0"
   },
   "scripts": {
+    "build-css": "node-sass --include-path scss src/styles/sass/all.scss public/styles.css",
     "build": "react-scripts build",
     "compile": "webpack --watch",
     "production": "webpack && node server/server.js",
-    "start": "npm run init-webpack && npm run init-server",
+    "start": "npm run build-css && npm run init-webpack && npm run init-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
