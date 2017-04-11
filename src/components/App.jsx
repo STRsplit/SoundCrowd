@@ -19,13 +19,23 @@ class App extends React.Component {
 		this.props.handleActivity(e.target.value);
 	}
 
+	getPlaylist() {
+		var count;
+		axios.get('/playlist')
+		.then((result) => {
+			count = result.data.length;
+			// console.log('existing playlist ', result);
+			axios.post('/create', {number: count});
+		});
+	}
+
 	render() {
 	  return (
 	  	<div>
 	  	  <h1>Welcome To So Me</h1>
 	  	  {this.props.children}
 	  	  <div>Use My Playlist</div> 
-	  	  <Link to='/new-playlist'>Get Suggested Playlist</Link>
+	  	  <Link to='/new-playlist' onClick={this.getPlaylist}>Get Suggested Playlist</Link>
 	  	  <div>Mood</div><select id="mood" onChange={this.setMood}>
 	  	    <option value="Choose One">Choose One</option>
 	  	    <option value="Happy">Happy</option>
