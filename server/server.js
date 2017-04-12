@@ -71,22 +71,30 @@ app.get('/auth/spotify/callback',
 app.get('/api/verifyuser', handler.verifyUser);
 
 /* * Spotify API * */
-app.get('/api/playlists', function(req, res) {
+app.get('/api/spotify/playlists', function(req, res) {
   spotify.getUserPlaylists(req.user.id, function(err, playlists) {
     if (err) res.status(err.statusCode).send(err);
     else res.status(200).send(playlists);
   });
 });
 
-app.get('/api/playlists/:playlist', function(req, res) {
+app.get('/api/spotify/playlists/:playlist', function(req, res) {
   var playlist = req.params.playlist;
   spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
     if (err) res.status(err.statusCode).send(err);
     else {
       dbHelpers.savePlaylist(playlist, req.user.id, tracks);
+      // format tracks for return -- match /api/playlists/:playlist
       res.status(200).send(tracks);
     }
   });
+});
+
+app.get('/api/playlists/:playlist', function(req, res) {
+  dbHelpers.getPlaylist(req.params.playlist)
+    .then(function(tracks) {
+      res.status(200).send(tracks);
+    });
 });
 
 app.post('/api/vote', function(req, res) {

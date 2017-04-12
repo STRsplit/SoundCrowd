@@ -56,8 +56,8 @@ Vote.sync();
 
 // User.hasMany(Playlist);
 // Playlist.belongsTo(User);
-Playlist.hasMany(Song);
-Song.belongsTo(Playlist);
+// Playlist.hasMany(Song);
+// Song.belongsTo(Playlist);
 
 module.exports = {
   User: User,

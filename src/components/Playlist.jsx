@@ -14,7 +14,7 @@ class Playlist extends Component {
 
   getPlaylistTracks() {
     var playlistId = this.props.playlist;
-    axios.get('/api/playlists/' + playlistId)
+    axios.get('/api/spotify/playlists/' + playlistId)
       .then(res => {
         let tracks = res.data.items;
         this.setState({ tracks: tracks });
@@ -22,6 +22,9 @@ class Playlist extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  sortTracks() {
   }
 
   render() {
