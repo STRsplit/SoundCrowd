@@ -84,6 +84,16 @@ module.exports = {
             }
           }
         } 
+      } else if (mood === 'Calm') {
+        for (var j = 0; j < names.length; j++) {
+          for (var k = 0; k < names[j].length; k++) {
+            if (names[j][k] === 'Relax' || names[j][k] === 'Coffeehouse' ||
+                 names[j][k] === 'Soft' || names[j][k] === 'Chill' || 
+                 names[j][k] === 'Break' || names[j][k] === 'Smooth') {
+              chosen.push(names[j]);
+            }
+          }
+        } 
       }
       res.send(chosen);
       // res.send(data.body.playlists.items);
