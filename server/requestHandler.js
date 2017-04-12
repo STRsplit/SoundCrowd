@@ -20,7 +20,7 @@ const validateVote = (req, res) => {
       }
     })
     .then(result => {
-      dbHelpers.updateVoteCount(songId, vote);
+      dbHelpers.updateVoteCount(songId, playlistId, vote);
       return Boolean(result);
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));
@@ -33,6 +33,7 @@ const validateVote = (req, res) => {
       }
     })
     .then(result => {
+      dbHelpers.updateVoteCount(songId, playlistId, vote);
       return Boolean(result);
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));

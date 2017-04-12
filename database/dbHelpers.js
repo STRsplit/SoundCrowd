@@ -4,7 +4,7 @@ var savePlaylist = function(playlistId, userId, tracks) {
   Playlist.findOrCreate({ where: {
     playlist_id: playlistId,
     user_id: userId
-  } })
+  }})
     .then(playlist => {
       tracks.items.forEach(track => {
         Song.create({
@@ -24,8 +24,16 @@ var savePlaylist = function(playlistId, userId, tracks) {
     });
 }
 
-var updateVoteCount = function(songId, vote) {
-  
+var updateVoteCount = function(songId, playlistId, vote) {
+  Song.find({ where: {
+    song_id: songId,
+    playlist_id: playlistId
+  }})
+    .then(song => {
+      console.log(song);
+      var newCount = song.vote_count + vote;
+      song.update({ vote_count: newCount });
+    });
 }
 
 module.exports.savePlaylist = savePlaylist;
