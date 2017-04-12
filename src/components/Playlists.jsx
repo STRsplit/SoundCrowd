@@ -12,7 +12,7 @@ class Playlists extends Component {
   }
 
   getPlaylists() {
-    axios.get('/api/playlists/', {
+    axios.get('/api/spotify/playlists/', {
       // params: {}
     })
     .then(res => {
