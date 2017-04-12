@@ -13,19 +13,6 @@ var mood;
 var activity;
 
 module.exports = {
-  /*
-  authenticate: function(code, cb) {
-    spotify.authorizationCodeGrant(code)
-    .then(function(data) {
-      spotify.setAccessToken(data.body.access_token);
-      spotify.setRefreshToken(data.body.refresh_token);
-      cb(null);
-    })
-    .catch(err => {
-      cb(err);
-    });
-  },
-  */
   getUserPlaylists: function(username, cb) {
     spotify.getUserPlaylists(username)
       .then(data => {
