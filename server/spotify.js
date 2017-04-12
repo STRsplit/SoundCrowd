@@ -112,6 +112,7 @@ module.exports = {
       spotify.getPlaylist('spotify', playlists[num].id)
       .then((data) => {
         var tracks = data.body.tracks.items;
+        var result = [];
         if (activity === 'Exercising' || activity === 'Partying') {
           for (var i = 0; i < tracks.length; i++) {
             if (tracks[i].track.popularity < 60) {
