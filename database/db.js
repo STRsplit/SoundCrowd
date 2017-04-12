@@ -29,15 +29,17 @@ const User = db.define('User', {
   } 
 );
 
-// creates these tables in MySQL if they don't already exist. Pass in {force: true}
-// to drop any existing user and message tables and make new ones.
-
-var Playlist = db.define('Playlist', {
-  number: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+const Playlist = db.define('Playlist', {
+  playlist_id: {type: Sequelize.STRING, primaryKey: true},
+  user_id: Sequelize.STRING,
   name: Sequelize.STRING
 }, {timestamps: false});
 
-Playlist.belongsTo(User);
+const Song = db.define('Song', {
+  song_id: {type: Sequelize.STRING, primaryKey: true},
+  playlist_id: Sequelize.STRING,
+  vote_count: Sequelize.INTEGER
+}, { timestamps: false });
 
 const Vote = db.define('Vote', {
   playlist_id: Sequelize.STRING,
@@ -48,12 +50,19 @@ const Vote = db.define('Vote', {
 });
 
 User.sync();
-Playlist.sync({force: true});
+Playlist.sync();
+Song.sync();
 Vote.sync();
+
+// User.hasMany(Playlist);
+// Playlist.belongsTo(User);
+Playlist.hasMany(Song);
+Song.belongsTo(Playlist);
 
 module.exports = {
   User: User,
   Playlist: Playlist,
+  Song: Song,
   Vote: Vote
 };
 

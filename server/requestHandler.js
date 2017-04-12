@@ -1,4 +1,5 @@
 const db = require('../database/db');
+const dbHelpers = require('../database/dbHelpers');
 
 const verifyUser = (req, res) => {
   console.log('req.sessionID', req.sessionID);
@@ -19,6 +20,7 @@ const validateVote = (req, res) => {
       }
     })
     .then(result => {
+      dbHelpers.updateVoteCount(songId, vote);
       return Boolean(result);
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));

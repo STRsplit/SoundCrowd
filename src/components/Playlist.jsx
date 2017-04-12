@@ -27,7 +27,7 @@ class Playlist extends Component {
   render() {
     const tracks = this.state.tracks.map(track => (
       (
-        <Track key={track.track.id} track={track.track}/>
+        <Track key={track.track.id} playlist={this.props.playlist} track={track.track}/>
       )
     ))
     return (
