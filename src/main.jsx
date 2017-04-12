@@ -8,7 +8,8 @@ import Login from './components/login/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
 import Playlist from './components/Playlist.jsx';
-import SearchContainer from './components/SearchContainer.jsx'
+import SearchContainer from './components/SearchContainer.jsx'; 
+import AccordionTest from './components/AccordionTest.jsx';
 
 
 import keys from './config/keys.js';
@@ -16,6 +17,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/elemental/less/elemental.less';
 import Foundation from 'react-foundation';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 require("!style-loader!css-loader!sass-loader!./styles/sass/all.scss");
 
 
@@ -104,4 +108,4 @@ class Main extends React.Component {
   }
 }
   
-ReactDOM.render(<Main />, document.getElementById('app'));
+ReactDOM.render(<MuiThemeProvider><Main /></MuiThemeProvider>, document.getElementById('app'));

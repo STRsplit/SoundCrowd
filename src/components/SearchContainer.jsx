@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
+import _ from 'lodash';
 import axios from 'axios';
 import $ from 'jquery';
 
+import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
 import SearchBar from './SearchBar.jsx';
+import AccordionTest from './AccordionTest.jsx';
 
 
 
@@ -18,10 +22,15 @@ class SearchContainer extends Component {
     this.state = {
       songs: [],
       search: '',
-      filter: 'track'
+      filter: 'track',
+      dataSource: []
     }
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
     this.searchSpotify = this.searchSpotify.bind(this);
+    this.autoCompleteSearchSpotify = this.autoCompleteSearchSpotify.bind(this);
+  }
+  handleSongAdd(e) {
+
   }
 
   componentDidUpdate() {
@@ -29,8 +38,9 @@ class SearchContainer extends Component {
   }
 
   enterSearch(input){
-    let search = input.target.value;
-    this.setState({search})
+    let search = input.target === undefined ? input : input.target.value;
+    this.setState({search}, this.autoCompleteSearchSpotify) 
+    
   }
   setSelected(event){
     const filter = event.target.value
@@ -53,7 +63,19 @@ class SearchContainer extends Component {
     })
     .then((data) => {
       let songs = data.data;
-      this.setState({songs: songs})
+      this.setState({songs: songs, search: ''})
+    })
+    .catch((error) => {
+      console.log('Request resulted in an error', error);
+    })
+  }
+
+  autoCompleteSearchSpotify() {
+    let { search, filter } = this.state
+    axios.get(`https://api.spotify.com/v1/search?q="${search}"&type=${filter}`)
+    .then((data) => {
+      let songs = data.data.tracks.items;
+      this.setState({dataSource: songs})
     })
     .catch((error) => {
       console.log('Request resulted in an error', error);
@@ -68,11 +90,15 @@ class SearchContainer extends Component {
         </div>
     ));
     return (
-      <div>
+      <div className="searchcontainer-container">
         <p onClick={() => this.handleSearch()}>HELLO</p>
-        <SearchBar text={this.state.search} selectedOption={this.state.filter} handleSelect={(e) => this.setSelected(e)} handleSearch={this.searchSpotify} handleChange={(e) => this.enterSearch(e)} />
+        <SearchBar stats={this.state} text={this.state.search} 
+        selectedOption={this.state.filter} 
+        handleSelect={(e) => this.setSelected(e)} 
+        handleSearch={this.searchSpotify} 
+        handleChange={(e) => this.enterSearch(e)} />
         <div>
-         {searchSongs}
+         <SongGenreSection songs={this.state.songs} />
         </div>
       </div>
     )
