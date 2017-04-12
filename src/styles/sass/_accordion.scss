@@ -28,6 +28,11 @@ body {
   }
 }
 
+.react-sanfona-item-expanded,
+ .react-sanfona-item-title {
+    background-color: #fafafa ! important;
+    color: #000 ! important;
+} 
 .react-sanfona {
   border: 1px solid $gray;
   border-radius: 3px;

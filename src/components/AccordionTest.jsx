@@ -1,12 +1,11 @@
-// require('../styles/sass/_accordion.scss');
 require('normalize.css');
 import React from 'react';
 import { Accordion, AccordionItem } from 'react-sanfona';
 
 const AccordionTest = ({ songs }) => (
 
-      <Accordion allowMultiple={true} activeItems={songs[0]}>
-        {songs.map((song) => {
+      <Accordion allowMultiple={true} activeItems={[1]}>
+        {[1, 2, 3, 4].map((item) => {
           return (
             <AccordionItem title={`This is How We do It ${ item } by Montell Jordan`} slug={item} key={item}>
               <div>
