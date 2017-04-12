@@ -25,10 +25,6 @@ module.exports = {
       }, 
       {
         test: /\.less$/,
-        // loaders: ['style-loader', 'css-loader', 'less-loader'],
-        // options: { 
-        //   paths: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "styles/sass")]
-        // }
         use: [
           {
            loader: "style-loader"
@@ -44,13 +40,26 @@ module.exports = {
           }
         ]
       },
+      { 
+        test: /\.scss$/,
+         use: [
+           {
+            loader: "style-loader"
+           }, {
+             loader: "css-loader"
+           }, {
+             loader: "sass-loader", options: {
+               paths: [
+                   path.resolve(__dirname, "node_modules"),
+                   path.resolve(__dirname, "styles/sass")
+               ]
+             }
+           }
+         ]
+       },
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
-        },
-        {
-          test: /\.scss$/,
-          loaders: ['style-loader', 'css-loader', 'sass-loader']
         }
     ],
   },
