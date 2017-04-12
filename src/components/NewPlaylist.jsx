@@ -18,10 +18,9 @@ class NewPlaylist extends React.Component {
       console.log('in component');
 			axios.get('/getCategory')
 			.then((result) => {
-				console.log('test result: ', result.data);
-				var num = Math.floor(Math.random() / (1 / result.data.length));
+				console.log('test result: ', result);
 			  this.setState({
-			  	href: result.data[num].external_urls.spotify
+			  	href: result.data.external_urls.spotify
 			  });
 			});
 		})
