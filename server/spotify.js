@@ -9,6 +9,8 @@ var spotify = new SpotifyWebApi({
   redirectUri: callbackURL
 });
 var userId;
+var mood;
+var activity;
 
 module.exports = {
   /*
@@ -63,20 +65,28 @@ module.exports = {
       console.error(err);
     });
   },
-  test: (req, res) => {
+  getCategory: (req, res) => {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
     .then((data) => {
+      console.log('inside get category');
       res.send(data.body.playlists.items);
     }, (err) => {
       console.log('error: ', err);
     });
   },
-  // getPlaylist: (req, res) => {
-  //   db.Playlist.findAll()
-  //   .then((result) => {
-  //     res.send(result);
-  //   });
-  // },
+  setPreferences: function(req, res) {
+    mood = req.body.mood;
+    activity = req.body.activity;
+    console.log('this is songs ', mood);
+    console.log('this is songs ', activity);
+    res.sendStatus(201);
+  },
+  getPlaylist: (req, res) => {
+    db.Playlist.findAll()
+    .then((result) => {
+      res.send(result);
+    });
+  },
   createPlaylist: (req, res) => {
     console.log('post ', req.body.number);
     console.log('create playlist ', userId);

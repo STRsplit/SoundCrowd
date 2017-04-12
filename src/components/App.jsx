@@ -26,16 +26,14 @@ class App extends React.Component {
     this.props.handleActivity(e.target.value);
   }
 
-  getPlaylist() {
-    var count;
-    axios.get('/playlist')
-    .then((result) => {
-      count = result.data.length;
-      // console.log('existing playlist ', result);
-      axios.post('/create', {number: count});
-    });
-  }
-
+	getPlaylist() {
+		var count;
+		axios.get('/playlist')
+		.then((result) => {
+			count = result.data.length;
+			axios.post('/create', {number: count});
+		});
+	}
 
 
 	render() {
