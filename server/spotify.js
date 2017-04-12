@@ -69,7 +69,24 @@ module.exports = {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
     .then((data) => {
       console.log('inside get category');
-      res.send(data.body.playlists.items);
+      var playlists = data.body.playlists.items;
+      var names = [];
+      var chosen = [];
+      for (var i = 0; i < playlists.length; i++) {
+        names.push(playlists[i].name.split(' '));
+        names[i].unshift(i);
+      }
+      if (mood === 'Happy') {
+        for (var j = 0; j < names.length; j++) {
+          for (var k = 0; k < names[j].length; k++) {
+            if (names[j][k] === 'Good' || names[j][k] === 'Happy') {
+              chosen.push(names[j]);
+            }
+          }
+        } 
+      }
+      res.send(chosen);
+      // res.send(data.body.playlists.items);
     }, (err) => {
       console.log('error: ', err);
     });
