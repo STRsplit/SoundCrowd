@@ -22,37 +22,37 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
-      }, 
-      {
-        test: /\.less$/,
-        // loaders: ['style-loader', 'css-loader', 'less-loader'],
-        // options: { 
-        //   paths: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "styles/sass")]
-        // }
-        use: [
-          {
-           loader: "style-loader"
-          }, {
-            loader: "css-loader"
-          }, {
-            loader: "less-loader", options: {
-              paths: [
-                  path.resolve(__dirname, "node_modules"),
-                  path.resolve(__dirname, "styles/sass")
-              ]
-            }
-          }
-        ]
       },
       {
+        test: /\.less$/,
+        use: [{
+            loader: "style-loader"
+        }, {
+            loader: "css-loader"
+        }, {
+            loader: "less-loader", options: {
+                paths: [
+                    path.resolve(__dirname, "node_modules"),
+                    path.resolve(__dirname, "styles/sass")
+                ]
+            }
+        }]
+    },
+     {
+      test: /\.css$/,
+      loaders: ['style-loader', 'css-loader']
+    },
+  ],
+  loaders: [
+      {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      }
+        loaders: ['style', 'css', 'sass']
+      },
+    ]
+  },
+  resolve: {
+    modules: [
+      path.join(__dirname, 'node_modules'),
     ],
   },
-    resolve: {
-      modules: [
-        path.join(__dirname, 'node_modules'),
-      ],
-    },
 };
