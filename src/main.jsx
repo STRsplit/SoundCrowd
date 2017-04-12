@@ -27,7 +27,7 @@ class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: true,
+			loggedIn: false,
 			location: '',
 			weather: '',
 			mood: '',
