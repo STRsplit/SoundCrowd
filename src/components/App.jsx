@@ -4,31 +4,32 @@ import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-		}
-		this.setMood = this.setMood.bind(this);
-		this.setActivity = this.setActivity.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+    this.setMood = this.setMood.bind(this);
+    this.setActivity = this.setActivity.bind(this);
+  }
 
-	setMood(e) {
-		this.props.handleMood(e.target.value);
-	}
+  setMood(e) {
+    this.props.handleMood(e.target.value);
+  }
 
-	setActivity(e) {
-		this.props.handleActivity(e.target.value);
-	}
+  setActivity(e) {
+    this.props.handleActivity(e.target.value);
+  }
 
-	getPlaylist() {
-		var count;
-		axios.get('/playlist')
-		.then((result) => {
-			count = result.data.length;
-			// console.log('existing playlist ', result);
-			axios.post('/create', {number: count});
-		});
-	}
+  getPlaylist() {
+    var count;
+    axios.get('/playlist')
+    .then((result) => {
+      count = result.data.length;
+      // console.log('existing playlist ', result);
+      axios.post('/create', {number: count});
+    });
+  }
+
 
 	render() {
 	  return (

@@ -84,6 +84,20 @@ app.get('/api/playlists/:playlist', function(req, res) {
   });
 });
 
+app.post('/api/vote', function(req, res) {
+  // do stuff with the vote
+    // like see if you need to reorder songs
+  handler.validateVote(req, res);
+  // if err, handle
+  // else
+    // emit socket event
+      // update vote count for that track
+      // needs updated playlist order (just the two that have flipped?)
+      // something like io.emit('flip', 1, 2)
+    // respond to client
+  res.sendStatus(201);
+});
+
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });

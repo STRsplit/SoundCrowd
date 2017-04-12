@@ -39,12 +39,22 @@ var Playlist = db.define('Playlist', {
 
 Playlist.belongsTo(User);
 
+const Vote = db.define('Vote', {
+  playlist_id: Sequelize.STRING,
+  song_id: Sequelize.STRING,
+  user_id: Sequelize.STRING,
+  session_id: Sequelize.STRING,
+  vote: Sequelize.INTEGER
+});
+
 User.sync();
 Playlist.sync({force: true});
+Vote.sync();
 
 module.exports = {
   User: User,
-  Playlist: Playlist
+  Playlist: Playlist,
+  Vote: Vote
 };
 
 /* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED * * 

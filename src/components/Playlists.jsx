@@ -8,6 +8,7 @@ class Playlists extends Component {
     this.state = {
       playlists: []
     };
+    this.getPlaylists();
   }
 
   getPlaylists() {
@@ -16,6 +17,7 @@ class Playlists extends Component {
     })
     .then(res => {
       let playlists = res.data.items;
+      console.log(res.data.items);
       this.setState({ playlists: playlists });
     })
     .catch(err => {
@@ -27,10 +29,6 @@ class Playlists extends Component {
 
   setPlaylist(playlistId) {
     this.props.setPlaylist(playlistId);
-  }
-
-  componentWillMount() {
-    this.getPlaylists();
   }
 
   render() {

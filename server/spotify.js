@@ -71,12 +71,12 @@ module.exports = {
       console.log('error: ', err);
     });
   },
-  getPlaylist: (req, res) => {
-    db.Playlist.findAll()
-    .then((result) => {
-      res.send(result);
-    });
-  },
+  // getPlaylist: (req, res) => {
+  //   db.Playlist.findAll()
+  //   .then((result) => {
+  //     res.send(result);
+  //   });
+  // },
   createPlaylist: (req, res) => {
     console.log('post ', req.body.number);
     console.log('create playlist ', userId);
