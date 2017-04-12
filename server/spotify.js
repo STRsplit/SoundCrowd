@@ -120,13 +120,18 @@ module.exports = {
             }
           }
         } else if (activity === 'Studying' || activity === 'Chilling' || activity === 'Driving') {
-          for (var i = 0; i < tracks.length; i++) {
+          for (i = 0; i < tracks.length; i++) {
             if (tracks[i].track.popularity < 30) {
               tracks[i] = undefined;
             }
           }
         }
-        res.send(tracks);
+        for (i = 0; i < tracks.length; i++) {
+          if (tracks[i] !== undefined) {
+            result.push(tracks[i]);
+          }
+        }
+        res.send(result);
       });
       // res.send(playlists);
     }, (err) => {
