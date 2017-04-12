@@ -12,7 +12,6 @@
     "compile": "webpack --watch",
     "production": "webpack && node server/server.js",
     "start": "npm run build-css && npm run init-webpack && npm run init-server",
-    "dev": "npm run watch-css && npm run init-webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
