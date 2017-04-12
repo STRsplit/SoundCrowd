@@ -14,27 +14,34 @@ module.exports = {
   },
 
   savePlaylist: function(playlistId, userId, tracks) {
-    Playlist.findOrCreate({ where: {
-      playlist_id: playlistId,
-      user_id: userId
-    }})
-      .then(playlist => {
-        tracks.items.forEach(track => {
-          Song.create({
-            song_id: track.track.id,
-            playlist_id: playlistId,
-            vote_count: 0
-          })
-          .then(() => {
-            // console.log('saved ' + track.track.id);
-          })
+    return new Promise((resolve, reject) => {
+      Playlist.findOrCreate({ where: {
+        playlist_id: playlistId,
+        user_id: userId
+      }})
+        .then(playlist => {
+          tracks = tracks.items.map(track => {
+            var trackObj = {
+              song_id: track.track.id,
+              playlist_id: playlistId,
+              title: track.track.name,
+              artist: track.track.artists ? track.track.artists[0].name : '',
+                // weird issue where rarely there's no artists array
+                // fix later to map all artist names to string, then save
+              vote_count: 0
+            }; 
+            return trackObj;
+          });
+
+          Song.bulkCreate(tracks)
+            .then(savedTracks => {
+              resolve(savedTracks);
+            });
         })
-        return playlist;
-      })
-      .catch(err => {
-        console.log(err);
-        // return err;
-      });
+        .catch(err => {
+          reject(err);
+        });
+    });
   },
 
   updateVoteCount: function(songId, playlistId, vote) {
