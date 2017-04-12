@@ -1,0 +1,93 @@
+@import 'mixins_functions';
+
+
+
+
+
+// @function property-value($property, $selector: null) {
+//     @return $magic;
+// }
+
+// @function calcEm($target-px, $context) {
+//   @return ($target-px / $context) * 1em;
+// }
+
+
+
+
+.login-container {
+  display: block;
+  position: relative;
+  width: 60%;
+  // background-color: colorOpacity(black, 1);
+  @include center;
+}
+
+.login-container-inner {
+  width: 80%;
+  padding: 10% 0;
+  margin: 5%;
+  display: block;
+  position: relative;
+  background-color: colorOpacity(white, 1);
+  overflow-x: hidden;
+  @include transition(background 1s ease);
+  @include center(80%);
+  @include vertical-align(10%);
+}
+.button-container {
+  display: block;
+  margin: 5% 0;
+}
+
+.button {
+  display: block;
+  width: $offsetHalf;
+  max-width: $offsetHalf + 10%;
+  padding: $smallPad;
+  position: relative;
+  margin: 5% auto;
+  @include border-radius($radius);
+    span {
+      @include center
+    }
+}
+.center-content {
+  display: block;
+  margin: 10% auto 0%;
+  text-align: center;
+  width: 100%;
+}
+
+
+h2 {
+  color: colorOpacity(white, 1);
+  font: $font-stack;
+}
+
+.about-brief {
+  width: $offsetHalf;
+  padding: $smallPad;
+  display: block;
+  margin: centerContent(0%);
+}
+.tagline {
+  font: $font-stack;
+  text-align: center;
+}
+
+.spotifyLogoContainer {
+  display: table-cell; 
+  vertical-align: middle; 
+  text-align:center;
+  margin: centerContent(0%);
+
+}
+.spotifyLogo {
+  max-width: 40%;
+  margin: centerContent(0%);
+}
+
+
+
+

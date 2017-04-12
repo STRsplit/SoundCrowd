@@ -16,12 +16,7 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/elemental/less/elemental.less';
 import Foundation from 'react-foundation';
-// import './node_modules/elemental/less/elemental.less'
 require("!style-loader!css-loader!sass-loader!./styles/sass/all.scss");
-
-
-
-
 
 
 class Main extends React.Component {
@@ -96,6 +91,7 @@ class Main extends React.Component {
             this.state.loggedIn ? <Playlists setPlaylist={this.setPlaylist} /> : <Redirect to="/login" />
           )}/>
           <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist}/>)}/>
+          <Route path="/search" render={() => (<SearchContainer />)} />
 		      <Route exact path="/" render={() => (
 		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
 		      )}/>

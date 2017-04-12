@@ -1,11 +1,54 @@
 @import 'node_modules/muicss/lib/sass/mui/colors.scss';
+@import '_navBar';
+@import '_app';
+@import '_login';
+@import '_playlist';
+@import '_playlists';
+@import '_search';
+@import '_songEntry';
+
+
+$step-size-heading: 0.8;
+
+
+// @function colorOpacity($color, $opacity) {
+//   @return rgba($color, $opacity)
+// }
+
+// @function centerContent($margin-top){
+//   @return $margin-top auto;
+// }
+
+
+@mixin heading-size($size) {
+    font-size: $size * $step-size-heading + em;
+}
+
+@function colorOpacity($color, $opacity) {
+  @return rgba($color, $opacity)
+}
+
+@function centerContent($margin-top){
+  @return $margin-top auto;
+}
+
+h1 {
+    @include heading-size(6);
+}
+h2 {
+    @include heading-size(5);
+}
+h3 {
+    @include heading-size(4);
+}
 
 html,
 body {
-  background-color: #6dbcdb;
+  background-color: colorOpacity(#6dbcdb, 1);
 }
 ul,
 ol {
   margin: 0;
   padding: 0;
 }
+
