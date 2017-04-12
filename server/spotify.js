@@ -118,6 +118,12 @@ module.exports = {
               tracks[i] = undefined;
             }
           }
+        } else if (activity === 'Studying' || activity === 'Chilling' || activity === 'Driving') {
+          for (var i = 0; i < tracks.length; i++) {
+            if (tracks[i].track.popularity < 30) {
+              tracks[i] = undefined;
+            }
+          }
         }
         res.send(tracks);
       });
