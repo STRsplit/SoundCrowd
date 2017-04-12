@@ -110,6 +110,14 @@ module.exports = {
             }
           }
         } 
+      } else if (mood === 'Excited') {
+        for (j = 0; j < names.length; j++) {
+          for (k = 0; k < names[j].length; k++) {
+            if (names[j][k] === 'Free') {
+              chosen.push(names[j]);
+            }
+          }
+        } 
       }
       res.send(chosen);
       // res.send(data.body.playlists.items);
