@@ -40,7 +40,7 @@ class App extends React.Component {
 	  		<div>
 		  	  <h1>Welcome To So Me</h1>
 		  	  {this.props.children}
-		  	  <div>Use My Playlist</div> 
+				<div><Link to='/playlists'>Use My Playlist</Link></div> 
 		  	  	<Link to='/new-playlist'>Get Suggested Playlist</Link>
 		  	  <div>Mood</div>
 	  	  	<select id="mood" onChange={this.setMood}>
