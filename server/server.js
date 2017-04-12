@@ -83,9 +83,13 @@ app.get('/api/spotify/playlists/:playlist', function(req, res) {
   spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
     if (err) res.status(err.statusCode).send(err);
     else {
-      dbHelpers.savePlaylist(playlist, req.user.id, tracks);
-      // format tracks for return -- match /api/playlists/:playlist
-      res.status(200).send(tracks);
+      dbHelpers.savePlaylist(playlist, req.user.id, tracks)
+        .then(function(savedTracks) {
+          res.status(200).send(savedTracks);
+        })
+        .catch(err => {
+          res.status(err.statusCode).send(err);
+        });
     }
   });
 });

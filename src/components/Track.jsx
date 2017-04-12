@@ -22,7 +22,7 @@ class Track extends Component {
     axios.post('/api/vote/', {
       vote: val,
       playlistId: this.props.playlist,
-      songId: this.props.track.id
+      songId: this.props.track.song_id
     })
     .then(res => {
       if (voteStatus !== null) {
@@ -44,7 +44,7 @@ class Track extends Component {
   render() {
     return (
       <div>
-        {this.props.track.name} - {this.props.track.artists ? this.props.track.artists[0].name : ''}
+        {this.props.track.title} - {this.props.track.artist}
         <div>
           <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
           <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>

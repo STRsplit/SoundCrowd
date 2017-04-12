@@ -16,7 +16,7 @@ class Playlist extends Component {
     var playlistId = this.props.playlist;
     axios.get('/api/spotify/playlists/' + playlistId)
       .then(res => {
-        let tracks = res.data.items;
+        let tracks = res.data;
         this.setState({ tracks: tracks });
       })
       .catch(err => {
@@ -30,7 +30,7 @@ class Playlist extends Component {
   render() {
     const tracks = this.state.tracks.map(track => (
       (
-        <Track key={track.track.id} playlist={this.props.playlist} track={track.track}/>
+        <Track key={track.song_id} playlist={this.props.playlist} track={track}/>
       )
     ))
     return (
