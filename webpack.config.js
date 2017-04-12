@@ -20,7 +20,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react', 'es2015', 'stage-1']
         }
       }, 
       {
@@ -44,29 +44,13 @@ module.exports = {
           }
         ]
       },
-      { test: /\.scss$/,
-        // loaders: ['style-loader', 'css-loader', 'less-loader'],
-        // options: { 
-        //   paths: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "styles/sass")]
-        // }
-        use: [
-          {
-           loader: "style-loader"
-          }, {
-            loader: "css-loader"
-          }, {
-            loader: "sass-loader", options: {
-              paths: [
-                  path.resolve(__dirname, "node_modules"),
-                  path.resolve(__dirname, "styles/sass")
-              ]
-            }
-          }
-        ]
-      },
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css-loader', 'sass-loader']
         }
     ],
   },
