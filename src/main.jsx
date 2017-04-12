@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect, Match } from 'react-router-dom';
 
 import App from './components/App.jsx';
-import Login from './components/login/Login.jsx';
+import Login from './components/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
 import Playlist from './components/Playlist.jsx';
