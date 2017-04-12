@@ -122,7 +122,6 @@ module.exports = {
       var num = Math.floor(Math.random() / (1 / chosen.length));
       num = chosen[num][0];
       res.send(playlists[num]);
-      // res.send(data.body.playlists.items);
     }, (err) => {
       console.log('error: ', err);
     });
