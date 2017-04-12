@@ -55,10 +55,10 @@ module.exports = {
   getCategory: (req, res) => {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
     .then((data) => {
-      console.log('inside get category');
       var playlists = data.body.playlists.items;
       var names = [];
       var chosen = [];
+      var playlistId;
       for (var i = 0; i < playlists.length; i++) {
         names.push(playlists[i].name.split(' '));
         names[i].unshift(i);
@@ -71,7 +71,7 @@ module.exports = {
             }
           }
         } 
-      } else if (mood === 'Calm') {
+      } else if (mood === 'Calm' || mood === '') {
         for (j = 0; j < names.length; j++) {
           for (k = 0; k < names[j].length; k++) {
             if (names[j][k] === 'Relax' || names[j][k] === 'Coffeehouse' ||
@@ -108,7 +108,13 @@ module.exports = {
       }
       var num = Math.floor(Math.random() / (1 / chosen.length));
       num = chosen[num][0];
-      res.send(playlists[num]);
+      console.log('this is playlist num: ', playlists[num]);
+
+      // spotify.getPlaylist('spotify', playlists[num].id)
+      // .then((data) => {
+      //   res.send(data);
+      // });
+      res.send(playlist[num]);
     }, (err) => {
       console.log('error: ', err);
     });
