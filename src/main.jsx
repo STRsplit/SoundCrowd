@@ -8,8 +8,8 @@ import Login from './components/login/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
 import Playlist from './components/Playlist.jsx';
-import SearchContainer from './components/SearchContainer.jsx'
-
+import SearchContainer from './components/SearchContainer.jsx'; 
+import AccordionTest from './components/AccordionTest.jsx';
 
 
 import keys from './config/keys.js';
@@ -27,7 +27,7 @@ class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedIn: false,
+			loggedIn: true,
 			location: '',
 			weather: '',
 			mood: '',

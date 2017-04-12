@@ -11,6 +11,7 @@ import $ from 'jquery';
 import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
 import SearchBar from './SearchBar.jsx';
+import AccordionTest from './AccordionTest.jsx';
 
 
 
@@ -74,7 +75,6 @@ class SearchContainer extends Component {
     axios.get(`https://api.spotify.com/v1/search?q="${search}"&type=${filter}`)
     .then((data) => {
       let songs = data.data.tracks.items;
-      console.log(songs)
       this.setState({dataSource: songs})
     })
     .catch((error) => {

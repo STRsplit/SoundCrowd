@@ -6,9 +6,9 @@ import axios from 'axios';
 import $ from 'jquery';
 
 import { Form, Input, Textarea, Button } from 'muicss/react';
-import { Button as ColorButton } from 'elemental' 
-import AutoCompleteSearch from './Autocomplete.jsx'
-
+import { Button as ColorButton } from 'elemental';
+import AutoCompleteSearch from './Autocomplete.jsx';
+import AccordionTest from './AccordionTest.jsx';
 
 // import Button from 'muicss/lib/react/button.js';
 // import Container from 'muicss/lib/react/container.js';

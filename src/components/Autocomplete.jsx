@@ -9,18 +9,16 @@ class AutoCompleteSearch extends Component {
   constructor(props){
     super(props);
     this.handleUpdateInput = this.handleUpdateInput.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   };
 
   handleUpdateInput(value) {
-    console.log('handle update', value)
     this.props.handleInput(value);
   }
 
 
-  handleClick(e) {
-    console.log('djshfkjhadskjfhdaskjhfkjhadskjfh', e)
-  }
+  // handleClick(e) {
+  //  
+  // }
 
   render() {
 
@@ -28,9 +26,7 @@ class AutoCompleteSearch extends Component {
     let dataSource = stats.dataSource
     const dataSourceConfig = {
       text: 'name',
-      value: 'name',
-      ref: 'ref',
-      onClick: this.handleClick
+      value: 'name'
     };
 
     return (
@@ -40,7 +36,6 @@ class AutoCompleteSearch extends Component {
           dataSource={dataSource}
           searchText={stats.search}
           fullWidth={true}
-          // onNewRequest={(e) => this.handleClick(e)}
           dataSourceConfig={dataSourceConfig}
           filter={AutoComplete.noFilter}
         />
