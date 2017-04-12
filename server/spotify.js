@@ -88,8 +88,16 @@ module.exports = {
         for (var j = 0; j < names.length; j++) {
           for (var k = 0; k < names[j].length; k++) {
             if (names[j][k] === 'Relax' || names[j][k] === 'Coffeehouse' ||
-                 names[j][k] === 'Soft' || names[j][k] === 'Chill' || 
-                 names[j][k] === 'Break' || names[j][k] === 'Smooth') {
+                names[j][k] === 'Soft' || names[j][k] === 'Chill' || 
+                names[j][k] === 'Break' || names[j][k] === 'Smooth') {
+              chosen.push(names[j]);
+            }
+          }
+        } 
+      } else if (mood === 'Sad') {
+        for (var j = 0; j < names.length; j++) {
+          for (var k = 0; k < names[j].length; k++) {
+            if (names[j][k] === 'Dark' || names[j][k] === 'Melancholia' || names[j][k] === 'Loss') {
               chosen.push(names[j]);
             }
           }
