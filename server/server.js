@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var handler = require('./requestHandler');
 var spotify = require('./spotify');
 var db = require('../database/db');
+var dbHelpers = require('../database/dbHelpers');
 
 /* * Authentication * */
 var session = require('express-session');
@@ -78,16 +79,19 @@ app.get('/api/playlists', function(req, res) {
 });
 
 app.get('/api/playlists/:playlist', function(req, res) {
-  spotify.getPlaylist(req.user.id, req.params.playlist, function(err, tracks) {
+  var playlist = req.params.playlist;
+  spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
     if (err) res.status(err.statusCode).send(err);
-    else res.status(200).send(tracks);
+    else {
+      dbHelpers.savePlaylist(playlist, req.user.id, tracks);
+      res.status(200).send(tracks);
+    }
   });
 });
 
 app.post('/api/vote', function(req, res) {
-  // do stuff with the vote
-    // like see if you need to reorder songs
   handler.validateVote(req, res);
+  // reorder songs if needed
   // if err, handle
   // else
     // emit socket event
