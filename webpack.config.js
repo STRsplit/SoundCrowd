@@ -44,7 +44,7 @@ module.exports = {
           }
         ]
       },
-      test: /\.scss$/,
+      { test: /\.scss$/,
         // loaders: ['style-loader', 'css-loader', 'less-loader'],
         // options: { 
         //   paths: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "styles/sass")]
