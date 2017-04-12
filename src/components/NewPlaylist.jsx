@@ -19,9 +19,9 @@ class NewPlaylist extends React.Component {
 			axios.get('/getCategory')
 			.then((result) => {
 				console.log('test result: ', result);
-			  this.setState({
-			  	href: result.data.external_urls.spotify
-			  });
+			  // this.setState({
+			  // 	href: result.data.external_urls.spotify
+			  // });
 			});
 		})
 		.catch((err) => {

@@ -108,13 +108,11 @@ module.exports = {
       }
       var num = Math.floor(Math.random() / (1 / chosen.length));
       num = chosen[num][0];
-      console.log('this is playlist num: ', playlists[num]);
 
-      // spotify.getPlaylist('spotify', playlists[num].id)
-      // .then((data) => {
-      //   res.send(data);
-      // });
-      res.send(playlist[num]);
+      spotify.getPlaylist('spotify', playlists[num].id)
+      .then((data) => {
+        res.send(data.body);
+      });
     }, (err) => {
       console.log('error: ', err);
     });
