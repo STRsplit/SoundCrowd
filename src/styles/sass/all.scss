@@ -1,4 +1,4 @@
-@import 'node_modules/muicss/lib/sass/mui/colors';
+@import 'node_modules/muicss/lib/sass/mui/colors.scss';
 @import '_navBar';
 @import '_app';
 @import '_login';
@@ -6,7 +6,7 @@
 @import '_playlists';
 @import '_search';
 @import '_songEntry';
-@import '_accordion';
+@import 'accordion';
 @import 'mixins_functions';
 
 $step-size-heading: 0.8;

@@ -1,4 +1,4 @@
-require('../styles/sass/_accordion.scss');
+// require('../styles/sass/_accordion.scss');
 require('normalize.css');
 import React from 'react';
 import { Accordion, AccordionItem } from 'react-sanfona';
