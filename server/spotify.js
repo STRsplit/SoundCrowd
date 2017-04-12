@@ -111,8 +111,17 @@ module.exports = {
 
       spotify.getPlaylist('spotify', playlists[num].id)
       .then((data) => {
-        res.send(data.body);
+        var tracks = data.body.tracks.items;
+        if (activity === 'Exercising' || activity === 'Partying') {
+          for (var i = 0; i < tracks.length; i++) {
+            if (tracks[i].track.popularity < 60) {
+              tracks[i] = undefined;
+            }
+          }
+        }
+        res.send(tracks);
       });
+      // res.send(playlists);
     }, (err) => {
       console.log('error: ', err);
     });
