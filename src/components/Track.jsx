@@ -6,7 +6,7 @@ class Track extends Component {
     super(props);
     this.state = {
       // track: null,
-      voteCount: null,
+      voteCount: this.props.voteCount || 0,
       voted: null
     };
   }

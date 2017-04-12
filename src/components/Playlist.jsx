@@ -25,7 +25,6 @@ class Playlist extends Component {
   }
 
   sortTracks() {
-
   }
 
   render() {

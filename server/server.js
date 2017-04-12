@@ -84,9 +84,17 @@ app.get('/api/spotify/playlists/:playlist', function(req, res) {
     if (err) res.status(err.statusCode).send(err);
     else {
       dbHelpers.savePlaylist(playlist, req.user.id, tracks);
+      // format tracks for return -- match /api/playlists/:playlist
       res.status(200).send(tracks);
     }
   });
+});
+
+app.get('/api/playlists/:playlist', function(req, res) {
+  dbHelpers.getPlaylist(req.params.playlist)
+    .then(function(tracks) {
+      res.status(200).send(tracks);
+    });
 });
 
 app.post('/api/vote', function(req, res) {
