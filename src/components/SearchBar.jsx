@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+
 import axios from 'axios';
 import $ from 'jquery';
 
 import { Form, Input, Textarea, Button } from 'muicss/react';
 import { Button as ColorButton } from 'elemental' 
+import AutoCompleteSearch from './Autocomplete.jsx'
 
 
 // import Button from 'muicss/lib/react/button.js';
@@ -24,12 +25,14 @@ class SearchBar extends Component {
     this.props.handleSearch();
   }
   render() {
-    const { text, handleChange, handleSearch, handleSelect, selectedOption } = this.props
+    let { stats, text, handleChange, handleSearch, handleSongAdd, handleSelect, selectedOption } = this.props
     return (
       <div>
         <div>
+        <div>
+        <AutoCompleteSearch handleInput={handleChange} handleSongAdd={handleSongAdd} stats={stats} />
+        </div>
           <Form>
-            <Input type="text" default="search for a song" onChange={handleChange} value={text}></Input>
             <br />
             <br />
             <label>Song Title: <Input type="radio" onClick={handleSelect} value="track" ref="song" name="searchfilter" checked={selectedOption === 'track'}/></label>
@@ -37,6 +40,7 @@ class SearchBar extends Component {
              <label>Album Title: <Input type="radio" onClick={handleSelect} value="album" ref="album" name="searchfilter" checked={selectedOption === 'album'}/></label>
             <br />
             <button onClick={this.handleClick}>Search Spotify</button>
+           
           </Form>
         </div>
       </div>

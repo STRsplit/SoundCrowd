@@ -15,6 +15,22 @@
   margin-left: -10px;
   margin-right: -10px; }
 
+.layout-column {
+  text-align: center;
+  height: 100vh;
+  padding: 0px; }
+
+.main-container {
+  width: 100%;
+  display: block;
+  clear: both; }
+
+.main-left-column {
+  background-color: pink; }
+
+.main-right-column {
+  background-color: purple; }
+
 .login-container {
   display: block;
   position: relative;
@@ -95,6 +111,28 @@ h2 {
 .spotifyLogo {
   max-width: 40%;
   margin: 0% auto; }
+
+.searchcontainer-container {
+  width: 80%;
+  margin: 0% auto; }
+
+.mui-dropdown__menu,
+.mui--is-open {
+  width: 100%; }
+
+.mui-btn {
+  float: right !important;
+  background-color: blue; }
+
+.mui-dropdown {
+  width: 100%;
+  background-color: blue; }
+
+.mui-dropdown:hover {
+  width: 100%;
+  background-color: white; }
+  .mui-dropdown:hover .mui-btn {
+    background-color: white; }
 
 .song-entry-container {
   width: 100%; }

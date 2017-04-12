@@ -20,35 +20,43 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react', 'es2015', 'stage-1']
         }
-      },
+      }, 
       {
         test: /\.less$/,
-        use: [{
-            loader: "style-loader"
-        }, {
+        // loaders: ['style-loader', 'css-loader', 'less-loader'],
+        // options: { 
+        //   paths: [path.resolve(__dirname, "node_modules"), path.resolve(__dirname, "styles/sass")]
+        // }
+        use: [
+          {
+           loader: "style-loader"
+          }, {
             loader: "css-loader"
-        }, {
+          }, {
             loader: "less-loader", options: {
-                paths: [
-                    path.resolve(__dirname, "node_modules"),
-                    path.resolve(__dirname, "styles/sass")
-                ]
+              paths: [
+                  path.resolve(__dirname, "node_modules"),
+                  path.resolve(__dirname, "styles/sass")
+              ]
             }
-        }]
-    }
-  ],
-  loaders: [
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+          }
+        ]
       },
-    ]
-  },
-  resolve: {
-    modules: [
-      path.join(__dirname, 'node_modules'),
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css-loader', 'sass-loader']
+        }
     ],
   },
+    resolve: {
+      modules: [
+        path.join(__dirname, 'node_modules'),
+      ],
+    },
 };
