@@ -128,7 +128,7 @@ module.exports = {
         }
         for (i = 0; i < tracks.length; i++) {
           if (tracks[i] !== undefined) {
-            result.push(tracks[i]);
+            result.push(tracks[i].track.uri);
           }
         }
         res.send(result);
