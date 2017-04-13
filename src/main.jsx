@@ -112,6 +112,7 @@ class Main extends React.Component {
     return (
       <BrowserRouter>
 			  <div>
+
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
 		      )}/>
