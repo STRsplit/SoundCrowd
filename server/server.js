@@ -22,13 +22,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-app.get('/playlist', spotify.findPlaylist);
-
-app.post('/create', spotify.createPlaylist);
-
-app.get('/getCategory', spotify.getCategory);
-
-app.post('/setPreferences', spotify.setPreferences);
 
 
 /* *  Authentication * */
@@ -73,6 +66,14 @@ app.get('/auth/spotify/callback',
 app.get('/api/verifyuser', handler.verifyUser);
 
 /* * Spotify API * */
+app.get('/playlist', spotify.findPlaylist);
+
+app.post('/create', spotify.createPlaylist);
+
+app.get('/getCategory', spotify.getCategory);
+
+app.post('/setPreferences', spotify.setPreferences);
+
 app.get('/api/spotify/playlists', function(req, res) {
   spotify.getUserPlaylists(req.user.id, function(err, playlists) {
     if (err) res.status(err.statusCode).send(err);

@@ -12,6 +12,7 @@ var userId;
 var mood;
 var activity;
 var newPlaylistId;
+var href;
 
 module.exports = {
   getUserPlaylists: function(username, cb) {
@@ -113,7 +114,7 @@ module.exports = {
       spotify.getPlaylist('spotify', playlists[num].id)
       .then((data) => {
         var tracks = data.body.tracks.items;
-        var result = [];
+        var result = {uri: [], link: href};
         if (activity === 'Exercising' || activity === 'Partying') {
           for (var i = 0; i < tracks.length; i++) {
             if (tracks[i].track.popularity < 60) {
@@ -128,14 +129,14 @@ module.exports = {
           }
         }
         for (i = 0; i < tracks.length; i++) {
-          if (result.length === 90) {
+          if (result.uri.length === 90) {
             break;
           }
           if (tracks[i] !== undefined) {
-            result.push(tracks[i].track.uri);
+            result.uri.push(tracks[i].track.uri);
           }
         }
-        spotify.addTracksToPlaylist(userId, newPlaylistId, result)
+        spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
         .then((data) => {
           console.log('added tracks');
         }, function(err) {
@@ -165,7 +166,7 @@ module.exports = {
   },
   createPlaylist: (req, res) => {
     console.log('post ', req.body.number);
-    console.log('create playlist ', userId);
+    console.log('playlist user id: ', userId);
     var playlistName = 'Playlist ' + req.body.number;
     spotify.createPlaylist(userId, playlistName, {public: false})
     .then((data) => {
@@ -175,7 +176,8 @@ module.exports = {
         user_id: userId,
         name: playlistName
       });
-      console.log('created Playlist :', data.body.id);
+      href = data.body.external_urls.spotify;
+      console.log('created Playlist :', data.body.external_urls.spotify);
       res.sendStatus(201);
     }, (err) => {
       console.log('error: ', err);
