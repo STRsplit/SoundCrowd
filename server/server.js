@@ -21,7 +21,6 @@ app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
 app.get('/test', spotify.test);
 
 app.get('/playlist', spotify.getPlaylist);
@@ -36,7 +35,7 @@ app.use(session({
     host: process.env.SITE_URL || 'localhost',
     port: process.env.REDIS_PORT || 6379,
     client: client,
-    ttl: 300 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
+    ttl: 30 // ttl is expiration in seconds. 260 seconds default, 86400 sec === 1day
   }),
   resave: false, 
   saveUninitialized: true
@@ -54,11 +53,14 @@ app.get('/api/search/', spotify.searchFor);
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
-app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private'], responseType: 'token', showDialog: true}));
+app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private', 'user-read-currently-playing', 'user-read-playback-state'], responseType: 'token', showDialog: true}));
 
 app.get('/auth/spotify/callback', 
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
 );
+
+app.get('/api/verifyuser', handler.verifyUser);
+/* *  Authentication * */
 
 // app.get('/api/trackTest', function(req, res) {
 //   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
@@ -67,10 +69,10 @@ app.get('/auth/spotify/callback',
 //   });
 // });
 
-/* *  Authentication * */
-app.get('/api/verifyuser', handler.verifyUser);
 
 /* * Spotify API * */
+app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
+
 app.get('/api/playlists', function(req, res) {
   spotify.getUserPlaylists(req.user.id, function(err, playlists) {
     if (err) res.status(err.statusCode).send(err);
@@ -101,6 +103,8 @@ app.post('/api/vote', function(req, res) {
     // respond to client
   res.sendStatus(201);
 });
+
+// app.get('/api/playlist/currentsong', handler.getCurrentSongDetails);
 
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));

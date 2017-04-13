@@ -1,3 +1,5 @@
+var request = require('request');
+var rp = require('request-promise');
 var db = require('../database/db');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
@@ -86,8 +88,49 @@ module.exports = {
     }, (err) => {
       console.log('error: ', err);
     });
+  },
+
+  getCurrentSongDetails: (req, res) => {
+    if (spotify._credentials.accessToken) {
+      const options = {
+        uri: 'https://api.spotify.com/v1/me/player',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${spotify._credentials.accessToken}`
+        },
+        json: true
+      }; 
+      rp(options)
+      .then(info => {
+        console.log('info',info);
+        res.send(info);
+      })
+      .catch(err => console.log('getCurrentSongDetails err: ', err));
+      // // new Promise((resolve, reject) => {
+      //   request(options, (err, res, body) => {
+      //     console.log('body', res.body);
+      //     resolve(req.body);
+      //   });            
+      // // })
+      // .then(info => {
+      //   console.log('info',info);
+      //   res.send(info);         
+      // });
+    } else {
+      spotify.refreshAccessToken()
+      .then(function(data) {
+        console.log('The access token has been refreshed!');
+
+        // Save the access token so that it's used in future calls
+        spotify.setAccessToken(data.body['access_token']);
+      }, function(err) {
+        console.log('Could not refresh access token', err);
+      });
+    }
   }
 };
+
+
 
 
 passport.use(new SpotifyStrategy(SpotifyAuth,
@@ -95,6 +138,7 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
 
     spotify.setAccessToken(accessToken);
     spotify.setRefreshToken(refreshToken);
+    console.log(spotify);
     
     const { id, display_name, email } = profile._json;
     const user = {
