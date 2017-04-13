@@ -125,6 +125,11 @@ app.post('/api/vote', function(req, res) {
 });
 
 // app.get('/api/playlist/currentsong', handler.getCurrentSongDetails);
+app.post('/api/track', function(req, res) {
+  console.log(req.body)
+  handler.addTrack(req, res);
+  res.sendStatus(201);
+});
 
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));

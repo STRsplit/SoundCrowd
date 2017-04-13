@@ -42,6 +42,7 @@ class Main extends React.Component {
     this.logout = this.logout.bind(this);
 	}
 
+
 	componentWillMount() {
 		axios.get('/api/verifyuser')
 		.then(result => {
@@ -87,7 +88,7 @@ class Main extends React.Component {
 	}
 
   setPlaylist(playlistId) {
-    this.setState({ playlist: playlistId });
+    this.setState({ playlist: playlistId })
   }
 
 	handleMood(val) {
@@ -105,6 +106,8 @@ class Main extends React.Component {
   /*<Route exact path="/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>*/
 
   render() {
+    const { playlist, loggedIn } = this.state
+
     console.log('logged in', this.state.loggedIn);
     return (
       <BrowserRouter>

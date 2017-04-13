@@ -56,6 +56,7 @@ const validateVote = (req, res) => {
   }
 };
 
+
 const logoutUser = (req, res) => {
   req.logout();
   req.session.destroy(function(err) {
@@ -63,9 +64,27 @@ const logoutUser = (req, res) => {
   });
 };
 
+const addTrack = (req, res) => {
+  console.log('INFO YOU WANTED', req.trackInfo, req.body)
+  const { song_id, playlist_id } = req.body.track
+  let addedSong = db.Song.build({
+      song_id: song_id, 
+      playlist_id: playlist_id,
+      vote_count: 1
+    });
+
+  addedSong.save()
+  .then(result => {
+    return;
+  })
+  .catch(err => {
+    console.log('requestHandle > addTrack errr: ', err)
+  })
+};
 
 module.exports = {
   verifyUser,
   validateVote,
-  logoutUser
+  logoutUser,
+  addTrack
 };

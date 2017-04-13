@@ -111,13 +111,15 @@ h2 {
   width: 80%;
   margin: 0% auto; }
 
+.searchresults-container {
+  background-color: #fff; }
+
 .mui-dropdown__menu,
 .mui--is-open {
   width: 100%; }
 
 .mui-btn {
-  float: right !important;
-  background-color: blue; }
+  float: right !important; }
 
 .mui-dropdown {
   width: 100%;

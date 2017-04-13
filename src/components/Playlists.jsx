@@ -42,7 +42,7 @@ class Playlists extends Component {
             </Link>
           </div>
         )}
-      </div>
+
     )
   }
 }
