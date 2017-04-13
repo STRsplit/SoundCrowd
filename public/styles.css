@@ -1,21 +1,46 @@
 /**
  * MUI Colors module
  */
+
+.nav-container {
+  width: 100%;
+  height: 8%;
+  background-color: #FFF;
+  position: fixed;
+  display: block; 
+}
+
+
+.nav-container-name {
+  float: left;
+}
+
+.nav-container-logout {
+  float: right;
+}
+
 .Row {
   flex-wrap: nowrap !important; }
 
+
+
 .3-col-row {
-  display: flex;
-  flex-wrap: nowrap !important;
+  width: 100%;
+  display: block;
   margin-left: -10px;
   margin-right: -10px; }
 
-.layout-column {
-  text-align: center;
-  height: 100vh;
-  padding: 0px; }
+.nav-container .container {
+  width: 100%; }
 
-.main-container {
+.col-xs {
+  text-align: center; }
+
+.main-app-container {
+  display: block;
+  padding-top: 10%; }
+
+.inner-app-container {
   width: 100%;
   display: block;
   clear: both; }
@@ -25,6 +50,14 @@
 
 .main-right-column {
   background-color: purple; }
+
+.column-right {
+  background-color: red;
+  min-height: 100%;
+  position: fixed;
+  top: 10%;
+  right: 0;
+  bottom: 0; }
 
 .login-container {
   display: block;

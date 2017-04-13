@@ -87,7 +87,9 @@ class SearchContainer extends Component {
     let { search, filter } = this.state
     axios.get(`https://api.spotify.com/v1/search?q="${search}"&type=${filter}`)
     .then((data) => {
-      let songs = filter === 'album' ? data.data.albums.items : data.data.tracks.items;
+
+      let songs = filter === 'album' ? data.data.albums.items : filter === 'track' ? 
+      data.data.tracks.items : data.data.artists.items
       this.setState({dataSource: songs})
     })
     .catch((error) => {
