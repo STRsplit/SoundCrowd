@@ -66,9 +66,38 @@ class App extends React.Component {
 				  			<div className="main-middle-column">
                   <Switch>
           					<Route exact path="/app" render={() => (
-                      <Playlists setPlaylist={this.props.setPlaylist} />
+                      <div>
+                        <div>
+                          <Playlists setPlaylist={this.props.setPlaylist} />
+                        </div>
+                        <div>
+                          <div>
+                              <div><Link to='/app/playlists'>Use My Playlist</Link></div>
+                              <div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div>
+                          </div>
+                            <div>
+                              <h4>Mood</h4>
+                                <select id="mood" onChange={this.setMood}>
+                                  <option value="Choose One">Choose One</option>
+                                  <option value="Happy">Happy</option>
+                                  <option value="Calm">Calm</option>
+                                  <option value="Sad">Sad</option>
+                                  <option value="Focused">Focused</option>
+                                  <option value="Excited">Excited</option>
+                                </select>
+                                <h4>Activity</h4>
+                                <select id="activity" onChange={this.setActivity}>
+                                  <option value="Choose One">Choose One</option>
+                                  <option value="Exercising">Exercising</option>
+                                  <option value="Studying">Studying</option>
+                                  <option value="Partying">Partying</option>
+                                  <option value="Chilling">Chilling</option>
+                                  <option value="Driving">Driving</option>
+                                </select>
+                              </div>
+                            </div>
+                        </div>
                     )}/>
-
                     <Route path="/app/playlist/tracks" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
@@ -76,27 +105,7 @@ class App extends React.Component {
                     )}/>
                   </Switch>
                 </div>
-                <Link to='/app/playlists'>Use My Playlist</Link>
-  			  	  	<Link to='/app/new-playlist'>Get Suggested Playlist</Link>
-  				  	  <div>Mood</div>
-  				  	  	<select id="mood" onChange={this.setMood}>
-  					  	    <option value="Choose One">Choose One</option>
-  					  	    <option value="Happy">Happy</option>
-  					  	    <option value="Calm">Calm</option>
-  					  	    <option value="Sad">Sad</option>
-  					  	    <option value="Focused">Focused</option>
-  					  	    <option value="Excited">Excited</option>
-  					  	  </select>
-  					  	  <div>Activity</div>
-  					  	  <select id="activity" onChange={this.setActivity}>
-  					  	    <option value="Choose One">Choose One</option>
-  					  	    <option value="Exercising">Exercising</option>
-  					  	    <option value="Studying">Studying</option>
-  					  	    <option value="Partying">Partying</option>
-  					  	    <option value="Chilling">Chilling</option>
-  					  	    <option value="Driving">Driving</option>
-  					  	  </select>
-      		  	  	</div>
+      		  	  </div>
       		  	</Col>
               <Col className="layout-column column-right" xs="18" md="2">md-4</Col>
             </Row>
