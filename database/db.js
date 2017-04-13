@@ -36,11 +36,12 @@ const Playlist = db.define('Playlist', {
 }, {timestamps: false});
 
 const Song = db.define('Song', {
-  song_id: {type: Sequelize.STRING, primaryKey: true},
+  song_id: Sequelize.STRING,
   playlist_id: Sequelize.STRING,
   title: Sequelize.STRING,
   artist: Sequelize.STRING,
-  vote_count: Sequelize.INTEGER
+  vote_count: Sequelize.INTEGER,
+  position: Sequelize.INTEGER
 }, { timestamps: false });
 
 const Vote = db.define('Vote', {

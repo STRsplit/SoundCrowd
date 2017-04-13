@@ -11,30 +11,43 @@ const verifyUser = (req, res) => {
 // EXPECTED votes column names are song_id, user_id, playlist_id
 const validateVote = (req, res) => {
   const { songId, playlistId, vote } = req.body;
+  var voteObj = {
+    song_id: songId, 
+    playlist_id: playlistId,
+    vote: vote
+  }
   if ( req.isAuthenticated() ) { 
-    return db.Vote.findOrCreate({where: {
-        song_id: songId, 
-        user_id: req.user.id,
-        playlist_id: playlistId,
-        vote: vote
-      }
-    })
+    voteObj.user_id = req.user.id;
+    return db.Vote.find({ where: voteObj })
     .then(result => {
-      dbHelpers.updateVoteCount(songId, playlistId, vote);
-      return Boolean(result);
+      if (!result) {
+        // db.Vote.create({ voteObj });
+        db.Vote.create({
+          song_id: voteObj.song_id,
+          playlist_id: voteObj.playlist_id,
+          user_id: voteObj.user_id,
+          vote: vote
+        });
+        dbHelpers.updateVoteCount(songId, playlistId, vote);
+        return false;
+      } else return true;
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));
   } else {
-    return db.Vote.findOrCreate({where: {
-        song_id: songId, 
-        session_id: req.sessionID,
-        playlist_id: playlistId,
-        vote: vote
-      }
-    })
+    voteObj.session_id = req.sessionID;
+    return db.Vote.find({ where: voteObj })
     .then(result => {
-      dbHelpers.updateVoteCount(songId, playlistId, vote);
-      return Boolean(result);
+      if (!result) {
+        // db.Vote.create({ voteObj });
+        db.Vote.create({
+          song_id: voteObj.song_id,
+          playlist_id: voteObj.playlist_id,
+          session_id: voteObj.session_id,
+          vote: vote
+        });
+        dbHelpers.updateVoteCount(songId, playlistId, vote);
+        return false;
+      } else return true;
     })
     .catch(err => console.log('requestHandler > validateVote error: ', err));
   }
