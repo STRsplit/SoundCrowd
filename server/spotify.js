@@ -133,7 +133,6 @@ module.exports = {
         }
         res.send(result);
       });
-      // res.send(playlists);
     }, (err) => {
       console.log('error: ', err);
     });
