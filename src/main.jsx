@@ -112,19 +112,17 @@ class Main extends React.Component {
     return (
       <BrowserRouter>
 			  <div>
-				  <Route path="/login" render={() => (
-		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
-		      )}/>
-          <Route path="/playlists/:playlistId" component={PlaylistRoute} />
-          <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist} owner={true}/>)}/>
-          <Route path="/search" render={() => (<SearchContainer />)} />
-		      <Route exact path="/" render={() => (
-		     	  this.state.loggedIn ? <App name={this.state.name} setPlaylist={this.setPlaylist} logout={this.logout} 
-		     	  handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
-		      )}/>
-		      <Route path="/new-playlist" render={() => (
-		     	  this.state.loggedIn ? <NewPlaylist state={this.state}/> : <Redirect to="/login" />
-		      )}/>
+        <Route path="*" render={() => (
+            this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />
+          )}/>
+        <Route path="/login" render={() => (
+            this.state.loggedIn ? <Redirect to="/app" /> : <Login />
+          )}/>
+
+        <Route path="/app" render={() => 
+          (<App stats={this.state} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
+
+>>>>>>> Working.
 		    </div>
       </BrowserRouter>
     )
