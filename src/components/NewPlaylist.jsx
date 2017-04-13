@@ -10,13 +10,22 @@ class NewPlaylist extends React.Component {
 	}
 
 	componentWillMount() {
-		axios.get('/test')
-		.then(result => {
-			console.log('test result: ', result.data);
-			var num = Math.floor(Math.random() / (1 / result.data.length));
-		  this.setState({
-		  	href: result.data[num].external_urls.spotify
-		  });
+		axios.post('/setPreferences', { 
+			mood: this.props.state.mood, 
+			activity: this.props.state.activity 
+		})
+		.then((res) => {
+      console.log('in component');
+			axios.get('/getCategory')
+			.then((result) => {
+				console.log('test result: ', result);
+			  // this.setState({
+			  // 	href: result.data.external_urls.spotify
+			  // });
+			});
+		})
+		.catch((err) => {
+			console.log(err);
 		});
 	}
 

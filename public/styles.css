@@ -136,7 +136,7 @@ h2 {
 
 .song-entry-container {
   width: 100%; }
-
+  
 *,
 *:after,
 *:before {
@@ -205,6 +205,25 @@ body {
   padding: 10px;
   position: absolute;
   transition: opacity .3s; }
+
+#currentPlaylist {
+  float: left;
+}
+
+#newPlaylist {
+  float: left;
+  clear: left;
+}
+
+#mood {
+  float: left;
+  clear: left;
+}
+
+#activity {
+  float: left;
+  clear: left;
+}
 
 h1 {
   font-size: 4.8em; }

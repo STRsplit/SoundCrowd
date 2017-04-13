@@ -22,11 +22,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-app.get('/test', spotify.test);
-
-app.get('/playlist', spotify.getPlaylist);
+app.get('/playlist', spotify.findPlaylist);
 
 app.post('/create', spotify.createPlaylist);
+
+app.get('/getCategory', spotify.getCategory);
+
+app.post('/setPreferences', spotify.setPreferences);
 
 
 /* *  Authentication * */
