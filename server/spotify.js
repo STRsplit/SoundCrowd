@@ -176,8 +176,10 @@ module.exports = {
         name: playlistName
       });
       console.log('created Playlist :', data.body.id);
+      res.sendStatus(201);
     }, (err) => {
       console.log('error: ', err);
+      res.sendStatus(404);
     });
   }
 };
