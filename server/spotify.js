@@ -128,7 +128,7 @@ module.exports = {
           }
         }
         for (i = 0; i < tracks.length; i++) {
-          if (result.length === 99) {
+          if (result.length === 90) {
             break;
           }
           if (tracks[i] !== undefined) {
