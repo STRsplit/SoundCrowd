@@ -30,7 +30,7 @@ class App extends React.Component {
 		var count;
 		axios.get('/playlist')
 		.then((result) => {
-			count = result.data.length;
+			count = result.data.length + 1;
 			axios.post('/create', {number: count});
 		});
 	}

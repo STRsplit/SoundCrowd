@@ -11,6 +11,7 @@ var spotify = new SpotifyWebApi({
 var userId;
 var mood;
 var activity;
+var newPlaylistId;
 
 module.exports = {
   getUserPlaylists: function(username, cb) {
@@ -131,7 +132,12 @@ module.exports = {
             result.push(tracks[i].track.uri);
           }
         }
-        // spotify.addTracksToPlaylist(userId, )
+        spotify.addTracksToPlaylist(userId, newPlaylistId, result)
+        .then((data) => {
+          console.log('added tracks');
+        }, function(err) {
+          console.log('add tracks error: ', err);
+        });
         res.send(result);
       });
     }, (err) => {
@@ -149,6 +155,9 @@ module.exports = {
     db.Playlist.findAll()
     .then((result) => {
       res.send(result);
+    })
+    .catch((err) => {
+      console.log('findPlaylist error: ', err);
     });
   },
   createPlaylist: (req, res) => {
@@ -156,7 +165,8 @@ module.exports = {
     console.log('create playlist ', userId);
     spotify.createPlaylist(userId, 'Playlist ' + req.body.number, {public: false})
     .then((data) => {
-      console.log('created Playlist :', data);
+      newPlaylistId = data.body.id;
+      console.log('created Playlist :', data.body.id);
     }, (err) => {
       console.log('error: ', err);
     });
