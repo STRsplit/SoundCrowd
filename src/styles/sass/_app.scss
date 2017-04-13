@@ -9,6 +9,10 @@
   clear: both;
 }
 
+.main-app-container {
+  display: block;
+  padding-top: 10%;
+}
 .main-left-column {
 
   background-color: pink;
@@ -32,5 +36,10 @@
 
 }
 .column-right {
-
+  background-color: red;
+  min-height: 100%; 
+  position: fixed, 
+  top: 10%; 
+  right: 0; 
+  bottom: 0;
 }

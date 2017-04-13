@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, BrowserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
+
 import axios from 'axios';
 
 class Playlists extends Component {
@@ -27,10 +28,12 @@ class Playlists extends Component {
   }
 
   setPlaylist(playlistId) {
+    console.log(playlistId)
     this.props.setPlaylist(playlistId);
   }
 
   render() {
+
     return (
       <div id='playlist-container'>
         <div>Playlists</div>
@@ -42,7 +45,6 @@ class Playlists extends Component {
             </Link>
           </div>
         )}
-
     )
   }
 }
