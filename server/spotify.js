@@ -45,7 +45,7 @@ module.exports = {
         cb(err);
       });
   },
-  
+
   searchFor: function(name, filter, cb) {
     spotify.searchTracks(`${filter}:${name}`)
     .then((data) => {
@@ -60,7 +60,7 @@ module.exports = {
 
   getCategory: (req, res) => {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
-
+  },
   test: (req, res) => {
     spotify.getPlaylistsForCategory('mood')
     .then((data) => {
@@ -155,6 +155,7 @@ module.exports = {
       console.log('error: ', err);
     });
   },
+
   setPreferences: function(req, res) {
     mood = req.body.mood;
     activity = req.body.activity;
