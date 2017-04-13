@@ -1,9 +1,47 @@
 var { Playlist, Song, Vote } = require('./db.js');
 
 module.exports = {
+  checkForReorder: function(song, playlistId, vote) {
+    return new Promise((resolve, reject) => {
+      Song.findAll({
+        where: { 
+          playlist_id: playlistId, 
+          vote_count: song.vote_count - vote,
+          song_id: { $not: song.song_id }
+        },
+        order: ['position']
+      })
+        .then(songs => {
+          if (songs.length) {
+            Song.findAll({})
+              .then(allSongs => {
+                allSongs.sort((a, b) => {
+                  return b.vote_count - a.vote_count;
+                });
+
+                var position = 0;
+                allSongs.forEach(song => {
+                  song.position = position++;
+                  song.save();
+                });
+                resolve(allSongs);
+              });
+          } else {
+            resolve(null);
+          }
+    })
+      })
+      .catch(err => {
+        reject(err);
+      });
+  },
+
   getPlaylist: function(playlistId) {
     return new Promise((resolve, reject) => {
-      Song.findAll({ where: { playlist_id: playlistId }})
+      Song.findAll({ 
+        where: { playlist_id: playlistId },
+        order: ['position']
+      })
         .then(songs => {
           resolve(songs);
         })
@@ -20,6 +58,7 @@ module.exports = {
         user_id: userId
       }})
         .then(playlist => {
+          var position = 0;
           tracks = tracks.items.map(track => {
             var trackObj = {
               song_id: track.track.id,
@@ -28,7 +67,8 @@ module.exports = {
               artist: track.track.artists ? track.track.artists[0].name : '',
                 // weird issue where rarely there's no artists array
                 // fix later to map all artist names to string, then save
-              vote_count: 0
+              vote_count: 0,
+              position: position++
             }; 
             return trackObj;
           });
@@ -50,9 +90,11 @@ module.exports = {
       playlist_id: playlistId
     }})
       .then(song => {
-        console.log(song);
         var newCount = song.vote_count + vote;
-        song.update({ vote_count: newCount });
+        song.update({ vote_count: newCount })
+          .then(() => {
+            this.checkForReorder(song, playlistId, vote);
+          });
       });
   }
 };
