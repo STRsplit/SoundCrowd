@@ -128,6 +128,9 @@ module.exports = {
           }
         }
         for (i = 0; i < tracks.length; i++) {
+          if (result.length === 99) {
+            break;
+          }
           if (tracks[i] !== undefined) {
             result.push(tracks[i].track.uri);
           }
