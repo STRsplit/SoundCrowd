@@ -206,7 +206,21 @@ body {
   position: absolute;
   transition: opacity .3s; }
 
+#currentPlaylist {
+  float: left;
+}
+
 #newPlaylist {
+  float: left;
+  clear: left;
+}
+
+#mood {
+  float: left;
+  clear: left;
+}
+
+#activity {
   float: left;
   clear: left;
 }

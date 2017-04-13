@@ -52,10 +52,11 @@ class App extends React.Component {
 				  			<div className="main-middle-column">
 						  	  <h1>Welcome To So Me</h1>
 						  	  {this.props.children}
-								  <Link to='/playlists'>Use My Playlist</Link>
+								  <Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>
 						  	  <Link id='newPlaylist' to='/new-playlist' onClick={this.findPlaylist}>Get Suggested Playlist</Link>
-						  	  <div>Mood</div>
-					  	  	<select id="mood" onChange={this.setMood}>
+						  	  <div id='mood'>
+						  	  <div id='moodLabel'>Mood</div>
+					  	  	<select id="moodMenu" onChange={this.setMood}>
 						  	    <option value="Choose One">Choose One</option>
 						  	    <option value="Happy">Happy</option>
 						  	    <option value="Calm">Calm</option>
@@ -63,8 +64,10 @@ class App extends React.Component {
 						  	    <option value="Focused">Focused</option>
 						  	    <option value="Excited">Excited</option>
 						  	  </select>
-						  	  <div>Activity</div>
-						  	  <select id="activity" onChange={this.setActivity}>
+						  	  </div>
+						  	  <div id='activity'>
+						  	  <div id='activityLabel'>Activity</div>
+						  	  <select id="activityMenu" onChange={this.setActivity}>
 						  	    <option value="Choose One">Choose One</option>
 						  	    <option value="Exercising">Exercising</option>
 						  	    <option value="Studying">Studying</option>
@@ -72,6 +75,7 @@ class App extends React.Component {
 						  	    <option value="Chilling">Chilling</option>
 						  	    <option value="Driving">Driving</option>
 						  	  </select>
+						  	  </div>
 				  	  	</div>
 				  		</div>
 				  	</Col>
