@@ -163,9 +163,15 @@ module.exports = {
   createPlaylist: (req, res) => {
     console.log('post ', req.body.number);
     console.log('create playlist ', userId);
-    spotify.createPlaylist(userId, 'Playlist ' + req.body.number, {public: false})
+    var playlistName = 'Playlist ' + req.body.number;
+    spotify.createPlaylist(userId, playlistName, {public: false})
     .then((data) => {
       newPlaylistId = data.body.id;
+      db.Playlist.create({
+        playlist_id: newPlaylistId,
+        user_id: userId,
+        name: playlistName
+      });
       console.log('created Playlist :', data.body.id);
     }, (err) => {
       console.log('error: ', err);
