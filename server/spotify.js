@@ -45,19 +45,24 @@ module.exports = {
         cb(err);
       });
   },
-  searchFor: function(req, res) {
-  const { name, filter } = req.query
-
-  spotify.searchTracks(`${filter}:${name}`)
-  .then(function(data) {
-    let { items } = data.body.tracks;
-    res.send(items)
-  }, function(err) {
-      console.error(err);
-    });
+  
+  searchFor: function(name, filter, cb) {
+    spotify.searchTracks(`${filter}:${name}`)
+    .then((data) => {
+      let { items } = data.body.tracks;
+      cb(null, items);
+    })
+    .catch((err) => {
+        console.error(err);
+        cb(err)
+      });
   },
+
   getCategory: (req, res) => {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
+
+  test: (req, res) => {
+    spotify.getPlaylistsForCategory('mood')
     .then((data) => {
       var playlists = data.body.playlists.items;
       var names = [];

@@ -42,7 +42,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/api/search/', spotify.searchFor);
+// app.get('/api/search/', spotify.searchFor);
+
+app.get('/api/search/', function(req, res) {
+  const { name, filter } = req.query
+  
+  spotify.searchFor(name, filter, function(err, items) {
+    if(err) res.status(err.statusCode).send(err);
+    else {
+      res.status(200).send(items);
+    }
+  })
+});
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
