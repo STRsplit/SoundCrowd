@@ -13,12 +13,8 @@ module.exports = {
       })
         .then(songs => {
           if (songs.length) {
-            Song.findAll({})
+            Song.findAll({ order: [['vote_count', 'DESC']] })
               .then(allSongs => {
-                allSongs.sort((a, b) => {
-                  return b.vote_count - a.vote_count;
-                });
-
                 var position = 0;
                 allSongs.forEach(song => {
                   song.position = position++;
