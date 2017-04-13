@@ -8,6 +8,7 @@ import Login from './components/login/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
 import Playlists from './components/Playlists.jsx';
 import Playlist from './components/Playlist.jsx';
+import PlaylistRoute from './components/routes/PlaylistRoute.jsx';
 import SearchContainer from './components/SearchContainer.jsx'; 
 import AccordionTest from './components/AccordionTest.jsx';
 
@@ -91,10 +92,9 @@ class Main extends React.Component {
 				  <Route path="/login" render={() => (
 		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
 		      )}/>
-          <Route path="/playlists" render={() => (
-            this.state.loggedIn ? <Playlists setPlaylist={this.setPlaylist} /> : <Redirect to="/login" />
-          )}/>
-          <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist}/>)}/>
+          <Route exact path="/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>
+          <Route path="/playlists/:playlistId" component={PlaylistRoute} />
+          <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist} owner={true}/>)}/>
           <Route path="/search" render={() => (<SearchContainer />)} />
 		      <Route exact path="/" render={() => (
 		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />

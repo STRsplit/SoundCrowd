@@ -6,14 +6,9 @@ class Track extends Component {
     super(props);
     this.state = {
       // track: null,
-      voteCount: this.props.voteCount || 0,
+      voteCount: this.props.track.vote_count,
       voted: null
     };
-  }
-
-  getVoteCount() {
-    // get count from DB, passed in from props...?
-    this.setState({ voteCount: 10 });
   }
 
   vote(val) {
@@ -35,10 +30,6 @@ class Track extends Component {
       // fix handling
       console.log(err);
     });
-  }
-
-  componentWillMount() {
-    this.getVoteCount();
   }
 
   render() {
