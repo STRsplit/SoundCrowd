@@ -131,6 +131,7 @@ module.exports = {
             result.push(tracks[i].track.uri);
           }
         }
+        // spotify.addTracksToPlaylist(userId, )
         res.send(result);
       });
     }, (err) => {
@@ -144,7 +145,7 @@ module.exports = {
     console.log('this is songs ', activity);
     res.sendStatus(201);
   },
-  getPlaylist: (req, res) => {
+  findPlaylist: (req, res) => {
     db.Playlist.findAll()
     .then((result) => {
       res.send(result);
