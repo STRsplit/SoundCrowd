@@ -21,13 +21,6 @@ app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/test', spotify.test);
-
-app.get('/playlist', spotify.getPlaylist);
-
-app.post('/create', spotify.createPlaylist);
-
-
 /* *  Authentication * */
 app.use(session({
   secret: 'badum tsss', 
@@ -73,22 +66,42 @@ app.get('/api/verifyuser', handler.verifyUser);
 /* * Spotify API * */
 app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
 
-app.get('/api/playlists', function(req, res) {
+app.get('/playlist', spotify.findPlaylist);
+
+app.post('/create', spotify.createPlaylist);
+
+app.get('/getCategory', spotify.getCategory);
+
+app.post('/setPreferences', spotify.setPreferences);
+
+app.get('/api/spotify/playlists', function(req, res) {
   spotify.getUserPlaylists(req.user.id, function(err, playlists) {
     if (err) res.status(err.statusCode).send(err);
     else res.status(200).send(playlists);
   });
 });
 
-app.get('/api/playlists/:playlist', function(req, res) {
+app.get('/api/spotify/playlists/:playlist', function(req, res) {
   var playlist = req.params.playlist;
   spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
     if (err) res.status(err.statusCode).send(err);
     else {
-      dbHelpers.savePlaylist(playlist, req.user.id, tracks);
-      res.status(200).send(tracks);
+      dbHelpers.savePlaylist(playlist, req.user.id, tracks)
+        .then(function(savedTracks) {
+          res.status(200).send(savedTracks);
+        })
+        .catch(err => {
+          res.status(err.statusCode).send(err);
+        });
     }
   });
+});
+
+app.get('/api/playlists/:playlist', function(req, res) {
+  dbHelpers.getPlaylist(req.params.playlist)
+    .then(function(tracks) {
+      res.status(200).send(tracks);
+    });
 });
 
 app.post('/api/vote', function(req, res) {

@@ -6,7 +6,8 @@
 @import '_playlists';
 @import '_search';
 @import '_songEntry';
-
+@import 'accordion';
+@import 'mixins_functions';
 
 $step-size-heading: 0.8;
 
@@ -51,4 +52,5 @@ ol {
   margin: 0;
   padding: 0;
 }
+
 

@@ -13,10 +13,11 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
+    var route = this.props.owner ? '/api/spotify/playlists/' : '/api/playlists/';
     var playlistId = this.props.playlist;
-    axios.get('/api/playlists/' + playlistId)
+    axios.get(route + playlistId)
       .then(res => {
-        let tracks = res.data.items;
+        let tracks = res.data;
         this.setState({ tracks: tracks });
       })
       .catch(err => {
@@ -24,10 +25,13 @@ class Playlist extends Component {
       });
   }
 
+  sortTracks() {
+  }
+
   render() {
     const tracks = this.state.tracks.map(track => (
       (
-        <Track key={track.track.id} playlist={this.props.playlist} track={track.track}/>
+        <Track key={track.song_id} playlist={this.props.playlist} track={track}/>
       )
     ))
     return (

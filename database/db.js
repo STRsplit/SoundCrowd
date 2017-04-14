@@ -36,9 +36,12 @@ const Playlist = db.define('Playlist', {
 }, {timestamps: false});
 
 const Song = db.define('Song', {
-  song_id: {type: Sequelize.STRING, primaryKey: true},
+  song_id: Sequelize.STRING,
   playlist_id: Sequelize.STRING,
-  vote_count: Sequelize.INTEGER
+  title: Sequelize.STRING,
+  artist: Sequelize.STRING,
+  vote_count: Sequelize.INTEGER,
+  position: Sequelize.INTEGER
 }, { timestamps: false });
 
 const Vote = db.define('Vote', {
@@ -56,8 +59,8 @@ Vote.sync();
 
 // User.hasMany(Playlist);
 // Playlist.belongsTo(User);
-Playlist.hasMany(Song);
-Song.belongsTo(Playlist);
+// Playlist.hasMany(Song);
+// Song.belongsTo(Playlist);
 
 module.exports = {
   User: User,
