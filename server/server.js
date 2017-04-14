@@ -139,7 +139,8 @@ app.post('/api/tracks', function(req, res) {
   let song = req.body.track
 
   dbHelpers.addTrack(song, function(err, success) {
-    if(err) res.status(statusCode).send(err);
+    console.log(err);
+    if(err) res.status(err.statusCode).send(err);
     else {
       res.sendStatus(201)
     }

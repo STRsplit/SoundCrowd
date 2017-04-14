@@ -113,8 +113,8 @@ class Main extends React.Component {
     return (
       <BrowserRouter>
 			  <div>
-        <Route path="*" render={() => (
-            this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />
+        <Route path="*" render={({path}) => (
+            this.state.loggedIn ? <Redirect to={path} /> : <Redirect to="/login" />
           )}/>
         <Route path="/login" render={() => (
             this.state.loggedIn ? <Redirect to="/app" /> : <Login />
@@ -122,7 +122,6 @@ class Main extends React.Component {
 
         <Route path="/app" render={() => 
           (<App stats={this.state} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
-
 		    </div>
       </BrowserRouter>
     )

@@ -12,6 +12,8 @@ import Col from 'muicss/lib/react/col';
 import NewPlaylist from './NewPlaylist.jsx';
 import Playlists from './Playlists.jsx';
 import Playlist from './Playlist.jsx';
+import PlaylistRoute from './routes/PlaylistRoute.jsx';
+
 import SearchContainer from './SearchContainer.jsx'; 
 
 class App extends React.Component {
@@ -65,6 +67,7 @@ class App extends React.Component {
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
                   <Switch>
+                    <Route path="/app/playlist/:playlistId" render={({path}) => (<Playlist playlist={this.props.stats.playlist}/>)}/>
           					<Route exact path="/app" render={() => (
                       <div>
                         <div>
@@ -98,7 +101,7 @@ class App extends React.Component {
                             </div>
                         </div>
                     )}/>
-                    <Route path="/app/playlist/tracks" render={() => (<Playlist owner={true} playlist={this.props.stats.playlist}/>)}/>
+                    <Route path="/app/playlist/:playlistId" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
                       <NewPlaylist state={this.props.stats}/>

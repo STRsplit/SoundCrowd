@@ -53,9 +53,10 @@ class SearchContainer extends Component {
       }
     })[0];
     console.log('TARGETSONNNGGNGNGN', targetSong)
+    targetSong.artist = targetSong.artist ? targetSong.artist[0].name : targetSong.artists[0].name
     let trackInfo = {
       song_id: targetSong.id,
-      artist: targetSong.artists,
+      artist: targetSong.artist,
       title: targetSong.name,
       playlist_id: playlist
     }

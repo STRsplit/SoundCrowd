@@ -38,7 +38,7 @@ class Playlists extends Component {
       return (
         <div key={playlist.id}>
           <img src=""/>
-          <Link to="/app/playlist/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+          <Link to={`/app/playlist/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>
             {playlist.name}
           </Link>
         </div>
