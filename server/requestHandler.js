@@ -1,9 +1,9 @@
 const db = require('../database/db');
 const dbHelpers = require('../database/dbHelpers');
+const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  console.log('req.sessionID', req.sessionID);
-  res.send(req.user);
+  res.send(req.isAuthenticated());
 };
 
 // RETURNS PROMISE OBJECT THAT CONTAINS TRUE IF VOTED ALREADY FALSE OTHERWISE
@@ -66,7 +66,7 @@ const logoutUser = (req, res) => {
 
 
 module.exports = {
-  verifyUser: verifyUser,
-  validateVote: validateVote,
-  logoutUser: logoutUser
+  verifyUser,
+  validateVote,
+  logoutUser
 };

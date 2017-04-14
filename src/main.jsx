@@ -63,7 +63,9 @@ class Main extends React.Component {
 						console.log(this.state.weather);
 					}.bind(this))
 				}.bind(this));
-			}
+			} else {
+        this.setState({loggedIn: false});
+      }
 		})
 		.catch(err => console.log('main.js error componentDidMount: ', err));
 	}

@@ -2,11 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
+import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 // import { Grid, Row, Col } from 'react-flexbox-grid';
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
-
 
 
 class App extends React.Component {
@@ -42,6 +42,7 @@ class App extends React.Component {
 		  	<div>
 		  		<div>
 		  			<NavBar />
+            <CurrentSongBar />
 		  		</div>
 		  	</div>
 		  	<Container fluid={true}>
