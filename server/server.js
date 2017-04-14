@@ -133,11 +133,17 @@ app.post('/api/vote', function(req, res) {
   res.sendStatus(201);
 });
 
-// app.get('/api/playlist/currentsong', handler.getCurrentSongDetails);
-app.post('/api/track', function(req, res) {
-  console.log(req.body)
-  handler.addTrack(req, res);
-  res.sendStatus(201);
+
+app.post('/api/tracks', function(req, res) {
+  console.log(req.body);
+  let song = req.body.track
+
+  dbHelpers.addTrack(song, function(err, success) {
+    if(err) res.status(statusCode).send(err);
+    else {
+      res.sendStatus(201)
+    }
+  })
 });
 
 app.get('*', function(req, res) {

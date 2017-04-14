@@ -45,12 +45,22 @@ class SearchContainer extends Component {
 
   handleSongAdd(e) {
     const { playlist } = this.props.stats
+    const { dataSource } = this.state
+    console.log(dataSource, e.target.value)
+    let targetSong = dataSource.filter(song => {
+      if(e.target.value === song.id){
+        return song;
+      }
+    })[0];
+    console.log('TARGETSONNNGGNGNGN', targetSong)
     let trackInfo = {
-      song_id: e.target.value,
+      song_id: targetSong.id,
+      artist: targetSong.artists,
+      title: targetSong.name,
       playlist_id: playlist
     }
-    
-    axios.post('/api/track/', { 
+    console.log(trackInfo)
+    axios.post('/api/tracks/', { 
       track: trackInfo
     })
     .then((res) => {
@@ -60,6 +70,7 @@ class SearchContainer extends Component {
       console.log('Request resulted in an error', error);
     })
   }
+
   addSongToPlaylist(event) {
     event.preventDefault()
     this.setState({songs: [], search: '', filter: 'track'})
@@ -67,7 +78,6 @@ class SearchContainer extends Component {
 
   searchSpotify() {
     const { search, filter } = this.state
-    
     axios.get('/api/search/', { 
       params: {
         name: search,
@@ -85,11 +95,9 @@ class SearchContainer extends Component {
 
   autoCompleteSearchSpotify() {
     let { search, filter } = this.state
-    axios.get(`https://api.spotify.com/v1/search?q="${search}"&type=${filter}`)
+    axios.get(`https://api.spotify.com/v1/search?q=${filter}:${search}&type=track`)
     .then((data) => {
-
-      let songs = filter === 'album' ? data.data.albums.items : filter === 'track' ? 
-      data.data.tracks.items : data.data.artists.items;
+      let songs = data.data.tracks.items
       this.setState({dataSource: songs})
     })
     .catch((error) => {

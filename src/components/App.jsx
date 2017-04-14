@@ -72,7 +72,7 @@ class App extends React.Component {
                         </div>
                         <div>
                           <div>
-                              <div><Link to='/app/playlists'>Use My Playlist</Link></div>
+                              <div><Link to='/app'>Use My Playlist</Link></div>
                               <div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div>
                           </div>
                             <div>
