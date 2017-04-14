@@ -1,5 +1,5 @@
 var request = require('request');
-var rp = require('request-promise');
+var requestPromise = require('request-promise');
 var db = require('../database/db');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
@@ -100,32 +100,27 @@ module.exports = {
         },
         json: true
       }; 
-      rp(options)
+      requestPromise(options)
       .then(info => {
-        console.log('info',info);
         res.send(info);
       })
       .catch(err => console.log('getCurrentSongDetails err: ', err));
-      // // new Promise((resolve, reject) => {
-      //   request(options, (err, res, body) => {
-      //     console.log('body', res.body);
-      //     resolve(req.body);
-      //   });            
-      // // })
-      // .then(info => {
-      //   console.log('info',info);
-      //   res.send(info);         
-      // });
     } else {
-      spotify.refreshAccessToken()
-      .then(function(data) {
-        console.log('The access token has been refreshed!');
+      /* FUTURE TODO: Should logs out the user when access token expired or server restarted.
+      // For logout
+      req.logOut();
+      req.session.destroy();
 
+      // For refreshing approach
+      spotify.refreshAccessToken()
+      .then(data => {
         // Save the access token so that it's used in future calls
         spotify.setAccessToken(data.body['access_token']);
-      }, function(err) {
+        console.log('The access token has been refreshed!');
+      }, err => {
         console.log('Could not refresh access token', err);
       });
+      */
     }
   }
 };

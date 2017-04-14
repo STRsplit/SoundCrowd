@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
+import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends React.Component {
 	  	<div>
 	  		<div>
 	  			<NavBar />
+          <CurrentSongBar />
 	  		</div>
 	  		<div>
 		  	  <h1>Welcome To So Me</h1>
