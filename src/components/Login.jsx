@@ -26,7 +26,7 @@ class Login extends Component {
           <h2>Logo</h2>
         </div>
           <div className="button-container">
-            <Button type="primary"><a style={{"color": "white"}} href="auth/spotify"><span>Login Spotify</span></a></Button>
+            <a style={{"color": "white"}} href="auth/spotify"><Button type="primary"><span>Login Spotify</span></Button></a>
           </div>
         </div>
           <div>
