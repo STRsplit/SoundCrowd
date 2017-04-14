@@ -53,4 +53,26 @@ ol {
   padding: 0;
 }
 
+/* * Current Song Bar * */
+.csb-container {
+  width: 100%;
+  height: 50px;
+  background-color: #000; 
+}
+
+.csb-album-image {
+  display: inline-block;
+}
+
+.csb-song-info {
+  display: inline-block;
+  margin: auto 0;
+  vertical-align: middle;
+}
+
+.csb-song-name {
+  color: #0090e0;
+}
+
+
 
