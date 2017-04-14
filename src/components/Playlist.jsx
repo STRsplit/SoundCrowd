@@ -28,12 +28,16 @@ class Playlist extends Component {
       });
   }
 
+
   sortTracks() {
     var sortedTracks = this.state.tracks.sort((a, b) => {
       a.vote_count - b.vote_count;
     })
     this.setState({ tracks: sortedTracks });
   }
+
+  // sortTracks() {
+  // }
 
   render() {
     var id = 0;

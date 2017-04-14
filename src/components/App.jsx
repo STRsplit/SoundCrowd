@@ -98,7 +98,7 @@ class App extends React.Component {
                             </div>
                         </div>
                     )}/>
-                    <Route path="/app/playlist/tracks" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
+                    <Route path="/app/playlist/tracks" render={() => (<Playlist owner={true} playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
                       <NewPlaylist state={this.props.stats}/>

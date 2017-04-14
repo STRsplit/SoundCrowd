@@ -88,6 +88,7 @@ class Main extends React.Component {
 	}
 
   setPlaylist(playlistId) {
+    console.log('PLAYLISTTTTTT!!!!', playlistId)
     this.setState({ playlist: playlistId })
   }
 
@@ -122,7 +123,6 @@ class Main extends React.Component {
         <Route path="/app" render={() => 
           (<App stats={this.state} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
 
->>>>>>> Working.
 		    </div>
       </BrowserRouter>
     )

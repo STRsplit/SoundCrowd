@@ -61,6 +61,7 @@ module.exports = {
   getCategory: (req, res) => {
     spotify.getPlaylistsForCategory('mood', { limit: 50 })
   },
+
   test: (req, res) => {
     spotify.getPlaylistsForCategory('mood')
     .then((data) => {

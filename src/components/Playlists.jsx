@@ -28,23 +28,31 @@ class Playlists extends Component {
   }
 
   setPlaylist(playlistId) {
-    console.log(playlistId)
+    console.log('PLAYLIST ID 2', playlistId)
     this.props.setPlaylist(playlistId);
   }
 
   render() {
 
+    const userPlaylists = this.state.playlists.map(playlist => {
+      return (
+        <div key={playlist.id}>
+          <img src=""/>
+          <Link to="/app/playlist/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+            {playlist.name}
+          </Link>
+        </div>
+      )
+    })
+
     return (
-      <div id='playlist-container'>
-        <div>Playlists</div>
-        {this.state.playlists.map(playlist => 
-          <div key={playlist.id}>
-            <img src=""/>
-            <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
-              {playlist.name}
-            </Link>
-          </div>
-        )}
+      <div>
+        <div><Link to="/app/search">Search</Link></div>
+        <div>
+          <h2>Playlists:</h2>
+          <div>{userPlaylists}</div>
+        </div>
+      </div>
     )
   }
 }
