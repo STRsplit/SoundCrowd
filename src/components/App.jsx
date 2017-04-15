@@ -12,21 +12,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	name: ''
     }
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
-  }
-
-  componentDidMount() {
-    axios.get('/name')
-    .then((result) => {
-    	console.log('name response ', result);
-    	this.setState({
-    		name: result.data
-    	})
-    })
   }
 
   setMood(e) {
@@ -55,7 +44,7 @@ class App extends React.Component {
 	  	<div>
 		  	<div>
 		  		<div>
-		  			<NavBar logout={this.props.logout} name={this.state.name}/>
+		  			<NavBar logout={this.props.logout} name={this.props.name}/>
 		  		</div>
 		  	</div>
 		  	<Container fluid={true}>

@@ -3,7 +3,8 @@ const dbHelpers = require('../database/dbHelpers');
 const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  res.send(req.isAuthenticated());
+  obj = {login: req.isAuthenticated(), name: req.user.name}
+  res.send(obj);
 };
 
 // RETURNS PROMISE OBJECT THAT CONTAINS TRUE IF VOTED ALREADY FALSE OTHERWISE
@@ -54,13 +55,9 @@ const validateVote = (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-  req.session.destroy(err => {
-    // err ? console.log('requestHandler > logoutUser error: ', err) : res.redirect('/');
-    if(err){
-      console.log('requestHandler > logoutUser err', err);
-    } else {
-      res.redirect('/');
-    }
+  req.logout();
+  req.session.destroy(function(err) {
+    res.redirect('/');
   });
 };
 

@@ -33,7 +33,8 @@ class Main extends React.Component {
 			weather: '',
 			mood: '',
 			activity: '',
-      playlist:''
+      playlist:'',
+      name: ''
 		}
     this.setPlaylist = this.setPlaylist.bind(this);
     this.handleMood = this.handleMood.bind(this);
@@ -45,8 +46,11 @@ class Main extends React.Component {
 		axios.get('/api/verifyuser')
 		.then(result => {
 			console.log('result', result);
-			if (result.data) {
-				this.setState({loggedIn: true});
+			if (result.data.login) {
+				this.setState({
+					loggedIn: true,
+					name: result.data.name
+				});
 
 				axios.get('http://ip-api.com/json')
 				.then(function(res) {
@@ -111,7 +115,7 @@ class Main extends React.Component {
           <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist} owner={true}/>)}/>
           <Route path="/search" render={() => (<SearchContainer />)} />
 		      <Route exact path="/" render={() => (
-		     	  this.state.loggedIn ? <App logout={this.logout} handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
+		     	  this.state.loggedIn ? <App name={this.state.name} logout={this.logout} handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
 		      )}/>
 		      <Route path="/new-playlist" render={() => (
 		     	  this.state.loggedIn ? <NewPlaylist state={this.state}/> : <Redirect to="/login" />

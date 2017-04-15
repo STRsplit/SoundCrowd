@@ -11,7 +11,6 @@ var spotify = new SpotifyWebApi({
   redirectUri: callbackURL
 });
 var userId;
-var clientName;
 var mood;
 var activity;
 var newPlaylistId;
@@ -159,7 +158,7 @@ module.exports = {
     res.sendStatus(201);
   },
   getName: (req, res) => {
-    res.send(clientName);
+    res.send(req.user.name);
   },
   findPlaylist: (req, res) => {
     db.Playlist.findAll()
