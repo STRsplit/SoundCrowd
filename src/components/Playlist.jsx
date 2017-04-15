@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 
 class Playlist extends Component {
@@ -35,7 +35,10 @@ class Playlist extends Component {
       )
     ))
     return (
-      <div>Tracks:{tracks}</div>
+      <div>
+        <CurrentSongBar />
+        <div>Tracks:{tracks}</div>
+      </div>
     )
   }
 }
