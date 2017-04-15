@@ -26,35 +26,18 @@ class Playlists extends Component {
     });
   }
 
-  // getPlaylists() {
-  //   axios.get('/api/spotify/playlists/', {
-  //     // params: {}
-  //   })
-  //   .then(res => {
-  //     let playlists = res.data.items;
-  //     console.log(res.data.items);
-  //     this.setState({ playlists: playlists });
-  //   })
-  //   .catch(err => {
-  //     // handle error and display appropriate message
-  //     console.log(err);
-  //   });
-  // }
-
-
   setPlaylist(playlistId) {
     this.props.setPlaylist(playlistId);
   }
-  /*<Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
-    {playlist.name}
-  </Link>*/
 
   render() {
     const userPlaylists = this.state.playlists.map(playlist => {
       return (
         <div key={playlist.id}>
           <img src=""/>
-          <a href={playlist.external_urls.spotify}>{playlist.name}</a>
+          <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+            {playlist.name}
+          </Link>
         </div>
       )
     });
