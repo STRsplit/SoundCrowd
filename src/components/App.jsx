@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
+import Playlists from './Playlists.jsx';
 // import { Grid, Row, Col } from 'react-flexbox-grid';
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
@@ -103,17 +104,7 @@ class App extends React.Component {
 						  	  </div>
 				  	  	</div>
 				  		</div>
-				  		<div id='playlist-container'>
-					      <div>Playlists</div>
-					      {this.state.playlists.map(playlist => 
-				          <div key={playlist.id}>
-					          <img src=""/>
-					          <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
-					            {playlist.name}
-					          </Link>
-					        </div>
-					      )}
-					    </div>
+				  		<Playlists setPlaylist={this.props.setPlaylist}/>
 				  	</Col>
 		        <Col className="layout-column column-right" xs="5" md="3"></Col>
 	        </Row>

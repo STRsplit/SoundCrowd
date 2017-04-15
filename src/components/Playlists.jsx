@@ -31,19 +31,17 @@ class Playlists extends Component {
   }
 
   render() {
-    const userPlaylists = this.state.playlists.map(playlist => {
-      return (
-        <div key={playlist.id}>
-          <img src=""/>
-          <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
-            {playlist.name}
-          </Link>
-        </div>
-      )
-    });
     return (
-      <div>Playlists:
-        <div>{userPlaylists}</div>
+      <div id='playlist-container'>
+        <div>Playlists</div>
+        {this.state.playlists.map(playlist => 
+          <div key={playlist.id}>
+            <img src=""/>
+            <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+              {playlist.name}
+            </Link>
+          </div>
+        )}
       </div>
     )
   }
