@@ -15,7 +15,6 @@ class NewPlaylist extends React.Component {
 			activity: this.props.state.activity 
 		}) 
 		.then((res) => {
-      console.log('in component');
 			axios.get('/getCategory')
 			.then((result) => {
 				console.log('test result: ', result);

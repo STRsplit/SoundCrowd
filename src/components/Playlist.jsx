@@ -21,7 +21,6 @@ class Playlist extends Component {
     axios.get('/api/playlists/' + this.props.playlist)
 
       .then(res => {
-        console.log(res.data)
         let tracks = res.data;
         this.setState({ tracks: tracks });
       })

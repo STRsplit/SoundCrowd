@@ -34,11 +34,8 @@ class Main extends React.Component {
 			mood: '',
 			activity: '',
       playlist:'',
-<<<<<<< HEAD
-      name: ''
-=======
+      name: '',
       owner: false
->>>>>>> routing in progress.
 		}
     this.setPlaylist = this.setPlaylist.bind(this);
     this.handleMood = this.handleMood.bind(this);
@@ -81,7 +78,6 @@ class Main extends React.Component {
 	}
 
 	logout() {
-		console.log('logout clicked');
     axios.get('/logout')
     .catch((err) => {
       console.log(err);
@@ -92,7 +88,6 @@ class Main extends React.Component {
 	}
 
   setPlaylist(playlistId) {
-    console.log('PLAYLISTTTTTT!!!!', playlistId)
     this.setState({ playlist: playlistId })
   }
 

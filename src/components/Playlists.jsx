@@ -17,8 +17,6 @@ class Playlists extends Component {
     })
     .then(res => {
       let playlists = res.data.items;
-      console.log('get playlist response ', res);
-
       this.setState({ playlists: playlists });
     })
     .catch(err => {
@@ -33,15 +31,14 @@ class Playlists extends Component {
   }
 
   render() {
-
     const userPlaylists = this.state.playlists.map(playlist => {
-      return (
-        <div key={playlist.id}>
-          <img src=""/>
-          <Link to={`/app/playlists/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>
-            {playlist.name}
-          </Link>
-        </div>
+    return (
+      <div key={playlist.id}>
+        <img src=""/>
+        <Link to={`/app/playlists/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>
+          {playlist.name}
+        </Link>
+      </div>
       )
     })
 
