@@ -7,16 +7,24 @@ class Playlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: []
+      tracks: [],
+      owner: this.props.owner
     };
-    this.getPlaylistTracks();
+    this.getPlaylistTracks(); 
+    this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
+    this.setOwner = this.setOwner.bind(this);
+  }
+
+  componentDidUpdate() {
+    // this.render();
   }
 
   getPlaylistTracks() {
-    var route = this.props.owner ? '/api/spotify/playlists/' : '/api/playlists/';
+    var route = this.state.owner ? '/api/spotify/playlists/' : '/api/playlists/';
     var playlistId = this.props.playlist;
     axios.get(route + playlistId)
       .then(res => {
+        console.log('gimme votes', res.data);
         let tracks = res.data;
         this.setState({ tracks: tracks });
       })
@@ -25,14 +33,24 @@ class Playlist extends Component {
       });
   }
 
+  setOwner(bool) {
+    this.setState({ owner: bool });
+  }
+
   sortTracks() {
+    var sortedTracks = this.state.tracks.sort((a, b) => {
+      a.vote_count - b.vote_count;
+    })
+    this.setState({ tracks: sortedTracks });
   }
 
   render() {
-    const tracks = this.state.tracks.map(track => (
-      (
-        <Track key={track.song_id} playlist={this.props.playlist} track={track}/>
-      )
+    this.state.tracks.forEach(track => {
+      console.log(track.title, track.vote_count);
+    });
+    var id = 0;
+    var tracks = this.state.tracks.map(track => (
+      <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} setOwner={this.setOwner} sortTracks={this.sortTracks.bind(this)}/>
     ))
     return (
       <div>

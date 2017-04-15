@@ -3,7 +3,9 @@ const dbHelpers = require('../database/dbHelpers');
 const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  obj = {login: req.isAuthenticated(), name: req.user.name}
+  obj = {login: req.isAuthenticated()}
+  if (req.user) obj.name = req.user.name;
+  else obj.name = '';
   res.send(obj);
 };
 

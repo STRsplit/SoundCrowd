@@ -36,6 +36,8 @@ module.exports = {
       });
   },
   moveTrack: function(username, playlistId, cb) {
+    // need range of songs, direction to shift, 
+    // and positions to shift from/to
     // var options = { 'range_length': 2 };
     spotify.reorderTracksInPlaylist(username, playlistId, 1, 3)
       .then(data => {
