@@ -55,7 +55,7 @@ class App extends React.Component {
 	  	<div>
 		  	<div>
 		  		<div>
-		  			<NavBar name={this.state.name}/>
+		  			<NavBar logout={this.props.logout} name={this.state.name}/>
 		  		</div>
 		  	</div>
 		  	<Container fluid={true}>

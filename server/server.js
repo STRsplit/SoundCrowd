@@ -63,6 +63,16 @@ app.get('/api/verifyuser', handler.verifyUser);
 // });
 
 
+app.get('/logout', function(req, res) {
+  console.log('before logout ', req.session);
+  req.logout();
+  console.log('outside session destroy ', req.session);
+  req.session.destroy(function(err) {
+    console.log('inside session destroy', req.session);
+    res.redirect('/');
+  });
+});
+
 /* * Spotify API * */
 app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
 

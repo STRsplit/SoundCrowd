@@ -3,23 +3,21 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'elemental';
 
-const Navbar = (props) => (
-  <div className="nav-container">
-    <nav>
-      <Row className="3-col-row">
-        <Col sm="1/3">
-         {props.name}
-        </Col> 
-        <Col sm="1/3">
-          One Third
-        </Col>
-        <Col sm="1/3">
-          dkjfjdasl
-        </Col>
-      </Row>
-    </nav>
-  </div>
-);
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
 
+  render() {
+    return (
+      <div className='nav-container'>
+        <div className='nav-container-name'>{this.props.name}</div>
+        <div className='nav-container-logout' onClick={this.props.logout}>Logout</div>
+      </div>
+    );
+  }
+}
 
 export default Navbar;

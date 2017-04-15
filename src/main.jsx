@@ -38,6 +38,7 @@ class Main extends React.Component {
     this.setPlaylist = this.setPlaylist.bind(this);
     this.handleMood = this.handleMood.bind(this);
     this.handleActivity = this.handleActivity.bind(this);
+    this.logout = this.logout.bind(this);
 	}
 
 	componentWillMount() {
@@ -70,6 +71,17 @@ class Main extends React.Component {
 		.catch(err => console.log('main.js error componentDidMount: ', err));
 	}
 
+	logout() {
+		console.log('logout clicked');
+    axios.get('/logout')
+    .catch((err) => {
+      console.log(err);
+    });
+    this.setState({
+    	loggedIn: false
+    });
+	}
+
   setPlaylist(playlistId) {
     this.setState({ playlist: playlistId });
   }
@@ -99,7 +111,7 @@ class Main extends React.Component {
           <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist} owner={true}/>)}/>
           <Route path="/search" render={() => (<SearchContainer />)} />
 		      <Route exact path="/" render={() => (
-		     	  this.state.loggedIn ? <App handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
+		     	  this.state.loggedIn ? <App logout={this.logout} handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
 		      )}/>
 		      <Route path="/new-playlist" render={() => (
 		     	  this.state.loggedIn ? <NewPlaylist state={this.state}/> : <Redirect to="/login" />
