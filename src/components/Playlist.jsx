@@ -7,7 +7,7 @@ class Playlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: [],
+      tracks: []
     };
     // this.getPlaylistTracks(); 
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
