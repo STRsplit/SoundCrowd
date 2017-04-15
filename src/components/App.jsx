@@ -12,10 +12,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+    	playlists: []
     }
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
+    this.setPlaylist = this.setPlaylist.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/api/spotify/playlists/', {
+      // params: {}
+    })
+    .then(res => {
+      let playlists = res.data.items;
+      console.log('get playlist response ', res);
+
+      this.setState({ playlists: playlists });
+    })
+    .catch(err => {
+      // handle error and display appropriate message
+      console.log(err);
+    });
   }
 
   setMood(e) {
@@ -24,6 +42,10 @@ class App extends React.Component {
 
   setActivity(e) {
     this.props.handleActivity(e.target.value);
+  }
+
+  setPlaylist(playlistId) {
+    this.props.setPlaylist(playlistId);
   }
 
 	findPlaylist() {
@@ -38,6 +60,7 @@ class App extends React.Component {
 		});
 	}
 
+	/*<Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>*/
 
 	render() {
 	  return (
@@ -49,13 +72,12 @@ class App extends React.Component {
 		  	</div>
 		  	<Container fluid={true}>
 	        <Row className>
-		        <Col className="layout-column column-left" xs="0" md="1">md-4</Col>
+		        <Col className="layout-column column-left" xs="0" md="1"></Col>
 		        <Col className="layout-column column-mid" xs="11" md="8">
 		          <div className="main-container">
 				  			<div className="main-middle-column">
 						  	  <h1>Welcome To So Me</h1>
 						  	  {this.props.children}
-								  <Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>
 						  	  <Link id='newPlaylist' to='/new-playlist' onClick={this.findPlaylist}>Get Suggested Playlist</Link>
 						  	  <div id='mood'>
 						  	  <div id='moodLabel'>Mood</div>
@@ -81,8 +103,19 @@ class App extends React.Component {
 						  	  </div>
 				  	  	</div>
 				  		</div>
+				  		<div id='playlist-container'>
+					      <div>Playlists</div>
+					      {this.state.playlists.map(playlist => 
+				          <div key={playlist.id}>
+					          <img src=""/>
+					          <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
+					            {playlist.name}
+					          </Link>
+					        </div>
+					      )}
+					    </div>
 				  	</Col>
-		        <Col className="layout-column column-right" xs="5" md="3">md-4</Col>
+		        <Col className="layout-column column-right" xs="5" md="3"></Col>
 	        </Row>
 	      </Container>
 		  </div>	

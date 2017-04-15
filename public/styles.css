@@ -1,20 +1,6 @@
 /**
  * MUI Colors module
  */
-.nav-container {
-  width: 100%;
-  height: 8%;
-  background-color: #FFF; 
-}
-
-.nav-container-name {
-  float: left;
-}
-
-.nav-container-logout {
-  float: right;
-}
-
 .Row {
   flex-wrap: nowrap !important; }
 
