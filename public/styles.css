@@ -243,6 +243,36 @@ body {
   position: absolute;
   transition: opacity .3s; }
 
+.track-main-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 2% auto;
+  border-radius: 4px; }
+
+.track-vote-container {
+  float: left;
+  display: block;
+  position: relative;
+  top: 50%; }
+
+.track-vote-container-inner {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  border: 2px solid #031527;
+  padding: 10%;
+  white-space: pre !important; }
+
+.track-vote-container-inner input {
+  width: 100%;
+  margin: 2px auto;
+  display: inline-block;
+  padding: 2%; }
+
+.track-vote-container-inner .voteCount {
+  font-size: 2em;
+  color: #d7dadb;
+  font-weight: 600; }
+
 h1 {
   font-size: 4.8em; }
 

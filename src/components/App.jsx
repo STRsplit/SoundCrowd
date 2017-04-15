@@ -100,7 +100,7 @@ class App extends React.Component {
                         </div>
                     )}/>
                     <Switch>
-                    <Route exact path="/app/playlist" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
+                    <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/playlists/:playlistId" component={PlaylistRoute} />
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
