@@ -1,14 +1,41 @@
 .nav-container {
   width: 100%;
-  height: 10%;
+  height: 80px;
   background-color: #FFF;
+  position: fixed;
+  display: block;
+  z-index: 20; }
+
+
+.nav-container-name {
+  float: left;
+  margin-left: 30px;
 }
-.Row {
-  flex-wrap: nowrap ! important;
+
+.nav-container-logout {
+  float: right;
+  margin-right: 30px;
 }
+
+
 .3-col-row {
-    display: flex;
-    flex-wrap: nowrap ! important;
+    width: 100%;
+    display: block;
     margin-left: -10px;
     margin-right: -10px;
+}
+
+.nav-container .container {
+  width: 100%;
+}
+.col-xs {
+  text-align: center;
+}
+  
+.nav-container-name {
+  float: left;
+}
+
+.nav-container-logout {
+  float: right;
 }

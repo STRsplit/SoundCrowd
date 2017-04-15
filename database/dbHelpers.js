@@ -92,5 +92,24 @@ module.exports = {
             this.checkForReorder(song, playlistId, vote);
           });
       });
+  },
+
+  addTrack: function(song, cb) {
+    console.log('INFO YOU WANTED', song, song)
+    let addedSong = Song.build({
+        artist: song.artist,
+        title: song.title,
+        song_id: song.song_id,
+        playlist_id: song.playlist_id,
+        vote_count: 1
+      });
+
+    addedSong.save()
+    .then(result => {
+      cb(null, result)
+    })
+    .catch(err => {
+      cb(err)
+    })
   }
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, BrowserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
+
 import axios from 'axios';
 
 class Playlists extends Component {
@@ -16,8 +17,6 @@ class Playlists extends Component {
     })
     .then(res => {
       let playlists = res.data.items;
-      console.log('get playlist response ', res);
-
       this.setState({ playlists: playlists });
     })
     .catch(err => {
@@ -27,21 +26,29 @@ class Playlists extends Component {
   }
 
   setPlaylist(playlistId) {
+    console.log('PLAYLIST ID 2', playlistId)
     this.props.setPlaylist(playlistId);
   }
 
   render() {
+    const userPlaylists = this.state.playlists.map(playlist => {
     return (
-      <div id='playlist-container'>
-        <div>Playlists</div>
-        {this.state.playlists.map(playlist => 
-          <div key={playlist.id}>
-            <img src=""/>
-            <Link to="/tracks" onClick={() => this.setPlaylist(playlist.id)}>
-              {playlist.name}
-            </Link>
-          </div>
-        )}
+      <div key={playlist.id}>
+        <img src=""/>
+        <Link to={`/app/playlists/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>
+          {playlist.name}
+        </Link>
+      </div>
+      )
+    })
+
+    return (
+      <div>
+        <div><Link to="/app/search">Search</Link></div>
+        <div>
+          <h2>Playlists:</h2>
+          <div>{userPlaylists}</div>
+        </div>
       </div>
     )
   }

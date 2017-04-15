@@ -1,13 +1,21 @@
+.main-app-container {
+  display: block;
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
 .layout-column {
   text-align: center;
-  height: 100vh;
   padding: 0px;
 }
-.main-container {
+.inner-app-container {
   width: 100%;
   display: block;
   clear: both;
+  margin-top: 120px;
 }
+
+
 
 .main-left-column {
 
@@ -32,5 +40,10 @@
 
 }
 .column-right {
-
+  background-color: red;
+  min-height: 100%;
+  position: fixed;
+  top: 8%;
+  right: 0;
+  bottom: 0;
 }

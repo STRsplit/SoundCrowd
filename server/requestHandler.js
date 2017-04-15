@@ -56,6 +56,7 @@ const validateVote = (req, res) => {
   }
 };
 
+
 const logoutUser = (req, res) => {
   req.logout();
   req.session.destroy(function(err) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import { BrowserRouter, Route, Redirect, Match } from 'react-router-dom';
+import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
 
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
@@ -42,6 +42,7 @@ class Main extends React.Component {
     this.logout = this.logout.bind(this);
 	}
 
+
 	componentWillMount() {
 		axios.get('/api/verifyuser')
 		.then(result => {
@@ -76,18 +77,19 @@ class Main extends React.Component {
 	}
 
 	logout() {
-		console.log('logout clicked');
+    console.log('logout reached');
     axios.get('/logout')
     .catch((err) => {
       console.log(err);
     });
     this.setState({
     	loggedIn: false
-    });
+    })
+    this.context.router.replace('/login');
 	}
 
   setPlaylist(playlistId) {
-    this.setState({ playlist: playlistId });
+    this.setState({ playlist: playlistId })
   }
 
 	handleMood(val) {
@@ -105,23 +107,22 @@ class Main extends React.Component {
   /*<Route exact path="/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>*/
 
   render() {
+    const { playlist, loggedIn} = this.state
+
     console.log('logged in', this.state.loggedIn);
     return (
       <BrowserRouter>
 			  <div>
-				  <Route path="/login" render={() => (
-		      	this.state.loggedIn ? <Redirect to="/" /> : <Login />
-		      )}/>
-          <Route path="/playlists/:playlistId" component={PlaylistRoute} />
-          <Route path="/tracks" render={() =>(<Playlist playlist={this.state.playlist} owner={true}/>)}/>
-          <Route path="/search" render={() => (<SearchContainer />)} />
-		      <Route exact path="/" render={() => (
-		     	  this.state.loggedIn ? <App name={this.state.name} setPlaylist={this.setPlaylist} logout={this.logout} 
-		     	  handleMood={this.handleMood} handleActivity={this.handleActivity}/> : <Redirect to="/login" />
-		      )}/>
-		      <Route path="/new-playlist" render={() => (
-		     	  this.state.loggedIn ? <NewPlaylist state={this.state}/> : <Redirect to="/login" />
-		      )}/>
+        <Route path="app/playlists/:playlistId" render={({match}) => (<PlaylistRoute />)} />
+        <Route exact path="app/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>
+        <Route exact path="/" render={() => (
+            this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />
+          )}/>
+        <Route path="/login" render={() => (
+            this.state.loggedIn ? <Redirect to="/app" /> : <Login />
+          )}/>
+        <Route path="/app" render={() => 
+          (<App stats={this.state} logout={this.logout} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
 		    </div>
       </BrowserRouter>
     )
@@ -129,3 +130,4 @@ class Main extends React.Component {
 }
   
 ReactDOM.render(<MuiThemeProvider><Main /></MuiThemeProvider>, document.getElementById('app'));
+

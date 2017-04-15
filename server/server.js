@@ -42,7 +42,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/api/search/', spotify.searchFor);
+
+app.get('/api/search/', function(req, res) {
+  const { name, filter } = req.query
+  spotify.searchFor(name, filter, function(err, items) {
+    if(err) res.status(err.statusCode).send(err);
+    else {
+      res.status(200).send(items);
+    }
+  })
+});
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
@@ -124,7 +133,19 @@ app.post('/api/vote', function(req, res) {
   res.sendStatus(201);
 });
 
-// app.get('/api/playlist/currentsong', handler.getCurrentSongDetails);
+
+app.post('/api/tracks', function(req, res) {
+  console.log(req.body);
+  let song = req.body.track
+
+  dbHelpers.addTrack(song, function(err, success) {
+    console.log(err);
+    if(err) res.status(err.statusCode).send(err);
+    else {
+      res.sendStatus(201)
+    }
+  })
+});
 
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
