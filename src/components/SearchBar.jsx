@@ -6,7 +6,7 @@ import axios from 'axios';
 import $ from 'jquery';
 
 import { Form, Input, Textarea, Button, Radio } from 'muicss/react';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Button as ColorButton } from 'elemental';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import AutoCompleteSearch from './Autocomplete.jsx';
