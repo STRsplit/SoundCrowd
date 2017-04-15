@@ -44,6 +44,8 @@ class Playlist extends Component {
     var id = 0;
     var tracks = this.state.tracks.map(track => (
       <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
+      ));
+    
     return (
       <div>
         <CurrentSongBar />
