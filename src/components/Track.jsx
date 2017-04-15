@@ -20,10 +20,7 @@ class Track extends Component {
       songId: this.props.track.song_id
     })
     .then(res => {
-      if (voteStatus !== null) {
-        if (val === 1) val = 2;
-        else if (val === -1) val = -2;
-      }
+      // this.setState({ voteCount: this.props.track.vote_count });
       this.setState({ voteCount: this.state.voteCount += val });
     })
     .catch(err => {
@@ -43,7 +40,6 @@ class Track extends Component {
         </div>
       </div>
     )
-    
   }
 }
 

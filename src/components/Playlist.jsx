@@ -7,15 +7,18 @@ class Playlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tracks: []
+      tracks: [],
     };
+    // this.getPlaylistTracks(); 
+    this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
+  }
+
+  componentDidMount() {
     this.getPlaylistTracks();
   }
 
   getPlaylistTracks() {
-    var route = this.props.owner ? '/api/spotify/playlists/' : '/api/playlists/';
-    var playlistId = this.props.playlist;
-    axios.get(route + playlistId)
+    axios.get('/api/playlists/' + this.props.playlist)
       .then(res => {
         let tracks = res.data;
         this.setState({ tracks: tracks });
@@ -26,13 +29,16 @@ class Playlist extends Component {
   }
 
   sortTracks() {
+    var sortedTracks = this.state.tracks.sort((a, b) => {
+      a.vote_count - b.vote_count;
+    })
+    this.setState({ tracks: sortedTracks });
   }
 
   render() {
-    const tracks = this.state.tracks.map(track => (
-      (
-        <Track key={track.song_id} playlist={this.props.playlist} track={track}/>
-      )
+    var id = 0;
+    var tracks = this.state.tracks.map(track => (
+      <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
     ))
     return (
       <div>
