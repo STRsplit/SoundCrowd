@@ -20,11 +20,8 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
-    var route = this.state.owner ? '/api/spotify/playlists/' : '/api/playlists/';
-    var playlistId = this.props.playlist;
-    axios.get(route + playlistId)
+    axios.get('/api/playlists/' + this.props.playlist)
       .then(res => {
-        console.log('gimme votes', res.data);
         let tracks = res.data;
         this.setState({ tracks: tracks });
       })
