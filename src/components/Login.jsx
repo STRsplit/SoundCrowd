@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Button } from 'elemental';
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      playlist: ''
+
     };
     this.spotifyAuth = this.spotifyAuth.bind(this);
-    this.setPlaylist = this.setPlaylist.bind(this);
-    this.goToPlaylist = this.goToPlaylist.bind(this);
-  }
-
-  setPlaylist(e) {
-    console.log()
-    this.setState({ playlist: e.target.value });
-    console.log('playlist change', this.state.playlist);
-  }
-
-  goToPlaylist() {
-    console.log('playlistId', this.state.playlist);
+    console.log('Login');
   }
 
   spotifyAuth(e){
@@ -41,11 +30,8 @@ class Login extends Component {
           </div>
         </div>
           <div>
-          <input type="text" placeholder="Enter room code here..." onChange={this.setPlaylist}/>
           <div className="button-container">
-            
-              <Button type="primary"><span>Join a Room</span></Button>
-            
+            <Button type="primary"><span>Join a Room</span></Button>
           </div>
       </div>
       <div className="about-brief">
@@ -58,12 +44,6 @@ class Login extends Component {
       </div>
     );
   }
-
-  // <div className="button-container">
-  //           <Link to=`/playlists/${this.state.playlist}`>
-  //             <Button type="primary"><span>Join a Room</span></Button>
-  //           </Link>
-  //         </div>
 
 }
 

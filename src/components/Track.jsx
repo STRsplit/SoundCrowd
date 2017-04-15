@@ -12,7 +12,6 @@ class Track extends Component {
   }
 
   vote(val) {
-    this.props.setOwner(false);
     var voteStatus = this.state.voted;
     this.setState({ voted: val });
     axios.post('/api/vote/', {
@@ -21,16 +20,8 @@ class Track extends Component {
       songId: this.props.track.song_id
     })
     .then(res => {
-      // this.props.getPlaylistTracks();
-      // this.render();
-      this.setState({ voteCount: this.props.track.vote_count });
-      if (voteStatus !== null) {
-        // if (val === 1) val = 2;
-        // else if (val === -1) val = -2;
-      }
+      // this.setState({ voteCount: this.props.track.vote_count });
       this.setState({ voteCount: this.state.voteCount += val });
-      this.props.sortTracks();
-      // this.props.renderTracks() ???
     })
     .catch(err => {
       // fix handling
