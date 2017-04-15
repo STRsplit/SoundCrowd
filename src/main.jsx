@@ -34,8 +34,7 @@ class Main extends React.Component {
 			mood: '',
 			activity: '',
       playlist:'',
-      name: '',
-      owner: false
+      name: ''
 		}
     this.setPlaylist = this.setPlaylist.bind(this);
     this.handleMood = this.handleMood.bind(this);
@@ -114,7 +113,7 @@ class Main extends React.Component {
     return (
       <BrowserRouter>
 			  <div>
-        <Route path="app/playlists/:playlistId" render={({match}) => (<PlaylistRoute owner={false}/>)} />
+        <Route path="app/playlists/:playlistId" render={({match}) => (<PlaylistRoute />)} />
         <Route exact path="app/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>
         <Route exact path="/" render={() => (
             this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />

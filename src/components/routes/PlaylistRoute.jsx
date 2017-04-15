@@ -9,7 +9,7 @@ import Playlist from '../Playlist.jsx';
 // }
 const PlaylistRoute = ({ match }) => (
 
-  <Playlist playlist={match.params.playlistId} owner={false} />
+  <Playlist playlist={match.params.playlistId} />
 
 );
 

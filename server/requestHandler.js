@@ -66,7 +66,7 @@ const logoutUser = (req, res) => {
 
 
 module.exports = {
-  verifyUser: verifyUser,
-  validateVote: validateVote,
-  logoutUser: logoutUser
+  verifyUser,
+  validateVote,
+  logoutUser
 };
