@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from './Navbar.jsx';
+import Playlists from './Playlists.jsx';
 // import { Grid, Row, Col } from 'react-flexbox-grid';
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
@@ -38,6 +39,7 @@ class App extends React.Component {
 		});
 	}
 
+	/*<Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>*/
 
 	render() {
 	  return (
@@ -49,13 +51,12 @@ class App extends React.Component {
 		  	</div>
 		  	<Container fluid={true}>
 	        <Row className>
-		        <Col className="layout-column column-left" xs="0" md="1">md-4</Col>
+		        <Col className="layout-column column-left" xs="0" md="1"></Col>
 		        <Col className="layout-column column-mid" xs="11" md="8">
 		          <div className="main-container">
 				  			<div className="main-middle-column">
 						  	  <h1>Welcome To So Me</h1>
 						  	  {this.props.children}
-								  <Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>
 						  	  <Link id='newPlaylist' to='/new-playlist' onClick={this.findPlaylist}>Get Suggested Playlist</Link>
 						  	  <div id='mood'>
 						  	  <div id='moodLabel'>Mood</div>
@@ -81,8 +82,9 @@ class App extends React.Component {
 						  	  </div>
 				  	  	</div>
 				  		</div>
+				  		<Playlists setPlaylist={this.props.setPlaylist}/>
 				  	</Col>
-		        <Col className="layout-column column-right" xs="5" md="3">md-4</Col>
+		        <Col className="layout-column column-right" xs="5" md="3"></Col>
 	        </Row>
 	      </Container>
 		  </div>	
