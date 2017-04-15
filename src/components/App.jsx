@@ -50,13 +50,15 @@ class App extends React.Component {
 
 	render() {
     console.log('APP stats', this.props.stats)
-     if (!this.props.stats.loggedIn) {
-      return (
-        <Login />
-      )
-    }
+    //  if (!this.props.stats.loggedIn) {
+    //   return (
+    //     <Login />
+    //   )
+    // }
 	  return ( 
     <BrowserRouter>
+      <Switch>
+      <Route exact path="/login" render={() => (<Login />)}/>
 	  	<div>
 		  	<div>
 		  		<div>
@@ -104,6 +106,7 @@ class App extends React.Component {
                             </div>
                         </div>
                     )}/>
+
                     <Switch>
                     <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/playlists/:playlistId" component={PlaylistRoute} />
@@ -120,7 +123,7 @@ class App extends React.Component {
 	        </Container>
           </div>
 		  </div>
-
+      </Switch>
     </BrowserRouter>
 	  );
 	}
