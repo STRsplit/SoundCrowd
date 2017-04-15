@@ -11,10 +11,11 @@ var spotify = new SpotifyWebApi({
   redirectUri: callbackURL
 });
 var userId;
+var clientName;
 var mood;
 var activity;
 var newPlaylistId;
-var href;
+var href; 
 
 module.exports = {
   getUserPlaylists: function(username, cb) {
@@ -160,7 +161,8 @@ module.exports = {
   findPlaylist: (req, res) => {
     db.Playlist.findAll()
     .then((result) => {
-      res.send(result);
+      var obj = {db: result, user: clientName};
+      res.send(obj);
     })
     .catch((err) => {
       console.log('findPlaylist error: ', err);
@@ -239,6 +241,7 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
       email: email 
     };
 
+    clientName = display_name;
     userId = id;
 
     db.User.findOne({where: {id: id}})

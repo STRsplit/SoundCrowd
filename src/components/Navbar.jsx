@@ -3,24 +3,24 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'elemental';
 
-const Navbar = ({}) => {
+const Navbar = (props) => {
   return (
     <div className="nav-container">
-      <nav> 
+      <nav>
         <Row className="3-col-row">
           <Col sm="1/3">
            One Third
-          </Col>
+          </Col> 
           <Col sm="1/3">
             One Third
+          </Col>     
+          <Col>
+            dkjfjdasl
           </Col>
-          <Col sm="1/3">
-            One Third
-          </Col>
-        </Row>          
+        </Row>
       </nav>
     </div>
-  )
+  );
 
 }
 
