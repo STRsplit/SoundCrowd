@@ -59,7 +59,6 @@ class App extends React.Component {
 		  		</div>
 		  	</div>
         <div>
-
 		  	<Container className="main-app-container" fluid={true}>
 	        <Row className>
 

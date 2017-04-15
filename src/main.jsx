@@ -78,6 +78,7 @@ class Main extends React.Component {
 	}
 
 	logout() {
+    console.log('logout reached');
     axios.get('/logout')
     .catch((err) => {
       console.log(err);
@@ -122,7 +123,7 @@ class Main extends React.Component {
           )}/>
 
         <Route path="/app" render={() => 
-          (<App stats={this.state} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
+          (<App stats={this.state} logout={this.logout} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
 
 		    </div>
       </BrowserRouter>
