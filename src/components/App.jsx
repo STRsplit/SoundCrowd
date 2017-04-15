@@ -41,7 +41,7 @@ class App extends React.Component {
 			count = result.data.length + 1;
 			// this.setState({
    //      name: result.data.user
-			// });
+			// });s
 			axios.post('/create', {number: count});
 		});
 	}
