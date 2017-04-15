@@ -67,8 +67,6 @@ class App extends React.Component {
 		        <Col className="layout-column column-mid" xs="18" md="9">
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
-                  <Switch>
-                    <Route path="/app/playlist/:playlistId" render={({path}) => (<Playlist owner={true} playlist={this.props.stats.playlist}/>)}/>
           					<Route exact path="/app" render={() => (
                       <div>
                         <div>
@@ -77,7 +75,7 @@ class App extends React.Component {
                         <div>
                           <div>
                               <div><Link to='/app'>Use My Playlist</Link></div>
-                              <div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div>
+                              <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
                           </div>
                             <div>
                               <h4>Mood</h4>
@@ -102,7 +100,9 @@ class App extends React.Component {
                             </div>
                         </div>
                     )}/>
-                    <Route path="/app/playlist/:playlistId" render={({path}) => (<Playlist owner={true} playlist={this.props.stats.playlist}/>)}/>
+                    <Switch>
+                    <Route exact path="/app/playlist" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
+                    <Route path="/app/playlists/:playlistId" component={PlaylistRoute} />
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
                       <NewPlaylist state={this.props.stats}/>
@@ -122,3 +122,8 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+//                    
+
+

@@ -34,7 +34,11 @@ class Main extends React.Component {
 			mood: '',
 			activity: '',
       playlist:'',
+<<<<<<< HEAD
       name: ''
+=======
+      owner: false
+>>>>>>> routing in progress.
 		}
     this.setPlaylist = this.setPlaylist.bind(this);
     this.handleMood = this.handleMood.bind(this);
@@ -107,12 +111,14 @@ class Main extends React.Component {
   /*<Route exact path="/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>*/
 
   render() {
-    const { playlist, loggedIn } = this.state
+    const { playlist, loggedIn, owner} = this.state
 
     console.log('logged in', this.state.loggedIn);
     return (
       <BrowserRouter>
 			  <div>
+        <Route exact path="app/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>
+        <Route path="app/playlists/:playlistId" render={({match}) => (<PlaylistRoute owner={false}/>)} />
         <Route exact path="/" render={() => (
             this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />
           )}/>

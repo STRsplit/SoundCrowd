@@ -19,7 +19,9 @@ class Playlist extends Component {
 
   getPlaylistTracks() {
     axios.get('/api/playlists/' + this.props.playlist)
+
       .then(res => {
+        console.log(res.data)
         let tracks = res.data;
         this.setState({ tracks: tracks });
       })
@@ -43,7 +45,6 @@ class Playlist extends Component {
     var id = 0;
     var tracks = this.state.tracks.map(track => (
       <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
-    ))
     return (
       <div>
         <CurrentSongBar />
