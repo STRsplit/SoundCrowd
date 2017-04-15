@@ -19,6 +19,16 @@ class App extends React.Component {
     this.findPlaylist = this.findPlaylist.bind(this);
   }
 
+  componentDidMount() {
+    axios.get('/name')
+    .then((result) => {
+    	console.log('name response ', result);
+    	this.setState({
+    		name: result.data
+    	})
+    })
+  }
+
   setMood(e) {
     this.props.handleMood(e.target.value);
   }
@@ -31,10 +41,10 @@ class App extends React.Component {
 		var count;
 		axios.get('/playlist')
 		.then((result) => {
-			count = result.data.db.length + 1;
-			this.setState({
-        name: result.data.user
-			});
+			count = result.data.length + 1;
+			// this.setState({
+   //      name: result.data.user
+			// });
 			axios.post('/create', {number: count});
 		});
 	}

@@ -158,11 +158,14 @@ module.exports = {
     console.log('this is songs ', activity);
     res.sendStatus(201);
   },
+  getName: (req, res) => {
+    res.send(clientName);
+  },
   findPlaylist: (req, res) => {
     db.Playlist.findAll()
     .then((result) => {
-      var obj = {db: result, user: clientName};
-      res.send(obj);
+      // var obj = {db: result, user: clientName};
+      res.send(result);
     })
     .catch((err) => {
       console.log('findPlaylist error: ', err);

@@ -66,6 +66,8 @@ app.get('/api/verifyuser', handler.verifyUser);
 /* * Spotify API * */
 app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
 
+app.get('/name', spotify.getName);
+
 app.get('/playlist', spotify.findPlaylist);
 
 app.post('/create', spotify.createPlaylist);
