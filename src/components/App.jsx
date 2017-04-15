@@ -13,28 +13,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	playlists: []
     }
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
-    this.setPlaylist = this.setPlaylist.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
-  }
-
-  componentDidMount() {
-    axios.get('/api/spotify/playlists/', {
-      // params: {}
-    })
-    .then(res => {
-      let playlists = res.data.items;
-      console.log('get playlist response ', res);
-
-      this.setState({ playlists: playlists });
-    })
-    .catch(err => {
-      // handle error and display appropriate message
-      console.log(err);
-    });
   }
 
   setMood(e) {
@@ -43,10 +25,6 @@ class App extends React.Component {
 
   setActivity(e) {
     this.props.handleActivity(e.target.value);
-  }
-
-  setPlaylist(playlistId) {
-    this.props.setPlaylist(playlistId);
   }
 
 	findPlaylist() {
