@@ -14,7 +14,7 @@ var userId;
 var mood;
 var activity;
 var newPlaylistId;
-var href;
+var href; 
 
 module.exports = {
   getUserPlaylists: function(username, cb) {
@@ -157,9 +157,13 @@ module.exports = {
     console.log('this is songs ', activity);
     res.sendStatus(201);
   },
+  getName: (req, res) => {
+    res.send(req.user.name);
+  },
   findPlaylist: (req, res) => {
     db.Playlist.findAll()
     .then((result) => {
+      // var obj = {db: result, user: clientName};
       res.send(result);
     })
     .catch((err) => {
@@ -239,6 +243,7 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
       email: email 
     };
 
+    clientName = display_name;
     userId = id;
 
     db.User.findOne({where: {id: id}})

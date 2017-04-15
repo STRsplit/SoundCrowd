@@ -15,6 +15,7 @@ class App extends React.Component {
     }
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
+    this.findPlaylist = this.findPlaylist.bind(this);
   }
 
   setMood(e) {
@@ -30,6 +31,9 @@ class App extends React.Component {
 		axios.get('/playlist')
 		.then((result) => {
 			count = result.data.length + 1;
+			// this.setState({
+   //      name: result.data.user
+			// });
 			axios.post('/create', {number: count});
 		});
 	}
@@ -40,7 +44,7 @@ class App extends React.Component {
 	  	<div>
 		  	<div>
 		  		<div>
-		  			<NavBar />
+		  			<NavBar logout={this.props.logout} name={this.props.name}/>
 		  		</div>
 		  	</div>
 		  	<Container fluid={true}>

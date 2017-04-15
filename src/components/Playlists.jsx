@@ -8,16 +8,16 @@ class Playlists extends Component {
     this.state = {
       playlists: []
     };
-    this.getPlaylists();
   }
 
-  getPlaylists() {
+  componentDidMount() {
     axios.get('/api/spotify/playlists/', {
       // params: {}
     })
     .then(res => {
       let playlists = res.data.items;
-      console.log(res.data.items);
+      console.log('get playlist response ', res);
+
       this.setState({ playlists: playlists });
     })
     .catch(err => {
@@ -25,7 +25,6 @@ class Playlists extends Component {
       console.log(err);
     });
   }
-
 
   setPlaylist(playlistId) {
     this.props.setPlaylist(playlistId);

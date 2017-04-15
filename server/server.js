@@ -63,8 +63,12 @@ app.get('/api/verifyuser', handler.verifyUser);
 // });
 
 
+app.get('/logout', handler.logoutUser);
+
 /* * Spotify API * */
 app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
+
+app.get('/name', spotify.getName);
 
 app.get('/playlist', spotify.findPlaylist);
 
