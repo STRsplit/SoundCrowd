@@ -10,7 +10,6 @@ import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
 import NewPlaylist from './NewPlaylist.jsx';
-import Playlists from './Playlists.jsx';
 import Playlist from './Playlist.jsx';
 import Login from './Login.jsx';
 import PlaylistRoute from './routes/PlaylistRoute.jsx';
