@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import { BrowserRouter, BrowserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
 
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
@@ -85,7 +85,7 @@ class Main extends React.Component {
     });
     this.setState({
     	loggedIn: false
-    });
+    })
 	}
 
   setPlaylist(playlistId) {
@@ -121,7 +121,6 @@ class Main extends React.Component {
         <Route path="/login" render={() => (
             this.state.loggedIn ? <Redirect to="/app" /> : <Login />
           )}/>
-
         <Route path="/app" render={() => 
           (<App stats={this.state} logout={this.logout} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
 

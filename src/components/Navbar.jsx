@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import login from './Login.jsx';
+import { Link, Redirect} from 'react-router-dom';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
@@ -18,10 +19,10 @@ render() {
             <Col xs><div className='nav-container-name'>{this.props.name}</div></Col>
               <Col xs></Col>
               <Col xs>
-                <div><Link to="/app/search">Search</Link></div>
+                <div><Link to='/app/search'>Search</Link></div>
                 <div><Link to='/app/playlists'>Use My Playlist</Link></div>
                 <div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div>
-                <div onClick={this.props.logout}>Logout</div>
+                <div onClick={this.props.logout}><Link to="/">Logout</Link></div>
               </Col>
             </Row>
           </Grid>

@@ -12,6 +12,7 @@ import Col from 'muicss/lib/react/col';
 import NewPlaylist from './NewPlaylist.jsx';
 import Playlists from './Playlists.jsx';
 import Playlist from './Playlist.jsx';
+import Login from './Login.jsx';
 import PlaylistRoute from './routes/PlaylistRoute.jsx';
 
 import SearchContainer from './SearchContainer.jsx'; 
@@ -50,6 +51,11 @@ class App extends React.Component {
 
 	render() {
     console.log('APP stats', this.props.stats)
+     if (!this.props.stats.loggedIn) {
+      return (
+        <Login />
+      )
+    }
 	  return ( 
     <BrowserRouter>
 	  	<div>
