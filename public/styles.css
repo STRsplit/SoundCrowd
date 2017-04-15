@@ -3,11 +3,19 @@
  */
 .nav-container {
   width: 100%;
-  height: 8%;
+  height: 80px;
   background-color: #FFF;
   position: fixed;
   display: block;
   z-index: 20; }
+
+.nav-container-name {
+  float: left;
+  margin-left: 30px; }
+
+.nav-container-logout {
+  float: right;
+  margin-right: 30px; }
 
 .3-col-row {
   width: 100%;
@@ -136,6 +144,9 @@ h2 {
 .spotifyLogo {
   max-width: 40%;
   margin: 0% auto; }
+
+.playlist-container {
+  margin-top: 60px; }
 
 .searchcontainer-container {
   width: 80%;
@@ -290,29 +301,13 @@ ol {
   margin: 0;
   padding: 0; }
 
-.nav-container {
-  width: 100%;
-  height: 50px;
-  background-color: #FFF; }
-
-.nav-container-name {
-  float: left;
-  margin-left: 30px; }
-
-.nav-container-logout {
-  float: right;
-  margin-right: 30px; }
-
-#playlist-container {
-  margin-top: 60px; }
-
 /* * Current Song Bar * */
 .csb-container {
   width: 100%;
   height: 50px;
   background-color: #000;
   position: absolute;
-  top: 8%; }
+  top: 80px; }
 
 .csb-album-image {
   display: inline-block; }
