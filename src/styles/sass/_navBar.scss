@@ -1,12 +1,11 @@
 .nav-container {
   width: 100%;
-  height: 10%;
-  background-color: purple;
+  height: 8%;
+  background-color: #FFF;
   position: fixed;
   display: block;
-  z-index: 20;
+  z-index: 20; }
 
-}
 .3-col-row {
     width: 100%;
     display: block;
@@ -19,4 +18,12 @@
 }
 .col-xs {
   text-align: center;
+}
+  
+.nav-container-name {
+  float: left;
+}
+
+.nav-container-logout {
+  float: right;
 }
