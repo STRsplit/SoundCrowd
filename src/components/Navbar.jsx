@@ -22,7 +22,7 @@ render() {
                 <div><Link to='/app/search'>Search</Link></div>
                 <div><Link to='/app/playlists'>Use My Playlist</Link></div>
                 <div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div>
-                <div onClick={this.props.logout}><Link to="/">Logout</Link></div>
+                <div onClick={this.props.logout}><Link to="/login">Logout</Link></div>
               </Col>
             </Row>
           </Grid>

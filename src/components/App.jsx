@@ -119,7 +119,8 @@ class App extends React.Component {
             </Row>
 	        </Container>
           </div>
-		  </div>	
+		  </div>
+
     </BrowserRouter>
 	  );
 	}
