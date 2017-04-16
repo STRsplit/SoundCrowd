@@ -45,10 +45,10 @@
   padding: 0px; }
 
 .inner-app-container {
-  width: 100%;
+  width: 80%;
   display: block;
   clear: both;
-  margin-top: 120px; }
+  margin: 120px auto; }
 
 .main-left-column {
   background-color: pink; }
@@ -307,7 +307,11 @@ ol {
   height: 50px;
   background-color: #000;
   position: absolute;
-  top: 80px; }
+  position: fixed;
+  top: 80px;
+  z-index: 20;
+  left: 0;
+  right: 0; }
 
 .csb-album-image {
   display: inline-block; }
