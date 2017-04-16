@@ -10,7 +10,7 @@
 @import '_track';
 @import 'mixins_functions';
 
-$step-size-heading: 0.8;
+$step-size-heading: 0.4;
 
 
 // @function colorOpacity($color, $opacity) {
@@ -62,7 +62,11 @@ ol {
   height: 50px;
   background-color: #000;
   position: absolute;
+  position: fixed;
   top: 80px; 
+  z-index: 20;
+  left: 0;
+  right:0;
 }
 
 .csb-album-image {

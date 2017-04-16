@@ -34,51 +34,37 @@ class Track extends Component {
 
   render() {
     const { track } = this.props
+    console.log(track);
     return (
       <div>
       <div className="track-main-container">
         <div>
-          <div>
-            {this.props.track.title} - {this.props.track.artist}
-            <div>
-              <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
-              <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
-              {this.state.voteCount}
-            </div>
-          </div>
         </div>
-        <Row>
-          <Col xs={2}>
-          <div className="track-vote-container">
-              <div className="track-vote-container-inner">
-                <span className="voteCount">{this.state.voteCount}</span>
-                <div>
-                  <input  type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
-                  <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
+          <Row>
+            <Col xs={2}>
+            <div className="track-vote-container">
+                <div className="track-vote-container-inner">
+                  <span className="voteCount">{this.state.voteCount}</span>
+                  <div>
+                    <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
+                    <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Col>
-          <Col xs>
-            <div className="song-entry-header">
-              <h3>{track.title}</h3>
-            </div>
-          </Col>
-        </Row>
-          <div className="song-entry-container">
-            <Row middle="xs" around="xs">
-              <Col xs>
-              </Col>
-              <Col xs>
-                <div className="song-entry-inner-details">
-                  {track.artist}
+            </Col>
+           
+            <Col className="track-song-details" xs>
+              <div className="track-song-details-inner flexbox-container">
+                <div className="track-image">
+                 djfl
                 </div>
-              </Col>
-            </Row>
-            </div>
-            <br />
-      </div>
-      <div>
+                  <div className="song-entry-header">
+                    <h3>{track.title}</h3>
+                    <h4>{track.artist}</h4>
+                  </div>
+                </div>
+            </Col>
+          </Row>
         <Divider />
       </div>
     </div>
@@ -87,3 +73,13 @@ class Track extends Component {
 }
 
 export default Track;
+        //   <div>
+        //  <div>
+        //     {this.props.track.title} - {this.props.track.artist}
+        //     <div>
+        //       <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
+        //       <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
+        //       {this.state.voteCount}
+        //     </div>
+        //   </div>
+        // </div>
