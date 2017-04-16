@@ -1,13 +1,12 @@
 .track-main-container {
-  background-color: rgba(255, 255, 255, .2);
   margin: 2% auto;
   border-radius:4px;
+  padding: 5%;
 }
 .track-vote-container {
   float: left;
   display: block;
   position: relative;
-  top: 50%;
 }
 .track-vote-container-inner {
   display: block;
@@ -16,6 +15,7 @@
   border: 2px solid #031527;
   padding: 10%;
   white-space: pre ! important;
+  border-spacing: 5%;
 }
 .track-vote-container-inner input{
   width: 100%;
@@ -27,6 +27,32 @@
   font-size: 2em;
   color: #d7dadb;
   font-weight: 600;
+
+}
+.track-image {
+
+}
+.track-main-container .col-xs-2 {
+  max-width: none ! important;
+  flex-basis: none ! important;
+}
+.flexbox-container {
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flexbox-container > div {
+  padding: 10px;
+}
+
+.flexbox-container > div:first-child {
+  margin-right: 20px;
+  width: 20%;
+}
+
+.track-song-details {
+  background-color: rgba(255, 255, 255, .2);
 }
 
 
