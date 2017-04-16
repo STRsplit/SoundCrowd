@@ -62,7 +62,11 @@ ol {
   height: 50px;
   background-color: #000;
   position: absolute;
+  position: fixed;
   top: 80px; 
+  z-index: 20;
+  left: 0;
+  right:0;
 }
 
 .csb-album-image {
