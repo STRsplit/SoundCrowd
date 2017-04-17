@@ -30,10 +30,10 @@ render() {
               targetOrigin={{horizontal: 'right', vertical: 'top'}}
               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
               >
-            <MenuItem><div><Link to='/app'>Use My Playlist</Link></div></MenuItem>
-            <MenuItem><div><Link to='/app/search'>Search</Link></div></MenuItem>
-            <MenuItem><div><Link to='/app/new-playlist'>Get Suggested Playlist</Link></div></MenuItem>
-            <MenuItem><div onClick={this.props.logout}><Link to="/login">Logout</Link></div></MenuItem>    
+            <Link to='/app' style={style.link}><MenuItem><div>Use My Playlist</div></MenuItem></Link>
+            <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+            <Link to='/app/new-playlist' style={style.link}><MenuItem><div>Get Suggested Playlist</div></MenuItem></Link>
+            <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logout}>Logout</div></MenuItem></Link>
            </IconMenu>
       }
         />
@@ -44,3 +44,9 @@ render() {
 }
 
 export default Navbar;
+
+const style = {
+  link: {
+    textDecoration: 'none'
+  }
+};
