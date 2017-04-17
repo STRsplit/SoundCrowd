@@ -126,9 +126,9 @@ app.get('/api/playlists/:playlist', function(req, res) {
 
 app.post('/api/vote', function(req, res) {
   handler.validateVote(req, res);
-  // reorder songs if needed
-  // if err, handle
-  // else
+  spotify.moveTrack(req.user.id, req.body.playlistId, function(err) {
+    if (err) console.log(err);
+  });
     // emit socket event
       // update vote count for that track
       // needs updated playlist order (just the two that have flipped?)
