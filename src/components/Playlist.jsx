@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 import { Button } from 'elemental';
@@ -28,6 +29,7 @@ class Playlist extends Component {
         console.log(err);
       });
   }
+  componenWillUpdate() {}
 
   sortTracks() {
     // var sortedTracks = this.state.tracks.sort((a, b) => {
@@ -38,11 +40,13 @@ class Playlist extends Component {
 
   render() {
     var id = 0;
+
     var tracks = this.state.tracks.map(track => (
       <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
     ));
     
     return (
+      <div>
       <div>
         <CurrentSongBar />
         <div>
@@ -51,6 +55,10 @@ class Playlist extends Component {
           </a>
         </div>
         <div>Tracks:{tracks}</div>
+      </div>
+      <div>
+      <AccordionTest songs={tracks}/>
+      </div>
       </div>
     )
   }

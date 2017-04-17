@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import SongEntry from './SongEntry.jsx';
+import FlipMove from 'react-flip-move';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Divider from 'material-ui/Divider';
+
+import SongEntry from './SongEntry.jsx';
 
 class Track extends Component {
   constructor(props) {
@@ -34,8 +36,9 @@ class Track extends Component {
 
   render() {
     const { track } = this.props
-    console.log(track);
+
     return (
+  <FlipMove duration={750} easing="ease-out">
       <div>
       <div className="track-main-container">
         <div>
@@ -44,19 +47,22 @@ class Track extends Component {
             <Col xs={2}>
             <div className="track-vote-container">
                 <div className="track-vote-container-inner">
-                  <span className="voteCount">{this.state.voteCount}</span>
                   <div>
-                    <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
-                    <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
+                    <div className="triangle-up" onClick={() => this.state.voted === 1 ? null : this.vote(1)}>
+                    </div>
+                    <span className="voteCount">{this.state.voteCount}</span>
+                    <div className="triangle-down" onClick={() => this.state.voted === -1 ? null : this.vote(-1)}>
+                    </div>
+                   
                   </div>
                 </div>
               </div>
             </Col>
            
             <Col className="track-song-details" xs>
-              <div className="track-song-details-inner flexbox-container">
-                <div className="track-image">
-                 djfl
+              <div className="track-song-details-inner flexbox-container container">
+                <div className="track-image box">
+                  <img src="https://i.scdn.co/image/5487acf8d22aa518645d90135d8a9a1fed3e902e" />
                 </div>
                   <div className="song-entry-header">
                     <h3>{track.title}</h3>
@@ -68,6 +74,7 @@ class Track extends Component {
         <Divider />
       </div>
     </div>
+    </FlipMove>
     )
   }
 }

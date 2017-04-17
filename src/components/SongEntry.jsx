@@ -26,6 +26,7 @@ const SongEntry = ({ songInfo, images, addSong }) => (
           {songInfo.artists.map((artist, idx) => (
             <div key={songInfo.id + idx}>{artist.name}</div>
           ))}
+ 
         </div>
         <button value={songInfo.id} onClick={addSong}>Add Song to Playlist</button>
       </Col>
