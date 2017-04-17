@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FlipMove from 'react-flip-move';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Divider from 'material-ui/Divider';
 
@@ -38,7 +37,6 @@ class Track extends Component {
     const { track } = this.props
 
     return (
-  <FlipMove duration={750} easing="ease-out">
       <div>
       <div className="track-main-container">
         <div>
@@ -52,8 +50,7 @@ class Track extends Component {
                     </div>
                     <span className="voteCount">{this.state.voteCount}</span>
                     <div className="triangle-down" onClick={() => this.state.voted === -1 ? null : this.vote(-1)}>
-                    </div>
-                   
+                    </div>    
                   </div>
                 </div>
               </div>
@@ -74,7 +71,6 @@ class Track extends Component {
         <Divider />
       </div>
     </div>
-    </FlipMove>
     )
   }
 }

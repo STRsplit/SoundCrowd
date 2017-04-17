@@ -40,13 +40,11 @@ class Playlist extends Component {
 
   render() {
     var id = 0;
-
     var tracks = this.state.tracks.map(track => (
       <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
     ));
     
     return (
-      <div>
       <div>
         <CurrentSongBar />
         <div>
@@ -55,10 +53,6 @@ class Playlist extends Component {
           </a>
         </div>
         <div>Tracks:{tracks}</div>
-      </div>
-      <div>
-      <AccordionTest songs={tracks}/>
-      </div>
       </div>
     )
   }

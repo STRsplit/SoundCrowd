@@ -38,7 +38,7 @@ class CurrentSongBar extends Component {
 
   autoUpdateInfo() {
     this.counter += 1000;
-    if(this.counter >= 100000) {
+    if(this.counter >= 5000) {
       this.updateInfo();
     } else {
       let { progress, duration, isPlaying } = this.state;

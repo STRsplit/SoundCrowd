@@ -77,6 +77,7 @@ class App extends React.Component {
                       <div>
                         <div>
                           <Playlists setPlaylist={this.props.setPlaylist} />
+                          }
                         </div>
                         <div>
                           <div>
