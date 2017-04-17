@@ -35,7 +35,7 @@ class Login extends Component {
         </div>
         <div>
           <div className="button-container">
-            <Link to={`/playlists/${this.state.playlist}`}>
+            <Link to={`/app/playlists/${this.state.playlist}`}>
               <Button type="primary"><span>Join a Room</span></Button>
             </Link>
             <div className="center-content">
