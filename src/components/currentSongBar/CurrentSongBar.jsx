@@ -98,7 +98,7 @@ class CurrentSongBar extends Component {
         <Col sm="1/3"> 
           <span>{this.convertToTime(progress)}</span>
           <span style={style.duration}>{this.convertToTime(duration)}</span>
-          <Slider sliderStyle={style.slider} value={sliderValue} />
+          <Slider style={{backgroundColor: '#000'}} sliderStyle={style.slider} value={sliderValue} />
         </Col>
         <Col sm="1/3">
           Search Song || Add Song Section
