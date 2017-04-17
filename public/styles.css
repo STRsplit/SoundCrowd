@@ -1,40 +1,6 @@
 /**
  * MUI Colors module
  */
-/* Playlist.jsx styles */
-.playlists-single-container {
-  display: flex;
-  margin: 15px;
-}
-
-.playlists-single-image {
-  width: '200px';
-  height: '200px';
-
-}
-
-.playlists-single-details {
-  flex-grow: 1;
-  margin-left: 10px;
-  padding: 5px;
-  padding-top: 10px;
-  opacity: .5;
-  background-color: #fff;
-  box-shadow: 5px 5px 5px 0 #000;
-}
-
-.playlists-h3 {
-  margin-top: 10px; 
-}
-
-.playlists-hr {
-
-}
-
-
-/* Playlist.jsx styles */
-
-
 .nav-container {
   width: 100%;
   height: 80px;
@@ -452,3 +418,26 @@ ol {
 
 .csb-song-name {
   color: #0090e0; }
+
+/* Playlist.jsx styles */
+.playlists-single-container {
+  display: flex;
+  margin: 15px; }
+
+.playlists-single-image {
+  width: '200px';
+  height: '200px'; }
+
+.playlists-single-details {
+  flex-grow: 1;
+  margin-left: 10px;
+  padding: 5px;
+  padding-top: 10px;
+  opacity: .5;
+  background-color: #fff;
+  box-shadow: 5px 5px 5px 0 #000; }
+
+.playlists-h3 {
+  margin-top: 10px; }
+
+/* Playlist.jsx styles */
