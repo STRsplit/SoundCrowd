@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch, Path } from 'react-router-dom';
 
 import NavBar from './Navbar.jsx';
+import RightBar from './RightBar.jsx';
 import Playlists from './Playlists.jsx';
 // import { Grid, Row, Col } from 'react-flexbox-grid';
 // import { Container, Row, Col } from 'muicss/lib/react';
@@ -68,8 +69,7 @@ class App extends React.Component {
         <div>
 		  	<Container className="main-app-container" fluid={true}>
 	        <Row className>
-
-		        <Col className="layout-column column-left" md="2"> </Col>
+		        <Col className="layout-column column-left" md="2"></Col>
 		        <Col className="layout-column column-mid" xs="18" md="7">
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
@@ -117,7 +117,7 @@ class App extends React.Component {
                 </div>
       		  	  </div>
       		  	</Col>
-              <Col className="layout-column column-right" xs="18" md="3">md-4</Col>
+              <Col className="layout-column column-right" xs="18" md="3"><RightBar /></Col>
             </Row>
 	        </Container>
           </div>
@@ -129,8 +129,4 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-//                    
-
 
