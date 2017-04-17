@@ -47,6 +47,21 @@ module.exports = {
     });
   },
 
+  getPlaylistOwner: function(playlistId) {
+    return new Promise((resolve, reject) => {
+      Playlist.findOne({
+        attributes: ['user_id'],
+        where: { playlist_id: playlistId }
+      })
+        .then(owner => {
+          resolve(owner);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    });
+  },
+
   savePlaylist: function(playlistId, userId, tracks) {
     return new Promise((resolve, reject) => {
       Playlist.findOrCreate({ where: {

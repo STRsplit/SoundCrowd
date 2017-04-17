@@ -98,15 +98,19 @@ app.get('/api/playlists/:playlist', function(req, res) {
   var playlist = req.params.playlist;
   dbHelpers.getPlaylist(playlist)
     .then(function(tracks) {
-      if (tracks.length) res.status(200).send(tracks);
-      else {
+      if (tracks.length) {
+        dbHelpers.getPlaylistOwner(playlist)
+          .then(function(owner) {
+              res.status(200).send({ owner: owner.user_id, tracks: tracks });
+          });
+      } else {
         if (req.isAuthenticated()) {
           spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
             if (err) res.status(err.statusCode).send(err);
             else {
               dbHelpers.savePlaylist(playlist, req.user.id, tracks)
                 .then(function(savedTracks) {
-                  res.status(200).send(savedTracks);
+                  res.status(200).send({ owner: req.user.id, tracks: savedTracks });
                 })
                 .catch(err => {
                   res.status(err.statusCode).send(err);
