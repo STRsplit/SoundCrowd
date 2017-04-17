@@ -108,7 +108,6 @@ class CurrentSongBar extends Component {
     </MuiThemeProvider>
     );
   }
-
 }
 
 export default CurrentSongBar;
