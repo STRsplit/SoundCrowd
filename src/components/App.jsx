@@ -74,14 +74,10 @@ class App extends React.Component {
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
           					<Route exact path="/app" render={() => (
-                      <div>
-                        <div>
-                          <Playlists setPlaylist={this.props.setPlaylist} />
-                        </div>
+                      <div>                        
                         <div>
                           <div>
-                              <div><Link to='/app'>Use My Playlist</Link></div>
-                              <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
+                            <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
                           </div>
                             <div>
                               <h4>Mood</h4>
@@ -103,6 +99,9 @@ class App extends React.Component {
                                   <option value="Driving">Driving</option>
                                 </select>
                               </div>
+                            </div>
+                            <div>
+                             <Playlists setPlaylist={this.props.setPlaylist} />
                             </div>
                         </div>
                     )}/>
