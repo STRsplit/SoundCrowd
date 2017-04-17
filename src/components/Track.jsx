@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Divider from 'material-ui/Divider';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import SongEntry from './SongEntry.jsx';
+
+const style = {
+};
+
 
 class Track extends Component {
   constructor(props) {
@@ -34,29 +40,40 @@ class Track extends Component {
   }
 
   render() {
+
+    const voteUp = (
+      <div>
+        <div className="triangle-up" onClick={() => this.state.voted === 1 ? null : this.vote(1)}></div>
+        <span className="voteCount">{this.state.voteCount}</span>
+        <div className="triangle-down" onClick={() => this.state.voted === -1 ? null : this.vote(-1)}></div>
+      </div>
+    )
+
+    const addToPlaylist = (
+      <div>
+        <FloatingActionButton style={style}>
+          <ContentAdd />
+        </FloatingActionButton>
+      </div>
+    )
+    
     const { track } = this.props
+    const actionItem = this.props.search ? addToPlaylist : voteUp
 
     return (
       <div>
       <div className="track-main-container">
         <div>
         </div>
-          <Row>
-            <Col xs={2}>
+        <div className="track-dual-container">
+
             <div className="track-vote-container">
-                <div className="track-vote-container-inner">
-                  <div>
-                    <div className="triangle-up" onClick={() => this.state.voted === 1 ? null : this.vote(1)}>
-                    </div>
-                    <span className="voteCount">{this.state.voteCount}</span>
-                    <div className="triangle-down" onClick={() => this.state.voted === -1 ? null : this.vote(-1)}>
-                    </div>    
-                  </div>
+                <div className="track-vote-container-inner">     
+                   {actionItem}
                 </div>
               </div>
-            </Col>
            
-            <Col className="track-song-details" xs>
+            <div className="track-song-details">
               <div className="track-song-details-inner flexbox-container container">
                 <div className="track-image box">
                   <img src="https://i.scdn.co/image/5487acf8d22aa518645d90135d8a9a1fed3e902e" />
@@ -66,8 +83,8 @@ class Track extends Component {
                     <h4>{track.artist}</h4>
                   </div>
                 </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
         <Divider />
       </div>
     </div>

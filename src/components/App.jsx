@@ -12,6 +12,7 @@ import Col from 'muicss/lib/react/col';
 import NewPlaylist from './NewPlaylist.jsx';
 import Playlist from './Playlist.jsx';
 import Login from './Login.jsx';
+import RightBar from './RightBar.jsx';
 import PlaylistRoute from './routes/PlaylistRoute.jsx';
 
 import SearchContainer from './SearchContainer.jsx'; 
@@ -77,7 +78,7 @@ class App extends React.Component {
                       <div>
                         <div>
                           <Playlists setPlaylist={this.props.setPlaylist} />
-                          }
+                          
                         </div>
                         <div>
                           <div>
@@ -119,7 +120,7 @@ class App extends React.Component {
                 </div>
       		  	  </div>
       		  	</Col>
-              <Col className="layout-column column-right" xs="18" md="3">md-4</Col>
+              <Col className="layout-column column-right" xs="18" md="3"><RightBar /></Col>
             </Row>
 	        </Container>
           </div>

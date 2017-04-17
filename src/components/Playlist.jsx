@@ -29,6 +29,7 @@ class Playlist extends Component {
         console.log(err);
       });
   }
+  
   componenWillUpdate() {}
 
   sortTracks() {
@@ -52,7 +53,7 @@ class Playlist extends Component {
             <Button type="primary"><span>Open in Spotify</span></Button>
           </a>
         </div>
-        <div>Tracks:{tracks}</div>
+        <div>{tracks}</div>
       </div>
     )
   }
