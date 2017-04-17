@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch, Path } from 'react-router-dom';
 
 import NavBar from './Navbar.jsx';
+import RightBar from './RightBar.jsx';
 import Playlists from './Playlists.jsx';
 // import { Grid, Row, Col } from 'react-flexbox-grid';
 // import { Container, Row, Col } from 'muicss/lib/react';
@@ -12,7 +13,6 @@ import Col from 'muicss/lib/react/col';
 import NewPlaylist from './NewPlaylist.jsx';
 import Playlist from './Playlist.jsx';
 import Login from './Login.jsx';
-import RightBar from './RightBar.jsx';
 import PlaylistRoute from './routes/PlaylistRoute.jsx';
 
 import SearchContainer from './SearchContainer.jsx'; 
@@ -69,21 +69,15 @@ class App extends React.Component {
         <div>
 		  	<Container className="main-app-container" fluid={true}>
 	        <Row className>
-
-		        <Col className="layout-column column-left" md="2">md-4</Col>
+		        <Col className="layout-column column-left" md="2"></Col>
 		        <Col className="layout-column column-mid" xs="18" md="7">
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
           					<Route exact path="/app" render={() => (
-                      <div>
-                        <div>
-                          <Playlists setPlaylist={this.props.setPlaylist} />
-                          
-                        </div>
+                      <div>                        
                         <div>
                           <div>
-                              <div><Link to='/app'>Use My Playlist</Link></div>
-                              <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
+                            <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
                           </div>
                             <div>
                               <h4>Mood</h4>
@@ -105,6 +99,9 @@ class App extends React.Component {
                                   <option value="Driving">Driving</option>
                                 </select>
                               </div>
+                            </div>
+                            <div>
+                             <Playlists setPlaylist={this.props.setPlaylist} />
                             </div>
                         </div>
                     )}/>
@@ -132,8 +129,4 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-//                    
-
 
