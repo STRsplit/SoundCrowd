@@ -18,6 +18,7 @@ class Playlists extends Component {
       playlists: [],
       loaded: false
     };
+    this.defaultImage = './assets/images/default-albumart.png';
   }
 
   componentDidMount() {
@@ -41,19 +42,20 @@ class Playlists extends Component {
 
   render() {
     const userPlaylists = this.state.playlists.map(playlist => {
-    return (
-      <Link key={playlist.id} style={style.link} to={`/app/playlists/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>      
-      <div className="playlists-single-container">        
-        <Paper zDepth={5} >
-          <img src={playlist.images[0].url} style={style.image} />            
-        </Paper> 
-        <div className="playlists-single-details">
-          <h3 className="playlists-h3" >{playlist.name}</h3>
-          <hr className="playlists-hr" />
+      const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
+      return (
+        <Link key={playlist.id} style={style.link} to={`/app/playlists/${playlist.id}`} onClick={() => this.setPlaylist(playlist.id)}>      
+        <div className="playlists-single-container">        
+          <Paper zDepth={5} >
+            <img src={image} style={style.image} />            
+          </Paper> 
+          <div className="playlists-single-details">
+            <h3 className="playlists-h3" >{playlist.name}</h3>
+            <hr className="playlists-hr" />
+          </div>
         </div>
-      </div>
-      </Link> 
-      )
+        </Link> 
+      );
     });
 
     return (

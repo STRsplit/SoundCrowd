@@ -69,7 +69,7 @@ class App extends React.Component {
 		  	<Container className="main-app-container" fluid={true}>
 	        <Row className>
 
-		        <Col className="layout-column column-left" md="2">md-4</Col>
+		        <Col className="layout-column column-left" md="2"> </Col>
 		        <Col className="layout-column column-mid" xs="18" md="7">
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
