@@ -37,7 +37,9 @@ module.exports = {
   },
   moveTrack: function(username, playlistId, cb) {
     // var options = { 'range_length': 2 };
-    spotify.reorderTracksInPlaylist(username, playlistId, 1, 3)
+    var i1 = Math.floor(Math.random()*10);
+    var i2 = Math.floor(Math.random()*10);
+    spotify.reorderTracksInPlaylist(username, playlistId, i1, i2)
       .then(data => {
         cb(null);
       })
