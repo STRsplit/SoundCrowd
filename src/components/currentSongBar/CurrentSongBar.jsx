@@ -38,7 +38,7 @@ class CurrentSongBar extends Component {
 
   autoUpdateInfo() {
     this.counter += 1000;
-    if(this.counter >= 100000) {
+    if(this.counter >= 5000) {
       this.updateInfo();
     } else {
       let { progress, duration, isPlaying } = this.state;
@@ -108,13 +108,12 @@ class CurrentSongBar extends Component {
     </MuiThemeProvider>
     );
   }
-
 }
 
 export default CurrentSongBar;
 
 const style = {
-  avatar: {margin: '5px 10px'},
+  avatar: {margin: '5px 0px'},
   duration: {float: 'right'},
-  slider: {margin: '5px', width: '98%'}
+  slider: {margin: '0 auto', width: '98%'}
 };

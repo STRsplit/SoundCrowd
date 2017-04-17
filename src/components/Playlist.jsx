@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 import { Button } from 'elemental';
@@ -28,6 +29,8 @@ class Playlist extends Component {
         console.log(err);
       });
   }
+  
+  componenWillUpdate() {}
 
   sortTracks() {
     // var sortedTracks = this.state.tracks.sort((a, b) => {
@@ -50,7 +53,7 @@ class Playlist extends Component {
             <Button type="primary"><span>Open in Spotify</span></Button>
           </a>
         </div>
-        <div>Tracks:{tracks}</div>
+        <div>{tracks}</div>
       </div>
     )
   }
