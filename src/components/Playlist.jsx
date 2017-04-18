@@ -33,16 +33,18 @@ class Playlist extends Component {
   componenWillUpdate() {}
 
   sortTracks() {
-    // var sortedTracks = this.state.tracks.sort((a, b) => {
-    //   a.vote_count - b.vote_count;
-    // })
-    // this.setState({ tracks: sortedTracks });
+    console.log('sorting...');
+    var sortedTracks = this.state.tracks.sort((a, b) => {
+      console.log(a, b);
+      a.vote_count - b.vote_count;
+    });
+    this.setState({ tracks: sortedTracks });
   }
 
   render() {
     var id = 0;
     var tracks = this.state.tracks.map(track => (
-      <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
+      <Track key={id++} playlist={this.props.playlist} track={track} sortTracks={this.sortTracks.bind(this)} />
     ));
     
     return (

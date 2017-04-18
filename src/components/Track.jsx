@@ -32,6 +32,7 @@ class Track extends Component {
     .then(res => {
       // this.setState({ voteCount: this.props.track.vote_count });
       this.setState({ voteCount: this.state.voteCount += val });
+      this.props.sortTracks();
     })
     .catch(err => {
       // fix handling
