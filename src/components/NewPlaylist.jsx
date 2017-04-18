@@ -36,7 +36,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  {this.state.owner === '' ? <h2>Loading...</h2> : <Playlist tracks={this.state.tracks} owner={this.state.owner} playlist={this.state.id}/>}
+	  	  {this.state.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist tracks={this.state.tracks} owner={this.state.owner} playlist={this.state.id}/>}
 		  </div>	
 	  );
 	}
