@@ -1,7 +1,7 @@
 var request = require('request');
 var requestPromise = require('request-promise');
 var db = require('../database/db');
-var trackSelector = require('./trackSelector');
+var customPlaylist = require('./customPlaylist');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -64,34 +64,22 @@ module.exports = {
 
   createPlaylist: function(userId, preferences, cb) {
     // TODO: change playlist name to timestamp
-    var playlistName = 'TODO';
-    // console.log(userId, preferences);
+    var playlistName = 'SoundCrowd';
     spotify.createPlaylist(userId, playlistName, {public: false})
       .then(data => {
-        console.log('new playlist id', data.body.id);
-        // go get tracks for playlist
+        var newPlaylistId = data.body.id;
         spotify.getPlaylistsForCategory('mood', { limit: 50 })
           .then(playlists => {
-            trackSelector(playlists.body.playlists.items);
-            // playlists.body.playlists.items
+            var playlistId = customPlaylist.selectPlaylist(playlists.body.playlists.items, preferences.mood);
+            spotify.getPlaylist('spotify', playlistId)
+              .then(playlist => {
+                spotify.addTracksToPlaylist(userId, newPlaylistId, customPlaylist.selectTracks(playlist, preferences.activity))
+                  .then(() => cb(null));
+              });
           })
-
-
-
-        this.getCategory(req.body.mood, req.body.activity)
-          .then(something => {
-            // dbHelpers.savePlaylist with tracks
-            // send response
-          })
-          .catch(err => {
-            console.log(err);
-          })
-        console.log('created Playlist :', data.body.external_urls.spotify);
-        // res.sendStatus(201);
-      }, (err) => {
-        console.log('error: ', err);
-        // wrong status
-        // res.sendStatus(404);
+      }) 
+      .catch(err => {
+        cb(err);
       });
   },
 

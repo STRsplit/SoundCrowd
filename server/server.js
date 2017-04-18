@@ -55,7 +55,6 @@ app.get('/auth/spotify/callback',
 
 app.get('/api/verifyuser', handler.verifyUser);
 
-
 app.get('/logout', handler.logoutUser);
 
 /* * Spotify API * */
@@ -63,38 +62,25 @@ app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
 
 app.get('/name', spotify.getName);
 
-// app.get('/playlist', spotify.findPlaylist);
-
-// app.post('/create', spotify.createPlaylist);
-
-// app.get('/getCategory', spotify.getCategory);
-
-// app.post('/setPreferences', spotify.setPreferences);
-
-app.get('/api/spotify/playlists', function(req, res) {
-  spotify.getUserPlaylists(req.user.id, function(err, playlists) {
-    if (err) res.status(err.statusCode).send(err);
-    else res.status(200).send(playlists);
+app.route('/api/spotify/playlists')
+  .get(function(req, res) {
+    spotify.getUserPlaylists(req.user.id, function(err, playlists) {
+      if (err) res.status(err.statusCode).send(err);
+      else res.status(200).send(playlists);
+    });    
+  })
+  .post(function(req, res) {
+    var preferences = {
+      mood: req.body.mood,
+      activity: req.body.activity
+    };
+    spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
+      if (err) res.status(err.statusCode).send(err);
+      else res.sendStatus(201);
+    });
   });
-});
 
-app.post('/api/spotify/playlists', function(req, res) {
-  var preferences = {
-    mood: req.body.mood,
-    activity: req.body.activity
-  };
-  spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
-    if (err) {
-      console.log(err);
-      res.status(err.statusCode).send(err);
-    } else {
-      console.log('success');
-      res.status(201).send(playlist);
-    }
-  });
-});
-
-app.get('/api/search/', function(req, res) {
+app.get('/api/spotify/search/', function(req, res) {
   const { name, filter } = req.query
   spotify.searchFor(name, filter, function(err, items) {
     if(err) res.status(err.statusCode).send(err);
