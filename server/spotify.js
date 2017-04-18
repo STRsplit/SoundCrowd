@@ -10,7 +10,6 @@ var spotify = new SpotifyWebApi({
   clientSecret: clientSecret,
   redirectUri: callbackURL
 });
-var userId;
 var mood;
 var activity;
 var newPlaylistId;
@@ -142,7 +141,7 @@ getCategory: (req, res) => {
             result.uri.push(tracks[i].track.uri);
           }
         }
-        spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
+        spotify.addTracksToPlaylist(req.user.id, newPlaylistId, result.uri)
         .then((data) => {
           console.log('added tracks');
         }, function(err) {
@@ -180,12 +179,12 @@ getCategory: (req, res) => {
 
   createPlaylist: (req, res) => {
     var playlistName = 'Playlist ' + req.body.number;
-    spotify.createPlaylist(userId, playlistName, {public: false})
+    spotify.createPlaylist(req.user.id, playlistName, {public: false})
     .then((data) => {
       newPlaylistId = data.body.id;
       db.Playlist.create({
         playlist_id: newPlaylistId,
-        user_id: userId,
+        user_id: req.user.id,
         name: playlistName
       });
       href = data.body.external_urls.spotify;
@@ -250,7 +249,6 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
     };
 
     clientName = display_name;
-    userId = id;
 
     db.User.findOne({where: {id: id}})
     .then(result => {
