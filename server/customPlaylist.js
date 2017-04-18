@@ -2,7 +2,6 @@ module.exports = {
   selectPlaylist: function(playlists, mood) {
     var names = [];
     var chosen = [];
-    var playlistId;
     for (var i = 0; i < playlists.length; i++) {
       names.push(playlists[i].name.split(' '));
       names[i].unshift(i);
@@ -57,7 +56,6 @@ module.exports = {
 
   selectTracks: function(playlist, activity) {
     var tracks = playlist.body.tracks.items;
-    console.log(tracks);
     var result = {uri: []};
     if (activity === 'Exercising' || activity === 'Partying') {
       for (var i = 0; i < tracks.length; i++) {
@@ -81,7 +79,6 @@ module.exports = {
       }
     }
 
-    console.log(result.uri);
     return result.uri;
   }
 }

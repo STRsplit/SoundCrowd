@@ -53,7 +53,7 @@ class CurrentSongBar extends Component {
   }
 
   updateInfo() {
-    axios.get('/api/playlist/currentsong')
+    axios.get('/api/spotify/current_song')
     .then(result => {
       const { is_playing, progress_ms } = result.data;
       const { name, duration_ms } = result.data.item;

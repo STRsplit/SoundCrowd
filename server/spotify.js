@@ -58,13 +58,8 @@ module.exports = {
       });
   },
 
-  getName: (req, res) => {
-    res.send(req.user.name);
-  },
-
   createPlaylist: function(userId, preferences, cb) {
-    // TODO: change playlist name to timestamp
-    var playlistName = 'SoundCrowd';
+    var playlistName = 'SoundCrowd-' + new Date().toISOString().slice(0, -14);
     spotify.createPlaylist(userId, playlistName, {public: false})
       .then(data => {
         var newPlaylistId = data.body.id;
@@ -82,40 +77,6 @@ module.exports = {
         cb(err);
       });
   },
-
-  getCurrentSongDetails: (req, res) => {
-    if (spotify._credentials.accessToken) {
-      const options = {
-        uri: 'https://api.spotify.com/v1/me/player',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${spotify._credentials.accessToken}`
-        },
-        json: true
-      }; 
-      requestPromise(options)
-      .then(info => {
-        res.send(info);
-      })
-      .catch(err => console.log('getCurrentSongDetails err: ', err));
-    } else {
-      /* FUTURE TODO: Should logs out the user when access token expired or server restarted.
-      // For logout
-      req.logOut();
-      req.session.destroy();
-
-      // For refreshing approach
-      spotify.refreshAccessToken()
-      .then(data => {
-        // Save the access token so that it's used in future calls
-        spotify.setAccessToken(data.body['access_token']);
-        console.log('The access token has been refreshed!');
-      }, err => {
-        console.log('Could not refresh access token', err);
-      });
-      */
-    }
-  }
 };
 
 

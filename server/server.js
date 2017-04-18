@@ -5,6 +5,7 @@ var handler = require('./requestHandler');
 var spotify = require('./spotify');
 var db = require('../database/db');
 var dbHelpers = require('../database/dbHelpers');
+var spotifyRouter = require('./routes/spotifyRouter');
 
 /* * Authentication * */
 var session = require('express-session');
@@ -41,6 +42,7 @@ app.use(session({
 // }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api/spotify', spotifyRouter);
 
 
 /* *  Authentication * */
@@ -57,37 +59,9 @@ app.get('/api/verifyuser', handler.verifyUser);
 
 app.get('/logout', handler.logoutUser);
 
-/* * Spotify API * */
-app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
-
-app.get('/name', spotify.getName);
-
-app.route('/api/spotify/playlists')
-  .get(function(req, res) {
-    spotify.getUserPlaylists(req.user.id, function(err, playlists) {
-      if (err) res.status(err.statusCode).send(err);
-      else res.status(200).send(playlists);
-    });    
-  })
-  .post(function(req, res) {
-    var preferences = {
-      mood: req.body.mood,
-      activity: req.body.activity
-    };
-    spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
-      if (err) res.status(err.statusCode).send(err);
-      else res.sendStatus(201);
-    });
-  });
-
-app.get('/api/spotify/search/', function(req, res) {
-  const { name, filter } = req.query
-  spotify.searchFor(name, filter, function(err, items) {
-    if(err) res.status(err.statusCode).send(err);
-    else {
-      res.status(200).send(items);
-    }
-  })
+app.get('/api/user', function(req, res) {
+  if (req.user) res.send(req.user);
+  else res.send(null);
 });
 
 app.get('/api/playlists/:playlist', function(req, res) {
