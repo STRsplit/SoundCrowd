@@ -8,15 +8,33 @@ import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 import { Button } from 'elemental';
+import io from 'socket.io-client';
 
 class Playlist extends Component {
 
   componentWillMount () {
+    this.socket = io.connect();
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
+    this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
+    this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
+  }
+
+   handlePlaylistVote(){
+    console.log('YOU ARE DUMB');
+    this.socket.emit('playlistReorder', this.props.playlist)
   }
 
   componentDidMount() {
+    var context = this;
     this.getPlaylistTracks();
+    this.socket.emit('playlistId', this.props.playlist)
+    this.socket.on('join', function(data) {
+      console.log('This socket Joined?', data);
+    });
+    this.socket.on('updatePlaylist', function(playlistData){
+      console.log('THIS WORKEEEEDDDDDD');
+      context.handlePlaylistUpdate(playlistData);
+    });
   }
 
   getPlaylistTracks() {
@@ -34,8 +52,14 @@ class Playlist extends Component {
         console.log(err);
       });
   }
+
+  handlePlaylistUpdate(playlist) {
+    console.log(playlist);
+    this.setState({tracks: playlist});
+  }
+
+ 
   
-  componenWillUpdate() {}
 
   sortTracks() {
     // var sortedTracks = this.state.tracks.sort((a, b) => {

@@ -7,6 +7,10 @@ var spotifyRouter = require('./routes/spotifyRouter');
 var spotifyCronJob = require('./spotifyCron');
 spotifyCronJob.start();
 
+
+
+
+
 /* * Authentication * */
 var session = require('express-session');
 var redis = require('redis');
@@ -18,9 +22,39 @@ var client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) :
 var app = express();
 var port = process.env.PORT || 3000;
 
+
+
+
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+/* * Socket Integration * */
+var server = app.listen(port, function(){
+  console.log("Server started: http://localhost:" + port + "/");
+})
+var io = require("socket.io").listen(server);
+io.on('connection', function(socket){
+  socket.on('playlistId', function(playlistId) {
+    socket.join(playlistId);
+    console.log('IO DATA', io.sockets.adapter.rooms);
+    // io.sockets.in(playlistId).emit('join', 'what is going on, party people?');
+    io.to(playlistId).emit('join', 'socket event on join');
+  });
+  socket.on('playlistReorder', function(playlistId) {
+    console.log('YOOOOOO', playlistId);
+    dbHelpers.getPlaylist(playlistId)
+    .then((playlist) => {
+      io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+    })
+  })
+ 
+  console.log('a user connected', socket.id);
+});
+
+
+
+
 
 /* *  Authentication * */
 app.use(session({
@@ -66,6 +100,7 @@ app.get('/*', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(port, function() {
-  console.log(`listening on port!${port}`);
-});
+// app.listen(port, function() {
+//   console.log(`listening on port!${port}`);
+// });
+

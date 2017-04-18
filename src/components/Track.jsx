@@ -19,24 +19,27 @@ class Track extends Component {
       voteCount: this.props.track.vote_count,
       voted: null
     };
+    this.vote = this.vote.bind(this);
   }
 
   vote(val) {
-    var voteStatus = this.state.voted;
-    this.setState({ voted: val });
-    axios.post('/api/vote/', {
-      vote: val,
-      playlistId: this.props.playlist,
-      songId: this.props.track.song_id
-    })
-    .then(res => {
-      // this.setState({ voteCount: this.props.track.vote_count });
-      this.setState({ voteCount: this.state.voteCount += val });
-    })
-    .catch(err => {
-      // fix handling
-      console.log(err);
-    });
+    this.props.reorderPlaylist();
+    // var voteStatus = this.state.voted;
+    // this.setState({ voted: val });
+    // axios.post('/api/vote/', {
+    //   vote: val,
+    //   playlistId: this.props.playlist,
+    //   songId: this.props.track.song_id
+    // })
+    // .then(res => {
+    //   // this.setState({ voteCount: this.props.track.vote_count });
+    //   this.setState({ voteCount: this.state.voteCount += val });
+    // })
+    // .catch(err => {
+    //   // fix handling
+    //   console.log(err);
+    // });
+
   }
 
   render() {
