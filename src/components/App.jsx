@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch, Path } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import { setPlaylist } from '../actions/playlistActions';
+
 import NavBar from './Navbar.jsx';
 import RightBar from './RightBar.jsx';
 import Playlists from './Playlists.jsx';
-// import { Grid, Row, Col } from 'react-flexbox-grid';
-// import { Container, Row, Col } from 'muicss/lib/react';
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
@@ -47,15 +48,7 @@ class App extends React.Component {
 		});
 	}
 
-	/*<Link id='currentPlaylist' to='/playlists'>Use My Playlist</Link>*/
-
 	render() {
-    console.log('APP stats', this.props.stats)
-    //  if (!this.props.stats.loggedIn) {
-    //   return (
-    //     <Login />
-    //   )
-    // }
 	  return ( 
     <BrowserRouter>
       <Switch>
@@ -77,38 +70,38 @@ class App extends React.Component {
                       <div>                        
                         <div>
                           <div>
-                            <div><Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></div>
+                            <Link onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link>
                           </div>
-                            <div>
-                              <h4>Mood</h4>
-                                <select id="mood" onChange={this.setMood}>
-                                  <option value="Choose One">Choose One</option>
-                                  <option value="Happy">Happy</option>
-                                  <option value="Calm">Calm</option>
-                                  <option value="Sad">Sad</option>
-                                  <option value="Focused">Focused</option>
-                                  <option value="Excited">Excited</option>
-                                </select>
-                                <h4>Activity</h4>
-                                <select id="activity" onChange={this.setActivity}>
-                                  <option value="Choose One">Choose One</option>
-                                  <option value="Exercising">Exercising</option>
-                                  <option value="Studying">Studying</option>
-                                  <option value="Partying">Partying</option>
-                                  <option value="Chilling">Chilling</option>
-                                  <option value="Driving">Driving</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div>
-                             <Playlists setPlaylist={this.props.setPlaylist} />
-                            </div>
+                          <div>
+                            <h4>Mood</h4>
+                            <select id="mood" onChange={this.setMood}>
+                              <option value="Choose One">Choose One</option>
+                              <option value="Happy">Happy</option>
+                              <option value="Calm">Calm</option>
+                              <option value="Sad">Sad</option>
+                              <option value="Focused">Focused</option>
+                              <option value="Excited">Excited</option>
+                            </select>
+                            <h4>Activity</h4>
+                            <select id="activity" onChange={this.setActivity}>
+                              <option value="Choose One">Choose One</option>
+                              <option value="Exercising">Exercising</option>
+                              <option value="Studying">Studying</option>
+                              <option value="Partying">Partying</option>
+                              <option value="Chilling">Chilling</option>
+                              <option value="Driving">Driving</option>
+                            </select>
+                          </div>
                         </div>
+                        <div>
+                          <Playlists />
+                        </div>
+                      </div>
                     )}/>
 
                     <Switch>
                     <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
-                    <Route path="/app/playlists/:playlistId" component={PlaylistRoute} />
+                    <Route path="/app/playlists/:playlistId" component={Playlist} />
                     <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
                     <Route path="/app/new-playlist" render={() => (
                       <NewPlaylist state={this.props.stats}/>

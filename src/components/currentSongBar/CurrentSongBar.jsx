@@ -45,6 +45,7 @@ class CurrentSongBar extends Component {
       progress += 1000;
       if(progress > duration) {
         this.counter = 0;
+        this.progress = 0;
         this.updateInfo();
       } else if(isPlaying) {
         this.setState({progress: progress, sliderValue: progress/duration});        

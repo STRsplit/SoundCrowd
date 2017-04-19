@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import { BrowserRouter, browserHistory, Route, Redirect, Match, Link, Switch } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
 import NewPlaylist from './components/NewPlaylist.jsx';
@@ -11,7 +14,6 @@ import Playlist from './components/Playlist.jsx';
 import PlaylistRoute from './components/routes/PlaylistRoute.jsx';
 import SearchContainer from './components/SearchContainer.jsx'; 
 import AccordionTest from './components/AccordionTest.jsx';
-
 
 import keys from './config/keys.js';
 import axios from 'axios';
@@ -106,8 +108,6 @@ class Main extends React.Component {
 		});
 	}
 
-  /*<Route exact path="/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>*/
-
   render() {
     const { playlist, loggedIn} = this.state
 
@@ -115,8 +115,7 @@ class Main extends React.Component {
     return (
       <BrowserRouter>
 			  <div>
-        <Route path="app/playlists/:playlistId" render={({match}) => (<PlaylistRoute />)} />
-        <Route exact path="app/playlists" render={() => (<Playlists setPlaylist={this.setPlaylist} />)}/>
+        <Route exact path="app/playlists" component={Playlists}/>
         <Route exact path="/" render={() => (
             this.state.loggedIn ? <Redirect to="/app" /> : <Redirect to="/login" />
           )}/>
@@ -124,12 +123,19 @@ class Main extends React.Component {
             this.state.loggedIn ? <Redirect to="/app" /> : <Login />
           )}/>
         <Route path="/app" render={() => 
-          (<App stats={this.state} logout={this.logout} setPlaylist={this.setPlaylist} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
+          (<App stats={this.state} logout={this.logout} handleMood={this.handleMood} handleActivity={this.handleActivity}/>)}/>
 		    </div>
       </BrowserRouter>
     )
   }
 }
   
-ReactDOM.render(<MuiThemeProvider><Main /></MuiThemeProvider>, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store} >
+    <MuiThemeProvider>
+      <Main />
+    </MuiThemeProvider>
+  </Provider>
+  , document.getElementById('app')
+);
 

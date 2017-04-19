@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
+
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 import { Button } from 'elemental';
 
 class Playlist extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tracks: [],
-      owner: ''
-    };
-    // this.getPlaylistTracks(); 
+
+  componentWillMount () {
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
   }
 
@@ -21,9 +20,16 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
-    axios.get('/api/playlists/' + this.props.playlist)
+    console.log('called');
+    const playlistId = this.props.match.params.playlistId;
+    axios.get('/api/playlists/' + playlistId)
       .then(res => {
-        this.setState({ tracks: res.data.tracks, owner: res.data.owner });
+        const { owner, tracks } = res.data;
+        this.props.setPlaylist({
+          id: playlistId,
+          owner: owner,
+          tracks: tracks
+        });
       })
       .catch(err => {
         console.log(err);
@@ -41,15 +47,15 @@ class Playlist extends Component {
 
   render() {
     var id = 0;
-    var tracks = this.state.tracks.map(track => (
-      <Track key={id++} playlist={this.props.playlist} track={track} getPlaylistTracks={this.getPlaylistTracks} />
+    var tracks = this.props.playlist.tracks.map(track => (
+      <Track key={id++} playlist={this.props.playlist.id} track={track} getPlaylistTracks={this.getPlaylistTracks} />
     ));
     
     return (
       <div>
         <CurrentSongBar />
         <div>
-          <a href={`http://open.spotify.com/user/${this.state.owner}/playlist/${this.props.playlist}`}>
+          <a href={`http://open.spotify.com/user/${this.props.playlist.owner}/playlist/${this.props.playlist.id}`}>
             <Button type="primary"><span>Open in Spotify</span></Button>
           </a>
         </div>
@@ -59,4 +65,33 @@ class Playlist extends Component {
   }
 }
 
-export default Playlist;
+const mapStateToProps = (state) => {
+  return {
+    playlist: state.playlist //this.props.playlist to access the state inside the component
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPlaylist: (playlist) => {  //this.props.setPlaylist to access the state inside the component
+      dispatch(setPlaylist(playlist));
+    },
+    setPlaylistId: (id) => { 
+      dispatch(setPlaylistId(id));
+    },
+    setPlaylistTracks: (tracks) => { 
+      dispatch(setPlaylistTracks(tracks));
+    },
+    setPlaylistOwner: (owner) => { 
+      dispatch(setPlaylistOwner(owner));
+    },
+  };
+};
+
+// export default Playlist;
+export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+
+
+
+
+
