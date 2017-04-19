@@ -84,6 +84,13 @@ ol {
   background-color: #fff;
 }
 
+#mood-button:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 #mood-menu {
   position: relative;
   cursor: pointer;
@@ -123,6 +130,13 @@ ol {
   border: none;
   opacity: .5;
   background-color: #fff;
+}
+
+#activity-button:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 #activity-menu {
