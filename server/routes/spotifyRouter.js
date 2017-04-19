@@ -1,4 +1,4 @@
-var express = require('express')
+var express = require('express');
 var spotify = require('../spotify');
 
 var router = express.Router();

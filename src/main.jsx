@@ -46,7 +46,7 @@ class Main extends React.Component {
 
 
 	componentWillMount() {
-		axios.get('/api/verifyuser')
+		axios.get('/api/verify_user')
 		.then(result => {
 			console.log('result', result);
 			if (result.data.login) {
