@@ -71,7 +71,7 @@ class SearchContainer extends Component {
 
   searchSpotify() {
     const { search, filter } = this.state
-    axios.get('/api/search/', { 
+    axios.get('/api/spotify/search/', { 
       params: {
         name: search,
         filter: filter

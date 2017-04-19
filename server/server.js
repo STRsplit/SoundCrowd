@@ -2,9 +2,8 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var handler = require('./requestHandler');
-var spotify = require('./spotify');
-var db = require('../database/db');
-var dbHelpers = require('../database/dbHelpers');
+var router = require('./routes/router');
+var spotifyRouter = require('./routes/spotifyRouter');
 
 /* * Authentication * */
 var session = require('express-session');
@@ -41,17 +40,11 @@ app.use(session({
 // }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api', router);
+app.use('/api/spotify', spotifyRouter);
 
 
-app.get('/api/search/', function(req, res) {
-  const { name, filter } = req.query
-  spotify.searchFor(name, filter, function(err, items) {
-    if(err) res.status(err.statusCode).send(err);
-    else {
-      res.status(200).send(items);
-    }
-  })
-});
+/* *  Authentication * */
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
@@ -61,96 +54,7 @@ app.get('/auth/spotify/callback',
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
 );
 
-app.get('/api/verifyuser', handler.verifyUser);
-/* *  Authentication * */
-
-// app.get('/api/trackTest', function(req, res) {
-//   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
-//     if (err) res.status(err.statusCode).send(err);
-//     else res.status(200).send();
-//   });
-// });
-
-
 app.get('/logout', handler.logoutUser);
-
-/* * Spotify API * */
-app.get('/api/playlist/currentsong', spotify.getCurrentSongDetails);
-
-app.get('/name', spotify.getName);
-
-app.get('/playlist', spotify.findPlaylist);
-
-app.post('/create', spotify.createPlaylist);
-
-app.get('/getCategory', spotify.getCategory);
-
-app.post('/setPreferences', spotify.setPreferences);
-
-app.get('/api/spotify/playlists', function(req, res) {
-  spotify.getUserPlaylists(req.user.id, function(err, playlists) {
-    if (err) res.status(err.statusCode).send(err);
-    else res.status(200).send(playlists);
-  });
-});
-
-app.get('/api/playlists/:playlist', function(req, res) {
-  var playlist = req.params.playlist;
-  dbHelpers.getPlaylist(playlist)
-    .then(function(tracks) {
-      if (tracks.length) {
-        dbHelpers.getPlaylistOwner(playlist)
-          .then(function(owner) {
-              res.status(200).send({ owner: owner.user_id, tracks: tracks });
-          });
-      } else {
-        if (req.isAuthenticated()) {
-          spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
-            if (err) res.status(err.statusCode).send(err);
-            else {
-              dbHelpers.savePlaylist(playlist, req.user.id, tracks)
-                .then(function(savedTracks) {
-                  res.status(200).send({ owner: req.user.id, tracks: savedTracks });
-                })
-                .catch(err => {
-                  res.status(err.statusCode).send(err);
-                });
-            }
-          });
-        } else {
-          res.sendStatus(404);
-        }
-      }
-    });
-});
-
-app.post('/api/vote', function(req, res) {
-  handler.validateVote(req, res);
-  spotify.moveTrack(req.user.id, req.body.playlistId, function(err) {
-    if (err) console.log(err);
-  });
-    // emit socket event
-      // update vote count for that track
-      // needs updated playlist order (just the two that have flipped?)
-      // something like io.emit('flip', 1, 2)
-    // respond to client
-  res.sendStatus(201);
-});
-
-
-app.post('/api/tracks', function(req, res) {
-  console.log(req.body);
-  let song = req.body.track
-
-  dbHelpers.addTrack(song, function(err, success) {
-    console.log(err);
-    if(err) res.status(err.statusCode).send(err);
-    else {
-      res.sendStatus(201)
-    }
-  })
-});
-
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });

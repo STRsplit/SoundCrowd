@@ -9,16 +9,18 @@ class NewPlaylist extends React.Component {
 		this.href = '';
 		const { mood, activity } = this.props.filters;
 
-		axios.post('/setPreferences', { 
+		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity
 		}) 
 		.then(result => {
+			/* * OLD CODE * *
 			axios.get('/getCategory')
 			.then((result) => {
 				console.log(result);
 			  this.href = result.data.link;
 			});
+			* * OLD CODE * */
 		})
 		.catch(err => console.log(err));
 	}
