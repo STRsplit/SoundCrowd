@@ -10,22 +10,16 @@ class NewPlaylist extends React.Component {
 	}
 
 	componentWillMount() {
-		axios.post('/setPreferences', { 
-			mood: this.props.state.mood, 
-			activity: this.props.state.activity 
-		}) 
-		.then((res) => {
-			axios.get('/getCategory')
-			.then((result) => {
-				console.log('test result: ', result);
-			  this.setState({
-			  	href: result.data.link
-			  });
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+    axios.post('/api/spotify/playlists', {
+      mood: this.props.state.mood,
+      activity: this.props.state.activity
+    })
+    .then(res => {
+      // do something? maybe, maybe not
+    })
+    .catch(err => {
+      console.log(err);
+    });
 	}
 
 	render() {
