@@ -20,7 +20,6 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
-    console.log('called');
     const playlistId = this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
       .then(res => {
@@ -67,13 +66,13 @@ class Playlist extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    playlist: state.playlist //this.props.playlist to access the state inside the component
+    playlist: state.playlist 
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setPlaylist: (playlist) => {  //this.props.setPlaylist to access the state inside the component
+    setPlaylist: (playlist) => {  
       dispatch(setPlaylist(playlist));
     },
     setPlaylistId: (id) => { 
@@ -88,10 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// export default Playlist;
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
-
-
-
-
-

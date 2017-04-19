@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
-import _ from 'lodash';
 import axios from 'axios';
-import $ from 'jquery';
 
 import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
 import SearchBar from './SearchBar.jsx';
 import AccordionTest from './AccordionTest.jsx';
-
-
-
 
 class SearchContainer extends Component {
   constructor(props){
@@ -116,10 +108,11 @@ class SearchContainer extends Component {
     return (
       <div className="searchcontainer-container">
         <SearchBar stats={this.state} text={search} 
-        selectedOption={filter} 
-        handleSelect={(e) => this.setSelected(e)} 
-        handleSearch={this.searchSpotify} 
-        handleChange={(e) => this.enterSearch(e)} />
+          selectedOption={filter} 
+          handleSelect={(e) => this.setSelected(e)} 
+          handleSearch={this.searchSpotify} 
+          handleChange={(e) => this.enterSearch(e)} 
+        />
         
         <div>
           <SongGenreSection addSong={(e) => this.handleSongAdd(e)} songs={songs} />

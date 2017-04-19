@@ -64,7 +64,6 @@ class Playlists extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     playlists: state.playlists, //this.props.playlists to access global state
