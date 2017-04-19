@@ -33,22 +33,26 @@ app.use(bodyParser.urlencoded({extended: true}));
 var server = app.listen(port, function(){
   console.log("Server started: http://localhost:" + port + "/");
 })
+
 var io = require("socket.io").listen(server);
+
 io.on('connection', function(socket){
+
   socket.on('playlistId', function(playlistId) {
     socket.join(playlistId);
-    console.log('IO DATA', io.sockets.adapter.rooms);
-    // io.sockets.in(playlistId).emit('join', 'what is going on, party people?');
-    io.to(playlistId).emit('join', 'socket event on join');
-  });
-  socket.on('playlistReorder', function(playlistId) {
-    console.log('YOOOOOO', playlistId);
-    dbHelpers.getPlaylist(playlistId)
-    .then((playlist) => {
-      io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+    io.to(playlistId).emit('join', `Joined: ${playlistId}`)
+  })
+
+  socket.on('recordVote', function(voteData) {
+    const { songId, playlistId, vote } = voteData
+    dbHelpers.updateVoteCount(songId, playlistId, vote)
+    .then((playlists) => {
+      io.sockets.in(playlistId).emit('updatePlaylist', playlists);
+    })
+    .catch((err) => {
+      io.sockets.in(playlistId).emit('updatePlaylist', null);
     })
   })
- 
   console.log('a user connected', socket.id);
 });
 

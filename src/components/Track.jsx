@@ -15,17 +15,20 @@ class Track extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // track: null,
-      voteCount: this.props.track.vote_count,
       voted: null
     };
-    this.vote = this.vote.bind(this);
+    this.handleVote = this.handleVote.bind(this);
   }
 
-  vote(val) {
-    this.props.reorderPlaylist();
+  handleVote(vote_val) {
+    const { playlist, track } = this.props
+    console.log('TRACK', track)
+    const { song_id } = track
+
+    this.props.handlePlaylistVote(song_id, playlist, vote_val)
     // var voteStatus = this.state.voted;
-    // this.setState({ voted: val });
+    this.setState({ voted: vote_val })
+
     // axios.post('/api/vote/', {
     //   vote: val,
     //   playlistId: this.props.playlist,
@@ -44,24 +47,15 @@ class Track extends Component {
 
   render() {
 
+    const { voted } = this.state
+    const { title, artist, vote_count } = this.props.track
     const voteUp = (
       <div>
-        <div className="triangle-up" onClick={() => this.state.voted === 1 ? null : this.vote(1)}></div>
-        <span className="voteCount">{this.state.voteCount}</span>
-        <div className="triangle-down" onClick={() => this.state.voted === -1 ? null : this.vote(-1)}></div>
+        <div className="triangle-up" onClick={() => voted === 1 ? null : this.handleVote(1)}></div>
+        <span className="voteCount">{vote_count}</span>
+        <div className="triangle-down" onClick={() => voted === -1 ? null : this.handleVote(-1)}></div>
       </div>
     )
-
-    const addToPlaylist = (
-      <div>
-        <FloatingActionButton style={style}>
-          <ContentAdd />
-        </FloatingActionButton>
-      </div>
-    )
-    
-    const { track } = this.props
-    const actionItem = this.props.search ? addToPlaylist : voteUp
 
     return (
       <div>
@@ -72,7 +66,7 @@ class Track extends Component {
 
             <div className="track-vote-container">
                 <div className="track-vote-container-inner">     
-                   {actionItem}
+                   {voteUp}
                 </div>
               </div>
            
@@ -82,8 +76,8 @@ class Track extends Component {
                   <img src="https://i.scdn.co/image/5487acf8d22aa518645d90135d8a9a1fed3e902e" />
                 </div>
                   <div className="song-entry-header">
-                    <h3>{track.title}</h3>
-                    <h4>{track.artist}</h4>
+                    <h3>{title}</h3>
+                    <h4>{artist}</h4>
                   </div>
                 </div>
             </div>

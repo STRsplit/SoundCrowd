@@ -11,17 +11,17 @@ module.exports = {
         },
         order: ['position']
       })
-        .then(songs => {
-          if (songs.length) {
-            resolve(this.reorderPlaylist(playlistId));
-          } else {
-            resolve(null);
-          }
-    })
+      .then(songs => {
+        if (songs.length) {
+          resolve(this.reorderPlaylist(playlistId));
+        } else {
+          resolve(songs);
+        }
       })
-      .catch(err => {
-        reject(err);
-      });
+    })
+    .catch(err => {
+      reject(err);
+    });
   },
 
   getPlaylist: function(playlistId) {
@@ -62,19 +62,22 @@ module.exports = {
       }})
         .then(playlist => {
           var position = 0;
-          tracks = tracks.items.map(track => {
-            var trackObj = {
-              song_id: track.track.id,
-              playlist_id: playlistId,
-              title: track.track.name,
-              artist: track.track.artists ? track.track.artists[0].name : '',
-                // weird issue where rarely there's no artists array
-                // fix later to map all artist names to string, then save
-              vote_count: 0,
-              position: position++
-            }; 
-            return trackObj;
-          });
+          tracks = tracks.items.reduce((allTracks, track) => {
+            if(track.track.id !== null) {
+              var trackObj = {
+                song_id: track.track.id,
+                playlist_id: playlistId,
+                title: track.track.name,
+                artist: track.track.artists ? track.track.artists[0].name : '',
+                  // weird issue where rarely there's no artists array
+                  // fix later to map all artist names to string, then save
+                vote_count: 0,
+                position: position++
+              }; 
+              allTracks.push(trackObj);
+              return allTracks;
+            }
+          }, []);
 
           Song.bulkCreate(tracks)
             .then(savedTracks => {
@@ -86,6 +89,7 @@ module.exports = {
         });
     });
   },
+
 
   reorderPlaylist: function(playlistId) {
     return new Promise((resolve, reject) => {
@@ -106,7 +110,8 @@ module.exports = {
   },
 
   updateVoteCount: function(songId, playlistId, vote) {
-    Song.find({ where: {
+    return new Promise((resolve, reject) => {
+      Song.find({ where: {
       song_id: songId,
       playlist_id: playlistId
     }})
@@ -114,10 +119,14 @@ module.exports = {
         var newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
           .then(() => {
-            this.checkForReorder(song, playlistId, vote);
+            this.checkForReorder(song, playlistId, vote)
+            .then((playlist) => {
+              resolve(playlist);
+            })
           });
       });
-  },
+    })
+  },  
 
   addTrack: function(song, cb) {
     let addedSong = Song.build({

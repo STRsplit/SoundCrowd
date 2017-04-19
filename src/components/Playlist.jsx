@@ -15,24 +15,28 @@ class Playlist extends Component {
   componentWillMount () {
     this.socket = io.connect();
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
+
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
   }
 
-   handlePlaylistVote(){
-    console.log('YOU ARE DUMB');
-    this.socket.emit('playlistReorder', this.props.playlist)
+   handlePlaylistVote(song_id, playlist_id, vote_val){
+    let voteData = {
+      songId: song_id,
+      playlistId: playlist_id,
+      vote: vote_val
+    }
+    this.socket.emit('recordVote', voteData)
   }
 
   componentDidMount() {
-    var context = this;
+    let context = this;
     this.getPlaylistTracks();
     this.socket.emit('playlistId', this.props.playlist)
-    this.socket.on('join', function(data) {
-      console.log('This socket Joined?', data);
+    this.socket.on('join', function(joinedRoom) {
+      console.log(joinedRoom);
     });
     this.socket.on('updatePlaylist', function(playlistData){
-      console.log('THIS WORKEEEEDDDDDD');
       context.handlePlaylistUpdate(playlistData);
     });
   }
@@ -54,8 +58,11 @@ class Playlist extends Component {
   }
 
   handlePlaylistUpdate(playlist) {
-    console.log(playlist);
-    this.setState({tracks: playlist});
+    if(!playlist){
+      console.log('ERRORR WITH PLAYLIST')
+    } else {
+      this.setPlaylistTracks({tracks: playlist});
+    }
   }
 
  
@@ -69,9 +76,13 @@ class Playlist extends Component {
   }
 
   render() {
-    var id = 0;
-    var tracks = this.props.playlist.tracks.map(track => (
-      <Track key={id++} playlist={this.props.playlist.id} track={track} getPlaylistTracks={this.getPlaylistTracks} />
+    const { playlist } = this.props 
+    var tracks = playlist.tracks.map(track => (
+      <Track key={track.song_id} 
+      playlist={playlist.id} 
+      track={track} 
+      getPlaylistTracks={this.getPlaylistTracks}
+      handlePlaylistVote={this.handlePlaylistVote} />
     ));
     
     return (
@@ -82,7 +93,7 @@ class Playlist extends Component {
             <Button type="primary"><span>Open in Spotify</span></Button>
           </a>
         </div>
-        <div>{tracks}</div>
+        <div>{playlistTracks}</div>
       </div>
     )
   }
