@@ -32,7 +32,6 @@ render() {
               >
             <Link to='/app' style={style.link}><MenuItem><div>Use My Playlist</div></MenuItem></Link>
             <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-            <Link to='/app/new-playlist' style={style.link}><MenuItem><div>Get Suggested Playlist</div></MenuItem></Link>
             <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logout}>Logout</div></MenuItem></Link>
            </IconMenu>
       }
