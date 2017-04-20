@@ -15,7 +15,19 @@ class Navbar extends Component {
     this.state = {
     }
   }
-render() {
+  
+  render() {
+
+    const style = {
+      link: {
+        textDecoration: 'none'
+      },
+      div: {
+        textAlign: 'center',
+        width: '150px',
+        margin: '0 auto'
+      }
+    };
 
     return (
       <div className="nav-container">
@@ -30,11 +42,11 @@ render() {
               targetOrigin={{horizontal: 'right', vertical: 'top'}}
               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
               >
-            <Link to='/app' style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
-            <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-            <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logout}>Logout</div></MenuItem></Link>
+            <Link to='/app' style={style.link}><MenuItem><div style={style.div}>Home</div></MenuItem></Link>
+            <Link to='/app/search' style={style.link}><MenuItem><div style={style.div}>Search</div></MenuItem></Link>
+            <Link to='/login' style={style.link}><MenuItem><div style={style.div} onClick={this.props.logout}>Logout</div></MenuItem></Link>
            </IconMenu>
-      }
+          }
         />
         </div>
       </div>
@@ -43,9 +55,3 @@ render() {
 }
 
 export default Navbar;
-
-const style = {
-  link: {
-    textDecoration: 'none'
-  }
-};
