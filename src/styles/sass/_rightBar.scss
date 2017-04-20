@@ -1,0 +1,9 @@
+.rightBar-container {
+  margin-top: 80px;
+  padding-top: 10px;
+  & > div { 
+    & h3 {
+    border-bottom: 10px solid red;
+  }
+}
+}

@@ -94,6 +94,29 @@ app.get('/auth/spotify/callback',
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
 );
 
+
+app.get('/api/verifyuser', handler.verifyUser);
+
+app.get('/api/user/sessionInfo', function(req, res){
+  console.log(req.user)
+  const sessionInfo = {
+    user_id: req.user ? req.user.id : '',
+    session_id: req.sessionID
+  }
+  res.status(200).send(sessionInfo)
+});
+
+/* *  Authentication * */
+
+// app.get('/api/trackTest', function(req, res) {
+//   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
+//     if (err) res.status(err.statusCode).send(err);
+//     else res.status(200).send();
+//   });
+// });
+
+
+
 app.get('/logout', handler.logoutUser);
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));

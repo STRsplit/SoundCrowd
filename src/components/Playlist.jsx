@@ -18,6 +18,7 @@ class Playlist extends Component {
 
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
+    this.getSessionInfo = this.getSessionInfo.bind(this);
   }
 
    handlePlaylistVote(song_id, playlist_id, vote_val){
@@ -34,10 +35,25 @@ class Playlist extends Component {
     this.getPlaylistTracks();
     this.socket.emit('playlistId', this.props.playlist)
     this.socket.on('join', function(joinedRoom) {
-      console.log(joinedRoom);
+      context.getSessionInfo();
     });
     this.socket.on('updatePlaylist', function(playlistData){
       context.handlePlaylistUpdate(playlistData);
+    });
+  }
+
+  getSessionInfo() {
+    let context = this;
+    axios.get('/api/user/sessionInfo', {
+      // params: {}
+    })
+    .then(res => {
+      const { session_id, user_id } = res.data
+      context.socket.session_id = session_id
+      context.socket.user_id = user_id
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 
