@@ -55,6 +55,10 @@
   clear: both;
   margin: 120px auto; }
 
+@media (max-width: 768px) {
+  .mui-col-xs-0 {
+    display: none; } }
+
 .main-left-column {
   background-color: pink; }
 
@@ -377,6 +381,12 @@ body {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 20px solid #fc4349; }
+
+.rightBar-container {
+  margin-top: 80px;
+  padding-top: 10px; }
+  .rightBar-container > div h3 {
+    border-bottom: 10px solid red; }
 
 h1 {
   font-size: 2.4em; }
