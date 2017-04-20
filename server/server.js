@@ -45,8 +45,6 @@ const io = require ('socket.io').listen(server);
 const socketManager = require('./sockets.js')(io);
 
 
-
-
 /* *  Authentication * */
 app.use(session({
   secret: 'badum tsss', 
