@@ -51,9 +51,9 @@ class Track extends Component {
     const { title, artist, vote_count } = this.props.track
     const voteUp = (
       <div>
-        <div className="triangle-up" onClick={() => voted === 1 ? null : this.handleVote(1)}></div>
+        <div className="triangle-up" onClick={() => this.handleVote(1)}></div>
         <span className="voteCount">{vote_count}</span>
-        <div className="triangle-down" onClick={() => voted === -1 ? null : this.handleVote(-1)}></div>
+        <div className="triangle-down" onClick={() => this.handleVote(-1)}></div>
       </div>
     )
 

@@ -56,7 +56,7 @@ const verifyUser = (req, res) => {
 //   }
 // };
 const validateVote = (voteData) => {
-  console.log('VOTE DATAAAAAAA', voteData)
+  console.log('YOU ARE HERE NOW', voteData);
   return new Promise((resolve, reject) => {
     const { songId, playlistId, vote, user_id, session_id } = voteData
     var voteObj = {
@@ -64,10 +64,12 @@ const validateVote = (voteData) => {
       playlist_id: playlistId,
       vote: vote
     }
-    if (user_id !== '') {
+    if (user_id.length !== 0) {
+      console.log('DID YOU SEE THIS OR NAH', voteObj)
       voteObj.user_id = user_id
       return db.Vote.find({ where: voteObj })
       .then(result => {
+        console.log('RESULT WORKEDDDDDDD', result)
         if (!result) {
           // db.Vote.create({ voteObj });
           db.Vote.create({

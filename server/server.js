@@ -2,10 +2,17 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var handler = require('./requestHandler');
+
 var router = require('./routes/router');
 var spotifyRouter = require('./routes/spotifyRouter');
 var spotifyCronJob = require('./spotifyCron');
 spotifyCronJob.start();
+
+
+var spotify = require('./spotify');
+var db = require('../database/db');
+var dbHelpers = require('../database/dbHelpers');
+
 
 
 
@@ -34,56 +41,8 @@ var server = app.listen(port, function(){
   console.log("Server started: http://localhost:" + port + "/");
 })
 
-var io = require("socket.io").listen(server);
-
-io.on('connection', function(socket){
-
-  socket.on('playlistId', function(playlistId) {
-    socket.join(playlistId);
-    io.to(playlistId).emit('join', `Joined: ${playlistId}`)
-  })
-
-  // socket.on('recordVote', function(voteData) {
-  //   const { songId, playlistId, vote } = voteData
-  //   dbHelpers.updateVoteCount(songId, playlistId, vote)
-  //   .then((playlists) => {
-  //     io.sockets.in(playlistId).emit('updatePlaylist', playlists);
-  //   })
-  //   .catch((err) => {
-  //     io.sockets.in(playlistId).emit('updatePlaylist', null);
-  //   })
-  // })
-  socket.on('recordVote', function(voteData) {
-    const { songId, playlistId, vote, session_id, user_id } = voteData
-    console.log('VOTE DATA ON SOCKET CONNECTION', voteData);
-    handler.validateVote(voteData)
-    .then(song => {
-      if(song){
-        dbHelpers.checkForReorder(song, playlistId, vote)
-        .then(playlists => {
-          if(playlists.length > 0){
-            io.sockets.in(playlistId).emit('updatePlaylist', playlists)
-          } else {
-            console.log('IDIOTTTTT', voteData);
-            io.sockets.in(playlistId).emit('updateSongVoteCount', voteData)
-          }
-        })
-      } else socket.emit('voteError', "Hey, you've voted on this song idiot.")
-    })
-  })
-
-
-    // dbHelpers.updateVoteCount(songId, playlistId, vote)
-    // .then((playlists) => {
-    //   io.sockets.in(playlistId).emit('updatePlaylist', playlists);
-    // })
-    // .catch((err) => {
-    //   io.sockets.in(playlistId).emit('updatePlaylist', null);
-    // })
-  // })
-  console.log('a user connected', socket.id);
-});
-
+const io = require ('socket.io').listen(server);
+const socketManager = require('./sockets.js')(io);
 
 
 
@@ -126,7 +85,6 @@ app.get('/auth/spotify/callback',
 app.get('/api/verifyuser', handler.verifyUser);
 
 app.get('/api/user/sessionInfo', function(req, res){
-  console.log(req.user)
   const sessionInfo = {
     user_id: req.user ? req.user.id : '',
     session_id: req.sessionID

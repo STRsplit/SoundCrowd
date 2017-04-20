@@ -46,6 +46,9 @@ class Playlist extends Component {
     this.socket.on('updateSongVoteCount', function(songVoteData){
       context.handleSongVoteUpdate(songVoteData);
     });
+    this.socket.on('voteError', function(voteErrorInfo){
+      console.log('Sorry, but you\'ve already voted:', voteErrorInfo)
+    });
   }
 
   getSessionInfo() {
@@ -54,6 +57,7 @@ class Playlist extends Component {
       // params: {}
     })
     .then(res => {
+      console.log(res.data)
       const { session_id, user_id } = res.data
       context.socket.session_id = session_id
       context.socket.user_id = user_id
@@ -89,17 +93,17 @@ class Playlist extends Component {
 
   handleSongVoteUpdate(songVoteData) {
     console.log(songVoteData);
-    const { song_id, vote_count } = songVoteData
+    const { songId, vote } = songVoteData
     let tracks = this.state.tracks
     tracks = tracks.map(track => {
-      if(track.song_id === song_id){
-        track.vote_count = vote_count
+      if(track.song_id === songId){
+        track.vote_count += vote
         return track;
       } else {
         return track;
       }
     })
-    this.setState({ tracks })
+    this.setPlaylistTracks({ tracks })
   }
 
  
