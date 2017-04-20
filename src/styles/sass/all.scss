@@ -55,6 +55,76 @@ ol {
   padding: 0;
 }
 
+#mood {
+  height: 24px;
+  margin-bottom: 15px
+}
+
+#mood-label {
+  display: inline-block;
+}
+
+#mood-button {
+  position: relative;
+  left: 20px;
+  bottom: 3px;
+  height: 24px;
+  width: 150px;
+  text-align-last: center;
+  display: inline-block;
+  border: none;
+  opacity: .5;
+  background-color: #fff;
+}
+
+#mood-menu {
+  height: 22px;
+  width: 150px;
+  background: #fff;
+  cursor: pointer;
+  border: none;
+  text-align-last: center;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+}
+
+#activity {
+  height: 24px;
+}
+
+#activity-label {
+  display: inline-block;
+}
+
+#activity-button {
+  position: relative;
+  left: 13px;
+  bottom: 3px;
+  height: 24px;
+  width: 150px;
+  text-align-last: center;
+  display: inline-block;
+  border: none;
+  opacity: .5;
+  background-color: #fff;
+}
+
+#activity-menu {
+  height: 22px;
+  width: 150px;
+  background: #fff;
+  cursor: pointer;
+  border: none;
+  text-align-last: center;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+}
+
+#recommended-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 #loading {
   color: black;
 }
