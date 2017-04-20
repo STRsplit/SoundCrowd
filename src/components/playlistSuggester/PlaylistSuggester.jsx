@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import keys from '../../config/keys.js';
+import { Button } from 'elemental';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
@@ -63,7 +64,10 @@ class PlaylistSuggester extends Component {
     return (
       <div id="recommended-container">
         <div>
-          <h2><Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></h2>
+          <h2>Get Suggested Playlist</h2>
+          <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
+            <Button type="primary"><span>Create</span></Button>
+          </Link>
         </div>
         <div id="preferences">
           <div id="mood">
