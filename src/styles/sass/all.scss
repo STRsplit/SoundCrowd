@@ -66,16 +66,19 @@ ol {
 
 #mood-label {
   display: inline-block;
+  vertical-align: top;
+}
+
+#mood-container {
+  display: inline-block;
+  position: relative;
+  left: 20px;
 }
 
 #mood-button {
-  position: relative;
-  left: 20px;
-  bottom: 3px;
   height: 24px;
   width: 150px;
   text-align-last: center;
-  display: inline-block;
   border: none;
   opacity: .5;
   background-color: #fff;
@@ -83,10 +86,8 @@ ol {
 
 #mood-menu {
   position: relative;
-  left: 309px;
-  bottom: 14px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
 }
 
 #mood-menu div {
@@ -105,12 +106,16 @@ ol {
 
 #activity-label {
   display: inline-block;
+  vertical-align: top;
+}
+
+#activity-container {
+  display: inline-block;
+  position: relative;
+  left: 13px;
 }
 
 #activity-button {
-  position: relative;
-  left: 13px;
-  bottom: 3px;
   height: 24px;
   width: 150px;
   text-align-last: center;
@@ -122,8 +127,6 @@ ol {
 
 #activity-menu {
   position: relative;
-  left: 309px;
-  bottom: 14px;
   cursor: pointer;
   z-index: 10;
 }

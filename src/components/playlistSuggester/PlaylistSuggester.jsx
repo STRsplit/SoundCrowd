@@ -68,6 +68,7 @@ class PlaylistSuggester extends Component {
         <div id="preferences">
           <div id="mood">
             <h3 id="mood-label">Mood</h3>
+            <div id="mood-container">
             <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
             {this.state.showMood ? <div id="mood-menu">
               <div onClick={this.setMood}>Happy</div>
@@ -76,9 +77,11 @@ class PlaylistSuggester extends Component {
               <div onClick={this.setMood}>Focused</div>
               <div onClick={this.setMood}>Excited</div>
             </div> : null}
+            </div>
           </div>
           <div id="activity">
             <h3 id="activity-label">Activity</h3>
+            <div id="activity-container">
             <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
             {this.state.showActivity ? <div id="activity-menu">
               <div onClick={this.setActivity}>Exercising</div>
@@ -87,6 +90,7 @@ class PlaylistSuggester extends Component {
               <div onClick={this.setActivity}>Chilling</div>
               <div onClick={this.setActivity}>Driving</div>
             </div> : null}
+            </div>
           </div>
         </div>
       </div>
