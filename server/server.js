@@ -43,16 +43,44 @@ io.on('connection', function(socket){
     io.to(playlistId).emit('join', `Joined: ${playlistId}`)
   })
 
+  // socket.on('recordVote', function(voteData) {
+  //   const { songId, playlistId, vote } = voteData
+  //   dbHelpers.updateVoteCount(songId, playlistId, vote)
+  //   .then((playlists) => {
+  //     io.sockets.in(playlistId).emit('updatePlaylist', playlists);
+  //   })
+  //   .catch((err) => {
+  //     io.sockets.in(playlistId).emit('updatePlaylist', null);
+  //   })
+  // })
   socket.on('recordVote', function(voteData) {
-    const { songId, playlistId, vote } = voteData
-    dbHelpers.updateVoteCount(songId, playlistId, vote)
-    .then((playlists) => {
-      io.sockets.in(playlistId).emit('updatePlaylist', playlists);
-    })
-    .catch((err) => {
-      io.sockets.in(playlistId).emit('updatePlaylist', null);
+    const { songId, playlistId, vote, session_id, user_id } = voteData
+    console.log('VOTE DATA ON SOCKET CONNECTION', voteData);
+    handler.validateVote(voteData)
+    .then(song => {
+      if(song){
+        dbHelpers.checkForReorder(song, playlistId, vote)
+        .then(playlists => {
+          if(playlists.length > 0){
+            io.sockets.in(playlistId).emit('updatePlaylist', playlists)
+          } else {
+            console.log('IDIOTTTTT', voteData);
+            io.sockets.in(playlistId).emit('updateSongVoteCount', voteData)
+          }
+        })
+      } else socket.emit('voteError', "Hey, you've voted on this song idiot.")
     })
   })
+
+
+    // dbHelpers.updateVoteCount(songId, playlistId, vote)
+    // .then((playlists) => {
+    //   io.sockets.in(playlistId).emit('updatePlaylist', playlists);
+    // })
+    // .catch((err) => {
+    //   io.sockets.in(playlistId).emit('updatePlaylist', null);
+    // })
+  // })
   console.log('a user connected', socket.id);
 });
 

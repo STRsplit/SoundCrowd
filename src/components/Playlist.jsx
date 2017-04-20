@@ -19,19 +19,22 @@ class Playlist extends Component {
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
+    this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
   }
 
    handlePlaylistVote(song_id, playlist_id, vote_val){
     let voteData = {
       songId: song_id,
       playlistId: playlist_id,
-      vote: vote_val
+      vote: vote_val,
+      user_id: this.socket.user_id,
+      session_id: this.socket.session_id
     }
     this.socket.emit('recordVote', voteData)
   }
 
   componentDidMount() {
-    let context = this;
+    let context = this
     this.getPlaylistTracks();
     this.socket.emit('playlistId', this.props.playlist)
     this.socket.on('join', function(joinedRoom) {
@@ -40,10 +43,13 @@ class Playlist extends Component {
     this.socket.on('updatePlaylist', function(playlistData){
       context.handlePlaylistUpdate(playlistData);
     });
+    this.socket.on('updateSongVoteCount', function(songVoteData){
+      context.handleSongVoteUpdate(songVoteData);
+    });
   }
 
   getSessionInfo() {
-    let context = this;
+    let context = this
     axios.get('/api/user/sessionInfo', {
       // params: {}
     })
@@ -79,6 +85,21 @@ class Playlist extends Component {
     } else {
       this.setPlaylistTracks({tracks: playlist});
     }
+  }
+
+  handleSongVoteUpdate(songVoteData) {
+    console.log(songVoteData);
+    const { song_id, vote_count } = songVoteData
+    let tracks = this.state.tracks
+    tracks = tracks.map(track => {
+      if(track.song_id === song_id){
+        track.vote_count = vote_count
+        return track;
+      } else {
+        return track;
+      }
+    })
+    this.setState({ tracks })
   }
 
  

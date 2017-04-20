@@ -2,6 +2,7 @@ var { Playlist, Song, Vote } = require('./db.js');
 
 module.exports = {
   checkForReorder: function(song, playlistId, vote) {
+    console.log('STUPIDDDDDDDDD', song, playlistId, vote);
     return new Promise((resolve, reject) => {
       Song.findAll({
         where: { 
@@ -90,7 +91,6 @@ module.exports = {
     });
   },
 
-
   reorderPlaylist: function(playlistId) {
     return new Promise((resolve, reject) => {
       Song.findAll({ 
@@ -112,20 +112,20 @@ module.exports = {
   updateVoteCount: function(songId, playlistId, vote) {
     return new Promise((resolve, reject) => {
       Song.find({ where: {
-      song_id: songId,
-      playlist_id: playlistId
-    }})
+        song_id: songId,
+        playlist_id: playlistId
+      }})
       .then(song => {
         var newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
-          .then(() => {
-            this.checkForReorder(song, playlistId, vote)
-            .then((playlist) => {
-              resolve(playlist);
-            })
-          });
-      });
-    })
+          .then(song => {
+            resolve(song.dataValues)
+          })
+      })
+      .catch(err => {
+        reject(err)
+      })
+    });
   },  
 
   addTrack: function(song, cb) {
