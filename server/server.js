@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var handler = require('./requestHandler');
 var router = require('./routes/router');
 var spotifyRouter = require('./routes/spotifyRouter');
+var spotifyCronJob = require('./spotifyCron');
+spotifyCronJob.start();
 
 /* * Authentication * */
 var session = require('express-session');
