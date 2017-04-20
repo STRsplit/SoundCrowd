@@ -52,7 +52,7 @@ class PlaylistSuggester extends Component {
 
   render() {
     return (
-      <div>
+      <div id="recommended-container">
         <div>
           <h2><Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>Get Suggested Playlist</Link></h2>
         </div>
