@@ -109,7 +109,6 @@ module.exports = {
   },
 
   updateVoteCount: function(songId, playlistId, vote) {
-    console.log('HERE TOOO', songId, playlistId, vote)
     return new Promise((resolve, reject) => {
       Song.find({ where: {
         song_id: songId,
