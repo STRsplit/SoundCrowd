@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { enterSearch, setDataSource, setSearchResults, setSearchDefaults, setFilter } from '../actions/searchActions';
-import { setRecentTracks } from '../actions/playlistActions';
+import { setRecentAddedTracks } from '../actions/playlistActions';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
@@ -137,8 +137,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setRecentTracks: (tracks) => {  
-      dispatch(setRecentTracks(tracks));
+    setRecentAddedTracks: (tracks) => {  
+      dispatch(setRecentAddedTracks(tracks));
     },
     enterSearch: (search) => {
       return dispatch(enterSearch(search));

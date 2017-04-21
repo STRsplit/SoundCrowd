@@ -2,7 +2,9 @@ const initialState = {
   id: '',
   owner: '',
   tracks: [],
-  recentTracks: []
+  recentlyAddedTracks: [],
+  recentlyPlayedTracks: [],
+  trendingTracks: []
 };
 
 const playlistReducer = (state = initialState, action) => {
@@ -31,10 +33,22 @@ const playlistReducer = (state = initialState, action) => {
         owner: action.payload
       };
       break;
-    case 'SET_RECENT_TRACKS':
+    case 'SET_RECENTLY_ADDED_TRACKS':
       state = {
         ...state,
-        recentTracks: action.payload
+        recentlyAddedTracks: action.payload
+      };
+      break;
+    case 'SET_RECENTLY_PLAYED_TRACKS':
+      state = {
+        ...state,
+        recentlyPlayedTracks: action.payload
+      };
+      break;
+    case 'SET_TRENDING_TRACKS':
+      state = {
+        ...state,
+        trendingTracks: action.payload
       };
       break;
   }

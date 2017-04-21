@@ -26,9 +26,21 @@ const setPlaylistOwner = (owner) => {
   };
 };
 
-const setRecentTracks = (tracks) => {
+const setRecentAddedTracks = (tracks) => {
   return {
-    type: 'SET_RECENT_TRACKS',
+    type: 'SET_RECENTLY_ADDED_TRACKS',
+    payload: tracks
+  };
+};
+const setRecentPlayedTracks = (tracks) => {
+  return {
+    type: 'SET_RECENTLY_PLAYED_TRACKS',
+    payload: tracks
+  };
+};
+const setTrendingTracks = (tracks) => {
+  return {
+    type: 'SET_TRENDING_TRACKS',
     payload: tracks
   };
 };
@@ -38,7 +50,9 @@ export {
   setPlaylistId,
   setPlaylistTracks,
   setPlaylistOwner,
-  setRecentTracks,
+  setRecentAddedTracks,
+  setRecentPlayedTracks,
+  setTrendingTracks
 };
 
 /* * EG. FOR ASYNC FUNCTIONS * *
