@@ -13,22 +13,23 @@ class NewPlaylist extends React.Component {
 	}
 
 	componentWillMount() {
-		this.href = '';
 		const { mood, activity } = this.props.filters;
 
 		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity
 		}) 
-		.then(result => {
-			/* * OLD CODE * *
-			axios.get('/getCategory')
+		.then(res => {
+			axios.get('/api/spotify/create')
 			.then((result) => {
-				console.log(result);
-			  this.href = result.data.link;
-			});
-			* * OLD CODE * */
-			this.props.setPlaylist({})
+				console.log('test result: ', result);
+				this.setState({owner: result.data.owner});
+				this.props.setPlaylist({
+					id: result.data.id,
+	        owner: result.data.owner,
+	        tracks: result.data.tracks
+				});
+			})
 		})
 		.catch(err => console.log(err));
 	}
@@ -36,7 +37,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  {this.state.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist tracks={this.state.tracks} owner={this.state.owner} playlist={this.state.id}/>}
+	  	  {this.state.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist />}
 		  </div>	
 	  );
 	}

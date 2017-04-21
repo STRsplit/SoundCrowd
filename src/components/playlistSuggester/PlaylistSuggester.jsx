@@ -22,9 +22,14 @@ class PlaylistSuggester extends Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
+  findPlaylist() {
+    this.props.setFilters({
+      mood: this.state.mood,
+      activity: this.state.activity
+    });
+  }
 
   setMood(e) {
-    this.props.handleMood(e.target.textContent);
     this.setState({
       mood: e.target.textContent
     });
@@ -32,7 +37,6 @@ class PlaylistSuggester extends Component {
   }
 
   setActivity(e) {
-    this.props.handleActivity(e.target.textContent);
     this.setState({
       activity: e.target.textContent
     });

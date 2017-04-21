@@ -56,7 +56,7 @@ module.exports = {
 
   selectTracks: function(playlist, activity) {
     var tracks = playlist.body.tracks.items;
-    var result = {uri: []};
+    var result = {uri: [], owner: req.user.id, tracks: [], id: newPlaylistId};
     if (activity === 'Exercising' || activity === 'Partying') {
       for (var i = 0; i < tracks.length; i++) {
         if (tracks[i].track.popularity < 60) {
@@ -75,10 +75,12 @@ module.exports = {
         break;
       }
       if (tracks[i] !== undefined) {
+        var trackInfo = {artist: tracks[i].track.artists[0].name, title: tracks[i].track.name};
+        result.tracks.push(trackInfo);
         result.uri.push(tracks[i].track.uri);
       }
     }
 
-    return result.uri;
+    return result;
   }
 }

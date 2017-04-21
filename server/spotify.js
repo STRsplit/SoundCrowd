@@ -59,7 +59,8 @@ module.exports = {
   },
 
   createPlaylist: function(userId, preferences, cb) {
-    var playlistName = 'SoundCrowd-' + new Date().toISOString().slice(0, -14);
+    var data = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
+    var playlistName = 'SoundCrowd ' + date.slice(5, 11) + ' ' + date.slice(17, 25);
     spotify.createPlaylist(userId, playlistName, {public: false})
       .then(data => {
         var newPlaylistId = data.body.id;
@@ -68,8 +69,9 @@ module.exports = {
             var playlistId = customPlaylist.selectPlaylist(playlists.body.playlists.items, preferences.mood);
             spotify.getPlaylist('spotify', playlistId)
               .then(playlist => {
-                spotify.addTracksToPlaylist(userId, newPlaylistId, customPlaylist.selectTracks(playlist, preferences.activity))
-                  .then(() => cb(null));
+                var result = customPlaylist.selectTracks(playlist, preferences.activity);
+                spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
+                  .then(() => cb(null, result));
               });
           })
       }) 

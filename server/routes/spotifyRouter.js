@@ -3,24 +3,34 @@ var spotify = require('../spotify');
 
 var router = express.Router();
 
+var preferences;
+
 router.route('/playlists')
-  .get(function(req, res) {
-    console.log(req);
-    spotify.getUserPlaylists(req.user.id, function(err, playlists) {
-      if (err) res.status(err.statusCode).send(err);
-      else res.status(200).send(playlists);
-    });    
-  })
-  .post(function(req, res) {
-    var preferences = {
-      mood: req.body.mood,
-      activity: req.body.activity
-    };
-    spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
-      if (err) res.status(err.statusCode).send(err);
-      else res.sendStatus(201);
-    });
+.get(function(req, res) {
+  console.log(req);
+  spotify.getUserPlaylists(req.user.id, function(err, playlists) {
+    if (err) res.status(err.statusCode).send(err);
+    else res.status(200).send(playlists);
+  });    
+})
+.post(function(req, res) {
+  preferences = {
+    mood: req.body.mood,
+    activity: req.body.activity
+  };
+  res.sendStatus(201);
+  // spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
+  //   if (err) res.status(err.statusCode).send(err);
+  //   else res.sendStatus(201);
+  // });
+});
+
+router.get('/create', function(req, res) {
+  spotify.createPlaylist(req.user.id, preferences, function(err, result) {
+    if(err) res.status(err.statusCode).send(err);
+    else res.status(200).send(result);
   });
+});
 
 router.get('/search', function(req, res) {
   const { name, filter } = req.query;
