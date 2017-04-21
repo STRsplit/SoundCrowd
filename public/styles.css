@@ -383,10 +383,8 @@ body {
     border-bottom: 20px solid #fc4349; }
 
 .rightBar-container {
-  margin-top: 80px;
+  margin-top: 50px;
   padding-top: 10px; }
-  .rightBar-container > div h3 {
-    border-bottom: 10px solid red; }
 
 h1 {
   font-size: 2.4em; }
