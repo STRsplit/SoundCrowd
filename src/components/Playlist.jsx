@@ -21,7 +21,7 @@ class Playlist extends Component {
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
   }
 
-   handlePlaylistVote(song_id, playlist_id, vote_val){
+  handlePlaylistVote(song_id, playlist_id, vote_val){
     console.log('PLAYLIST GOT PLAYLIST VOTE', song_id, playlist_id, vote_val);
     let voteData = {
       songId: song_id,

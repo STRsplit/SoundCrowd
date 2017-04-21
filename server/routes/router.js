@@ -52,6 +52,7 @@ router.post('/vote', function(req, res) {
 });
 
 router.post('/tracks', function(req, res) {
+  console.log(req.body.track)
   dbHelpers.addTrack(req.body.track, function(err, success) {
     if (err) res.status(err.statusCode).send(err);
     else res.sendStatus(201);
