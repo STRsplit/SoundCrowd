@@ -139,7 +139,10 @@ module.exports = {
 
     addedSong.save()
     .then(result => {
-      cb(null, result)
+      this.reorderPlaylist(song.playlist_id)
+      .then(playlist => {
+        cb(null, true);
+      })
     })
     .catch(err => {
       cb(err)
