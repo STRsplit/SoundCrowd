@@ -2,18 +2,11 @@ const initialState = {
   songs: [],
   search: '',
   filter: 'track',
-  dataSource: [],
-  recentTracks: []
+  dataSource: []
 };
 
 const searchReducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'SET_RECENT_TRACKS':
-      state = {
-        ...state,
-        recentTracks: action.payload
-      };
-      break;
     case 'SET_ENTER_SEARCH_FULFILLED':
       state = {
         ...state,

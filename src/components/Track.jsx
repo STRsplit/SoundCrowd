@@ -20,27 +20,9 @@ class Track extends Component {
 
   handleVote(vote_val) {
     const { playlist, track } = this.props
-    console.log('TRACK', track)
     const { song_id } = track
-
     this.props.handlePlaylistVote(song_id, playlist, vote_val)
-    // var voteStatus = this.state.voted;
     this.setState({ voted: vote_val })
-
-    // axios.post('/api/vote/', {
-    //   vote: val,
-    //   playlistId: this.props.playlist,
-    //   songId: this.props.track.song_id
-    // })
-    // .then(res => {
-    //   // this.setState({ voteCount: this.props.track.vote_count });
-    //   this.setState({ voteCount: this.state.voteCount += val });
-    // })
-    // .catch(err => {
-    //   // fix handling
-    //   console.log(err);
-    // });
-
   }
 
   render() {
@@ -88,13 +70,3 @@ class Track extends Component {
 }
 
 export default Track;
-        //   <div>
-        //  <div>
-        //     {this.props.track.title} - {this.props.track.artist}
-        //     <div>
-        //       <input type="button" value="Up" disabled={this.state.voted === 1} onClick={() => this.vote(1)}/>
-        //       <input type="button" value="Down" disabled={this.state.voted === -1} onClick={() => this.vote(-1)}/>
-        //       {this.state.voteCount}
-        //     </div>
-        //   </div>
-        // </div>

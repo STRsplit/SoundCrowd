@@ -1,9 +1,4 @@
-const setRecentTracks = (tracks) => {
-  return {
-    type: 'SET_RECENT_TRACKS',
-    payload: tracks
-  };
-};
+
 const enterSearch = (search) => {
   return {
     type: 'SET_ENTER_SEARCH',
@@ -37,7 +32,6 @@ const setSearchDefaults = () => {
   };
 };
 export {
-  setRecentTracks,
   enterSearch,
   setDataSource,
   setSearchResults,

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { setRecentTracks, enterSearch, setDataSource, setSearchResults, setSearchDefaults, setFilter } from '../actions/searchActions';
+import { enterSearch, setDataSource, setSearchResults, setSearchDefaults, setFilter } from '../actions/searchActions';
+import { setRecentTracks } from '../actions/playlistActions';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
@@ -26,28 +27,27 @@ class SearchContainer extends Component {
     let search = input.target === undefined ? input : input.target.value;
     this.props.enterSearch(search)
     .then(() => {
-      this.autoCompleteSearchSpotify()
+      this.autoCompleteSearchSpotify();
     })
   }
   setSelected(event){
-    const filter = event.target.value
-    this.props.setFilter(filter)
+    const filter = event.target.value;
+    this.props.setFilter(filter);
   }
 
   handleSongAdd(e) {
     const { playlist, dataSource } = this.props.search;
-    console.log(dataSource, e.target.value)
     let targetSong = dataSource.filter(song => {
       if(e.target.value === song.id){
         return song;
-      }
-    })[0];
+      }})[0];
+
     targetSong.artist = targetSong.artist ? targetSong.artist[0].name : targetSong.artists[0].name
     let trackInfo = {
       song_id: targetSong.id,
       artist: targetSong.artist,
       title: targetSong.name,
-      playlist_id: this.props.search.playlist.id
+      playlist_id: this.props.playlist.id
     }
 
     axios.post('/api/tracks/', { 
@@ -62,7 +62,7 @@ class SearchContainer extends Component {
   }
 
   addSongToPlaylist(event) {
-    event.preventDefault()
+    event.preventDefault();
     this.props.setSearchDefaults();
   }
 
@@ -85,7 +85,6 @@ class SearchContainer extends Component {
   }
 
   autoCompleteSearchSpotify() {
-    console.log('TRIGGERED')
     let { search, filter } = this.props.search
     axios.get(`https://api.spotify.com/v1/search?q=${filter}:${search}&type=track`)
     .then((data) => {
@@ -98,9 +97,8 @@ class SearchContainer extends Component {
   }
 
   updateRecentSongs(track) {
-    console.log(track)
-    let currentList = this.props.search.recentTracks
-    console.log(currentList);
+    console.log(this.props.playlist.recentTracks);
+    let currentList = this.props.playlist.recentTracks
     currentList.unshift(track)
     this.props.setRecentTracks(currentList);
   }
@@ -131,7 +129,8 @@ class SearchContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    search: state.search
+    search: state.search,
+    playlist: state.playlist
   };
 };
 
@@ -153,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(setSearchDefaults());
     },
     setFilter: (filter) => {
-      dispatch(setFiltet(filter))
+      dispatch(setFilter(filter))
     }
   };
 };

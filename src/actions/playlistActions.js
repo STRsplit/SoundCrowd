@@ -26,11 +26,19 @@ const setPlaylistOwner = (owner) => {
   };
 };
 
+const setRecentTracks = (tracks) => {
+  return {
+    type: 'SET_RECENT_TRACKS',
+    payload: tracks
+  };
+};
+
 export {
   setPlaylist,
   setPlaylistId,
   setPlaylistTracks,
-  setPlaylistOwner
+  setPlaylistOwner,
+  setRecentTracks,
 };
 
 /* * EG. FOR ASYNC FUNCTIONS * *

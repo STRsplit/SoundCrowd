@@ -22,7 +22,6 @@ class Playlist extends Component {
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
-    console.log('PLAYLIST GOT PLAYLIST VOTE', song_id, playlist_id, vote_val);
     let voteData = {
       songId: song_id,
       playlistId: playlist_id,
@@ -34,11 +33,9 @@ class Playlist extends Component {
   }
 
   componentDidMount() {
-    let context = this
+    let context = this;
     this.getPlaylistTracks();
-
     this.socket.emit('playlistId', this.props.match.params.playlistId)
-
     this.socket.on('join', function(joinedRoom) {
       context.getSessionInfo();
     });
@@ -55,18 +52,15 @@ class Playlist extends Component {
 
   getSessionInfo() {
     let context = this
-    axios.get('/api/user/sessionInfo', {
-      // params: {}
-    })
-    .then(res => {
-      console.log(res.data)
-      const { session_id, user_id } = res.data
-      context.socket.session_id = session_id
-      context.socket.user_id = user_id
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    axios.get('/api/user/sessionInfo')
+      .then(res => {
+        const { session_id, user_id } = res.data
+        context.socket.session_id = session_id
+        context.socket.user_id = user_id
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   getPlaylistTracks() {
