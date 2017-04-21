@@ -65,7 +65,7 @@ class Playlist extends Component {
   getPlaylistTracks() {
     const playlistId = this.props.match.params.playlistId;
     if (this.props.owner === undefined) {
-      axios.get('/api/playlists/' + this.props.playlist)
+      axios.get('/api/playlists/' + playlistId)
       .then(res => {
         this.props.setPlaylist({
           id: playlistId,
