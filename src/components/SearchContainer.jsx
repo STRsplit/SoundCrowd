@@ -16,6 +16,7 @@ import AccordionTest from './AccordionTest.jsx';
 class SearchContainer extends Component {
 
   componentWillMount() {
+    this.props.setSearchDefaults();
     this.handleSongAdd = this.handleSongAdd.bind(this);
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
     this.searchSpotify = this.searchSpotify.bind(this);

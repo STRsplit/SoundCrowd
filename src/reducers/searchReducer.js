@@ -22,7 +22,7 @@ const searchReducer = (state = initialState, action) => {
     case 'SET_SEARCH_DEFAULTS':
       state = {
         ...state,
-        filter: track,
+        filter: 'track',
         search: '',
         songs: []
     };
