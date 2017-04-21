@@ -13,15 +13,7 @@ module.exports = {
       })
         .then(songs => {
           if (songs.length) {
-            Song.findAll({ order: [['vote_count', 'DESC']] })
-              .then(allSongs => {
-                var position = 0;
-                allSongs.forEach(song => {
-                  song.position = position++;
-                  song.save();
-                });
-                resolve(allSongs);
-              });
+            resolve(this.reorderPlaylist(playlistId));
           } else {
             resolve(null);
           }
@@ -95,6 +87,24 @@ module.exports = {
     });
   },
 
+  reorderPlaylist: function(playlistId) {
+    return new Promise((resolve, reject) => {
+      Song.findAll({ 
+        where: { playlist_id: playlistId },
+        order: [['vote_count', 'DESC']] 
+      })
+        .then(allSongs => {
+          var position = 0;
+          allSongs.forEach(song => {
+            song.position = position++;
+            song.save();
+          });
+          resolve(allSongs);
+        })
+        .catch(err => reject(err));
+    });
+  },
+
   updateVoteCount: function(songId, playlistId, vote) {
     Song.find({ where: {
       song_id: songId,
@@ -110,13 +120,12 @@ module.exports = {
   },
 
   addTrack: function(song, cb) {
-    console.log('INFO YOU WANTED', song, song)
     let addedSong = Song.build({
         artist: song.artist,
         title: song.title,
         song_id: song.song_id,
         playlist_id: song.playlist_id,
-        vote_count: 1
+        vote_count: 0
       });
 
     addedSong.save()
@@ -126,5 +135,22 @@ module.exports = {
     .catch(err => {
       cb(err)
     })
+  },
+
+  resetTrack: function(songId, playlistId) {
+    return new Promise((resolve, reject) => {
+      Song.find({ where: {
+        song_id: songId,
+        playlist_id: playlistId
+      }})
+      .then(song.update({ vote_count: 0 }))
+      .catch(err => reject(err));
+
+      Vote.destroy({ where: {
+        song_id: songId,
+        playlist_id: playlistId
+      }})
+      .catch(err => reject(err));
+    });
   }
 };
