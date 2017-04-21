@@ -119,7 +119,6 @@ module.exports = {
         var newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
           .then(song => {
-            console.log('LOOOK AT WHERE YOU ARE', song.dataValues)
             resolve(song.dataValues)
           })
       })

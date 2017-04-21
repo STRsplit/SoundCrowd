@@ -15,7 +15,6 @@ class Playlist extends Component {
   componentWillMount () {
     this.socket = io.connect();
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
-
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
@@ -23,6 +22,7 @@ class Playlist extends Component {
   }
 
    handlePlaylistVote(song_id, playlist_id, vote_val){
+    console.log('PLAYLIST GOT PLAYLIST VOTE', song_id, playlist_id, vote_val);
     let voteData = {
       songId: song_id,
       playlistId: playlist_id,
@@ -36,7 +36,9 @@ class Playlist extends Component {
   componentDidMount() {
     let context = this
     this.getPlaylistTracks();
-    this.socket.emit('playlistId', this.props.playlist)
+
+    this.socket.emit('playlistId', this.props.match.params.playlistId)
+
     this.socket.on('join', function(joinedRoom) {
       context.getSessionInfo();
     });
@@ -85,16 +87,15 @@ class Playlist extends Component {
 
   handlePlaylistUpdate(playlist) {
     if(!playlist){
-      console.log('ERRORR WITH PLAYLIST')
+      console.log('ERROR WITH PLAYLIST')
     } else {
-      this.setPlaylistTracks({tracks: playlist});
+      this.props.setPlaylistTracks(playlist);
     }
   }
 
   handleSongVoteUpdate(songVoteData) {
-    console.log(songVoteData);
     const { songId, vote } = songVoteData
-    let tracks = this.state.tracks
+    let tracks = this.props.playlist.tracks
     tracks = tracks.map(track => {
       if(track.song_id === songId){
         track.vote_count += vote
@@ -103,7 +104,7 @@ class Playlist extends Component {
         return track;
       }
     })
-    this.setPlaylistTracks({ tracks })
+    this.props.setPlaylistTracks(tracks)
   }
 
  
@@ -118,7 +119,7 @@ class Playlist extends Component {
 
   render() {
     const { playlist } = this.props 
-    var tracks = playlist.tracks.map(track => (
+    var playlistTracks = playlist.tracks.map(track => (
       <Track key={track.song_id} 
       playlist={playlist.id} 
       track={track} 

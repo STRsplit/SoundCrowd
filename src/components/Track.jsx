@@ -7,8 +7,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import SongEntry from './SongEntry.jsx';
 
-const style = {
-};
 
 
 class Track extends Component {

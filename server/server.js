@@ -8,7 +8,6 @@ var spotifyRouter = require('./routes/spotifyRouter');
 var spotifyCronJob = require('./spotifyCron');
 spotifyCronJob.start();
 
-
 var spotify = require('./spotify');
 var db = require('../database/db');
 var dbHelpers = require('../database/dbHelpers');
@@ -28,7 +27,6 @@ var client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) :
 
 var app = express();
 var port = process.env.PORT || 3000;
-
 
 
 
