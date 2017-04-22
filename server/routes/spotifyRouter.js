@@ -3,6 +3,8 @@ var spotify = require('../spotify');
 
 var router = express.Router();
 
+var preferences;
+
 router.route('/playlists')
 .get(function(req, res) {
   spotify.getUserPlaylists(req.user.id, function(err, playlists) {
@@ -11,22 +13,16 @@ router.route('/playlists')
   });    
 })
 .post(function(req, res) {
-  var preferences = {
+  preferences = {
     mood: req.body.mood,
     activity: req.body.activity
   };
   res.sendStatus(201);
-  // spotify.createPlaylist(req.user.id, preferences, function(err, playlist) {
-  //   if (err) res.status(err.statusCode).send(err);
-  //   else res.sendStatus(201);
-  // });
 });
 
 router.get('/create', function(req, res) {
-  var preferences = {
-    mood: req.body.mood,
-    activity: req.body.activity
-  };
+  console.log('in create successfully');
+  console.log('preferences ', preferences);
   spotify.createPlaylist(req.user.id, preferences, function(err, result) {
     if(err) res.status(err.statusCode).send(err);
     else res.status(200).send(result);

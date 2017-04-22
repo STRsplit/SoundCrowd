@@ -2,28 +2,26 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../actions/filtersActions';
+import { setPlaylist } from '../actions/playlistActions';
 import Playlist from './Playlist.jsx'
 
 class NewPlaylist extends React.Component {
-  constructor(props) {
-		super(props);
-		this.state = {
-			owner: ''
-		}
-	}
+
 
 	componentWillMount() {
 		const { mood, activity } = this.props.filters;
+		console.log('mood ', mood);
+		console.log('activity ', activity);
     console.log('in comp will mount');
 		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity
 		}) 
 		.then(res => {
+			console.log('post went through');
 			axios.get('/api/spotify/create')
 			.then((result) => {
 				console.log('test result: ', result);
-				this.setState({owner: result.data.owner});
 				this.props.setPlaylist({
 					id: result.data.id,
 	        owner: result.data.owner,
@@ -37,7 +35,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  {this.state.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist />}
+	  	  {this.props.playlist.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist />}
 		  </div>	
 	  );
 	}
@@ -45,8 +43,17 @@ class NewPlaylist extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.filters
+    filters: state.filters,
+    playlist: state.playlist
   };
 };
 
-export default connect(mapStateToProps, null)(NewPlaylist);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPlaylist: (playlist) => { //this.props.setPlaylist to access this global state function
+      dispatch(setPlaylist(playlist));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPlaylist);

@@ -63,10 +63,9 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
-    const playlistId = this.props.match.params.playlistId;
-    var user = this.props.playlist.owner;
-    var music = this.props.playlist.tracks;
-    if (this.props.owner === undefined) {
+    if (this.props.match !== undefined) {
+      const playlistId = this.props.match.params.playlistId;
+      console.log('regular path');
       axios.get('/api/playlists/' + playlistId)
       .then(res => {
         this.props.setPlaylist({
@@ -118,7 +117,6 @@ class Playlist extends Component {
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
     ));
-    console.log('this is state: ', this.state);
     
     return (
       <div>
