@@ -52,7 +52,7 @@ class Playlist extends Component {
 
   getSessionInfo() {
     let context = this
-    axios.get('/api/user/sessionInfo')
+    axios.get('/api/user/session_info')
       .then(res => {
         const { session_id, user_id } = res.data
         context.socket.session_id = session_id

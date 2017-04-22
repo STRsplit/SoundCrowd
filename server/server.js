@@ -80,7 +80,7 @@ app.get('/auth/spotify/callback',
 
 app.get('/api/verifyuser', handler.verifyUser);
 
-app.get('/api/user/sessionInfo', function(req, res){
+app.get('/api/user/session_info', function(req, res){
   const sessionInfo = {
     user_id: req.user ? req.user.id : '',
     session_id: req.sessionID

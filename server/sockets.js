@@ -18,7 +18,7 @@ module.exports = function(io){
         if(song){
           dbHelpers.checkForReorder(song, playlistId, vote)
           .then(playlists => {
-            if(playlists.length > 0){
+            if(playlists.length){
               io.sockets.in(playlistId).emit('updatePlaylist', playlists)
             } else {
               io.sockets.in(playlistId).emit('updateSongVoteCount', voteData)

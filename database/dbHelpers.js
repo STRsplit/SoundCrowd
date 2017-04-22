@@ -15,7 +15,7 @@ module.exports = {
         if (songs.length) {
           resolve(this.reorderPlaylist(playlistId));
         } else {
-          resolve(songs);
+          resolve(null);
         }
       })
     })
