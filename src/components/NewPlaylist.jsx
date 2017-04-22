@@ -2,8 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../actions/filtersActions';
+import Playlist from './Playlist.jsx'
 
 class NewPlaylist extends React.Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+			owner: ''
+		}
+	}
 
 	componentWillMount() {
 		this.href = '';
@@ -21,6 +28,7 @@ class NewPlaylist extends React.Component {
 			  this.href = result.data.link;
 			});
 			* * OLD CODE * */
+			this.props.setPlaylist({})
 		})
 		.catch(err => console.log(err));
 	}
@@ -28,8 +36,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  <h1>Recommended Playlist</h1>
-	  	  <a href={this.href}>Your Playlist</a>	  
+	  	  {this.state.owner === '' ? <h2>Loading...</h2> : <Playlist tracks={this.state.tracks} owner={this.state.owner} playlist={this.state.id}/>}
 		  </div>	
 	  );
 	}

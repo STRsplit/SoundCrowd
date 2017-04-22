@@ -64,9 +64,9 @@ class Playlist extends Component {
 
   getPlaylistTracks() {
     const playlistId = this.props.match.params.playlistId;
-    axios.get('/api/playlists/' + playlistId)
+    if (this.props.owner === undefined) {
+      axios.get('/api/playlists/' + this.props.playlist)
       .then(res => {
-        const { owner, tracks } = res.data;
         this.props.setPlaylist({
           id: playlistId,
           owner: owner,
@@ -116,6 +116,7 @@ class Playlist extends Component {
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
     ));
+    console.log('this is state: ', this.state);
     
     return (
       <div>
