@@ -1,4 +1,4 @@
-var { Playlist, Song, Vote } = require('./db.js');
+const { Playlist, Song, Vote } = require('./db.js');
 
 module.exports = {
   checkForReorder: function(song, playlistId, vote) {
@@ -11,17 +11,17 @@ module.exports = {
         },
         order: ['position']
       })
-        .then(songs => {
-          if (songs.length) {
-            resolve(this.reorderPlaylist(playlistId));
-          } else {
-            resolve(null);
-          }
-    })
+      .then(songs => {
+        if (songs.length) {
+          resolve(this.reorderPlaylist(playlistId));
+        } else {
+          resolve(null);
+        }
       })
-      .catch(err => {
-        reject(err);
-      });
+    })
+    .catch(err => {
+      reject(err);
+    });
   },
 
   getPlaylist: function(playlistId) {
@@ -61,20 +61,24 @@ module.exports = {
         user_id: userId
       }})
         .then(playlist => {
-          var position = 0;
-          tracks = tracks.items.map(track => {
-            var trackObj = {
-              song_id: track.track.id,
-              playlist_id: playlistId,
-              title: track.track.name,
-              artist: track.track.artists ? track.track.artists[0].name : '',
-                // weird issue where rarely there's no artists array
-                // fix later to map all artist names to string, then save
-              vote_count: 0,
-              position: position++
-            }; 
-            return trackObj;
-          });
+          let position = 0;
+          tracks = tracks.items.reduce((allTracks, track) => {
+            const { id, name, artists } = track.track;
+            if(track.track.id !== null) {
+              let trackObj = {
+                song_id: id,
+                playlist_id: playlistId,
+                title: name,
+                artist: artists ? artists[0].name : '',
+                  // weird issue where rarely there's no artists array
+                  // fix later to map all artist names to string, then save
+                vote_count: 0,
+                position: position++
+              }; 
+              allTracks.push(trackObj);
+              return allTracks;
+            }
+          }, []);
 
           Song.bulkCreate(tracks)
             .then(savedTracks => {
@@ -94,7 +98,7 @@ module.exports = {
         order: [['vote_count', 'DESC']] 
       })
         .then(allSongs => {
-          var position = 0;
+          let position = 0;
           allSongs.forEach(song => {
             song.position = position++;
             song.save();
@@ -106,18 +110,23 @@ module.exports = {
   },
 
   updateVoteCount: function(songId, playlistId, vote) {
-    Song.find({ where: {
-      song_id: songId,
-      playlist_id: playlistId
-    }})
+    return new Promise((resolve, reject) => {
+      Song.find({ where: {
+        song_id: songId,
+        playlist_id: playlistId
+      }})
       .then(song => {
-        var newCount = song.vote_count + vote;
+        let newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
-          .then(() => {
-            this.checkForReorder(song, playlistId, vote);
+          .then(song => {
+            resolve(song.dataValues);
           });
-      });
-  },
+      })
+      .catch(err => {
+        reject(err);
+      })
+    });
+  },  
 
   addTrack: function(song, cb) {
     let addedSong = Song.build({
@@ -130,10 +139,13 @@ module.exports = {
 
     addedSong.save()
     .then(result => {
-      cb(null, result)
+      this.reorderPlaylist(song.playlist_id)
+      .then(playlist => {
+        cb(null, true);
+      })
     })
     .catch(err => {
-      cb(err)
+      cb(err);
     })
   },
 

@@ -48,11 +48,11 @@ class App extends Component {
                     <Route path="/app/new-playlist" component={NewPlaylist} />
                   </Switch>
                 </div>
-    		  	  </div>
-    		  	</Col>
-            <Col className="layout-column column-right" xs="18" md="3"><RightBar /></Col>
-          </Row>
-        </Container>
+      		  	  </div>
+      		  	</Col>
+              <Col className="layout-column column-right" xs="0" md="3"><RightBar /></Col>
+            </Row>
+	        </Container>
           </div>
 		  </div>
       </Switch>

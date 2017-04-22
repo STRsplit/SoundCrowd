@@ -1,26 +1,47 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var handler = require('./requestHandler');
-var router = require('./routes/router');
-var spotifyRouter = require('./routes/spotifyRouter');
-var spotifyCronJob = require('./spotifyCron');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const handler = require('./requestHandler');
+
+const router = require('./routes/router');
+const spotifyRouter = require('./routes/spotifyRouter');
+const spotifyCronJob = require('./spotifyCron');
 spotifyCronJob.start();
 
+const spotify = require('./spotify');
+const db = require('../database/db');
+const dbHelpers = require('../database/dbHelpers');
+
+
+
+
+
+
 /* * Authentication * */
-var session = require('express-session');
-var redis = require('redis');
-var redisStore = require('connect-redis')(session);
-var passport = require('passport');
-var client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
+const session = require('express-session');
+const redis = require('redis');
+const redisStore = require('connect-redis')(session);
+const passport = require('passport');
+const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
 
 
-var app = express();
-var port = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
+
+
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+/* * Socket Integration * */
+const server = app.listen(port, function(){
+  console.log("Server started: http://localhost:" + port + "/");
+})
+
+const io = require ('socket.io').listen(server);
+const socketManager = require('./sockets.js')(io);
+
 
 /* *  Authentication * */
 app.use(session({
@@ -56,6 +77,29 @@ app.get('/auth/spotify/callback',
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
 );
 
+
+app.get('/api/verifyuser', handler.verifyUser);
+
+app.get('/api/user/session_info', function(req, res){
+  const { user, sessionID } = req;
+  const sessionInfo = {
+    user_id: user ? user.id : '',
+    session_id: sessionID
+  };
+  res.status(200).send(sessionInfo)
+});
+
+/* *  Authentication * */
+
+// app.get('/api/trackTest', function(req, res) {
+//   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
+//     if (err) res.status(err.statusCode).send(err);
+//     else res.status(200).send();
+//   });
+// });
+
+
+
 app.get('/logout', handler.logoutUser);
 app.get('*', function(req, res) {
 	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
@@ -66,6 +110,7 @@ app.get('/*', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(port, function() {
-  console.log(`listening on port!${port}`);
-});
+// app.listen(port, function() {
+//   console.log(`listening on port!${port}`);
+// });
+
