@@ -104,7 +104,7 @@ class Playlist extends Component {
   renderTracks() {
     return this.props.playlist.tracks.map(track => (
       <Track key={track.song_id} 
-      playlist={playlist.id} 
+      playlist={this.props.playlist.id} 
       track={track} 
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
