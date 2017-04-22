@@ -33,30 +33,28 @@ class Playlist extends Component {
   }
 
   componentDidMount() {
-    let context = this;
     this.getPlaylistTracks();
     this.socket.emit('playlistId', this.props.match.params.playlistId)
-    this.socket.on('join', function(joinedRoom) {
-      context.getSessionInfo();
+    this.socket.on('join', joinedRoom => {
+      this.getSessionInfo();
     });
-    this.socket.on('updatePlaylist', function(playlistData){
-      context.handlePlaylistUpdate(playlistData);
+    this.socket.on('updatePlaylist', playlistData => {
+      this.handlePlaylistUpdate(playlistData);
     });
-    this.socket.on('updateSongVoteCount', function(songVoteData){
-      context.handleSongVoteUpdate(songVoteData);
+    this.socket.on('updateSongVoteCount', songVoteData => {
+      this.handleSongVoteUpdate(songVoteData);
     });
-    this.socket.on('voteError', function(voteErrorInfo){
+    this.socket.on('voteError', voteErrorInfo => {
       console.log('Sorry, but you\'ve already voted:', voteErrorInfo)
     });
   }
 
   getSessionInfo() {
-    let context = this
     axios.get('/api/user/session_info')
       .then(res => {
         const { session_id, user_id } = res.data
-        context.socket.session_id = session_id
-        context.socket.user_id = user_id
+        this.socket.session_id = session_id
+        this.socket.user_id = user_id
       })
       .catch(err => {
         console.log(err);
@@ -100,9 +98,6 @@ class Playlist extends Component {
     })
     this.props.setPlaylistTracks(tracks)
   }
-
- 
-  
 
   sortTracks() {
     // var sortedTracks = this.state.tracks.sort((a, b) => {
