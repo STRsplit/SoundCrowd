@@ -18,7 +18,7 @@ class PlaylistSuggester extends Component {
     this.setActivity = this.setActivity.bind(this);
     this.toggleMood = this.toggleMood.bind(this);
     this.toggleActivity = this.toggleActivity.bind(this);
-    this.findPlaylist = this.findPlaylist.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
 
@@ -48,6 +48,15 @@ class PlaylistSuggester extends Component {
     this.setState({
       showActivity: !this.state.showActivity
     });
+  }
+
+  closeMenu(e) {
+    if (e.target.id !== 'mood-menu' && this.state.showMood === true) {
+      this.toggleMood();
+    }
+    if (e.target.id !== 'activity-menu' && this.state.showActivity === true) {
+      this.toggleActivity();
+    }
   }
 
   render() {

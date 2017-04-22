@@ -83,13 +83,20 @@ ol {
 
 #mood-menu {
   position: relative;
-  left: 300px;
+  left: 309px;
+  bottom: 14px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 #mood-menu div {
   heigth: 24px;
   width: 150px;
   background-color: #fff;
+}
+
+#mood-menu div:hover {
+  background: #b2ddea;
 }
 
 #activity {
@@ -115,13 +122,20 @@ ol {
 
 #activity-menu {
   position: relative;
-  left: 300px;
+  left: 309px;
+  bottom: 14px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 #activity-menu div {
   heigth: 24px;
   width: 150px;
   background-color: #fff;
+}
+
+#activity-menu div:hover {
+  background: #b2ddea;
 }
 
 #recommended-link {
