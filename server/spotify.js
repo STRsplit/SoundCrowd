@@ -71,7 +71,7 @@ module.exports = {
               .then(playlist => {
                 var result = customPlaylist.selectTracks(playlist, preferences.activity);
                 spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
-                  .then(() => cb(null, result));
+                  .then((result) => cb(null, result));
               });
           })
       }) 

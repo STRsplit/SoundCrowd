@@ -14,7 +14,7 @@ class NewPlaylist extends React.Component {
 
 	componentWillMount() {
 		const { mood, activity } = this.props.filters;
-
+    console.log('in comp will mount');
 		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity

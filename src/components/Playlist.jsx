@@ -64,13 +64,15 @@ class Playlist extends Component {
 
   getPlaylistTracks() {
     const playlistId = this.props.match.params.playlistId;
+    var user = this.props.playlist.owner;
+    var music = this.props.playlist.tracks;
     if (this.props.owner === undefined) {
       axios.get('/api/playlists/' + playlistId)
       .then(res => {
         this.props.setPlaylist({
           id: playlistId,
-          owner: owner,
-          tracks: tracks
+          owner: res.data.owner,
+          tracks: res.data.tracks
         });
       })
       .catch(err => {

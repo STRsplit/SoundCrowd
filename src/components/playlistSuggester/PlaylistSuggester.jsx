@@ -8,13 +8,14 @@ import { setFilters } from '../../actions/filtersActions';
 
 class PlaylistSuggester extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       showMood: false,
       showActivity: false,
       mood: 'Choose One',
       activity: 'Choose One'
     }
+    this.findPlaylist = this.findPlaylist.bind(this);
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
     this.toggleMood = this.toggleMood.bind(this);
