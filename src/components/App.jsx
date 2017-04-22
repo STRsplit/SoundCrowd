@@ -46,7 +46,7 @@ class App extends Component {
                   </div>
       		  	  </div>
       		  	</Col>
-              <Col className="layout-column column-right" xs="18" md="3"><RightBar /></Col>
+              <Col className="layout-column column-right" xs="0" md="3"><RightBar /></Col>
             </Row>
           </Container>
         </div>
