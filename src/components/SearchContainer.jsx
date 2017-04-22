@@ -22,6 +22,8 @@ class SearchContainer extends Component {
     this.searchSpotify = this.searchSpotify.bind(this);
     this.autoCompleteSearchSpotify = this.autoCompleteSearchSpotify.bind(this);
     this.updateRecentSongs = this.updateRecentSongs.bind(this);
+    this.enterSearch = this.enterSearch.bind(this);
+    this.setSelected = this.setSelected.bind(this);
   }
 
   enterSearch(input){
@@ -29,6 +31,9 @@ class SearchContainer extends Component {
     this.props.enterSearch(search)
     .then(() => {
       this.autoCompleteSearchSpotify();
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
   setSelected(event){
@@ -43,21 +48,23 @@ class SearchContainer extends Component {
         return song;
       }})[0];
 
-    targetSong.artist = targetSong.artist ? targetSong.artist[0].name : targetSong.artists[0].name
+    let { artist, artists, id, name } = targetSong;
+    // targetSong.artist = targetSong.artist ? targetSong.artist[0].name : targetSong.artists[0].name;
+    artist = artist ? artist[0].name : artists[0].name;
     let trackInfo = {
-      song_id: targetSong.id,
-      artist: targetSong.artist,
-      title: targetSong.name,
+      song_id: id,
+      artist: artist,
+      title: name,
       playlist_id: this.props.playlist.id
-    }
+    };
 
     axios.post('/api/tracks/', { 
       track: trackInfo
     })
-    .then((res) => {
+    .then(res => {
       this.updateRecentSongs(trackInfo);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('Request resulted in an error', error);
     })
   }
@@ -75,53 +82,52 @@ class SearchContainer extends Component {
         filter: filter
       }
     })
-    .then((data) => {
+    .then(data => {
       let songs = data.data;
       let search = '';
-      this.props.setSearchResults(songs, search)
+      this.props.setSearchResults(songs, search);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('Request resulted in an error', error);
     })
   }
 
   autoCompleteSearchSpotify() {
-    let { search, filter } = this.props.search
+    let { search, filter } = this.props.search;
     axios.get(`https://api.spotify.com/v1/search?q=${filter}:${search}&type=track`)
-    .then((data) => {
-      let songs = data.data.tracks.items
-      this.props.setDataSource(songs)
+    .then(data => {
+      let songs = data.data.tracks.items;
+      this.props.setDataSource(songs);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('Request resulted in an error', error);
     })
   }
 
   updateRecentSongs(track) {
-    console.log(this.props.playlist.recentTracks);
-    let currentList = this.props.playlist.recentTracks
+    let currentList = this.props.playlist.recentlyAddedTracks
     currentList.unshift(track)
-    this.props.setRecentTracks(currentList);
+    this.props.setRecentAddedTracks(currentList);
   }
 
   render(){
     let { search, filter, songs } = this.props.search
     const searchSongs = songs.map((song, idx) => (
         <div>
-          <SongEntry songInfo={song} addSong={(e) => this.addSongToPlaylist(e)} images={song.album.images}/>
+          <SongEntry songInfo={song} addSong={this.addSongToPlaylist} images={song.album.images}/>
         </div>
     ));
     return (
       <div className="searchcontainer-container">
         <SearchBar stats={this.props.search} text={search} 
           selectedOption={filter} 
-          handleSelect={(e) => this.setSelected(e)} 
+          handleSelect={this.setSelected} 
           handleSearch={this.searchSpotify} 
-          handleChange={(e) => this.enterSearch(e)} 
+          handleChange={this.enterSearch} 
         />
         
         <div>
-          <SongGenreSection addSong={(e) => this.handleSongAdd(e)} songs={songs} />
+          <SongGenreSection addSong={this.handleSongAdd} songs={songs} />
         </div>
       </div>
     )

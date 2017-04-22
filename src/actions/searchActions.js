@@ -1,19 +1,19 @@
 
-const enterSearch = (search) => {
+const enterSearch = search => {
   return {
     type: 'SET_ENTER_SEARCH',
     payload: Promise.resolve(search)
   };
 };
 
-const setDataSource = (songs) => {
+const setDataSource = songs => {
   return {
     type: 'SET_DATA_SOURCE',
     payload: songs
   };
 };
 
-const setFilter = (filter) => {
+const setFilter = filter => {
   return {
     type: 'SET_FILTER',
     payload: filter

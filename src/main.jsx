@@ -54,9 +54,8 @@ class Main extends React.Component {
     this.context.router.replace('/login');
 	}
 
-
   render() {
-    const { loggedIn } = this.state
+    const { loggedIn } = this.state;
 
     return (
       <BrowserRouter>

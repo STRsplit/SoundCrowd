@@ -1,4 +1,4 @@
-var { Playlist, Song, Vote } = require('./db.js');
+const { Playlist, Song, Vote } = require('./db.js');
 
 module.exports = {
   checkForReorder: function(song, playlistId, vote) {
@@ -61,14 +61,15 @@ module.exports = {
         user_id: userId
       }})
         .then(playlist => {
-          var position = 0;
+          let position = 0;
           tracks = tracks.items.reduce((allTracks, track) => {
+            const { id, name, artists } = track.track;
             if(track.track.id !== null) {
-              var trackObj = {
-                song_id: track.track.id,
+              let trackObj = {
+                song_id: id,
                 playlist_id: playlistId,
-                title: track.track.name,
-                artist: track.track.artists ? track.track.artists[0].name : '',
+                title: name,
+                artist: artists ? artists[0].name : '',
                   // weird issue where rarely there's no artists array
                   // fix later to map all artist names to string, then save
                 vote_count: 0,
@@ -97,7 +98,7 @@ module.exports = {
         order: [['vote_count', 'DESC']] 
       })
         .then(allSongs => {
-          var position = 0;
+          let position = 0;
           allSongs.forEach(song => {
             song.position = position++;
             song.save();
@@ -115,14 +116,14 @@ module.exports = {
         playlist_id: playlistId
       }})
       .then(song => {
-        var newCount = song.vote_count + vote;
+        let newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
           .then(song => {
-            resolve(song.dataValues)
-          })
+            resolve(song.dataValues);
+          });
       })
       .catch(err => {
-        reject(err)
+        reject(err);
       })
     });
   },  
@@ -144,7 +145,7 @@ module.exports = {
       })
     })
     .catch(err => {
-      cb(err)
+      cb(err);
     })
   },
 

@@ -1,44 +1,44 @@
-const setPlaylist = (playlist) => {
+const setPlaylist = playlist => {
   return {
     type: 'SET_PLAYLIST',
     payload: playlist
   };
 };
 
-const setPlaylistId = (id) => {
+const setPlaylistId = id => {
   return {
     type: 'SET_PLAYLIST_ID',
     payload: id
   };
 };
 
-const setPlaylistTracks = (tracks) => {
+const setPlaylistTracks = tracks => {
   return {
     type: 'SET_PLAYLIST_TRACKS',
     payload: tracks
   };
 };
 
-const setPlaylistOwner = (owner) => {
+const setPlaylistOwner = owner => {
   return {
     type: 'SET_PLAYLIST_OWNER',
     payload: owner
   };
 };
 
-const setRecentAddedTracks = (tracks) => {
+const setRecentAddedTracks = tracks => {
   return {
     type: 'SET_RECENTLY_ADDED_TRACKS',
     payload: tracks
   };
 };
-const setRecentPlayedTracks = (tracks) => {
+const setRecentPlayedTracks = tracks => {
   return {
     type: 'SET_RECENTLY_PLAYED_TRACKS',
     payload: tracks
   };
 };
-const setTrendingTracks = (tracks) => {
+const setTrendingTracks = tracks => {
   return {
     type: 'SET_TRENDING_TRACKS',
     payload: tracks

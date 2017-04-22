@@ -9,14 +9,14 @@ const verifyUser = (req, res) => {
   res.send(obj);
 };
 
-const validateVote = (voteData) => {
+const validateVote = voteData => {
   return new Promise((resolve, reject) => {
-    const { songId, playlistId, vote, user_id, session_id } = voteData
-    var voteObj = {
+    const { songId, playlistId, vote, user_id, session_id } = voteData;
+    let voteObj = {
       song_id: songId, 
       playlist_id: playlistId,
       vote: vote
-    }
+    };
     if (user_id.length) {
       voteObj.user_id = user_id
       return db.Vote.find({ where: voteObj })
@@ -31,13 +31,15 @@ const validateVote = (voteData) => {
           // });
           dbHelpers.updateVoteCount(songId, playlistId, vote)
           .then(song => {
-            resolve(song)
+            resolve(song);
           })
-        } else resolve(null)
+        } else {
+          resolve(null);
+        }
       })
-      .catch(err => console.log('requestHandler > validateVote error: ', err))
+      .catch(err => console.log('requestHandler > validateVote error: ', err));
     } else {
-      voteObj.session_id = session_id
+      voteObj.session_id = session_id;
       return db.Vote.find({ where: voteObj })
       .then(result => {
         if (!result) {
@@ -50,9 +52,11 @@ const validateVote = (voteData) => {
           // });
           dbHelpers.updateVoteCount(songId, playlistId, vote)
           .then(song => {
-            resolve(song)
+            resolve(song);
           })
-        } else resolve(null)
+        } else {
+          resolve(null);
+        }
       })
       .catch(err => console.log('requestHandler > validateVote error: ', err));
     }

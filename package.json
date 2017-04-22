@@ -85,7 +85,6 @@
     "sequelize": "^3.30.4",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
-    "socketio-wildcard": "^0.4.0",
     "spotify-web-api-node": "^2.3.6",
     "style-loader": "^0.16.1",
     "webpack": "^2.2.1",

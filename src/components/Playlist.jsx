@@ -22,14 +22,15 @@ class Playlist extends Component {
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
+    const { user_id, session_id } = this.socket;
     let voteData = {
       songId: song_id,
       playlistId: playlist_id,
       vote: vote_val,
-      user_id: this.socket.user_id,
-      session_id: this.socket.session_id
+      user_id: user_id,
+      session_id: session_id
     }
-    this.socket.emit('recordVote', voteData)
+    this.socket.emit('recordVote', voteData);
   }
 
   componentDidMount() {
@@ -45,16 +46,16 @@ class Playlist extends Component {
       this.handleSongVoteUpdate(songVoteData);
     });
     this.socket.on('voteError', voteErrorInfo => {
-      console.log('Sorry, but you\'ve already voted:', voteErrorInfo)
+      console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
   }
 
   getSessionInfo() {
     axios.get('/api/user/session_info')
       .then(res => {
-        const { session_id, user_id } = res.data
-        this.socket.session_id = session_id
-        this.socket.user_id = user_id
+        const { session_id, user_id } = res.data;
+        this.socket.session_id = session_id;
+        this.socket.user_id = user_id;
       })
       .catch(err => {
         console.log(err);
@@ -79,15 +80,15 @@ class Playlist extends Component {
 
   handlePlaylistUpdate(playlist) {
     if(!playlist){
-      console.log('ERROR WITH PLAYLIST')
+      console.log('ERROR WITH PLAYLIST');
     } else {
       this.props.setPlaylistTracks(playlist);
     }
   }
 
   handleSongVoteUpdate(songVoteData) {
-    const { songId, vote } = songVoteData
-    let tracks = this.props.playlist.tracks
+    const { songId, vote } = songVoteData;
+    let tracks = this.props.playlist.tracks;
     tracks = tracks.map(track => {
       if(track.song_id === songId){
         track.vote_count += vote
@@ -96,7 +97,7 @@ class Playlist extends Component {
         return track;
       }
     })
-    this.props.setPlaylistTracks(tracks)
+    this.props.setPlaylistTracks(tracks);
   }
 
   sortTracks() {
@@ -107,7 +108,7 @@ class Playlist extends Component {
   }
 
   render() {
-    const { playlist } = this.props 
+    const { playlist } = this.props;
     var playlistTracks = playlist.tracks.map(track => (
       <Track key={track.song_id} 
       playlist={playlist.id} 

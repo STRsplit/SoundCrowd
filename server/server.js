@@ -1,16 +1,16 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var handler = require('./requestHandler');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const handler = require('./requestHandler');
 
-var router = require('./routes/router');
-var spotifyRouter = require('./routes/spotifyRouter');
-var spotifyCronJob = require('./spotifyCron');
+const router = require('./routes/router');
+const spotifyRouter = require('./routes/spotifyRouter');
+const spotifyCronJob = require('./spotifyCron');
 spotifyCronJob.start();
 
-var spotify = require('./spotify');
-var db = require('../database/db');
-var dbHelpers = require('../database/dbHelpers');
+const spotify = require('./spotify');
+const db = require('../database/db');
+const dbHelpers = require('../database/dbHelpers');
 
 
 
@@ -18,15 +18,15 @@ var dbHelpers = require('../database/dbHelpers');
 
 
 /* * Authentication * */
-var session = require('express-session');
-var redis = require('redis');
-var redisStore = require('connect-redis')(session);
-var passport = require('passport');
-var client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
+const session = require('express-session');
+const redis = require('redis');
+const redisStore = require('connect-redis')(session);
+const passport = require('passport');
+const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
 
 
-var app = express();
-var port = process.env.PORT || 3000;
+const app = express();
+const port = process.env.PORT || 3000;
 
 
 
@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 /* * Socket Integration * */
-var server = app.listen(port, function(){
+const server = app.listen(port, function(){
   console.log("Server started: http://localhost:" + port + "/");
 })
 
@@ -81,10 +81,11 @@ app.get('/auth/spotify/callback',
 app.get('/api/verifyuser', handler.verifyUser);
 
 app.get('/api/user/session_info', function(req, res){
+  const { user, sessionID } = req;
   const sessionInfo = {
-    user_id: req.user ? req.user.id : '',
-    session_id: req.sessionID
-  }
+    user_id: user ? user.id : '',
+    session_id: sessionID
+  };
   res.status(200).send(sessionInfo)
 });
 

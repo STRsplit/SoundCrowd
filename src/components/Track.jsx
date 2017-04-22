@@ -19,23 +19,22 @@ class Track extends Component {
   }
 
   handleVote(vote_val) {
-    const { playlist, track } = this.props
-    const { song_id } = track
-    this.props.handlePlaylistVote(song_id, playlist, vote_val)
-    this.setState({ voted: vote_val })
+    const { playlist, track } = this.props;
+    const { song_id } = track;
+    this.props.handlePlaylistVote(song_id, playlist, vote_val);
+    this.setState({ voted: vote_val });
   }
 
   render() {
-
-    const { voted } = this.state
-    const { title, artist, vote_count } = this.props.track
+    const { voted } = this.state;
+    const { title, artist, vote_count } = this.props.track;
     const voteUp = (
       <div>
         <div className="triangle-up" onClick={() => this.handleVote(1)}></div>
         <span className="voteCount">{vote_count}</span>
         <div className="triangle-down" onClick={() => this.handleVote(-1)}></div>
       </div>
-    )
+    );
 
     return (
       <div>
