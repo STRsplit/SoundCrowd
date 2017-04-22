@@ -23,7 +23,7 @@ class Login extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="login-container">
         <div>
           <div className="center-content">
@@ -47,7 +47,7 @@ class Login extends Component {
           <p className="tagline">Lorem Ipsum dhfjh adsljhfjashd  dsfh jaedsjfd. fjdshjfhjas e jledhsfj h sdlkafh ljads f </p>
         </div>
         <div className="spotifyLogoContainer">
-          <img className="spotifyLogo" src="https://img.clipartfest.com/3162c449b8951de3e76ed09cc47ffcbd_-delivery-at-spotify-spotify-clipart-transparent_3159-1228.png"/>
+          <img className="spotifyLogo" src="./assets/images/spotify-clipart.png"/>
         </div>
       </div>
     );

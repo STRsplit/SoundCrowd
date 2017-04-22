@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { setPlaylists } from '../actions/playlistsActions';
 import { setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
 
+import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
+
 import { Spinner } from 'elemental';
 import Paper from 'material-ui/Paper';
 
@@ -34,7 +36,7 @@ class Playlists extends Component {
   render() {
     const userPlaylists = this.props.playlists.playlists.map(playlist => {
       const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
-      return (
+      return (        
         <Link to={`/app/playlists/${playlist.id}`} 
           key={playlist.id} style={style.link} 
           onClick={() => this.props.setPlaylistId(playlist.id)}
@@ -54,6 +56,7 @@ class Playlists extends Component {
 
     return (
       <div>
+        <PlaylistSuggester />
         <hr />
         <h2>PLAYLISTS</h2>        
         <div>

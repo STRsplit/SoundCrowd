@@ -5,7 +5,6 @@ var router = express.Router();
 
 router.route('/playlists')
   .get(function(req, res) {
-    console.log(req);
     spotify.getUserPlaylists(req.user.id, function(err, playlists) {
       if (err) res.status(err.statusCode).send(err);
       else res.status(200).send(playlists);

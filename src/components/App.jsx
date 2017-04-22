@@ -1,64 +1,86 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { verifyUser, setUser, setVerifying } from '../actions/userActions';
 import axios from 'axios';
 
-import NewPlaylist from './NewPlaylist.jsx';
-import Playlist from './Playlist.jsx';
 import Login from './Login.jsx';
-import SearchContainer from './SearchContainer.jsx'; 
-import NavBar from './Navbar.jsx';
-import RightBar from './RightBar.jsx';
-import Playlists from './Playlists.jsx';
-import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
+import PublicRoute from './routes/PublicRoute.jsx';
+import PrivateRoute from './routes/PrivateRoute.jsx';
 
-import Container from 'muicss/lib/react/container';
-import Row from 'muicss/lib/react/row';
-import Col from 'muicss/lib/react/col';
+import { Spinner } from 'elemental';
 
 class App extends Component {
 
   componentWillMount() {
-   
-  }  
+    this.props.setVerifying(true);
+
+    this.props.verifyUser()
+    .then(() => {      
+      this.props.setVerifying(false);
+    })
+    .catch(err => console.log('App componentWillMount err: ', err));
+
+    this.getHomeNode = this.getHomeNode.bind(this);
+    this.getLoginNode = this.getLoginNode.bind(this);
+  }
+
+  getHomeNode() {
+    const { verifying, loggedIn} = this.props.user;
+    if (verifying) {
+      return <div className="spinner-div"><Spinner size="lg" type="inverted" /></div>;
+    } else {
+      const location = loggedIn ? '/app' : '/login';
+      return <Redirect to={ location } />;
+    }
+  }
+
+  getLoginNode() {
+    const { verifying, loggedIn} = this.props.user;
+    if (verifying) {
+      return <div className="spinner-div"><Spinner size="lg" type="inverted" /></div>;
+    } else {
+      return loggedIn ? <Redirect to="/app" /> : <Login />;
+    }
+  }
 
 	render() {
+    /* * REMOVE BEFORE PR * */
+    console.log('this.props: ', this.props);
+
 	  return ( 
-    <BrowserRouter>
-      <Switch>
-      <Route exact path="/login" component={Login} />
-	  	<div>
-	  		<NavBar logout={this.props.logout} name={this.props.name}/>
+      <BrowserRouter>
         <div>
-		  	<Container className="main-app-container" fluid={true}>
-	        <Row>
-		        <Col className="layout-column column-left" md="2"></Col>
-		        <Col className="layout-column column-mid" xs="18" md="7">
-		          <div className="inner-app-container">
-				  			<div className="main-middle-column">
-        					<Route exact path="/app" render={() => (
-                    <div>                        
-                      <PlaylistSuggester />
-                      <Playlists />
-                    </div>
-                  )}/>
-                  <Switch>
-                    <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
-                    <Route path="/app/playlists/:playlistId" component={Playlist} />
-                    <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
-                    <Route path="/app/new-playlist" component={NewPlaylist} />
-                  </Switch>
-                </div>
-    		  	  </div>
-    		  	</Col>
-            <Col className="layout-column column-right" xs="18" md="3"><RightBar /></Col>
-          </Row>
-        </Container>
-          </div>
-		  </div>
-      </Switch>
-    </BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={ this.getHomeNode }/>
+          <Route exact path="/login" render={ this.getLoginNode } />
+          <Route exact path="/app/playlists/:playlistId" component={ PublicRoute } />
+          <Route path="/app" component={ PrivateRoute } /> 
+        </Switch>
+        </div>
+      </BrowserRouter>
 	  );
 	}
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    verifyUser: () => {
+      return dispatch(verifyUser());
+    },
+    setUser: user => {
+      dispatch(setUser(user));
+    },
+    setVerifying: boolean => {
+      dispatch(setVerifying(boolean));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -119,7 +119,6 @@ passport.use(new SpotifyStrategy(SpotifyAuth,
 
     spotify.setAccessToken(accessToken);
     spotify.setRefreshToken(refreshToken);
-    console.log(spotify);
     
     const { id, display_name, email } = profile._json;
     const user = {

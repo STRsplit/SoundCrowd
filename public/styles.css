@@ -441,3 +441,11 @@ ol {
   margin-top: 10px; }
 
 /* Playlist.jsx styles */
+/* App.jsx styles */
+.spinner-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+/* App.jsx styles */

@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import login from './Login.jsx';
-import { Link, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions/userActions';
+
 import { AppBar, IconButton, IconMenu, MenuItem } from 'material-ui/';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import UpDown from 'material-ui/svg-icons/action/swap-vertical-circle';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
-render() {
+  
+  render() {
+    const privateNavItems = (
+      <div>
+        <Link to='/app' style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
+        <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logoutUser}>Logout</div></MenuItem></Link>
+      </div>
+    );
+    const publicNavItems = (
+      <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+    );
+    const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
 
+    /* * Need to question where this._toggleNav coming from. * */
     return (
       <div className="nav-container">
       <div>
        <AppBar className='main-navigation-site'
           title="SoundCrowd"
-          onRightIconButtonTouchTap={ this._toggleNav }
+          onRightIconButtonTouchTap={ this._toggleNav } 
           iconElementLeft={<IconButton><UpDown /></IconButton>}
           iconElementRight={
             <IconMenu
+              listStyle={ style.menu }
               iconButtonElement={<IconButton><Menu /></IconButton>}
               targetOrigin={{horizontal: 'right', vertical: 'top'}}
               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              >
-            <Link to='/app' style={style.link}><MenuItem><div>Use My Playlist</div></MenuItem></Link>
-            <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-            <Link to='/app/new-playlist' style={style.link}><MenuItem><div>Get Suggested Playlist</div></MenuItem></Link>
-            <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logout}>Logout</div></MenuItem></Link>
+            >
+            { NavItems }
            </IconMenu>
       }
         />
@@ -43,10 +49,29 @@ render() {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser: () => {
+      dispatch(logoutUser());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
 const style = {
+  menu: {
+    width: '200px'
+  },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    textAlign: 'center',
+    margin: '0 auto'
   }
 };
