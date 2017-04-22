@@ -2,13 +2,10 @@ module.exports = {
   selectPlaylist: function(playlists, mood) {
     var names = [];
     var chosen = [];
-    console.log('this is playlists length', playlists.length);
     for (var i = 0; i < playlists.length; i++) {
       names.push(playlists[i].name.split(' '));
       names[i].unshift(i);
     }
-    console.log('this is names ', names);
-    console.log('this is mood ', mood);
     if (mood === 'Happy') {
       for (var j = 0; j < names.length; j++) {
         for (var k = 0; k < names[j].length; k++) {
@@ -52,7 +49,6 @@ module.exports = {
         }
       } 
     }
-    console.log('this is chosen ', chosen);
     var num = Math.floor(Math.random() / (1 / chosen.length));
     num = chosen[num][0];
     return playlists[num].id;

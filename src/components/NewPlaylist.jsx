@@ -10,24 +10,13 @@ class NewPlaylist extends React.Component {
 
 	componentWillMount() {
 		const { mood, activity } = this.props.filters;
-		console.log('mood ', mood);
-		console.log('activity ', activity);
-    console.log('in comp will mount');
 		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity
 		}) 
-		.then(res => {
-			console.log('post went through');
-			axios.get('/api/spotify/create')
-			.then((result) => {
-				console.log('test result: ', result);
-				this.props.setPlaylist({
-					id: result.data.id,
-	        owner: result.data.owner,
-	        tracks: result.data.tracks
-				});
-			})
+		.then((res) => {
+      var id = res.data;
+      this.props.history.push(`/app/playlists/${id}`);
 		})
 		.catch(err => console.log(err));
 	}
@@ -35,7 +24,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  {this.props.playlist.owner === '' ? <h2 id="loading">Loading...</h2> : <Playlist />}
+        <h2 id="loading">Loading...</h2>
 		  </div>	
 	  );
 	}
@@ -50,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setPlaylist: (playlist) => { //this.props.setPlaylist to access this global state function
+    setPlaylist: (playlist) => {
       dispatch(setPlaylist(playlist));
     }
   };

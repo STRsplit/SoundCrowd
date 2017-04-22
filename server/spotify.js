@@ -61,25 +61,21 @@ module.exports = {
   createPlaylist: function(userId, preferences, cb) {
     var date = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
     var playlistName = 'SoundCrowd ' + date.slice(5, 11) + ' ' + date.slice(17, 25);
-    console.log('created date');
-    spotify.createPlaylist(userId, playlistName, {public: false})
+    spotify.createPlaylist(userId, playlistName, {public: true})
       .then((data) => {
-        console.log('created empty playlist');
         var newPlaylistId = data.body.id;
         spotify.getPlaylistsForCategory('mood', { limit: 50 })
           .then((info) => {
-            console.log('got category');
             var playlistId = customPlaylist.selectPlaylist(info.body.playlists.items, preferences.mood)
             spotify.getPlaylist('spotify', playlistId)
               .then((resp) => {
-                console.log('got playlist');
                 var result = customPlaylist.selectTracks(resp, preferences.activity, userId, newPlaylistId);
                 spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
                 .then((res) => console.log('added tracks'));
-                cb(null, result);
+                cb(null, result.id);
               });
           })
-      }) 
+      })
       .catch(err => {
         cb(err);
       });

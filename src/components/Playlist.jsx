@@ -63,20 +63,18 @@ class Playlist extends Component {
   }
 
   getPlaylistTracks() {
-    if (this.props.match !== undefined) {
-      const playlistId = this.props.match.params.playlistId;
-      console.log('regular path');
-      axios.get('/api/playlists/' + playlistId)
-      .then(res => {
-        this.props.setPlaylist({
-          id: playlistId,
-          owner: res.data.owner,
-          tracks: res.data.tracks
-        });
-      })
-      .catch(err => {
-        console.log(err);
+    const playlistId = this.props.match.params.playlistId;
+    axios.get('/api/playlists/' + playlistId)
+    .then(res => {
+      this.props.setPlaylist({
+        id: playlistId,
+        owner: res.data.owner,
+        tracks: res.data.tracks
       });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   handlePlaylistUpdate(playlist) {
