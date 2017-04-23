@@ -82,6 +82,10 @@
   left: 50%;
   transform: translate(-50%, -50%); }
 
+.login-container h2 {
+  color: white;
+  font: Helvetica, sans-serif; }
+
 .login-container-inner {
   width: 80%;
   padding: 10% 0;
@@ -130,10 +134,6 @@
   text-align: center;
   width: 100%; }
 
-h2 {
-  color: white;
-  font: Helvetica, sans-serif; }
-
 .about-brief {
   width: 50%;
   padding: 2%;
@@ -153,6 +153,61 @@ h2 {
 .spotifyLogo {
   max-width: 40%;
   margin: 0% auto; }
+
+/* * MOBILE STYLES * */
+@media (max-width: 768px) {
+  .button-container {
+    display: block;
+    margin: 5% 0; }
+  .button {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    padding: 5%;
+    position: relative;
+    margin: 5% auto;
+    -moz-border-radius: 2em;
+    -webkit--radius: 2em;
+    border-radius: 2em; }
+    .button span {
+      font-size: 5vw;
+      padding: 2%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+  .login-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .login-container h2 {
+    color: white;
+    font: Helvetica, sans-serif; }
+  .login-container-inner {
+    width: 80%;
+    padding: 10% 0;
+    margin: 5%;
+    display: block;
+    position: relative;
+    background-color: white;
+    overflow-x: hidden;
+    -webkit-transition: background 1s ease;
+    transition: background 1s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    margin-left: -40%;
+    transform: translateY(-50%);
+    position: relative;
+    top: 10%;
+    transform: translateY(-10%);
+    -webkit-transform: translateY(-10%);
+    -ms-transform: translateY(-10%); } }
 
 .playlist-container {
   margin-top: 60px; }

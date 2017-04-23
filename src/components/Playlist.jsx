@@ -120,7 +120,7 @@ class Playlist extends Component {
 
   handleVoteError(open, message){
     this.votingError = true;
-    this.props.setVoteErrorPopup(true, message)
+    this.props.setVoteErrorPopup(true, message);
     this.votingError = false;
   }
   

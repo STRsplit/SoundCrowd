@@ -7,7 +7,7 @@ class VoteErrorPopup extends Component {
   }
 
   render() {
-    const { open, message } = this.props
+    const { open, message } = this.props;
     return (
       <div>
         <ErrorModal

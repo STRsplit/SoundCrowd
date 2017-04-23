@@ -1,9 +1,5 @@
 @import 'mixins_functions';
 
-
-
-
-
 // @function property-value($property, $selector: null) {
 //     @return $magic;
 // }
@@ -14,13 +10,16 @@
 
 
 
-
 .login-container {
   display: block;
   position: relative;
   width: 60%;
   // background-color: colorOpacity(black, 1);
   @include center;
+}
+.login-container h2 {
+  color: colorOpacity(white, 1);
+  font: $font-stack;
 }
 
 .login-container-inner {
@@ -35,6 +34,7 @@
   @include center(80%);
   @include vertical-align(10%);
 }
+
 .button-container {
   display: block;
   margin: 5% 0;
@@ -59,18 +59,13 @@
   width: 100%;
 }
 
-
-h2 {
-  color: colorOpacity(white, 1);
-  font: $font-stack;
-}
-
 .about-brief {
   width: $offsetHalf;
   padding: $smallPad;
   display: block;
   margin: centerContent(0%);
 }
+
 .tagline {
   font: $font-stack;
   text-align: center;
@@ -88,6 +83,55 @@ h2 {
   margin: centerContent(0%);
 }
 
+
+/* * MOBILE STYLES * */
+@media (max-width: 768px) {
+  .button-container {
+    display: block;
+    margin: 5% 0;
+  }
+
+  .button {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    padding: 5%;
+    position: relative;
+    margin: 5% auto;
+    @include border-radius($radius);
+      span {
+        font-size: 5vw;
+        padding: $smallPad;
+        @include center
+      }
+  }
+
+  .login-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    // background-color: colorOpacity(black, 1);
+    @include center;
+  }
+
+  .login-container h2 {
+    color: colorOpacity(white, 1);
+    font: $font-stack;
+  }
+
+  .login-container-inner {
+    width: 80%;
+    padding: 10% 0;
+    margin: 5%;
+    display: block;
+    position: relative;
+    background-color: colorOpacity(white, 1);
+    overflow-x: hidden;
+    @include transition(background 1s ease);
+    @include center(80%);
+    @include vertical-align(10%);
+  }
+}
 
 
 
