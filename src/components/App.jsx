@@ -32,7 +32,7 @@ class App extends Component {
   		          <div className="inner-app-container">
   				  			<div className="main-middle-column">
           					<Route exact path="/app" render={() => (
-                      <div>                        
+                      <div>
                         <PlaylistSuggester />
                         <Playlists />
                       </div>

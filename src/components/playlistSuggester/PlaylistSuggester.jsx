@@ -1,26 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import keys from '../../config/keys.js';
 import { Button } from 'elemental';
+import { browserHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
 
-class PlaylistSuggester extends Component {
+class PlaylistSuggester extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       showMood: false,
       showActivity: false,
       mood: 'Choose One',
-      activity: 'Choose One'
+      activity: 'Choose One',
+      error: false
     }
+    this.renderButton = this.renderButton.bind(this);
+    this.displayError = this.displayError.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
     this.toggleMood = this.toggleMood.bind(this);
     this.toggleActivity = this.toggleActivity.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  renderButton() {
+    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
+      return <div id="recommended-link" onClick={this.displayError}>
+          <Button type="primary"><span>Create</span></Button>
+        </div>;
+    } else {
+      return <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
+          <Button type="primary"><span>Create</span></Button>
+        </Link>;
+    }
+  }
+  
+  displayError() {
+    this.setState({
+      error: true
+    });
   }
 
   findPlaylist() {
@@ -70,9 +92,10 @@ class PlaylistSuggester extends Component {
       <div id="recommended-container">
         <div>
           <h2>Get Suggested Playlist</h2>
-          <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
-            <Button type="primary"><span>Create</span></Button>
-          </Link>
+          {this.state.error ? <div className="recommended-error">
+            Select mood and activity before creating playlist
+          </div> : null}
+          {this.renderButton()}
         </div>
         <div id="preferences">
           <div id="mood">
