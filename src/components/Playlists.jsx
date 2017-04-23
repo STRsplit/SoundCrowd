@@ -55,7 +55,7 @@ class Playlists extends Component {
     return (
       <div>
         <hr />
-        <h2>PLAYLISTS</h2>        
+        <h2>PLAYLISTS</h2>
         <div>
           { this.loaded ? userPlaylists : <Spinner size="lg" />  }
         </div>

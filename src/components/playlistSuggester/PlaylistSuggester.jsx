@@ -27,17 +27,6 @@ class PlaylistSuggester extends React.Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  renderButton() {
-    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
-      return <div id="recommended-link" onClick={this.displayError}>
-          <Button type="primary"><span>Create</span></Button>
-        </div>;
-    } else {
-      return <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
-          <Button type="primary"><span>Create</span></Button>
-        </Link>;
-    }
-  }
   
   displayError() {
     this.setState({
@@ -84,6 +73,18 @@ class PlaylistSuggester extends React.Component {
     }
     if (e.target.id !== 'activity-menu' && this.state.showActivity === true) {
       this.toggleActivity();
+    }
+  }
+  
+  renderButton() {
+    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
+      return <div id="recommended-link" onClick={this.displayError}>
+          <Button type="primary"><span>Create</span></Button>
+        </div>;
+    } else {
+      return <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
+          <Button type="primary"><span>Create</span></Button>
+        </Link>;
     }
   }
 

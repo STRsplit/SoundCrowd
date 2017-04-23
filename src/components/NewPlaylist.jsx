@@ -3,7 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../actions/filtersActions';
 import { setPlaylist } from '../actions/playlistActions';
-import Playlist from './Playlist.jsx'
+import Playlist from './Playlist.jsx';
+import { Spinner } from 'elemental';
 
 class NewPlaylist extends React.Component {
 
@@ -24,7 +25,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-        <h2 id="loading">Loading...</h2>
+        <Spinner size="lg" />
 		  </div>	
 	  );
 	}
