@@ -40,8 +40,6 @@ const setRecentPlayedTracks = tracks => {
   };
 };
 
-
-
 const setTrendingTracks = tracks => {
   return {
     type: 'SET_TRENDING_TRACKS',
