@@ -33,7 +33,7 @@ const setRecentAddedTracks = tracks => {
   };
 };
 
-const setRecentPlayedTracks = (tracks) => {
+const setRecentPlayedTracks = tracks => {
   return {
     type: 'SET_RECENTLY_PLAYED_TRACKS',
     payload: tracks
@@ -41,7 +41,7 @@ const setRecentPlayedTracks = (tracks) => {
 };
 
 
-const setTrendingTracks = (tracks) => {
+const setTrendingTracks = tracks => {
   return {
     type: 'SET_TRENDING_TRACKS',
     payload: tracks

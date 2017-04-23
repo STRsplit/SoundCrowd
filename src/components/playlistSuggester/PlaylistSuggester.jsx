@@ -143,7 +143,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFilters: (filters) => {
+    setFilters: filters => {
       dispatch(setFilters(filters));
     }
   };
