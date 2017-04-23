@@ -24,7 +24,7 @@ class Playlist extends Component {
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
-    this.renderTracks = this.renderTracks.bind(this);
+    this.displayTracks = this.displayTracks.bind(this);
     this.startPlaylist = this.startPlaylist.bind(this);
   }
 
@@ -55,6 +55,7 @@ class Playlist extends Component {
     });
     this.socket.on('voteError', voteErrorInfo => {
       this.handleVoteError(true, voteErrorInfo);
+      console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
   }
 
@@ -131,11 +132,14 @@ class Playlist extends Component {
     });
   }
 
-  renderTracks() {
-    return this.props.playlist.tracks.map(track => (
+  displayTracks() {
+    const { tracks, id } = this.props.playlist;
+
+    return tracks.map((track, ind) => (
       <Track key={track.song_id} 
-      playlist={this.props.playlist.id} 
+      playlist={id} 
       track={track}
+      isTop={ind === 0 ? true : false}
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
     ));
@@ -154,6 +158,7 @@ class Playlist extends Component {
             </a>
           </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
+
           <FlipMove>
           {this.renderTracks()}
           </FlipMove>

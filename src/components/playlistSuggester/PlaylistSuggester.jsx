@@ -7,7 +7,8 @@ import { browserHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
-
+import NewPlaylist from '../NewPlaylist.jsx';
+import Playlist from '../Playlist.jsx';
 class PlaylistSuggester extends Component {
   constructor(props) {
     super(props);
