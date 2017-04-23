@@ -19,18 +19,13 @@ class Playlists extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/spotify/playlists/', {
-      // params: {}
-    })
+    axios.get('/api/spotify/playlists/')
     .then(res => {
       let playlists = res.data.items;
       this.loaded = true;
       this.props.setPlaylists(playlists);
     })
-    .catch(err => {
-      // handle error and display appropriate message
-      console.log(err);
-    });
+    .catch(err => console.log('Playlists > componentDidMount error: ', err));
   }
 
   render() {
@@ -69,14 +64,14 @@ class Playlists extends Component {
 
 const mapStateToProps = state => {
   return {
-    playlists: state.playlists, //this.props.playlists to access global state
+    playlists: state.playlists, 
     playlist: state.playlist
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setPlaylists: playlists => { //this.props.setPlaylist to access this global state function
+    setPlaylists: playlists => { 
       dispatch(setPlaylists(playlists));
     },
     setPlaylistId: id => {
@@ -97,5 +92,3 @@ const style = {
     textDecoration: 'none'
   }
 };
-
-

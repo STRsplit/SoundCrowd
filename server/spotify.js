@@ -99,7 +99,7 @@ module.exports = {
 
 
 
-
+/* * SPOTIFY PASSPORT AUTHENTICATION * */
 passport.use(new SpotifyStrategy(SpotifyAuth,
   (accessToken, refreshToken, profile, done) => {
 
@@ -146,5 +146,4 @@ passport.deserializeUser(function(id, done) {
     console.log('passport.deserializeUser err: ', err);
   });
 });
-
-
+/* * SPOTIFY PASSPORT AUTHENTICATION * */

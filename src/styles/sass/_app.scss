@@ -18,8 +18,11 @@
   margin: centerContent(120px);
 }
 
-
-
+@media (max-width: 768px) {
+  .mui-col-xs-0 {
+    display: none
+  }
+}
 .main-left-column {
 
   background-color: pink;

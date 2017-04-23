@@ -10,22 +10,15 @@ import '../node_modules/elemental/less/elemental.less';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+
 require("!style-loader!css-loader!sass-loader!./styles/sass/all.scss");
 
 class Main extends Component {
-  
-  componentWillMount() {
-    
-  }
 
   render() {
-    
-    return (      
-		  <div>
-        <App />
-	    </div>
-    );
+    return (<div><App /></div>);
   }
+
 }
   
 ReactDOM.render(

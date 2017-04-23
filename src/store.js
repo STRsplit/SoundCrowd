@@ -5,20 +5,26 @@ import playlists from './reducers/playlistsReducer';
 import playlist from './reducers/playlistReducer';
 import filters from './reducers/filtersReducer';
 import user from './reducers/userReducer';
+import search from './reducers/searchReducer';
 
 export default createStore(
   combineReducers({
     playlists,
     playlist,
     filters,
-    user
+    user,
+    search
   }),
   {},
   applyMiddleware(createLogger(), promise())
 );
 
-// FOR DEV
-// applyMiddleware(createLogger(), promise())
+/* * CHANGE LINE 19 DEPENDING IF DEV OR PRODUCTION * *
 
-// FOR PRODUCTION
-// applyMiddleware(promise())
+FOR DEV
+applyMiddleware(createLogger(), promise())
+
+FOR PRODUCTION
+applyMiddleware(promise())
+
+* * CHANGE LINE 19 DEPENDING IF DEV OR PRODUCTION * */ 
