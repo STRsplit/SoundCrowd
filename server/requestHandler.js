@@ -3,10 +3,20 @@ const dbHelpers = require('../database/dbHelpers');
 const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  obj = {login: req.isAuthenticated()}
-  if (req.user) obj.name = req.user.name;
-  else obj.name = '';
-  res.send(obj);
+  console.log(req.isAuthenticated(), spotify.hasAccessToken())
+  if (req.isAuthenticated() && spotify.hasAccessToken()) {
+    res.send({
+      login: true, 
+      name: req.user.name
+    });
+  } else {
+    req.logout();
+    req.session.destroy();
+    res.send({
+      login: false, 
+      name: ''
+    });
+  }
 };
 
 // RETURNS PROMISE OBJECT THAT CONTAINS TRUE IF VOTED ALREADY FALSE OTHERWISE

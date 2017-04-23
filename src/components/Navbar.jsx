@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/userActions';
+import { logoutUser, setShowLogin } from '../actions/userActions';
 
 import { AppBar, IconButton, IconMenu, MenuItem } from 'material-ui/';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -14,17 +14,21 @@ class Navbar extends Component {
   render() {
     const privateNavItems = (
       <div>
-        <Link to='/app' style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
-        <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to='/login' style={style.link}><MenuItem><div onClick={this.props.logoutUser}>Logout</div></MenuItem></Link>
+        <Link to='/' style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
+        <Link to='/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to='/login' style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
+        <Link to='/aboutus' style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
       </div>
     );
     const publicNavItems = (
-      <Link to='/app/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+      <div>
+        <Link to='/login' style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
+        <Link to='/public/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to='/aboutus' style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+      </div>
     );
     const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
 
-    /* * Need to question where this._toggleNav coming from. * */
     return (
       <div className="nav-container">
       <div>
@@ -49,16 +53,19 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     logoutUser: () => {
       dispatch(logoutUser());
+    },
+    setShowLogin: () => {
+      dispatch(setShowLogin(true));
     }
   };
 };

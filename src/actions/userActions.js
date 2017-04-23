@@ -14,6 +14,13 @@ const setVerifying = boolean => {
   };
 };
 
+const setShowLogin = boolean => {
+  return {
+    type: 'SET_SHOWLOGIN',
+    payload: boolean
+  };
+};
+
 const verifyUser = () => {
   return {
     type: 'VERIFY_USER',
@@ -55,5 +62,6 @@ export {
   setUser,
   verifyUser,
   logoutUser,
-  setVerifying
+  setVerifying,
+  setShowLogin
 };

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import NavBar from '../Navbar.jsx';
 import Playlist from '../Playlist.jsx';
 import SearchContainer from '../SearchContainer.jsx'; 
 import RightBar from '../RightBar.jsx';
-import Playlists from '../Playlists.jsx';
 
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
@@ -14,8 +13,10 @@ import Col from 'muicss/lib/react/col';
 class PublicRoute extends Component {
 
   render() {
+    // TODO: ADD LOGIN REDIRECT
 
     return (
+      <BrowserRouter basename="/public" >
       <div>
         <NavBar />
         <div>
@@ -26,8 +27,8 @@ class PublicRoute extends Component {
               <div className="inner-app-container">
                 <div className="main-middle-column">
                   <Switch>  
-                    <Route path="/app/playlists/:playlistId" component={ Playlist } />
-                    <Route path="/app/search" component={ SearchContainer } />
+                    <Route path="/search" component={ SearchContainer } />
+                    <Route path="/playlist/:playlistId" component={ Playlist } />
                   </Switch>
                 </div>
               </div>
@@ -37,6 +38,7 @@ class PublicRoute extends Component {
         </Container>
           </div>
       </div>
+      </BrowserRouter>
     );
   }
 

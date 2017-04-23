@@ -30,10 +30,16 @@ router.get('/search', function(req, res) {
 });
 
 router.get('/current_song', function(req, res) {
-  spotify.getCurrentSong(function(err, info) {
-    if (err) res.status(err.statusCode).send(err);
-    else res.status(200).send(info);
-  });
+  if (spotify.hasAccessToken()) {   
+    spotify.getCurrentSong(function(err, info) {
+      if (err) res.status(err.statusCode).send(err);
+      else res.status(200).send(info);
+    });   
+  } else {
+    req.logout();
+    req.session.destroy();
+    res.status(401).send('User is not logged in.');    
+  }
 });
 
 module.exports = router;

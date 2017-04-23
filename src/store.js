@@ -14,7 +14,7 @@ export default createStore(
     user
   }),
   {},
-  applyMiddleware(promise())
+  applyMiddleware(createLogger(), promise())
 );
 
 // FOR DEV

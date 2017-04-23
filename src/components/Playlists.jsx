@@ -37,7 +37,7 @@ class Playlists extends Component {
     const userPlaylists = this.props.playlists.playlists.map(playlist => {
       const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
       return (        
-        <Link to={`/app/playlists/${playlist.id}`} 
+        <Link to={`/playlist/${playlist.id}`} 
           key={playlist.id} style={style.link} 
           onClick={() => this.props.setPlaylistId(playlist.id)}
         >      
@@ -67,19 +67,19 @@ class Playlists extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     playlists: state.playlists, //this.props.playlists to access global state
     playlist: state.playlist
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setPlaylists: (playlists) => { //this.props.setPlaylist to access this global state function
+    setPlaylists: playlists => { //this.props.setPlaylist to access this global state function
       dispatch(setPlaylists(playlists));
     },
-    setPlaylistId: (id) => {
+    setPlaylistId: id => {
       dispatch(setPlaylistId(id));
     }
   };

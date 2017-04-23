@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { verifyUser, setVerifying } from '../../actions/userActions';
 
-import NewPlaylist from '../NewPlaylist.jsx';
+import Playlists from '../Playlists.jsx';
 import Playlist from '../Playlist.jsx';
 import SearchContainer from '../SearchContainer.jsx'; 
 import NavBar from '../Navbar.jsx';
 import RightBar from '../RightBar.jsx';
-import Playlists from '../Playlists.jsx';
+import NewPlaylist from '../NewPlaylist.jsx';
 
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
+import { Spinner } from 'elemental';
 
 class PrivateRoute extends Component {
 
-  render() {
-    /* * REMOVE BEFORE PR * */
-    // console.log('this.props: ', this.props);
+  componentWillMount() {
+    this.props.verifyUser()
+    .then(() => {      
+      this.props.setVerifying(false); //CHANGE THE NAMING ON THIS
+    })
+    .catch(err => console.log('App componentWillMount err: ', err));
+  }
 
-    const { loggedIn } = this.props.user;
+  render() {
+    let Node;
+    const { pathname } = this.props.location;
+    const { verifying, loggedIn} = this.props.user;
     const privateRoute = 
       ( 
         <BrowserRouter>
@@ -33,10 +41,10 @@ class PrivateRoute extends Component {
                 <div className="inner-app-container">
                   <div className="main-middle-column">
                     <Switch>
-                      <Route exact path="/app" component={ Playlists } />
-                      <Route path="/app/playlists/:playlistId" component={ Playlist } />
-                      <Route path="/app/search" component={ SearchContainer } />
-                      <Route path="/app/new-playlist" component={ NewPlaylist } />
+                      <Route exact path="/" component={ Playlists } />
+                      <Route path="/search" component={ SearchContainer } />
+                      <Route path="/new-playlist" component={ NewPlaylist } />
+                      <Route path="/playlist/:playlistId" component={ Playlist } />
                     </Switch>
                   </div>
                 </div>
@@ -47,20 +55,37 @@ class PrivateRoute extends Component {
         </div>
         </BrowserRouter>
       );
+
+    if (verifying) {
+      Node =  <div className="spinner-div"><Spinner size="lg" type="inverted" /></div>;
+    } else if (loggedIn){
+      Node = privateRoute;      
+    } else {
+      const location = pathname.includes('/playlist/') ? `/public${ pathname }` :'/login';
+      Node = <Redirect to={ location } />;
+    }
     
-    return (
-      <div>
-        { loggedIn ? privateRoute : <Redirect to="/login" /> }
-      </div>
-    );
+    return (<div>{ Node }</div>);
+
   }
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user
   };
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+const mapDispatchToProps = dispatch => {
+  return {
+    verifyUser: () => {
+      return dispatch(verifyUser());
+    },
+    setVerifying: boolean => {
+      dispatch(setVerifying(boolean));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

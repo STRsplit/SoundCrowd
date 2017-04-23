@@ -1,7 +1,8 @@
 const initialState = {
   name: '',
   loggedIn: false,
-  verifying: false
+  verifying: true,
+  showLogin: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -30,6 +31,13 @@ const userReducer = (state = initialState, action) => {
         verifying: action.payload
       };
       break;
+    case 'SET_SHOWLOGIN':
+      state = {
+        ...state,
+        showLogin: action.payload
+      };
+      break;
+
   }
   return state;
 };
