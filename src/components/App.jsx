@@ -9,6 +9,7 @@ import SearchContainer from './SearchContainer.jsx';
 import NavBar from './Navbar.jsx';
 import RightBar from './RightBar.jsx';
 import Playlists from './Playlists.jsx';
+import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
 
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
@@ -30,7 +31,12 @@ class App extends Component {
 		        <Col className="layout-column column-mid" xs="18" md="7">
 		          <div className="inner-app-container">
 				  			<div className="main-middle-column">
-        					<Route exact path="/app"  component={Playlists}/>
+        					<Route exact path="/app"  component={() => (
+                    <div>                        
+                      <PlaylistSuggester />
+                      <Playlists />
+                    </div>
+                  )}/>
                   <Switch>
                     <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                     <Route path="/app/playlists/:playlistId" component={Playlist} />
