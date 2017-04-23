@@ -3,7 +3,6 @@ const dbHelpers = require('../database/dbHelpers');
 const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  console.log(req.isAuthenticated(), spotify.hasAccessToken())
   if (req.isAuthenticated() && spotify.hasAccessToken()) {
     res.send({
       login: true, 
