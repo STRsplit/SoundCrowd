@@ -54,7 +54,6 @@ class Playlist extends Component {
     });
     this.socket.on('voteError', voteErrorInfo => {
       this.handleVoteError(true, voteErrorInfo);
-      console.log('Sorry, but you\'ve already voted:', voteErrorInfo)
     });
   }
 
