@@ -157,6 +157,72 @@ h2 {
 .playlist-container {
   margin-top: 60px; }
 
+/* * Error multiple votes popup * */
+.playlist-vote-error-popup {
+  width: 100%;
+  background-color: rgba(3, 21, 39, 0.7); }
+  .playlist-vote-error-popup div {
+    margin: 0 auto;
+    width: 100%;
+    background-color: transparent !important;
+    font-weight: 600;
+    font-color: #FB8900 !important; }
+    .playlist-vote-error-popup div div {
+      width: 100%;
+      font-color: #FB8900 !important;
+      font-size: 2vw !important;
+      white-space: nowrap; }
+      @media (max-width: 768px) {
+        .playlist-vote-error-popup div div {
+          font-size: 4vw !important; } }
+      .playlist-vote-error-popup div div span {
+        width: 100%;
+        color: #FFF !important; }
+
+/* * Current Song Bar * */
+.csb-container {
+  width: 100%;
+  height: 50px;
+  background-color: #FB8900;
+  position: absolute;
+  position: fixed;
+  top: 80px;
+  z-index: 20;
+  left: 0;
+  right: 0; }
+
+.csb-album-image {
+  display: inline-block; }
+
+.csb-song-info {
+  display: inline-block;
+  margin: auto 0;
+  vertical-align: middle; }
+
+.csb-song-name {
+  color: #0090e0; }
+
+/* Playlist.jsx styles */
+.playlists-single-container {
+  display: flex;
+  margin: 15px; }
+
+.playlists-single-image {
+  width: '200px';
+  height: '200px'; }
+
+.playlists-single-details {
+  flex-grow: 1;
+  margin-left: 10px;
+  padding: 5px;
+  padding-top: 10px;
+  opacity: .5;
+  background-color: #fff;
+  box-shadow: 5px 5px 5px 0 #000; }
+
+.playlists-h3 {
+  margin-top: 10px; }
+
 .searchcontainer-container {
   width: 100%;
   margin: 0% auto; }
@@ -499,49 +565,3 @@ ol {
 
 #loading {
   color: black; }
-
-/* * Current Song Bar * */
-.csb-container {
-  width: 100%;
-  height: 50px;
-  background-color: #f66159;
-  position: absolute;
-  position: fixed;
-  top: 80px;
-  z-index: 20;
-  left: 0;
-  right: 0; }
-
-.csb-album-image {
-  display: inline-block; }
-
-.csb-song-info {
-  display: inline-block;
-  margin: auto 0;
-  vertical-align: middle; }
-
-.csb-song-name {
-  color: #0090e0; }
-
-/* Playlist.jsx styles */
-.playlists-single-container {
-  display: flex;
-  margin: 15px; }
-
-.playlists-single-image {
-  width: '200px';
-  height: '200px'; }
-
-.playlists-single-details {
-  flex-grow: 1;
-  margin-left: 10px;
-  padding: 5px;
-  padding-top: 10px;
-  opacity: .5;
-  background-color: #fff;
-  box-shadow: 5px 5px 5px 0 #000; }
-
-.playlists-h3 {
-  margin-top: 10px; }
-
-/* Playlist.jsx styles */

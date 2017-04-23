@@ -1,3 +1,57 @@
 .playlist-container {
   margin-top: 60px;
 }
+
+/* * Error multiple votes popup * */
+
+.playlist-vote-error-popup {
+  width: 100%;
+  background-color: rgba(3, 21, 39, .7);
+  div {
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0) ! important;
+    font-weight: 600;
+    font-color: #FB8900 ! important;
+      div {
+        width: 100%;
+        font-color: #FB8900 ! important;
+        font-size: 2vw ! important;
+        white-space: nowrap;
+        @media (max-width: 768px) {
+          font-size: 4vw ! important;
+        }
+          span {
+            width: 100%;
+            color: #FFF ! important;
+          }
+      }
+  }
+}
+
+/* * Current Song Bar * */
+.csb-container {
+  width: 100%;
+  height: 50px;
+  background-color: #FB8900;
+  position: absolute;
+  position: fixed;
+  top: 80px; 
+  z-index: 20;
+  left: 0;
+  right: 0;
+}
+
+.csb-album-image {
+  display: inline-block;
+}
+
+.csb-song-info {
+  display: inline-block;
+  margin: auto 0;
+  vertical-align: middle;
+}
+
+.csb-song-name {
+  color: #0090e0;
+}

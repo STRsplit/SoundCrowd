@@ -25,7 +25,7 @@ module.exports = io => {
             }
           })
         } else {
-          socket.emit('voteError', "Hey, you've voted on this song idiot.");
+          socket.emit('voteError', "Hey, you've voted on this song already.");
         }
       })
     })

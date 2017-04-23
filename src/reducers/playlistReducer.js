@@ -4,7 +4,8 @@ const initialState = {
   tracks: [],
   recentlyAddedTracks: [],
   recentlyPlayedTracks: [],
-  trendingTracks: []
+  trendingTracks: [],
+  voteErrorPopup: {open: false, message: ''}
 };
 
 const playlistReducer = (state = initialState, action) => {
@@ -49,6 +50,12 @@ const playlistReducer = (state = initialState, action) => {
       state = {
         ...state,
         trendingTracks: action.payload
+      };
+      break;
+    case 'SET_VOTE_ERROR_POPUP':
+      state = {
+        ...state,
+        voteErrorPopup: {open: action.payload.visible, message: action.payload.message}
       };
       break;
   }
