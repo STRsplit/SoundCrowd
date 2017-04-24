@@ -21,7 +21,6 @@ router.get('/playlists/:playlist', function(req, res) {
       } else {
         if (req.isAuthenticated()) {
           spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
-            console.log('Spotify Return Error', err)
             if (err) res.status(err.statusCode).send(err);
             else {
               dbHelpers.savePlaylist(playlist, req.user.id, tracks)
@@ -29,7 +28,6 @@ router.get('/playlists/:playlist', function(req, res) {
                   res.status(200).send({ owner: req.user.id, tracks: savedTracks });
                 })
                 .catch(err => {
-                  console.log('SAVING TO DB ERROR', err);
                   res.status(err.statusCode).send(err);
                 });
             }
