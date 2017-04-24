@@ -39,7 +39,8 @@ class Login extends Component {
           </div>
         </div>
         <div className="about-brief">
-          <p className="tagline">Lorem Ipsum dhfjh adsljhfjashd  dsfh jaedsjfd. fjdshjfhjas e jledhsfj h sdlkafh ljads f </p>
+          <p className="tagline">SoundCrowd, let the crowd control the sound of any event. Working in conjuction with your Spotify account, 
+           select a playlist to get the party started. SoundCrowd enables a realtime experience with live voting and track reordering - highest voted song plays next!</p>
         </div>
         <div className="spotifyLogoContainer">
           <img className="spotifyLogo" src="./assets/images/spotify-clipart.png"/>

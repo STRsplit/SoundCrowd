@@ -62,14 +62,17 @@ module.exports = {
       }})
         .then(playlist => {
           let position = 0;
+          let defaultIMG = 'http://www.iconninja.com/files/528/772/974/spotify-logo-icon.png';
           tracks = tracks.items.reduce((allTracks, track) => {
             const { id, name, artists } = track.track;
+            const { images } = track.track.album;
             if(track.track.id !== null) {
               let trackObj = {
                 song_id: id,
                 playlist_id: playlistId,
                 title: name,
                 artist: artists ? artists[0].name : '',
+                img_url: images[2] ? images[2].url : defaultIMG,
                   // weird issue where rarely there's no artists array
                   // fix later to map all artist names to string, then save
                 vote_count: 0,
@@ -118,7 +121,7 @@ module.exports = {
         let newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
           .then(song => {
-            resolve(song.dataValues);
+            resolve(song);
           });
       })
       .catch(err => {

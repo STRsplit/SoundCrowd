@@ -134,10 +134,9 @@ class Playlist extends Component {
 
   displayTracks() {
     const { tracks, id } = this.props.playlist;
-
     return tracks.map((track, ind) => (
       <Track key={track.song_id} 
-      playlist={id} 
+      playlist={id}
       track={track}
       isTop={ind === 0 ? true : false}
       getPlaylistTracks={this.getPlaylistTracks}
