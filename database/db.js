@@ -3,7 +3,7 @@ const dbName = 'music';
 const db_config = {
   host: process.env.CDB_HOST || 'localhost',
   user: process.env.CDB_USER || 'root',
-  password: process.env.CDB_PASSWORD || '',
+  password: process.env.CDB_PASSWORD || 'root',
   database: process.env.CDB_DATABASE || dbName
 };
 

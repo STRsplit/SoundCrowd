@@ -31,3 +31,7 @@ module.exports = io => {
     })
   })
 }
+
+var updatePlaylists = function() {
+  io.sockets.in(playlistId).emit('updatePlaylist', tracks);
+}

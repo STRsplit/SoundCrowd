@@ -38,6 +38,7 @@ class Playlist extends Component {
     }
     this.socket.emit('recordVote', voteData);
     this.handleVoteError = this.handleVoteError.bind(this);
+    this.startPlaylist = this.startPlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -122,6 +123,25 @@ class Playlist extends Component {
     this.props.setVoteErrorPopup(true, message);
     this.votingError = false;
   }
+  
+  startPlaylist() {
+    axios.post('/api/spotify/play', { playlist: this.props.playlist.id })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  
+  componenWillUpdate() {}
+
+  sortTracks() {
+    // var sortedTracks = this.state.tracks.sort((a, b) => {
+    //   a.vote_count - b.vote_count;
+    // })
+    // this.setState({ tracks: sortedTracks });
+  }
 
   renderTracks() {
     return this.props.playlist.tracks.map(track => (
@@ -142,7 +162,7 @@ class Playlist extends Component {
           <CurrentSongBar />
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
-              <Button type="primary"><span>Open in Spotify</span></Button>
+              <Button type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>
             </a>
           </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>

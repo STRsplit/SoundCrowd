@@ -97,6 +97,65 @@ module.exports = {
     requestPromise(options)
       .then(info => cb(null, info))
       .catch(err => cb(err, null));    
+
+      // For refreshing approach
+      // spotify.refreshAccessToken()
+      // .then(data => {
+      //   // Save the access token so that it's used in future calls
+      //   spotify.setAccessToken(data.body['access_token']);
+      //   console.log('The access token has been refreshed!');
+      // }, err => {
+      //   console.log('Could not refresh access token', err);
+      // });
+    // }
+  },
+  
+  startPlaylist: function(username, playlistId, cb) {
+    // request({
+    //   uri: 'https://api.spotify.com/v1/me/player/play',
+    //   method: 'PUT',
+    //   body: {
+    //     context_uri: `spotify:playlist:${playlistId}`
+    //     // context_uri: 'spotify:playlist:' + playlistId
+    //   }
+    // }, (err, res, body) => {
+    //   if (err) {
+    //     console.log('there was an error');
+    //     console.log(err);
+    //   } 
+    //   else {
+    //     console.log('there was no error');
+    //     console.log(JSON.stringify(res), body);
+    //   }
+    // });
+
+    if (spotify._credentials.accessToken) {
+      const options = {
+        uri: 'https://api.spotify.com/v1/me/player/play',
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${spotify._credentials.accessToken}`
+        },
+        body: {
+          context_uri: `spotify:playlist:${playlistId}`
+        }
+        // json: true
+      }; 
+      // requestPromise(options)
+      //   .then(info => cb(null, info))
+      //   .catch(err => cb(err, null));
+      requestPromise.put(options)
+        .then(info => {
+          console.log(info);
+        })
+        .catch(err => {
+          console.log('there was an error');
+          console.log(err);
+        });
+    } else {
+      console.log('no spotify token');
+    }
   }
 };
 

@@ -1,25 +1,37 @@
-var cron = require('node-cron');
-var spotify = require('./spotify');
-var dbHelpers = require('../database/dbHelpers');
+const cron = require('node-cron');
+const spotify = require('./spotify');
+const socketManager = require('./sockets')
+const dbHelpers = require('../database/dbHelpers');
 
-var currentSong;
-var job = cron.schedule('*/10 * * * * *', function() {
+module.exports = cron.schedule('*/10 * * * * *', function() {
   spotify.getCurrentSong((err, song) => {
     if (err) console.log('cron err', err);
     else {
-      console.log('cron song:', song.item.id, song.item.name);
-      if (currentSong) {
-        if (currentSong !== song.item.id) {
-          // assume the last song ended
-          // reset vote count to 0 and sort playlist
-          // emit new playlist order with socket event
-          // update current song bar & slider position
-        } else {
-          // update slider position ?
-        }
-      } else currentSong = song.item.id;
+      const { id, name } = song.item;
+      console.log('song id', id);
+      // var playlistId = song.context.uri.slice(-22);
+      var playlistId = '0GX5C9HO78OtzHUBDJv1xQ';
+      dbHelpers.getTrackByPosition(playlistId, 0)
+        .then(track => {
+          if (track) {
+            console.log('top song id', track.dataValues.song_id);
+            if (track !== id) {
+              // assume the last song ended
+              dbHelpers.resetTrack(track.dataValues.song_id, playlistId)
+                .then(dbHelpers.reorderPlaylist(playlistId))
+                  .then(playlist => {
+                    console.log('reordered playlist', playlist);
+                    // emit socket event with new order
+                  });
+              // update current song bar & slider position
+            } else {
+              console.log(playlistId + '=' + topSongId);
+              // update slider position ?
+            }
+          } else {
+            console.log(track);
+          }
+        });
     }
-  })
+  });
 });
-
-module.exports = job;

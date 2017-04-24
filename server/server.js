@@ -71,7 +71,7 @@ app.use('/api/spotify', spotifyRouter);
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
-app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private', 'user-read-currently-playing', 'user-read-playback-state'], responseType: 'token', showDialog: true}));
+app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private', 'user-read-currently-playing', 'user-read-playback-state', 'user-modify-playback-state'], responseType: 'token', showDialog: true}));
 
 app.get('/auth/spotify/callback', 
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })
