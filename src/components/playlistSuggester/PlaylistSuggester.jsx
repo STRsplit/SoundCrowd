@@ -41,7 +41,7 @@ class PlaylistSuggester extends Component {
       }) 
       .then(res => {
         var id = res.data;
-        this.props.methods.history.push(`/app/playlists/${id}`);
+        this.props.methods.history.push(`/playlist/${id}`);
       })
       .catch(err => console.log(err));
     }
