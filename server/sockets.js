@@ -12,6 +12,7 @@ module.exports = io => {
     });
 
     socket.on('recordVote', voteData => {
+      console.log('in record vote', voteData);
       const { songId, playlistId, vote, session_id, user_id } = voteData;
       handler.validateVote(voteData)
       .then(song => {

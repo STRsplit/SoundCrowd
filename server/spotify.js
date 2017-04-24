@@ -86,17 +86,17 @@ module.exports = {
   },
 
   getCurrentSong: function(cb) {
-    const options = {
-      uri: 'https://api.spotify.com/v1/me/player',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${spotify._credentials.accessToken}`
-      },
-      json: true
-    }; 
-    requestPromise(options)
-      .then(info => cb(null, info))
-      .catch(err => cb(err, null));    
+    // const options = {
+    //   uri: 'https://api.spotify.com/v1/me/player',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     Authorization: `Bearer ${spotify._credentials.accessToken}`
+    //   },
+    //   json: true
+    // }; 
+    // requestPromise(options)
+    //   .then(info => cb(null, info))
+    //   .catch(err => cb(err, null));    
 
       // For refreshing approach
       // spotify.refreshAccessToken()
@@ -109,7 +109,7 @@ module.exports = {
       // });
     // }
   },
-  
+
   startPlaylist: function(username, playlistId, cb) {
     // request({
     //   uri: 'https://api.spotify.com/v1/me/player/play',
@@ -128,31 +128,23 @@ module.exports = {
     //     console.log(JSON.stringify(res), body);
     //   }
     // });
-
+    console.log('this playlist', playlistId);
     if (spotify._credentials.accessToken) {
       const options = {
         uri: 'https://api.spotify.com/v1/me/player/play',
         method: 'PUT',
         headers: {
+          Accept: 'application/json',
           'Content-type': 'application/json',
           Authorization: `Bearer ${spotify._credentials.accessToken}`
         },
-        body: {
+        data: {
           context_uri: `spotify:playlist:${playlistId}`
         }
-        // json: true
       }; 
-      // requestPromise(options)
-      //   .then(info => cb(null, info))
-      //   .catch(err => cb(err, null));
-      requestPromise.put(options)
-        .then(info => {
-          console.log(info);
-        })
-        .catch(err => {
-          console.log('there was an error');
-          console.log(err);
-        });
+      requestPromise(options)
+        .then(info => cb(null, info))
+        .catch(err => cb(err, null));
     } else {
       console.log('no spotify token');
     }

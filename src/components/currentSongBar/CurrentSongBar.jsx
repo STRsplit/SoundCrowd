@@ -29,7 +29,7 @@ class CurrentSongBar extends Component {
 
   componentWillMount() {
     clearInterval(this.timer);
-    this.timer = setInterval(this.autoUpdateInfo, 1000);
+    // this.timer = setInterval(this.autoUpdateInfo, 1000);
   }
 
   componentWillUnmount() {
@@ -54,24 +54,24 @@ class CurrentSongBar extends Component {
   }
 
   updateInfo() {
-    axios.get('/api/spotify/current_song')
-    .then(result => {
-      const { is_playing, progress_ms } = result.data;
-      const { name, duration_ms } = result.data.item;
-      const album = result.data.item.album;
-      this.setState({
-        image: album.images[1].url,
-        name: name,
-        artist: album.artists[0].name,
-        album: album.name,
-        duration: duration_ms,
-        progress: progress_ms,
-        isPlaying: is_playing,
-        sliderValue: progress_ms/duration_ms
-      });
-      this.counter = 0;
-    })
-    .catch(err => console.log('CurrentSongBar error: ', err));    
+    // axios.get('/api/spotify/current_song')
+    // .then(result => {
+    //   const { is_playing, progress_ms } = result.data;
+    //   const { name, duration_ms } = result.data.item;
+    //   const album = result.data.item.album;
+    //   this.setState({
+    //     image: album.images[1].url,
+    //     name: name,
+    //     artist: album.artists[0].name,
+    //     album: album.name,
+    //     duration: duration_ms,
+    //     progress: progress_ms,
+    //     isPlaying: is_playing,
+    //     sliderValue: progress_ms/duration_ms
+    //   });
+    //   this.counter = 0;
+    // })
+    // .catch(err => console.log('CurrentSongBar error: ', err));    
   }
 
   convertToTime(millisec) {

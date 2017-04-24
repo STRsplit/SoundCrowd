@@ -25,6 +25,7 @@ class Playlist extends Component {
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
     this.renderTracks = this.renderTracks.bind(this);
+    this.startPlaylist = this.startPlaylist.bind(this);
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
@@ -38,7 +39,6 @@ class Playlist extends Component {
     }
     this.socket.emit('recordVote', voteData);
     this.handleVoteError = this.handleVoteError.bind(this);
-    this.startPlaylist = this.startPlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -123,9 +123,9 @@ class Playlist extends Component {
     this.props.setVoteErrorPopup(true, message);
     this.votingError = false;
   }
-  
+
   startPlaylist() {
-    axios.post('/api/spotify/play', { playlist: this.props.playlist.id })
+    axios.post('/api/spotify/play', { playlist: this.props.match.params.playlistId })
       .then(res => {
         console.log(res);
       })
@@ -134,8 +134,6 @@ class Playlist extends Component {
       });
   }
   
-  componenWillUpdate() {}
-
   sortTracks() {
     // var sortedTracks = this.state.tracks.sort((a, b) => {
     //   a.vote_count - b.vote_count;

@@ -147,16 +147,11 @@ module.exports = {
         }
       })
         .then(song => {
-          // console.log('made it here', song);
-          // return song;
           resolve(song);
-          // resolve(null);
         })
         .catch(err => {
-          console.log(err);
           reject(err);
         });
-
     });
   },
 

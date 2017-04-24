@@ -45,11 +45,11 @@ router.get('/current_song', function(req, res) {
 router.post('/play', function(req, res) {
   spotify.startPlaylist(req.user.id, req.body.playlist, function(err, something) {
     if (err) {
-      // console.log(err);
-      // res.status(err.statusCode).send(err);
+      console.log('play error', err);
+      res.status(err.statusCode).send(err);
     } else {
-      console.log(something);
-      // res.send(something);
+      console.log('playing', something);
+      res.send(something);
     }
   });
 });
