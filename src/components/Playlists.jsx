@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setPlaylists } from '../actions/playlistsActions';
 import { setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
+
 import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
 
 import { Spinner } from 'elemental';
@@ -18,25 +19,20 @@ class Playlists extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/spotify/playlists/', {
-      // params: {}
-    })
+    axios.get('/api/spotify/playlists/')
     .then(res => {
       let playlists = res.data.items;
       this.loaded = true;
       this.props.setPlaylists(playlists);
     })
-    .catch(err => {
-      // handle error and display appropriate message
-      console.log(err);
-    });
+    .catch(err => console.log('Playlists > componentDidMount error: ', err));
   }
 
   render() {
     const userPlaylists = this.props.playlists.playlists.map(playlist => {
       const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
-      return (
-        <Link to={`/app/playlists/${playlist.id}`} 
+      return (        
+        <Link to={`/playlist/${playlist.id}`} 
           key={playlist.id} style={style.link} 
           onClick={() => this.props.setPlaylistId(playlist.id)}
         >      
@@ -66,19 +62,19 @@ class Playlists extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    playlists: state.playlists, //this.props.playlists to access global state
+    playlists: state.playlists, 
     playlist: state.playlist
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setPlaylists: (playlists) => { //this.props.setPlaylist to access this global state function
+    setPlaylists: playlists => { 
       dispatch(setPlaylists(playlists));
     },
-    setPlaylistId: (id) => {
+    setPlaylistId: id => {
       dispatch(setPlaylistId(id));
     }
   };
@@ -96,5 +92,3 @@ const style = {
     textDecoration: 'none'
   }
 };
-
-

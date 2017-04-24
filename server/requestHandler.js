@@ -3,10 +3,19 @@ const dbHelpers = require('../database/dbHelpers');
 const spotify = require('./spotify');
 
 const verifyUser = (req, res) => {
-  obj = {login: req.isAuthenticated()}
-  if (req.user) obj.name = req.user.name;
-  else obj.name = '';
-  res.send(obj);
+  if (req.isAuthenticated() && spotify.hasAccessToken()) {
+    res.send({
+      login: true, 
+      name: req.user.name
+    });
+  } else {
+    req.logout();
+    req.session.destroy();
+    res.send({
+      login: false, 
+      name: ''
+    });
+  }
 };
 
 const validateVote = voteData => {

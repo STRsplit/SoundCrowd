@@ -9,7 +9,7 @@ class Login extends Component {
     this.state = {
       playlist: ''
     };
-    this.spotifyAuth = this.spotifyAuth.bind(this);
+    
     this.setPlaylist = this.setPlaylist.bind(this);
   }
 
@@ -17,13 +17,8 @@ class Login extends Component {
     this.setState({ playlist: e.target.value });
   }
 
-  spotifyAuth(e){
-    e.preventDefault()
-    axios.get('/auth/spotify');
-  }
-
   render() {
-    return(
+    return (
       <div className="login-container">
         <div>
           <div className="center-content">
@@ -35,7 +30,7 @@ class Login extends Component {
         </div>
         <div>
           <div className="button-container">
-            <Link to={`/app/playlists/${this.state.playlist}`}>
+            <Link to={`/public/playlist/${this.state.playlist}`}>
               <Button type="primary"><span>Join a Room</span></Button>
             </Link>
             <div className="center-content">
@@ -47,7 +42,7 @@ class Login extends Component {
           <p className="tagline">Lorem Ipsum dhfjh adsljhfjashd  dsfh jaedsjfd. fjdshjfhjas e jledhsfj h sdlkafh ljads f </p>
         </div>
         <div className="spotifyLogoContainer">
-          <img className="spotifyLogo" src="https://img.clipartfest.com/3162c449b8951de3e76ed09cc47ffcbd_-delivery-at-spotify-spotify-clipart-transparent_3159-1228.png"/>
+          <img className="spotifyLogo" src="./assets/images/spotify-clipart.png"/>
         </div>
       </div>
     );

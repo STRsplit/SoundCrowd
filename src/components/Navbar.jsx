@@ -1,51 +1,51 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import login from './Login.jsx';
-import { Link, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser, setShowLogin } from '../actions/userActions';
+
 import { AppBar, IconButton, IconMenu, MenuItem } from 'material-ui/';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import UpDown from 'material-ui/svg-icons/action/swap-vertical-circle';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
+  // TODO: ADD LOGIN REDIRECT
   
   render() {
-
-    const style = {
-      link: {
-        textDecoration: 'none'
-      },
-      div: {
-        textAlign: 'center',
-        width: '150px',
-        margin: '0 auto'
-      }
-    };
+    const privateNavItems = (
+      <div>
+        <Link to="/" style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
+        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+        <Link to="/login" style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
+      </div>
+    );
+    const publicNavItems = (
+      <div>
+        <Link to="/login" style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
+        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+      </div>
+    );
+    const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
 
     return (
       <div className="nav-container">
       <div>
        <AppBar className='main-navigation-site'
           title="SoundCrowd"
-          onRightIconButtonTouchTap={ this._toggleNav }
+          onRightIconButtonTouchTap={ this._toggleNav } 
           iconElementLeft={<IconButton><UpDown /></IconButton>}
           iconElementRight={
             <IconMenu
+              listStyle={ style.menu }
               iconButtonElement={<IconButton><Menu /></IconButton>}
               targetOrigin={{horizontal: 'right', vertical: 'top'}}
               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              >
-            <Link to='/app' style={style.link}><MenuItem><div style={style.div}>Home</div></MenuItem></Link>
-            <Link to='/app/search' style={style.link}><MenuItem><div style={style.div}>Search</div></MenuItem></Link>
-            <Link to='/login' style={style.link}><MenuItem><div style={style.div} onClick={this.props.logout}>Logout</div></MenuItem></Link>
-           </IconMenu>
+            >
+            { NavItems }
+            </IconMenu>
           }
         />
         </div>
@@ -54,4 +54,32 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: () => {
+      dispatch(logoutUser());
+    },
+    setShowLogin: () => {
+      dispatch(setShowLogin(true));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
+const style = {
+  menu: {
+    width: '200px'
+  },
+  link: {
+    textDecoration: 'none',
+    textAlign: 'center',
+    margin: '0 auto'
+  }
+};
