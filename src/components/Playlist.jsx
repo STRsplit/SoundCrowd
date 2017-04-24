@@ -147,7 +147,7 @@ class Playlist extends Component {
         <div>
           <CurrentSongBar />
           <div>
-            <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`}>
+            <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
               <Button type="primary"><span>Open in Spotify</span></Button>
             </a>
           </div>
