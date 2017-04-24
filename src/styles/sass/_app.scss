@@ -18,10 +18,17 @@
   margin: centerContent(120px);
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .mui-col-xs-0 {
     display: none
   }
+  .inner-app-container {
+    width: 100%;
+    display: block;
+    clear: both;
+    margin: centerContent(120px);
+  }
+
 }
 .main-left-column {
 

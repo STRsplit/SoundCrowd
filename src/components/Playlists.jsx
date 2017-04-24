@@ -51,9 +51,9 @@ class Playlists extends Component {
 
     return (
       <div>
-        <PlaylistSuggester />
+        <PlaylistSuggester methods={this.props}/>
         <hr />
-        <h2>PLAYLISTS</h2>        
+        <h2>PLAYLISTS</h2>
         <div>
           { this.loaded ? userPlaylists : <Spinner size="lg" />  }
         </div>

@@ -14,7 +14,7 @@ module.exports = {
           }
         }
       } 
-    } else if (mood === 'Calm' || mood === '') {
+    } else if (mood === 'Calm' || mood === '' || mood === 'Choose One') {
       for (j = 0; j < names.length; j++) {
         for (k = 0; k < names[j].length; k++) {
           if (names[j][k] === 'Relax' || names[j][k] === 'Coffeehouse' ||
@@ -54,9 +54,9 @@ module.exports = {
     return playlists[num].id;
   },
 
-  selectTracks: function(playlist, activity) {
+  selectTracks: function(playlist, activity, userId, newPlaylistId) {
     var tracks = playlist.body.tracks.items;
-    var result = {uri: []};
+    var result = {uri: [], owner: userId, tracks: [], id: newPlaylistId};
     if (activity === 'Exercising' || activity === 'Partying') {
       for (var i = 0; i < tracks.length; i++) {
         if (tracks[i].track.popularity < 60) {
@@ -75,10 +75,12 @@ module.exports = {
         break;
       }
       if (tracks[i] !== undefined) {
+        var trackInfo = {artist: tracks[i].track.artists[0].name, title: tracks[i].track.name};
+        result.tracks.push(trackInfo);
         result.uri.push(tracks[i].track.uri);
       }
     }
 
-    return result.uri;
+    return result;
   }
 }

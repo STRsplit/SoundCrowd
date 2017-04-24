@@ -45,8 +45,8 @@ class Navbar extends Component {
               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
             >
             { NavItems }
-           </IconMenu>
-      }
+            </IconMenu>
+          }
         />
         </div>
       </div>

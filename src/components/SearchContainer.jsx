@@ -49,7 +49,6 @@ class SearchContainer extends Component {
       }})[0];
 
     let { artist, artists, id, name } = targetSong;
-    // targetSong.artist = targetSong.artist ? targetSong.artist[0].name : targetSong.artists[0].name;
     artist = artist ? artist[0].name : artists[0].name;
     let trackInfo = {
       song_id: id,
@@ -105,8 +104,8 @@ class SearchContainer extends Component {
   }
 
   updateRecentSongs(track) {
-    let currentList = this.props.playlist.recentlyAddedTracks
-    currentList.unshift(track)
+    let currentList = this.props.playlist.recentlyAddedTracks;
+    currentList.unshift(track);
     this.props.setRecentAddedTracks(currentList);
   }
 
@@ -134,22 +133,22 @@ class SearchContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     search: state.search,
     playlist: state.playlist
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setRecentAddedTracks: (tracks) => {  
+    setRecentAddedTracks: tracks => {  
       dispatch(setRecentAddedTracks(tracks));
     },
-    enterSearch: (search) => {
+    enterSearch: search => {
       return dispatch(enterSearch(search));
     },
-    setDataSource: (songs) => {
+    setDataSource: songs => {
       dispatch(setDataSource(songs));
     },
     setSearchResults: (songs, search) => {
@@ -158,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
     setSearchDefaults: () => {
       dispatch(setSearchDefaults());
     },
-    setFilter: (filter) => {
+    setFilter: filter => {
       dispatch(setFilter(filter))
     }
   };

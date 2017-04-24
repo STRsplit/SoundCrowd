@@ -7,7 +7,7 @@ import SearchContainer from './SearchContainer.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
 import PublicRoute from './routes/PublicRoute.jsx';
 
-class App extends Component {  
+class App extends Component {
 
 	render() {
 
