@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import keys from '../../config/keys.js';
 import { Button } from 'elemental';
@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
 
-class PlaylistSuggester extends React.Component {
+class PlaylistSuggester extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       showMood: false,
       showActivity: false,
@@ -19,6 +19,7 @@ class PlaylistSuggester extends React.Component {
       error: false,
       loading: false
     }
+
     this.findPlaylist = this.findPlaylist.bind(this);
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
@@ -38,7 +39,7 @@ class PlaylistSuggester extends React.Component {
         mood,
         activity
       }) 
-      .then((res) => {
+      .then(res => {
         var id = res.data;
         this.props.methods.history.push(`/app/playlists/${id}`);
       })
@@ -82,7 +83,8 @@ class PlaylistSuggester extends React.Component {
   }
 
   renderPage() {
-    return <div>
+    return (
+    <div>
       <div>
         <h2>Get Suggested Playlist</h2>
         {this.state.error ? <div className="recommended-error">
@@ -121,43 +123,30 @@ class PlaylistSuggester extends React.Component {
         </div>
       </div>
     </div>
+    )
   }
 
   render() {
     return (
       <div id="recommended-container">
-        {this.state.loading ? <Spinner size="lg" /> : this.renderPage()}
+        {this.renderPage()}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     filters: state.filters
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setFilters: (filters) => {
+    setFilters: filters => {
       dispatch(setFilters(filters));
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
-  // fetchFilters() {
-  //   axios.get('http://ip-api.com/json')
-  //   .then(result => {
-  //     this.location = result['data']['city'];
-  //     return this.location;
-  //   })
-  //   .then(location => {
-  //     axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=' + keys['weather'])
-  //     .then(result => {
-  //       this.weather = result['data']['weather'][0]['main'];
-  //     });
-  //   })
-  //   .catch(err => console.log('PlaylistSuggester.jsx error componentDidMount: ', err));
-  // }   

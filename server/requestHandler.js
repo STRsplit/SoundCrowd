@@ -23,12 +23,6 @@ const validateVote = voteData => {
       .then(result => {
         if (!result) {
           db.Vote.create(voteObj);
-          // db.Vote.create({
-          //   song_id: voteObj.song_id,
-          //   playlist_id: voteObj.playlist_id,
-          //   user_id: voteObj.user_id,
-          //   vote: vote
-          // });
           dbHelpers.updateVoteCount(songId, playlistId, vote)
           .then(song => {
             resolve(song);
@@ -44,12 +38,6 @@ const validateVote = voteData => {
       .then(result => {
         if (!result) {
           db.Vote.create(voteObj);
-          // db.Vote.create({
-          //   song_id: voteObj.song_id,
-          //   playlist_id: voteObj.playlist_id,
-          //   session_id: voteObj.session_id,
-          //   vote: vote
-          // });
           dbHelpers.updateVoteCount(songId, playlistId, vote)
           .then(song => {
             resolve(song);

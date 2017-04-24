@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
+import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVoteErrorPopup } from '../actions/playlistActions';
 
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
+import VoteErrorPopup from './VoteErrorPopup.jsx';
+
 import Track from './Track.jsx';
 import { Button } from 'elemental';
+
 import io from 'socket.io-client';
 import FlipMove from 'react-flip-move';
 
@@ -15,12 +18,13 @@ class Playlist extends Component {
 
   componentWillMount () {
     this.socket = io.connect();
+    this.votingError = false;
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
-    this.renderTracks = this.renderTracks.bind(this);
+
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
@@ -33,6 +37,7 @@ class Playlist extends Component {
       session_id: session_id
     }
     this.socket.emit('recordVote', voteData);
+    this.handleVoteError = this.handleVoteError.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +53,7 @@ class Playlist extends Component {
       this.handleSongVoteUpdate(songVoteData);
     });
     this.socket.on('voteError', voteErrorInfo => {
-      console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
+      this.handleVoteError(true, voteErrorInfo);
     });
   }
 
@@ -62,6 +67,17 @@ class Playlist extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  handlePlaylistVote(song_id, playlist_id, vote_val){
+    let voteData = {
+      songId: song_id,
+      playlistId: playlist_id,
+      vote: vote_val,
+      user_id: this.socket.user_id,
+      session_id: this.socket.session_id
+    }
+    this.socket.emit('recordVote', voteData)
   }
 
   getPlaylistTracks() {
@@ -101,53 +117,73 @@ class Playlist extends Component {
     this.props.setPlaylistTracks(tracks);
   }
 
-  renderTracks() {
-    return this.props.playlist.tracks.map(track => (
-      <Track key={track.song_id} 
-      playlist={this.props.playlist.id} 
-      track={track} 
-      getPlaylistTracks={this.getPlaylistTracks}
-      handlePlaylistVote={this.handlePlaylistVote} />
-    ));
+  handleVoteError(open, message){
+    this.votingError = true;
+    this.props.setVoteErrorPopup(true, message);
+    this.votingError = false;
+  }
+  
+  sortTracks() {
+    // var sortedTracks = this.state.tracks.sort((a, b) => {
+    //   a.vote_count - b.vote_count;
+    // })
+    // this.setState({ tracks: sortedTracks });
   }
 
   render() {
+    const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
+    const { open, message } = voteErrorPopup;
+
+    let playlistTracks = tracks.map(track => (
+      <Track key={track.song_id} 
+      playlist={id} 
+      track={track}
+      getPlaylistTracks={this.getPlaylistTracks}
+      handlePlaylistVote={this.handlePlaylistVote} />
+    ));
+
     return (
       <div>
-        <CurrentSongBar />
         <div>
-          <a target="_blank" href={`http://open.spotify.com/user/${this.props.playlist.owner}/playlist/${this.props.playlist.id}`}>
-            <Button type="primary"><span>Open in Spotify</span></Button>
-          </a>
+          <CurrentSongBar />
+          <div>
+            <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
+              <Button type="primary"><span>Open in Spotify</span></Button>
+            </a>
+          </div>
+          <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
+          <FlipMove>
+          {playlistTracks}
+          </FlipMove>
         </div>
-        <FlipMove>
-          {this.renderTracks()}
-        </FlipMove>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     playlist: state.playlist 
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setPlaylist: (playlist) => {  
+    setPlaylist: playlist => {  
       dispatch(setPlaylist(playlist));
     },
-    setPlaylistId: (id) => { 
+    setPlaylistId: id => { 
       dispatch(setPlaylistId(id));
     },
-    setPlaylistTracks: (tracks) => { 
+    setPlaylistTracks: tracks => { 
       dispatch(setPlaylistTracks(tracks));
     },
-    setPlaylistOwner: (owner) => { 
+    setPlaylistOwner: owner => { 
       dispatch(setPlaylistOwner(owner));
     },
+    setVoteErrorPopup: (visibility, message) => {
+      dispatch(setVoteErrorPopup(visibility, message));
+    }
   };
 };
 
