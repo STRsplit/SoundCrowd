@@ -17,6 +17,7 @@ class Playlists extends Component {
     this.defaultImage = './assets/images/default-albumart.png';
     this.loaded = false;
     this.creating = false;
+    this.showLoading = this.showLoading.bind(this);
     this.renderPlaylists = this.renderPlaylists.bind(this);
     this.renderAll = this.renderAll.bind(this);
   }
@@ -29,6 +30,11 @@ class Playlists extends Component {
       this.props.setPlaylists(playlists);
     })
     .catch(err => console.log('Playlists > componentDidMount error: ', err));
+  }
+
+  showLoading() {
+    this.creating = true;
+    this.props.setPlaylists(true);
   }
 
   renderPlaylists() {
@@ -55,7 +61,7 @@ class Playlists extends Component {
 
   renderAll() {
     return <div>
-      <PlaylistSuggester methods={this.props}/>
+      <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
       <hr />
       <h2>PLAYLISTS</h2>
       <div>

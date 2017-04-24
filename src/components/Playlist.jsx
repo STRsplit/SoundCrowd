@@ -24,7 +24,7 @@ class Playlist extends Component {
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
-
+    this.renderTracks = this.renderTracks.bind(this);
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
@@ -122,26 +122,20 @@ class Playlist extends Component {
     this.props.setVoteErrorPopup(true, message);
     this.votingError = false;
   }
-  
-  sortTracks() {
-    // var sortedTracks = this.state.tracks.sort((a, b) => {
-    //   a.vote_count - b.vote_count;
-    // })
-    // this.setState({ tracks: sortedTracks });
+
+  renderTracks() {
+    return this.props.playlist.tracks.map(track => (
+      <Track key={track.song_id} 
+      playlist={this.props.playlist.id} 
+      track={track}
+      getPlaylistTracks={this.getPlaylistTracks}
+      handlePlaylistVote={this.handlePlaylistVote} />
+    ));
   }
 
   render() {
     const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
     const { open, message } = voteErrorPopup;
-
-    let playlistTracks = tracks.map(track => (
-      <Track key={track.song_id} 
-      playlist={id} 
-      track={track}
-      getPlaylistTracks={this.getPlaylistTracks}
-      handlePlaylistVote={this.handlePlaylistVote} />
-    ));
-
     return (
       <div>
         <div>
@@ -153,7 +147,7 @@ class Playlist extends Component {
           </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
           <FlipMove>
-          {playlistTracks}
+          {this.renderTracks()}
           </FlipMove>
         </div>
       </div>
