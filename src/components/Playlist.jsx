@@ -9,6 +9,7 @@ import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import Track from './Track.jsx';
 import { Button } from 'elemental';
 import io from 'socket.io-client';
+import FlipMove from 'react-flip-move';
 
 class Playlist extends Component {
 
@@ -19,6 +20,7 @@ class Playlist extends Component {
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
+    this.renderTracks = this.renderTracks.bind(this);
   }
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
@@ -65,17 +67,16 @@ class Playlist extends Component {
   getPlaylistTracks() {
     const playlistId = this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
-      .then(res => {
-        const { owner, tracks } = res.data;
-        this.props.setPlaylist({
-          id: playlistId,
-          owner: owner,
-          tracks: tracks
-        });
-      })
-      .catch(err => {
-        console.log(err);
+    .then(res => {
+      this.props.setPlaylist({
+        id: playlistId,
+        owner: res.data.owner,
+        tracks: res.data.tracks
       });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   handlePlaylistUpdate(playlist) {
@@ -100,32 +101,28 @@ class Playlist extends Component {
     this.props.setPlaylistTracks(tracks);
   }
 
-  sortTracks() {
-    // var sortedTracks = this.state.tracks.sort((a, b) => {
-    //   a.vote_count - b.vote_count;
-    // })
-    // this.setState({ tracks: sortedTracks });
-  }
-
-  render() {
-    const { playlist } = this.props;
-    var playlistTracks = playlist.tracks.map(track => (
+  renderTracks() {
+    return this.props.playlist.tracks.map(track => (
       <Track key={track.song_id} 
-      playlist={playlist.id} 
+      playlist={this.props.playlist.id} 
       track={track} 
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
     ));
-    
+  }
+
+  render() {
     return (
       <div>
         <CurrentSongBar />
         <div>
-          <a href={`http://open.spotify.com/user/${this.props.playlist.owner}/playlist/${this.props.playlist.id}`}>
+          <a target="_blank" href={`http://open.spotify.com/user/${this.props.playlist.owner}/playlist/${this.props.playlist.id}`}>
             <Button type="primary"><span>Open in Spotify</span></Button>
           </a>
         </div>
-        <div>{playlistTracks}</div>
+        <FlipMove>
+          {this.renderTracks()}
+        </FlipMove>
       </div>
     )
   }

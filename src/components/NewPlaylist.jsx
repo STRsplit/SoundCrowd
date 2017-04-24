@@ -2,25 +2,22 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../actions/filtersActions';
+import { setPlaylist } from '../actions/playlistActions';
+import Playlist from './Playlist.jsx';
+import { Spinner } from 'elemental';
 
 class NewPlaylist extends React.Component {
 
-	componentWillMount() {
-		this.href = '';
-		const { mood, activity } = this.props.filters;
 
+	componentDidMount() {
+		const { mood, activity } = this.props.filters;
 		axios.post('/api/spotify/playlists', { 
 			mood,
 			activity
 		}) 
-		.then(result => {
-			/* * OLD CODE * *
-			axios.get('/getCategory')
-			.then((result) => {
-				console.log(result);
-			  this.href = result.data.link;
-			});
-			* * OLD CODE * */
+		.then((res) => {
+      var id = res.data;
+      this.props.history.push(`/app/playlists/${id}`);
 		})
 		.catch(err => console.log(err));
 	}
@@ -28,8 +25,7 @@ class NewPlaylist extends React.Component {
 	render() {
 	  return (
 	  	<div>
-	  	  <h1>Recommended Playlist</h1>
-	  	  <a href={this.href}>Your Playlist</a>	  
+        <Spinner size="lg" />
 		  </div>	
 	  );
 	}
@@ -37,8 +33,17 @@ class NewPlaylist extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.filters
+    filters: state.filters,
+    playlist: state.playlist
   };
 };
 
-export default connect(mapStateToProps, null)(NewPlaylist);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPlaylist: (playlist) => {
+      dispatch(setPlaylist(playlist));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPlaylist);

@@ -17,10 +17,6 @@ import Col from 'muicss/lib/react/col';
 
 class App extends Component {
 
-  componentWillMount() {
-   
-  }  
-
 	render() {
 	  return ( 
     <BrowserRouter>
@@ -29,31 +25,26 @@ class App extends Component {
 	  	<div>
 	  		<NavBar logout={this.props.logout} name={this.props.name}/>
         <div>
-		  	<Container className="main-app-container" fluid={true}>
-	        <Row>
-		        <Col className="layout-column column-left" md="2"></Col>
-		        <Col className="layout-column column-mid" xs="18" md="7">
-		          <div className="inner-app-container">
-				  			<div className="main-middle-column">
-        					<Route exact path="/app" render={() => (
-                    <div>                        
-                      <PlaylistSuggester />
-                      <Playlists />
-                    </div>
-                  )}/>
-                  <Switch>
-                    <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
-                    <Route path="/app/playlists/:playlistId" component={Playlist} />
-                    <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
-                    <Route path="/app/new-playlist" component={NewPlaylist} />
-                  </Switch>
-                </div>
+  		  	<Container className="main-app-container" fluid={true}>
+  	        <Row>
+  		        <Col className="layout-column column-left" md="2"></Col>
+  		        <Col className="layout-column column-mid" xs="18" md="7">
+  		          <div className="inner-app-container">
+  				  			<div className="main-middle-column">
+          					<Route exact path="/app" component={Playlists}/>
+                    <Switch>
+                      <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
+                      <Route path="/app/playlists/:playlistId" component={Playlist} />
+                      <Route path="/app/search" render={() => (<SearchContainer addSong={this.handleSongAdd} stats={this.props.stats} />)} />
+                      <Route path="/app/new-playlist" component={NewPlaylist} />
+                    </Switch>
+                  </div>
       		  	  </div>
       		  	</Col>
               <Col className="layout-column column-right" xs="0" md="3"><RightBar /></Col>
             </Row>
-	        </Container>
-          </div>
+          </Container>
+        </div>
 		  </div>
       </Switch>
     </BrowserRouter>

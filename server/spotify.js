@@ -10,7 +10,7 @@ var spotify = new SpotifyWebApi({
   clientId: clientID,
   clientSecret: clientSecret,
   redirectUri: callbackURL
-});
+}); 
 
 module.exports = {
   getUserPlaylists: function(username, cb) {
@@ -59,20 +59,23 @@ module.exports = {
   },
 
   createPlaylist: function(userId, preferences, cb) {
-    var playlistName = 'SoundCrowd-' + new Date().toISOString().slice(0, -14);
-    spotify.createPlaylist(userId, playlistName, {public: false})
-      .then(data => {
+    var date = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
+    var playlistName = 'SoundCrowd ' + date.slice(5, 11) + ' ' + date.slice(17, 25);
+    spotify.createPlaylist(userId, playlistName, {public: true})
+      .then((data) => {
         var newPlaylistId = data.body.id;
         spotify.getPlaylistsForCategory('mood', { limit: 50 })
-          .then(playlists => {
-            var playlistId = customPlaylist.selectPlaylist(playlists.body.playlists.items, preferences.mood);
+          .then((info) => {
+            var playlistId = customPlaylist.selectPlaylist(info.body.playlists.items, preferences.mood)
             spotify.getPlaylist('spotify', playlistId)
-              .then(playlist => {
-                spotify.addTracksToPlaylist(userId, newPlaylistId, customPlaylist.selectTracks(playlist, preferences.activity))
-                  .then(() => cb(null));
+              .then((resp) => {
+                var result = customPlaylist.selectTracks(resp, preferences.activity, userId, newPlaylistId);
+                spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
+                .then((res) => console.log('added tracks'));
+                cb(null, result.id);
               });
           })
-      }) 
+      })
       .catch(err => {
         cb(err);
       });
