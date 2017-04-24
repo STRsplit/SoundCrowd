@@ -10,7 +10,7 @@ import Col from 'muicss/lib/react/col';
 class RouteContainer extends Component {
 
   render() {
-    console.log(this.props);
+    
     return (
       <BrowserRouter>
       <div>
@@ -20,10 +20,8 @@ class RouteContainer extends Component {
             <Col className="layout-column column-left" md="2"></Col>
             <Col className="layout-column column-mid" xs="18" md="7">
               <div className="inner-app-container">
-                <div className="main-middle-column">
-                  <Switch>            
-                    <div> { this.props.routes } </div>
-                  </Switch> 
+                <div className="main-middle-column">                        
+                  { this.props.routes }                  
                 </div>
               </div>
             </Col>
