@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 class RightBar extends Component {
 
   render() {
-    const { recentlyAddedTracks, recentlyPlayedTracks, trendingTracks } = this.props.playlist
+    const { recentlyAddedTracks, recentlyPlayedTracks, trendingTracks } = this.props.playlist;
+
     return (
       <div className="rightBar-container">
         <div><h2>Playlist Stats:</h2></div>
@@ -29,15 +30,15 @@ class RightBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     playlist: state.playlist 
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    
+  
   };
 };
 

@@ -18,7 +18,7 @@
         font-color: #FB8900 ! important;
         font-size: 2vw ! important;
         white-space: nowrap;
-        @media (max-width: 768px) {
+        @media screen and (max-width: 768px) {
           font-size: 4vw ! important;
         }
           span {

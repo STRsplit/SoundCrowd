@@ -55,9 +55,14 @@
   clear: both;
   margin: 120px auto; }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .mui-col-xs-0 {
-    display: none; } }
+    display: none; }
+  .inner-app-container {
+    width: 100%;
+    display: block;
+    clear: both;
+    margin: 120px auto; } }
 
 .main-left-column {
   background-color: pink; }
@@ -155,7 +160,7 @@
   margin: 0% auto; }
 
 /* * MOBILE STYLES * */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .button-container {
     display: block;
     margin: 5% 0; }
@@ -227,7 +232,7 @@
       font-color: #FB8900 !important;
       font-size: 2vw !important;
       white-space: nowrap; }
-      @media (max-width: 768px) {
+      @media screen and (max-width: 768px) {
         .playlist-vote-error-popup div div {
           font-size: 4vw !important; } }
       .playlist-vote-error-popup div div span {
@@ -507,24 +512,6 @@ body {
   margin-top: 50px;
   padding-top: 10px; }
 
-h1 {
-  font-size: 2.4em; }
-
-h2 {
-  font-size: 2em; }
-
-h3 {
-  font-size: 1.6em; }
-
-html,
-body {
-  background-color: #6dbcdb; }
-
-ul,
-ol {
-  margin: 0;
-  padding: 0; }
-
 #recommended-container {
   margin-bottom: 40px; }
 
@@ -620,3 +607,21 @@ ol {
 
 #loading {
   color: black; }
+
+h1 {
+  font-size: 2.4em; }
+
+h2 {
+  font-size: 2em; }
+
+h3 {
+  font-size: 1.6em; }
+
+html,
+body {
+  background-color: #6dbcdb; }
+
+ul,
+ol {
+  margin: 0;
+  padding: 0; }

@@ -85,7 +85,7 @@
 
 
 /* * MOBILE STYLES * */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .button-container {
     display: block;
     margin: 5% 0;

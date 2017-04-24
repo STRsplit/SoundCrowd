@@ -135,13 +135,13 @@ class PlaylistSuggester extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     filters: state.filters
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     setFilters: filters => {
       dispatch(setFilters(filters));

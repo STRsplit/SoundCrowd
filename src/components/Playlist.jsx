@@ -161,13 +161,13 @@ class Playlist extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     playlist: state.playlist 
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     setPlaylist: playlist => {  
       dispatch(setPlaylist(playlist));
