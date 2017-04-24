@@ -129,7 +129,7 @@ class PlaylistSuggester extends Component {
   render() {
     return (
       <div id="recommended-container">
-        {this.state.loading ? <Spinner size="lg" /> : this.renderPage()}
+        {this.renderPage()}
       </div>
     );
   }
