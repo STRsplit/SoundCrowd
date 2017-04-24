@@ -1,7 +1,8 @@
-var express = require('express');
-var spotify = require('../spotify');
+const express = require('express');
+const spotify = require('../spotify');
+// const spotifyCronJob = require('../spotifyCron');
 
-var router = express.Router();
+const router = express.Router();
 
 router.route('/playlists')
 .get(function(req, res) {
@@ -43,13 +44,12 @@ router.get('/current_song', function(req, res) {
 });
 
 router.post('/play', function(req, res) {
-  spotify.startPlaylist(req.user.id, req.body.playlist, function(err, something) {
+  spotify.startPlaylist(req.user.id, req.body.playlist, function(err) {
     if (err) {
-      console.log('play error', err);
       res.status(err.statusCode).send(err);
     } else {
-      console.log('playing', something);
-      res.send(something);
+      require('../spotifyCron').start();
+      res.sendStatus(201);
     }
   });
 });

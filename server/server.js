@@ -5,16 +5,10 @@ const handler = require('./requestHandler');
 
 const router = require('./routes/router');
 const spotifyRouter = require('./routes/spotifyRouter');
-const spotifyCronJob = require('./spotifyCron');
-spotifyCronJob.start();
 
 const spotify = require('./spotify');
 const db = require('../database/db');
 const dbHelpers = require('../database/dbHelpers');
-
-
-
-
 
 
 /* * Authentication * */
