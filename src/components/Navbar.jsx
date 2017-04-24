@@ -24,8 +24,8 @@ class Navbar extends Component {
     const publicNavItems = (
       <div>
         <Link to="/login" style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
-        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+        <Link to="/public/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to="/public/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
       </div>
     );
     const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
