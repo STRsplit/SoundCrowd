@@ -9,17 +9,12 @@ class Login extends Component {
     this.state = {
       playlist: ''
     };
-    this.spotifyAuth = this.spotifyAuth.bind(this);
+    
     this.setPlaylist = this.setPlaylist.bind(this);
   }
 
   setPlaylist(e) {
     this.setState({ playlist: e.target.value });
-  }
-
-  spotifyAuth(e){
-    e.preventDefault()
-    axios.get('/auth/spotify');
   }
 
   render() {
@@ -35,7 +30,7 @@ class Login extends Component {
         </div>
         <div>
           <div className="button-container">
-            <Link to={`/app/playlists/${this.state.playlist}`}>
+            <Link to={`/public/playlist/${this.state.playlist}`}>
               <Button type="primary"><span>Join a Room</span></Button>
             </Link>
             <div className="center-content">

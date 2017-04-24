@@ -10,21 +10,22 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import UpDown from 'material-ui/svg-icons/action/swap-vertical-circle';
 
 class Navbar extends Component {
+  // TODO: ADD LOGIN REDIRECT
   
   render() {
     const privateNavItems = (
       <div>
-        <Link to='/' style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
-        <Link to='/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to='/login' style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
-        <Link to='/aboutus' style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+        <Link to="/" style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
+        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to="/login" style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
+        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
       </div>
     );
     const publicNavItems = (
       <div>
-        <Link to='/login' style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
-        <Link to='/public/search' style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to='/aboutus' style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
+        <Link to="/login" style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
+        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
+        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
       </div>
     );
     const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
