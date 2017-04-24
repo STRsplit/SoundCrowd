@@ -63,6 +63,10 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, .5);
+  h3, h4 {
+      color: white;
+    }
 }
 
 .track-dual-container > div {
@@ -98,11 +102,10 @@
 }
 
 .track-song-details {
-  background-color: rgba(255, 255, 255, 1);
+
   padding: 2%;
 }
 .track-song-entry-header {
-
 }
 
 .container {
@@ -169,7 +172,9 @@
 .topTrack-main-container {
   .track-dual-container {
     background-color: rgba(0, 0, 0, .5);
-
+    h3 {
+      color: white;
+    }
   }
   .track-dual-container > div:first-child {
     display: flex;

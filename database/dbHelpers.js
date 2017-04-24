@@ -7,7 +7,8 @@ module.exports = {
         where: { 
           playlist_id: playlistId, 
           vote_count: song.vote_count - vote,
-          song_id: { $not: song.song_id }
+          song_id: { $not: song.song_id },
+          position: { $gt: 0 }
         },
         order: ['position']
       })
@@ -97,13 +98,15 @@ module.exports = {
   reorderPlaylist: function(playlistId) {
     return new Promise((resolve, reject) => {
       Song.findAll({ 
-        where: { playlist_id: playlistId },
+        where: { playlist_id: playlistId},
         order: [['vote_count', 'DESC']] 
       })
       .then(allSongs => {
-        let position = 0;
+        let position = 1;
         allSongs.forEach(song => {
-          song.update({ position: position++ });
+          if(song.position !== 0){
+            song.update({ position: position++ });
+          }
         });
         resolve(allSongs);
       })

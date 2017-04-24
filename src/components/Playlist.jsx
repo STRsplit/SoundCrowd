@@ -7,6 +7,7 @@ import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVot
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import VoteErrorPopup from './VoteErrorPopup.jsx';
+import SearchPopup from './SearchRevision.jsx';
 
 import Track from './Track.jsx';
 import { Button } from 'elemental';
@@ -151,6 +152,7 @@ class Playlist extends Component {
       <div>
         <div>
           <CurrentSongBar />
+          <SearchPopup />
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
               <Button type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>
