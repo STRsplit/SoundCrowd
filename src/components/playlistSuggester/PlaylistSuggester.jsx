@@ -16,8 +16,7 @@ class PlaylistSuggester extends Component {
       showActivity: false,
       mood: 'Choose One',
       activity: 'Choose One',
-      error: false,
-      loading: false
+      error: false
     }
 
     this.findPlaylist = this.findPlaylist.bind(this);
@@ -32,7 +31,7 @@ class PlaylistSuggester extends Component {
     if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
       this.setState({error: true});
     } else {
-      this.setState({loading: true});
+      this.props.loading();
       var mood = this.state.mood;
       var activity = this.state.activity;
       axios.post('/api/spotify/playlists', { 
@@ -41,7 +40,7 @@ class PlaylistSuggester extends Component {
       }) 
       .then(res => {
         var id = res.data;
-        this.props.methods.history.push(`/app/playlists/${id}`);
+        this.props.methods.history.push(`/playlist/${id}`);
       })
       .catch(err => console.log(err));
     }
@@ -82,54 +81,46 @@ class PlaylistSuggester extends Component {
     }
   }
 
-  renderPage() {
-    return (
-    <div>
-      <div>
-        <h2>Get Suggested Playlist</h2>
-        {this.state.error ? <div className="recommended-error">
-          Select mood and activity before creating playlist
-        </div> : null}
-        <div id="recommended-link" onClick={this.findPlaylist}>
-          <Button type="primary"><span>Create</span></Button>
-        </div>
-      </div>
-      <div id="preferences">
-        <div id="mood">
-          <h3 id="mood-label">Mood</h3>
-          <div id="mood-container">
-          <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
-          {this.state.showMood ? <div id="mood-menu">
-            <div onClick={this.setMood}>Happy</div>
-            <div onClick={this.setMood}>Calm</div>
-            <div onClick={this.setMood}>Sad</div>
-            <div onClick={this.setMood}>Focused</div>
-            <div onClick={this.setMood}>Excited</div>
-          </div> : null}
-          </div>
-        </div>
-        <div id="activity">
-          <h3 id="activity-label">Activity</h3>
-          <div id="activity-container">
-          <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
-          {this.state.showActivity ? <div id="activity-menu">
-            <div onClick={this.setActivity}>Exercising</div>
-            <div onClick={this.setActivity}>Studying</div>
-            <div onClick={this.setActivity}>Partying</div>
-            <div onClick={this.setActivity}>Chilling</div>
-            <div onClick={this.setActivity}>Driving</div>
-          </div> : null}
-          </div>
-        </div>
-      </div>
-    </div>
-    )
-  }
-
   render() {
     return (
       <div id="recommended-container">
-        {this.renderPage()}
+        <div>
+          <h2>Get Suggested Playlist</h2>
+          {this.state.error ? <div className="recommended-error">
+            Select mood and activity before creating playlist
+          </div> : null}
+          <div id="recommended-link" onClick={this.findPlaylist}>
+            <Button type="primary"><span>Create</span></Button>
+          </div>
+        </div>
+        <div id="preferences">
+          <div id="mood">
+            <h3 id="mood-label">Mood</h3>
+            <div id="mood-container">
+            <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
+            {this.state.showMood ? <div id="mood-menu">
+              <div onClick={this.setMood}>Happy</div>
+              <div onClick={this.setMood}>Calm</div>
+              <div onClick={this.setMood}>Sad</div>
+              <div onClick={this.setMood}>Focused</div>
+              <div onClick={this.setMood}>Excited</div>
+            </div> : null}
+            </div>
+          </div>
+          <div id="activity">
+            <h3 id="activity-label">Activity</h3>
+            <div id="activity-container">
+            <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
+            {this.state.showActivity ? <div id="activity-menu">
+              <div onClick={this.setActivity}>Exercising</div>
+              <div onClick={this.setActivity}>Studying</div>
+              <div onClick={this.setActivity}>Partying</div>
+              <div onClick={this.setActivity}>Chilling</div>
+              <div onClick={this.setActivity}>Driving</div>
+            </div> : null}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

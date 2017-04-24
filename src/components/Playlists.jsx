@@ -16,6 +16,10 @@ class Playlists extends Component {
   componentWillMount () {
     this.defaultImage = './assets/images/default-albumart.png';
     this.loaded = false;
+    this.creating = false;
+    this.showLoading = this.showLoading.bind(this);
+    this.renderPlaylists = this.renderPlaylists.bind(this);
+    this.renderAll = this.renderAll.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +32,13 @@ class Playlists extends Component {
     .catch(err => console.log('Playlists > componentDidMount error: ', err));
   }
 
-  render() {
-    const userPlaylists = this.props.playlists.playlists.map(playlist => {
+  showLoading() {
+    this.creating = true;
+    this.props.setPlaylists(true);
+  }
+
+  renderPlaylists() {
+    return this.props.playlists.playlists.map(playlist => {
       const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
       return (        
         <Link to={`/playlist/${playlist.id}`} 
@@ -48,15 +57,23 @@ class Playlists extends Component {
         </Link> 
       );
     });
+  }
 
+  renderAll() {
+    return <div>
+      <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
+      <hr />
+      <h2>PLAYLISTS</h2>
+      <div>
+        { this.loaded ? this.renderPlaylists() : <Spinner size="lg" /> }
+      </div>
+    </div>
+  }
+
+  render() {
     return (
       <div>
-        <PlaylistSuggester methods={this.props}/>
-        <hr />
-        <h2>PLAYLISTS</h2>
-        <div>
-          { this.loaded ? userPlaylists : <Spinner size="lg" />  }
-        </div>
+        { this.creating ? <Spinner size="lg"/> : this.renderAll() }
       </div>
     );
   }

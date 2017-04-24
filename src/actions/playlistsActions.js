@@ -1,12 +1,20 @@
-const setPlaylists = (playlists) => {
+const setPlaylists = playlists => {
   return {
     type: 'SET_PLAYLISTS',
     payload: playlists
   };
 };
 
+const setLoading = loading => {
+  return {
+    type: 'SET_LOADING',
+    payload: loading
+  };
+};
+
 export {
-  setPlaylists
+  setPlaylists,
+  setLoading
 };
 
 /* * EG. FOR ASYNC FUNCTIONS * *

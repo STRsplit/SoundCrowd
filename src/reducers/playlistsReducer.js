@@ -1,5 +1,6 @@
 const initialState = {
-  playlists: []
+  playlists: [],
+  loading: false
 };
 
 const playlistsReducer = (state = initialState, action) => {
@@ -8,6 +9,12 @@ const playlistsReducer = (state = initialState, action) => {
       state = {
         ...state,
         playlists: action.payload
+      };
+      break;
+    case 'SET_LOADING':
+      state = {
+        ...state,
+        loading: action.payload
       };
       break;
   }
