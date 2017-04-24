@@ -62,10 +62,10 @@ module.exports = {
       }})
         .then(playlist => {
           let position = 0;
-          let defaultIMG = 'http://www.iconninja.com/files/528/772/974/spotify-logo-icon.png';
+          const defaultIMG = 'https://cdn-img.easyicon.net/png/11888/1188810.gif';
           tracks = tracks.items.reduce((allTracks, track) => {
-            const { id, name, artists } = track.track;
-            const { images } = track.track.album;
+            const { id, name, artists, album } = track.track;
+            const { images } = album;
             if(track.track.id !== null) {
               let trackObj = {
                 song_id: id,
@@ -78,9 +78,9 @@ module.exports = {
                 vote_count: 0,
                 position: position++
               }; 
-              allTracks.push(trackObj);
-              return allTracks;
+             allTracks.push(trackObj);
             }
+            return allTracks;
           }, []);
 
           Song.bulkCreate(tracks)
@@ -121,7 +121,7 @@ module.exports = {
         let newCount = song.vote_count + vote;
         song.update({ vote_count: newCount })
           .then(song => {
-            resolve(song);
+            resolve(song.dataValues);
           });
       })
       .catch(err => {

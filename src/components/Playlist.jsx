@@ -43,7 +43,7 @@ class Playlist extends Component {
 
   componentDidMount() {
     this.getPlaylistTracks();
-    this.socket.emit('playlistId', this.props.match.params.playlistId)
+    this.socket.emit('playlistId', this.props.match.params.playlistId);
     this.socket.on('join', joinedRoom => {
       this.getSessionInfo();
     });
