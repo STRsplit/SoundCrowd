@@ -31,12 +31,7 @@ class App extends Component {
   		        <Col className="layout-column column-mid" xs="18" md="7">
   		          <div className="inner-app-container">
   				  			<div className="main-middle-column">
-          					<Route exact path="/app" render={() => (
-                      <div>
-                        <PlaylistSuggester />
-                        <Playlists />
-                      </div>
-                    )}/>
+          					<Route exact path="/app" component={Playlists}/>
                     <Switch>
                       <Route exact path="/app/playlists" render={() => (<Playlist playlist={this.props.stats.playlist}/>)}/>
                       <Route path="/app/playlists/:playlistId" component={Playlist} />

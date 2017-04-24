@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { setPlaylists } from '../actions/playlistsActions';
 import { setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
+import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
 
 import { Spinner } from 'elemental';
 import Paper from 'material-ui/Paper';
@@ -54,6 +55,7 @@ class Playlists extends Component {
 
     return (
       <div>
+        <PlaylistSuggester methods={this.props}/>
         <hr />
         <h2>PLAYLISTS</h2>
         <div>

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import keys from '../../config/keys.js';
 import { Button } from 'elemental';
+import { Spinner } from 'elemental';
 import { browserHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -15,10 +16,9 @@ class PlaylistSuggester extends React.Component {
       showActivity: false,
       mood: 'Choose One',
       activity: 'Choose One',
-      error: false
+      error: false,
+      loading: false
     }
-    this.renderButton = this.renderButton.bind(this);
-    this.displayError = this.displayError.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
@@ -27,18 +27,23 @@ class PlaylistSuggester extends React.Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  
-  displayError() {
-    this.setState({
-      error: true
-    });
-  }
-
   findPlaylist() {
-    this.props.setFilters({
-      mood: this.state.mood,
-      activity: this.state.activity
-    });
+    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
+      this.setState({error: true});
+    } else {
+      this.setState({loading: true});
+      var mood = this.state.mood;
+      var activity = this.state.activity;
+      axios.post('/api/spotify/playlists', { 
+        mood,
+        activity
+      }) 
+      .then((res) => {
+        var id = res.data;
+        this.props.methods.history.push(`/app/playlists/${id}`);
+      })
+      .catch(err => console.log(err));
+    }
   }
 
   setMood(e) {
@@ -75,57 +80,53 @@ class PlaylistSuggester extends React.Component {
       this.toggleActivity();
     }
   }
-  
-  renderButton() {
-    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
-      return <div id="recommended-link" onClick={this.displayError}>
+
+  renderPage() {
+    return <div>
+      <div>
+        <h2>Get Suggested Playlist</h2>
+        {this.state.error ? <div className="recommended-error">
+          Select mood and activity before creating playlist
+        </div> : null}
+        <div id="recommended-link" onClick={this.findPlaylist}>
           <Button type="primary"><span>Create</span></Button>
-        </div>;
-    } else {
-      return <Link id="recommended-link" onClick={this.findPlaylist} to='/app/new-playlist'>
-          <Button type="primary"><span>Create</span></Button>
-        </Link>;
-    }
+        </div>
+      </div>
+      <div id="preferences">
+        <div id="mood">
+          <h3 id="mood-label">Mood</h3>
+          <div id="mood-container">
+          <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
+          {this.state.showMood ? <div id="mood-menu">
+            <div onClick={this.setMood}>Happy</div>
+            <div onClick={this.setMood}>Calm</div>
+            <div onClick={this.setMood}>Sad</div>
+            <div onClick={this.setMood}>Focused</div>
+            <div onClick={this.setMood}>Excited</div>
+          </div> : null}
+          </div>
+        </div>
+        <div id="activity">
+          <h3 id="activity-label">Activity</h3>
+          <div id="activity-container">
+          <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
+          {this.state.showActivity ? <div id="activity-menu">
+            <div onClick={this.setActivity}>Exercising</div>
+            <div onClick={this.setActivity}>Studying</div>
+            <div onClick={this.setActivity}>Partying</div>
+            <div onClick={this.setActivity}>Chilling</div>
+            <div onClick={this.setActivity}>Driving</div>
+          </div> : null}
+          </div>
+        </div>
+      </div>
+    </div>
   }
 
   render() {
     return (
       <div id="recommended-container">
-        <div>
-          <h2>Get Suggested Playlist</h2>
-          {this.state.error ? <div className="recommended-error">
-            Select mood and activity before creating playlist
-          </div> : null}
-          {this.renderButton()}
-        </div>
-        <div id="preferences">
-          <div id="mood">
-            <h3 id="mood-label">Mood</h3>
-            <div id="mood-container">
-            <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
-            {this.state.showMood ? <div id="mood-menu">
-              <div onClick={this.setMood}>Happy</div>
-              <div onClick={this.setMood}>Calm</div>
-              <div onClick={this.setMood}>Sad</div>
-              <div onClick={this.setMood}>Focused</div>
-              <div onClick={this.setMood}>Excited</div>
-            </div> : null}
-            </div>
-          </div>
-          <div id="activity">
-            <h3 id="activity-label">Activity</h3>
-            <div id="activity-container">
-            <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
-            {this.state.showActivity ? <div id="activity-menu">
-              <div onClick={this.setActivity}>Exercising</div>
-              <div onClick={this.setActivity}>Studying</div>
-              <div onClick={this.setActivity}>Partying</div>
-              <div onClick={this.setActivity}>Chilling</div>
-              <div onClick={this.setActivity}>Driving</div>
-            </div> : null}
-            </div>
-          </div>
-        </div>
+        {this.state.loading ? <Spinner size="lg" /> : this.renderPage()}
       </div>
     );
   }

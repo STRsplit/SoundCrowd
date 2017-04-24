@@ -9,7 +9,7 @@ import { Spinner } from 'elemental';
 class NewPlaylist extends React.Component {
 
 
-	componentWillMount() {
+	componentDidMount() {
 		const { mood, activity } = this.props.filters;
 		axios.post('/api/spotify/playlists', { 
 			mood,
