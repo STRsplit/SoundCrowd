@@ -9,12 +9,15 @@ import { setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/p
 import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
 
 import { Spinner } from 'elemental';
+import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 
 class Playlists extends Component {
 
   componentWillMount () {
     this.defaultImage = './assets/images/default-albumart.png';
+    this.spotifyIcon = './assets/images/spotify-icon.png';
     this.loaded = false;
     this.creating = false;
     this.showLoading = this.showLoading.bind(this);
@@ -24,8 +27,8 @@ class Playlists extends Component {
 
   componentDidMount() {
     axios.get('/api/spotify/playlists/')
-    .then(res => {
-      let playlists = res.data.items;
+    .then(result => {     
+      let playlists = result.data.items;
       this.loaded = true;
       this.props.setPlaylists(playlists);
     })
@@ -39,22 +42,37 @@ class Playlists extends Component {
 
   renderPlaylists() {
     return this.props.playlists.playlists.map(playlist => {
-      const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
-      return (        
-        <Link to={`/playlist/${playlist.id}`} 
-          key={playlist.id} style={style.link} 
-          onClick={() => this.props.setPlaylistId(playlist.id)}
-        >      
-        <div className="playlists-single-container">        
+      const { images, id, name, external_urls, tracks } = playlist;
+      const imageUrl = images.length > 0 ? images[0].url : this.defaultImage;
+      return (            
+        <div className="playlists-single-container" key={id} >        
+          <Link to={`/playlist/${id}`} 
+            style={style.link} 
+            onClick={() => this.props.setPlaylistId(id)}
+          >  
           <Paper zDepth={5} >
-            <img src={image} style={style.image} />            
+            <img src={imageUrl} style={style.image} />            
           </Paper> 
+          </Link>   
           <div className="playlists-single-details">
-            <h3 className="playlists-h3" >{playlist.name}</h3>
-            <hr className="playlists-hr" />
+            <h3 className="playlists-h3" >{name}</h3>
+            <hr className="playlists-hr" />            
+            <FlatButton
+              href={external_urls.spotify}
+              target="_blank"
+              label="Spotify Link"
+              primary={true}
+              labelStyle={style.labelstyle}
+              style={style.flatbutton}
+            >
+              <Avatar
+                src={this.spotifyIcon}
+                size={30}
+              />
+            </FlatButton>
+            <h4><strong>{`${tracks.total} SONGS`}</strong></h4>
           </div>
         </div>
-        </Link> 
       );
     });
   }
@@ -101,11 +119,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(Playlists);
 
 const style = {
   image: {
-    width: '200px',
-    height: '200px',
+    width: '150px',
+    height: '150px',
     horizontalAlign: 'center'
   },
   link: {
     textDecoration: 'none'
+  },
+  labelstyle: {
+    paddingLeft: '5px'
+  },
+  flatbutton: {
+    paddingLeft: '12px',
+    marginBottom: '5px'
   }
 };

@@ -16,7 +16,7 @@ export default createStore(
     search
   }),
   {},
-  applyMiddleware(createLogger(), promise())
+  applyMiddleware(promise())
 );
 
 /* * CHANGE LINE 19 DEPENDING IF DEV OR PRODUCTION * *
