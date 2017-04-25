@@ -49,6 +49,7 @@ class Playlist extends Component {
       this.getSessionInfo();
     });
     this.socket.on('updatePlaylist', playlistData => {
+      console.log('in update playlist');
       this.handlePlaylistUpdate(playlistData);
     });
     this.socket.on('updateSongVoteCount', songVoteData => {
@@ -102,6 +103,7 @@ class Playlist extends Component {
     if(!playlist){
       console.log('ERROR WITH PLAYLIST');
     } else {
+      console.log('in playlist update');
       this.props.setPlaylistTracks(playlist);
     }
   }

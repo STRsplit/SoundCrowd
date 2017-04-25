@@ -7,6 +7,7 @@ import { setRecentAddedTracks } from '../actions/playlistActions';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
@@ -16,6 +17,7 @@ import AccordionTest from './AccordionTest.jsx';
 class SearchContainer extends Component {
 
   componentWillMount() {
+    this.socket = io.connect();
     this.props.setSearchDefaults();
     this.handleSongAdd = this.handleSongAdd.bind(this);
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
@@ -56,7 +58,6 @@ class SearchContainer extends Component {
       title: name,
       playlist_id: this.props.playlist.id
     };
-    this.socket.emit('addSong', this.props.playlist.id);
 
     axios.post('/api/tracks/', { 
       track: trackInfo
@@ -108,6 +109,7 @@ class SearchContainer extends Component {
     let currentList = this.props.playlist.recentlyAddedTracks;
     currentList.unshift(track);
     this.props.setRecentAddedTracks(currentList);
+    this.socket.emit('addSong', this.props.playlist.id);
   }
 
   render(){

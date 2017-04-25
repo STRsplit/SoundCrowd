@@ -32,10 +32,10 @@ module.exports = io => {
 
     socket.on('addSong', data => {
       console.log('data from add song ', data);
-      dbHelpers.reorderPlaylist()
+      dbHelpers.reorderPlaylist(data)
       .then(tracks => {
         if (tracks) {
-          io.sockets.in(playlistId).emit('updatePlaylist', tracks);
+          io.sockets.in(data).emit('updatePlaylist', tracks);
         } else {
           console.log('add song error');
         }
