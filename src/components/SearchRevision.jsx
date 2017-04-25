@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
+import SearchContainer from './SearchContainer.jsx'
 const styles = {
   radioButton: {
     marginTop: 16,
@@ -73,8 +74,7 @@ class FullPageSearchOverlay extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          
-            <div><p>hello</p></div>
+          <SearchContainer />
         </Dialog>
       </div>
     );

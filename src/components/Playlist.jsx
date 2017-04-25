@@ -135,7 +135,7 @@ class Playlist extends Component {
 
   displayTracks() {
     const { tracks, id } = this.props.playlist;
-    return tracks.map((track, ind) => (
+    return tracks.sort((a,b) => a.position - b.position).map((track, ind) => (
       <Track key={track.song_id} 
       playlist={id}
       track={track}
@@ -161,7 +161,7 @@ class Playlist extends Component {
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
 
           <FlipMove>
-          {this.renderTracks()}
+          {this.displayTracks()}
           </FlipMove>
         </div>
       </div>

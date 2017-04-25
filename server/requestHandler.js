@@ -21,6 +21,7 @@ const verifyUser = (req, res) => {
 const validateVote = voteData => {
   return new Promise((resolve, reject) => {
     const { songId, playlistId, vote, user_id, session_id } = voteData;
+    console.log('USER INFO', user_id, 'Session',  session_id);
     let voteObj = {
       song_id: songId, 
       playlist_id: playlistId,

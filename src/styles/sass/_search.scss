@@ -1,6 +1,8 @@
+
+@import 'mixins_functions';
+
 .searchcontainer-container {
   width: 100%;
-  margin: centerContent(0%);
 }
 .searchresults-container {
   background-color: #fff;
@@ -23,7 +25,6 @@
 .mui-dropdown {
   width: 100%;
   background-color: blue;
-
 }
 .mui-dropdown:hover {
   width: 100%;
@@ -34,12 +35,20 @@
 }
 
 .search-popup-modal {
+  position: fixed ! important;
    div {
-    div {
+      div {
       background-color: rgba(255, 255, 255, 0.8) ! important;
       div {
         background-color: rgba(255, 255, 255, 0) ! important
       }
     }
   }
+  .track-dual-container {
+    background-color: rgba(0, 0, 0, .5) ! important;
+  }
 }
+.search-popup-modal > div:first-child {
+   margin: -25vh auto ! important;
+}
+

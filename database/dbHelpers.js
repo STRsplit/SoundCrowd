@@ -7,8 +7,7 @@ module.exports = {
         where: { 
           playlist_id: playlistId, 
           vote_count: song.vote_count - vote,
-          song_id: { $not: song.song_id },
-          position: { $gt: 0 }
+          song_id: { $not: song.song_id }
         },
         order: ['position']
       })
