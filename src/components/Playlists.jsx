@@ -21,8 +21,8 @@ class Playlists extends Component {
     this.loaded = false;
     this.creating = false;
     this.showLoading = this.showLoading.bind(this);
-    this.renderPlaylists = this.renderPlaylists.bind(this);
-    this.renderAll = this.renderAll.bind(this);
+    this.displayPlaylists = this.displayPlaylists.bind(this);
+    this.displayAll = this.displayAll.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +40,7 @@ class Playlists extends Component {
     this.props.setPlaylists(true);
   }
 
-  renderPlaylists() {
+  displayPlaylists() {
     return this.props.playlists.playlists.map(playlist => {
       const { images, id, name, external_urls, tracks } = playlist;
       const imageUrl = images.length > 0 ? images[0].url : this.defaultImage;
@@ -77,13 +77,13 @@ class Playlists extends Component {
     });
   }
 
-  renderAll() {
+  displayAll() {
     return <div>
       <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
       <hr />
       <h2>PLAYLISTS</h2>
       <div>
-        { this.loaded ? this.renderPlaylists() : <Spinner size="lg" /> }
+        { this.loaded ? this.displayPlaylists() : <Spinner size="lg" /> }
       </div>
     </div>
   }
@@ -91,7 +91,7 @@ class Playlists extends Component {
   render() {
     return (
       <div>
-        { this.creating ? <Spinner size="lg"/> : this.renderAll() }
+        { this.creating ? <Spinner size="lg"/> : this.displayAll() }
       </div>
     );
   }

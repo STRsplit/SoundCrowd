@@ -28,6 +28,10 @@ module.exports = io => {
           socket.emit('voteError', "Hey, you've voted on this song already.");
         }
       })
-    })
+    });
+
+    socket.on('addSong', data => {
+      console.log('data from add song ', data);
+    });
   })
 }

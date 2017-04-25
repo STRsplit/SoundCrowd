@@ -126,6 +126,7 @@ class Playlist extends Component {
     this.votingError = false;
   }
 
+
   startPlaylist() {
     axios.post('/api/spotify/play', { playlist: this.props.match.params.playlistId })
     .catch(err => {
