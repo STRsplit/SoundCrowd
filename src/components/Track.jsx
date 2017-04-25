@@ -27,7 +27,8 @@ class Track extends Component {
 
   render() {
     const { voted } = this.state;
-    const { title, artist, vote_count } = this.props.track;
+    const { title, artist, vote_count, img_url } = this.props.track; 
+    const { isTop } = this.props
     const voteUp = (
       <div>
         <div className="triangle-up" onClick={() => this.handleVote(1)}></div>
@@ -36,23 +37,31 @@ class Track extends Component {
       </div>
     );
 
+    const noVote = (
+      <div className="top-track-no-vote">
+        <div className="right-triangle"></div>
+      </div>
+    );
+
+    let voteActions = isTop ? noVote : voteUp;
+    let trackClass = isTop ? 'topTrack' : 'track';
+
     return (
       <div>
-      <div className="track-main-container">
+      <div className={`${trackClass}-main-container`}>
         <div>
         </div>
         <div className="track-dual-container">
-
             <div className="track-vote-container">
                 <div className="track-vote-container-inner">     
-                   {voteUp}
+                   {voteActions}
                 </div>
               </div>
            
             <div className="track-song-details">
               <div className="track-song-details-inner flexbox-container container">
                 <div className="track-image box">
-                  <img src="https://i.scdn.co/image/5487acf8d22aa518645d90135d8a9a1fed3e902e" />
+                  <img src={img_url}/>
                 </div>
                   <div className="song-entry-header">
                     <h3>{title}</h3>
@@ -61,7 +70,6 @@ class Track extends Component {
                 </div>
             </div>
           </div>
-        <Divider />
       </div>
     </div>
     )

@@ -17,7 +17,7 @@ class NewPlaylist extends React.Component {
 		}) 
 		.then((res) => {
       var id = res.data;
-      this.props.history.push(`/app/playlists/${id}`);
+      this.props.history.push(`/app/playlist/${id}`);
 		})
 		.catch(err => console.log(err));
 	}
