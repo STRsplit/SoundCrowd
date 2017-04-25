@@ -33,7 +33,6 @@ class PrivateRoute extends Component {
     }
     
     return (<div>{ Node }</div>);
-
   }
 
 }

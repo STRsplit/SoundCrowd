@@ -7,6 +7,15 @@
 }
 .track-main-container {
   margin: 2% auto;
+  &:after {
+    content: '';
+    width: 100%;
+    border-bottom: solid 3px #fff;
+    margin-top: 2%;
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
 }
 .track-vote-container {
   float: left;
@@ -34,6 +43,7 @@
   color: #d7dadb;
   font-weight: 600;
 }
+
 // .track-image {
   
 //   background-size: 100% 100%;
@@ -46,7 +56,6 @@
 //   flex-basis: none ! important;
 // }
 
-
 .track-dual-container {
   display: -ms-flex;
   display: -webkit-flex;
@@ -54,6 +63,10 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, .5) ! important;
+  h3, h4 {
+      color: white;
+    }
 }
 
 .track-dual-container > div {
@@ -89,11 +102,9 @@
 }
 
 .track-song-details {
-  background-color: rgba(255, 255, 255, 1);
   padding: 2%;
 }
 .track-song-entry-header {
-
 }
 
 .container {
@@ -157,3 +168,54 @@
   }
 }
 
+.topTrack-main-container {
+  .track-dual-container {
+    background-color: rgba(0, 0, 0, .5);
+    h3 {
+      color: white;
+    }
+  }
+  .track-dual-container > div:first-child {
+    display: flex;
+    object-fit: contain;
+    flex: 0.75;
+    margin-right: 20px;
+  }
+  .voteCount { 
+    font-size: 4em;
+    color: #031527;
+    font-weight: 600;
+  }
+  &:after {
+    content: '';
+    width: 100%;
+    border-bottom: dashed 5px #fff;
+    margin: 0 auto;
+    margin-top: 2%;
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
+  .top-track-no-vote {
+    display: flex;
+    margin: 0 auto;
+    padding-left: 2%;
+  }
+  .track-song-details {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 2%;
+  }
+  .right-triangle {
+   width: 0;
+   height: 0;
+   margin: 2px auto;
+   border-left: 40px solid white;
+   border-top: 20px solid transparent;
+   border-bottom: 20px solid transparent;
+   @media (max-width: 900px) {
+    border-left: 30px solid white;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    }
+  }
+}

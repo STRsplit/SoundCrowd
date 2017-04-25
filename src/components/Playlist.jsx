@@ -7,6 +7,7 @@ import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVot
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import VoteErrorPopup from './VoteErrorPopup.jsx';
+import SearchPopup from './SearchRevision.jsx';
 
 import Track from './Track.jsx';
 import { Button } from 'elemental';
@@ -24,7 +25,7 @@ class Playlist extends Component {
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
     this.getSessionInfo = this.getSessionInfo.bind(this);
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
-    this.renderTracks = this.renderTracks.bind(this);
+    this.displayTracks = this.displayTracks.bind(this);
     this.startPlaylist = this.startPlaylist.bind(this);
   }
 
@@ -43,7 +44,7 @@ class Playlist extends Component {
 
   componentDidMount() {
     this.getPlaylistTracks();
-    this.socket.emit('playlistId', this.props.match.params.playlistId)
+    this.socket.emit('playlistId', this.props.match.params.playlistId);
     this.socket.on('join', joinedRoom => {
       this.getSessionInfo();
     });
@@ -55,6 +56,7 @@ class Playlist extends Component {
     });
     this.socket.on('voteError', voteErrorInfo => {
       this.handleVoteError(true, voteErrorInfo);
+      console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
   }
 
@@ -131,11 +133,13 @@ class Playlist extends Component {
     });
   }
 
-  renderTracks() {
-    return this.props.playlist.tracks.map(track => (
+  displayTracks() {
+    const { tracks, id } = this.props.playlist;
+    return tracks.sort((a,b) => a.position - b.position).map((track, ind) => (
       <Track key={track.song_id} 
-      playlist={this.props.playlist.id} 
+      playlist={id}
       track={track}
+      isTop={ind === 0 ? true : false}
       getPlaylistTracks={this.getPlaylistTracks}
       handlePlaylistVote={this.handlePlaylistVote} />
     ));
@@ -148,14 +152,16 @@ class Playlist extends Component {
       <div>
         <div>
           <CurrentSongBar />
+          <SearchPopup />
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
               <Button type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>
             </a>
           </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
+
           <FlipMove>
-          {this.renderTracks()}
+          {this.displayTracks()}
           </FlipMove>
         </div>
       </div>

@@ -41,6 +41,7 @@ const Song = db.define('Song', {
   playlist_id: Sequelize.STRING,
   title: Sequelize.STRING,
   artist: Sequelize.STRING,
+  img_url: Sequelize.STRING,
   vote_count: Sequelize.INTEGER,
   position: Sequelize.INTEGER
 }, { timestamps: false });

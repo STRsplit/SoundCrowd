@@ -62,22 +62,25 @@ module.exports = {
       }})
         .then(playlist => {
           let position = 0;
+          const defaultIMG = 'https://cdn-img.easyicon.net/png/11888/1188810.gif';
           tracks = tracks.items.reduce((allTracks, track) => {
-            const { id, name, artists } = track.track;
+            const { id, name, artists, album } = track.track;
+            const { images } = album;
             if(track.track.id !== null) {
               let trackObj = {
                 song_id: id,
                 playlist_id: playlistId,
                 title: name,
                 artist: artists ? artists[0].name : '',
+                img_url: images[2] ? images[2].url : defaultIMG,
                   // weird issue where rarely there's no artists array
                   // fix later to map all artist names to string, then save
                 vote_count: 0,
                 position: position++
               }; 
-              allTracks.push(trackObj);
-              return allTracks;
+             allTracks.push(trackObj);
             }
+            return allTracks;
           }, []);
 
           Song.bulkCreate(tracks)
@@ -94,13 +97,15 @@ module.exports = {
   reorderPlaylist: function(playlistId) {
     return new Promise((resolve, reject) => {
       Song.findAll({ 
-        where: { playlist_id: playlistId },
+        where: { playlist_id: playlistId},
         order: [['vote_count', 'DESC']] 
       })
       .then(allSongs => {
-        let position = 0;
+        let position = 1;
         allSongs.forEach(song => {
-          song.update({ position: position++ });
+          if(song.position !== 0){
+            song.update({ position: position++ });
+          }
         });
         resolve(allSongs);
       })
