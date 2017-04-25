@@ -9,9 +9,10 @@ const db_config = {
 
 const { host, user, password, database } = db_config;
 
+/* * ADD PROPERTY logging: false FOR PRODUCTION * */
 const db = new Sequelize(database, user, password, {
   host: host,
-  dialect: 'mysql',
+  dialect: 'mysql',  
   pool:{
     max: 5,
     min: 0,

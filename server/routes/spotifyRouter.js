@@ -11,10 +11,7 @@ module.exports = io => {
     });    
   })
   .post(function(req, res) {
-    var preferences = {
-      mood: req.body.mood,
-      activity: req.body.activity
-    };
+    var preferences = req.body;
     spotify.createPlaylist(req.user.id, preferences, function(err, result) {
       if(err) res.status(err.statusCode).send(err);
       else res.send(result);
