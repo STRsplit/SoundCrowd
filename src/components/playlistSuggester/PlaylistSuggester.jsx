@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import keys from '../../config/keys.js';
-import { Button } from 'elemental';
-import { Spinner } from 'elemental';
-import { browserHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
+
+import { Button } from 'elemental';
+import { Spinner } from 'elemental';
+import TextField from 'material-ui/TextField';
 
 class PlaylistSuggester extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ class PlaylistSuggester extends Component {
       activity: 'Choose One',
       error: false
     }
+    this.playlistName = '';
 
+    this.setPlaylistName = this.setPlaylistName.bind(this);
     this.findPlaylist = this.findPlaylist.bind(this);
     this.setMood = this.setMood.bind(this);
     this.setActivity = this.setActivity.bind(this);
@@ -34,9 +36,11 @@ class PlaylistSuggester extends Component {
       this.props.loading();
       var mood = this.state.mood;
       var activity = this.state.activity;
+      var playlistName = this.playlistName;
       axios.post('/api/spotify/playlists', { 
         mood,
-        activity
+        activity,
+        playlistName
       }) 
       .then(res => {
         var id = res.data;
@@ -44,6 +48,10 @@ class PlaylistSuggester extends Component {
       })
       .catch(err => console.log(err));
     }
+  }
+
+  setPlaylistName(event, newValue) {
+    this.playlistName = newValue;
   }
 
   setMood(e) {
@@ -83,16 +91,9 @@ class PlaylistSuggester extends Component {
 
   render() {
     return (
-      <div id="recommended-container">
-        <div>
-          <h2>Get Suggested Playlist</h2>
-          {this.state.error ? <div className="recommended-error">
-            Select mood and activity before creating playlist
-          </div> : null}
-          <div id="recommended-link" onClick={this.findPlaylist}>
-            <Button type="primary"><span>Create</span></Button>
-          </div>
-        </div>
+      <div id="recommended-container">    
+        <h2>Get Suggested Playlist</h2> 
+        <TextField hintText="Name" onChange={this.setPlaylistName} />  
         <div id="preferences">
           <div id="mood">
             <h3 id="mood-label">Mood</h3>
@@ -120,6 +121,14 @@ class PlaylistSuggester extends Component {
             </div> : null}
             </div>
           </div>
+        </div>
+        <div>                    
+          <div id="recommended-link" onClick={this.findPlaylist}>
+            <Button type="primary"><span>Create</span></Button>
+          </div>
+          {this.state.error ? <div className="recommended-error">
+            Select mood and activity before creating playlist
+          </div> : null}
         </div>
       </div>
     );

@@ -60,7 +60,7 @@ module.exports = {
 
   createPlaylist: function(userId, preferences, cb) {
     var date = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
-    var playlistName = 'SoundCrowd ' + date.slice(5, 11) + ' ' + date.slice(17, 25);
+    var playlistName = `SoundCrowd ${preferences.playlistName || date.slice(5, 11) + ' ' + date.slice(17, 25)}`;
     spotify.createPlaylist(userId, playlistName, {public: true})
       .then((data) => {
         var newPlaylistId = data.body.id;
