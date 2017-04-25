@@ -42,22 +42,23 @@ class Playlists extends Component {
 
   renderPlaylists() {
     return this.props.playlists.playlists.map(playlist => {
-      const image = playlist.images.length > 0 ? playlist.images[0].url : this.defaultImage;
+      const { images, id, name, external_urls, tracks } = playlist;
+      const imageUrl = images.length > 0 ? images[0].url : this.defaultImage;
       return (            
-        <div className="playlists-single-container" key={playlist.id} >        
-          <Link to={`/playlist/${playlist.id}`} 
+        <div className="playlists-single-container" key={id} >        
+          <Link to={`/playlist/${id}`} 
             style={style.link} 
-            onClick={() => this.props.setPlaylistId(playlist.id)}
+            onClick={() => this.props.setPlaylistId(id)}
           >  
           <Paper zDepth={5} >
-            <img src={image} style={style.image} />            
+            <img src={imageUrl} style={style.image} />            
           </Paper> 
           </Link>   
           <div className="playlists-single-details">
-            <h3 className="playlists-h3" >{playlist.name}</h3>
+            <h3 className="playlists-h3" >{name}</h3>
             <hr className="playlists-hr" />            
             <FlatButton
-              href={playlist.external_urls.spotify}
+              href={external_urls.spotify}
               target="_blank"
               label="Spotify Link"
               primary={true}
@@ -69,7 +70,7 @@ class Playlists extends Component {
                 size={30}
               />
             </FlatButton>
-            <h4><strong>{`${playlist.tracks.total} SONGS`}</strong></h4>
+            <h4><strong>{`${tracks.total} SONGS`}</strong></h4>
           </div>
         </div>
       );
