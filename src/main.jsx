@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -16,16 +17,17 @@ require("!style-loader!css-loader!sass-loader!./styles/sass/all.scss");
 class Main extends Component {
 
   render() {
-    return (<div><App /></div>);
+    return (
+      <MuiThemeProvider>
+        <BrowserRouter>
+          <Provider store={store} >
+            <App />
+          </Provider>
+        </BrowserRouter>
+      </MuiThemeProvider>
+    );
   }
 
 }
   
-ReactDOM.render(
-  <MuiThemeProvider>
-    <Provider store={store} >
-      <Main />
-    </Provider>
-  </MuiThemeProvider>
-  , document.getElementById('app')
-);
+ReactDOM.render(<Main />, document.getElementById('app'));

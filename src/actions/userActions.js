@@ -14,13 +14,6 @@ const setVerifying = boolean => {
   };
 };
 
-const setShowLogin = boolean => {
-  return {
-    type: 'SET_SHOWLOGIN',
-    payload: boolean
-  };
-};
-
 const verifyUser = () => {
   return {
     type: 'VERIFY_USER',
@@ -40,7 +33,7 @@ const verifyUser = () => {
           });
         }
       })
-      .catch(err => console.log('App.jsx error componentWillMount: ', err));
+      .catch(err => console.log('userActions.js > VERIFY_USER error: ', err));
       })
   };
 };
@@ -51,7 +44,7 @@ const logoutUser = () => {
     payload: new Promise((resolve, reject) => {
       axios.get('/logout')
       .catch(err => {
-        console.log('userActions.js LOGOUT_USER err: ', err);
+        console.log('userActions.js > LOGOUT_USER err: ', err);
       });
       resolve({loggedIn: false, name: ''});
     })
@@ -63,5 +56,4 @@ export {
   verifyUser,
   logoutUser,
   setVerifying,
-  setShowLogin
 };

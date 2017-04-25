@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
 import Login from './Login.jsx';
@@ -11,16 +11,12 @@ class App extends Component {
 
 	render() {
 
-	  return ( 
-      <BrowserRouter>
-        <div>
-        <Switch>
-          <Route path="/login" component={ Login } />              
-          <Route path="/public" component={ PublicRoute } />
-          <Route path="/" component={ PrivateRoute }/>
-        </Switch>
-        </div>
-      </BrowserRouter>
+	  return (       
+      <Switch>
+        <Route path="/login" component={ Login } />              
+        <Route path="/public" component={ PublicRoute } />
+        <Route path="/" component={ PrivateRoute }/>
+      </Switch>
 	  );
 	}
 }

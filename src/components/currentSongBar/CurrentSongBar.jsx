@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 import { Row, Col } from 'elemental';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Avatar from 'material-ui/Avatar';
 import Slider from 'material-ui/Slider';
 
@@ -20,7 +19,7 @@ class CurrentSongBar extends Component {
       sliderValue: 0
     };
 
-    this.counter = 4000;
+    this.counter = 4999;
 
     this.convertToTime = this.convertToTime.bind(this);
     this.autoUpdateInfo = this.autoUpdateInfo.bind(this);
@@ -39,13 +38,13 @@ class CurrentSongBar extends Component {
   autoUpdateInfo() {
     this.counter += 1000;
     if(this.counter >= 5000) {
+      this.counter = 0;
       this.updateInfo();
     } else {
       let { progress, duration, isPlaying } = this.state;
       progress += 1000;
-      if(progress > duration) {
+      if(progress >= duration) {
         this.counter = 0;
-        this.progress = 0;
         this.updateInfo();
       } else if(isPlaying) {
         this.setState({progress: progress, sliderValue: progress/duration});        
@@ -69,9 +68,13 @@ class CurrentSongBar extends Component {
         isPlaying: is_playing,
         sliderValue: progress_ms/duration_ms
       });
-      this.counter = 0;
     })
-    .catch(err => console.log('CurrentSongBar error: ', err));    
+    .catch(err => {
+      console.log('CurrentSongBar error: ', err);
+
+      /* * REDIRECTS TO LOGIN IF API CALL THROWS AN ERROR * */
+      this.context.router.history.push('/login');
+    });    
   }
 
   convertToTime(millisec) {
@@ -83,38 +86,48 @@ class CurrentSongBar extends Component {
 
   render() {
     const { image, name, artist, album, duration, progress, isPlaying, sliderValue } = this.state;
+    
     return(
-    <MuiThemeProvider>
-    <div className="csb-container">
-      <Row className="3-col-row">
-        <Col sm="1/3">          
-          <div className="csb-album-image">
-            <Avatar src={image} size={40} style={style.avatar} />
-          </div>
-          <div className="csb-song-info">
-            <span className="csb-song-name">{name}</span><br/>
-            <span>{`${artist} - ${album}`}</span>
-          </div>
-        </Col>
-        <Col sm="1/3"> 
-          <span>{this.convertToTime(progress)}</span>
-          <span style={style.duration}>{this.convertToTime(duration)}</span>
-          <Slider sliderStyle={style.slider} value={sliderValue} />
-        </Col>
-        <Col sm="1/3">
-          Search Song || Add Song Section
-        </Col>
-      </Row>
-    </div>  
-    </MuiThemeProvider>
+      <div className="csb-container">
+        <Row className="3-col-row">
+          <Col sm="1/3">          
+            <div className="csb-album-image">
+              <Avatar src={image} size={40} style={style.avatar} />
+            </div>
+            <div className="csb-song-info">
+              <span className="csb-song-name">{name}</span><br/>
+              <span>{`${artist}  ${album}`}</span>
+            </div>
+          </Col>
+          <Col sm="1/3"> 
+            <span>{this.convertToTime(progress)}</span>
+            <span style={style.duration}>{this.convertToTime(duration)}</span>
+            <Slider sliderStyle={style.slider} value={sliderValue} />
+          </Col>
+          <Col sm="1/3">
+            Search Song || Add Song Section
+          </Col>
+        </Row>
+      </div>  
     );
   }
+}
+
+CurrentSongBar.contextTypes = {
+  router: PropTypes.object
 }
 
 export default CurrentSongBar;
 
 const style = {
-  avatar: {margin: '5px 0px'},
-  duration: {float: 'right'},
-  slider: {margin: '0 auto', width: '98%'}
+  avatar: {
+    margin: '5px 0px'
+  },
+  duration: {
+    float: 'right'
+  },
+  slider: {
+    margin: '0 auto', 
+    width: '98%'
+  }
 };

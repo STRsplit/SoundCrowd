@@ -10,10 +10,9 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import UpDown from 'material-ui/svg-icons/action/swap-vertical-circle';
 
 class Navbar extends Component {
-  // TODO: ADD LOGIN REDIRECT
-  
-  render() {
-    const privateNavItems = (
+
+  privateNavItems() {
+    return (
       <div>
         <Link to="/" style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
         <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
@@ -21,14 +20,20 @@ class Navbar extends Component {
         <Link to="/login" style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
       </div>
     );
-    const publicNavItems = (
+  }
+
+  publicNavItems() {
+    return (
       <div>
-        <Link to="/login" style={style.link}  onClick={this.props.setShowLogin} ><MenuItem><div>Login</div></MenuItem></Link>
+        <Link to="/login" style={style.link} ><MenuItem><div>Login</div></MenuItem></Link>
         <Link to="/public/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
         <Link to="/public/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
       </div>
     );
-    const NavItems = this.props.user.loggedIn ? privateNavItems : publicNavItems;
+  }
+
+  render() {
+    const NavItems = this.props.user.loggedIn ? this.privateNavItems() : this.publicNavItems();
 
     return (
       <div className="nav-container">
