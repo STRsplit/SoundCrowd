@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
 import NavBar from '../Navbar.jsx';
 import RightBar from '../RightBar.jsx';
 
@@ -12,7 +11,6 @@ class RouteContainer extends Component {
   render() {
     
     return (
-      <BrowserRouter>
       <div>
         <NavBar />
         <Container className="main-app-container" fluid={true}>
@@ -29,7 +27,6 @@ class RouteContainer extends Component {
           </Row>
         </Container>
       </div>
-      </BrowserRouter>
     );
 
   }
