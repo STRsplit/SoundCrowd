@@ -13,22 +13,32 @@ class Navbar extends Component {
 
   privateNavItems() {
     return (
-      <div>
-        <Link to="/" style={style.link}><MenuItem><div>Home</div></MenuItem></Link>
-        <Link to="/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to="/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
-        <Link to="/login" style={style.link}  onClick={this.props.logoutUser}><MenuItem><div>Logout</div></MenuItem></Link>
-      </div>
+      <IconMenu
+        listStyle={ style.menu }
+        iconButtonElement={<IconButton><Menu /></IconButton>}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem><Link to="/" style={style.link}><div>Home</div></Link></MenuItem>
+        <MenuItem><Link to="/search" style={style.link}><div>Search</div></Link></MenuItem>
+        <MenuItem><Link to="/aboutus" style={style.link}><div>About Us</div></Link></MenuItem>
+        <MenuItem><Link to="/login" style={style.link}  onClick={this.props.logoutUser}><div>Logout</div></Link></MenuItem>
+      </IconMenu>
     );
   }
 
   publicNavItems() {
     return (
-      <div>
-        <Link to="/login" style={style.link} ><MenuItem><div>Login</div></MenuItem></Link>
-        <Link to="/public/search" style={style.link}><MenuItem><div>Search</div></MenuItem></Link>
-        <Link to="/public/aboutus" style={style.link}><MenuItem><div>About Us</div></MenuItem></Link>
-      </div>
+      <IconMenu
+        listStyle={ style.menu }
+        iconButtonElement={<IconButton><Menu /></IconButton>}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem><Link to="/login" style={style.link} ><div>Login</div></Link></MenuItem>
+        <MenuItem><Link to="/public/search" style={style.link}><div>Search</div></Link></MenuItem>
+        <MenuItem><Link to="/public/aboutus" style={style.link}><div>About Us</div></Link></MenuItem>
+      </IconMenu>
     );
   }
 
@@ -37,23 +47,12 @@ class Navbar extends Component {
 
     return (
       <div className="nav-container">
-      <div>
-       <AppBar className='main-navigation-site'
+        <AppBar className='main-navigation-site'
           title="SoundCrowd"
           onRightIconButtonTouchTap={ this._toggleNav } 
           iconElementLeft={<IconButton><UpDown /></IconButton>}
-          iconElementRight={
-            <IconMenu
-              listStyle={ style.menu }
-              iconButtonElement={<IconButton><Menu /></IconButton>}
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-            >
-            { NavItems }
-            </IconMenu>
-          }
+          iconElementRight={ NavItems }
         />
-        </div>
       </div>
     )
   }

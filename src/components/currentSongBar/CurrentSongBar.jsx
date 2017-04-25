@@ -9,7 +9,7 @@ class CurrentSongBar extends Component {
     super(props);
 
     this.state = {
-      image: './assets/images/default-albumart.png',
+      image: '',
       name: '',
       artist: '',
       album: '',
@@ -71,7 +71,6 @@ class CurrentSongBar extends Component {
     })
     .catch(err => {
       console.log('CurrentSongBar error: ', err);
-
       /* * REDIRECTS TO LOGIN IF API CALL THROWS AN ERROR * */
       this.context.router.history.push('/login');
     });    
@@ -86,13 +85,14 @@ class CurrentSongBar extends Component {
 
   render() {
     const { image, name, artist, album, duration, progress, isPlaying, sliderValue } = this.state;
-    
+    const avatar = image ? <Avatar src={image} size={40} style={style.avatar} /> : <Avatar size={40} style={style.avatar} >S</Avatar>;
+
     return(
       <div className="csb-container">
         <Row className="3-col-row">
           <Col sm="1/3">          
             <div className="csb-album-image">
-              <Avatar src={image} size={40} style={style.avatar} />
+              { avatar }
             </div>
             <div className="csb-song-info">
               <span className="csb-song-name">{name}</span><br/>
@@ -121,7 +121,7 @@ export default CurrentSongBar;
 
 const style = {
   avatar: {
-    margin: '5px 0px'
+    margin: '5px'
   },
   duration: {
     float: 'right'
