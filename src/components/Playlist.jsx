@@ -58,7 +58,7 @@ class Playlist extends Component {
       this.handleVoteError(true, voteErrorInfo);
       console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
-  }
+  } 
 
   getSessionInfo() {
     axios.get('/api/user/session_info')

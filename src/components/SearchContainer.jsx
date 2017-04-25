@@ -56,6 +56,7 @@ class SearchContainer extends Component {
       title: name,
       playlist_id: this.props.playlist.id
     };
+    this.socket.emit('addSong', this.props.playlist.id);
 
     axios.post('/api/tracks/', { 
       track: trackInfo

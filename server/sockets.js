@@ -27,11 +27,19 @@ module.exports = io => {
         } else {
           socket.emit('voteError', "Hey, you've voted on this song already.");
         }
-      })
+      });
     });
 
     socket.on('addSong', data => {
       console.log('data from add song ', data);
+      dbHelpers.reorderPlaylist()
+      .then(tracks => {
+        if (tracks) {
+          io.sockets.in(playlistId).emit('updatePlaylist', tracks);
+        } else {
+          console.log('add song error');
+        }
+      });
     });
   })
 }
