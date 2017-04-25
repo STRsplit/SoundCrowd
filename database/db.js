@@ -12,6 +12,7 @@ const { host, user, password, database } = db_config;
 const db = new Sequelize(database, user, password, {
   host: host,
   dialect: 'mysql',
+  logging: false,
   pool:{
     max: 5,
     min: 0,
