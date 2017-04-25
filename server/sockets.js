@@ -31,7 +31,6 @@ module.exports = io => {
     });
 
     socket.on('addSong', data => {
-      console.log('data from add song ', data);
       dbHelpers.reorderPlaylist(data)
       .then(tracks => {
         if (tracks) {
