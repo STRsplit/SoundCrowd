@@ -2,10 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const handler = require('./requestHandler');
-
-const router = require('./routes/router');
-const spotifyRouter = require('./routes/spotifyRouter');
-
 const spotify = require('./spotify');
 const db = require('../database/db');
 const dbHelpers = require('../database/dbHelpers');
@@ -36,6 +32,9 @@ const server = app.listen(port, function(){
 const io = require ('socket.io').listen(server);
 const socketManager = require('./sockets.js')(io);
 
+/* * Routers * */
+const router = require('./routes/router');
+const spotifyRouter = require('./routes/spotifyRouter')(io);
 
 /* *  Authentication * */
 app.use(session({

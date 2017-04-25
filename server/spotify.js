@@ -111,7 +111,6 @@ module.exports = {
   },
 
   startPlaylist: function(username, playlistId, cb) {
-    console.log('this playlist', playlistId);
     if (spotify._credentials.accessToken) {
       const options = {
         uri: 'https://api.spotify.com/v1/me/player/play',
