@@ -97,17 +97,6 @@ module.exports = {
     requestPromise(options)
       .then(info => cb(null, info))
       .catch(err => cb(err, null));    
-
-      // For refreshing approach
-      // spotify.refreshAccessToken()
-      // .then(data => {
-      //   // Save the access token so that it's used in future calls
-      //   spotify.setAccessToken(data.body['access_token']);
-      //   console.log('The access token has been refreshed!');
-      // }, err => {
-      //   console.log('Could not refresh access token', err);
-      // });
-    // }
   },
 
   startPlaylist: function(username, playlistId, cb) {
@@ -127,8 +116,6 @@ module.exports = {
       requestPromise(options)
         .then(info => cb(null, info))
         .catch(err => cb(err, null));
-    } else {
-      console.log('no spotify token');
     }
   }
 };

@@ -1,7 +1,5 @@
 const express = require('express');
 const spotify = require('../spotify');
-// const spotifyCronJob = require('../spotifyCron');
-
 
 module.exports = io => {
   const router = express.Router();

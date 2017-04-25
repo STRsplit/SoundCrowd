@@ -5,7 +5,6 @@ const dbHelpers = require('../database/dbHelpers');
 
 module.exports = io => {
   let task = cron.schedule('*/10 * * * * *', () => {
-    console.log('executing cron job....................');
     spotify.getCurrentSong((err, song) => {
       if (err) console.log('cron err', err);
       else {
