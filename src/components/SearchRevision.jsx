@@ -50,21 +50,9 @@ class FullPageSearchOverlay extends Component {
       />,
     ];
 
-    const radios = [];
-    for (let i = 0; i < 30; i++) {
-      radios.push(
-        <RadioButton
-          key={i}
-          value={`value${i + 1}`}
-          label={`Option ${i + 1}`}
-          style={styles.radioButton}
-        />
-      );
-    }
-
     return (
       <div>
-        <RaisedButton label="Scrollable Dialog" onTouchTap={this.handleOpen} />
+        <RaisedButton label="Search" onTouchTap={this.handleOpen} />
         <Dialog
           title="Scrollable Dialog"
           actions={actions}

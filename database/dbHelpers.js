@@ -106,7 +106,7 @@ module.exports = {
           if(song.position !== 0){
             song.update({ position: position++ });
           }
-        });
+        })
         resolve(allSongs);
       })
       .catch(err => reject(err));
@@ -179,7 +179,7 @@ module.exports = {
         playlist_id: playlistId
       }})
     .then(song => {
-      song.update({ vote_count: 0 })
+      song.update({ vote_count: 0, position: null })
       .then(() => {
         Vote.destroy({ where: {
           song_id: songId,
@@ -191,5 +191,21 @@ module.exports = {
     .catch(err => reject(err));
 
   });
+  },
+
+  swapTopTrack: function(playlistId) {
+    return new Promise((resolve, reject) => {
+      Song.findOne({where: {
+        playlist_id: playlistId,
+        position: 1
+      }})
+      .then(song => {
+        song.update({position: 0})
+        .then(() => {
+          resolve(null)
+        })
+      })
+      .catch(err => reject(err));
+    })
   }
 };
