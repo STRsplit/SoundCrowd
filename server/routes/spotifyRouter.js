@@ -43,13 +43,15 @@ module.exports = io => {
   });
 
   router.post('/play', function(req, res) {
-    spotify.startPlaylist(req.user.id, req.body.playlist, function(err) {
-      if (err) res.status(err.statusCode).send(err);
-      else {
-        require('../spotifyCron')(io).start();
-        res.sendStatus(201);
-      }
-    });
+    if (spotify.hasAccessToken()) {
+      spotify.startPlaylist(req.body.playlist, function(err) {
+        if (err) res.status(err.statusCode).send(err);
+        else {
+          require('../spotifyCron')(io).start();
+          res.sendStatus(201);
+        }
+      });
+    }
   });
 
   return router;
