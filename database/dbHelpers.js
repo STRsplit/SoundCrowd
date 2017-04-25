@@ -97,15 +97,14 @@ module.exports = {
         where: { playlist_id: playlistId },
         order: [['vote_count', 'DESC']] 
       })
-        .then(allSongs => {
-          let position = 0;
-          allSongs.forEach(song => {
-            song.position = position++;
-            song.save();
-          });
-          resolve(allSongs);
-        })
-        .catch(err => reject(err));
+      .then(allSongs => {
+        let position = 0;
+        allSongs.forEach(song => {
+          song.update({ position: position++ });
+        });
+        resolve(allSongs);
+      })
+      .catch(err => reject(err));
     });
   },
 
@@ -149,20 +148,42 @@ module.exports = {
     })
   },
 
+  getTrackByPosition: function(playlistId, position) {
+    return new Promise((resolve, reject) => {
+      Song.findOne({ 
+        attributes: ['song_id'],
+        where: {
+          playlist_id: playlistId,
+          position: position
+        }
+      })
+      .then(song => {
+        resolve(song.dataValues);
+      })
+      .catch(err => {
+        reject(err);
+      });
+    });
+  },
+
   resetTrack: function(songId, playlistId) {
     return new Promise((resolve, reject) => {
-      Song.find({ where: {
+      Song.findOne({ where: {
         song_id: songId,
         playlist_id: playlistId
       }})
-      .then(song.update({ vote_count: 0 }))
-      .catch(err => reject(err));
+    .then(song => {
+      song.update({ vote_count: 0 })
+      .then(() => {
+        Vote.destroy({ where: {
+          song_id: songId,
+          playlist_id: playlistId
+        }})
+        .then(resolve(null));
+      });
+    })
+    .catch(err => reject(err));
 
-      Vote.destroy({ where: {
-        song_id: songId,
-        playlist_id: playlistId
-      }})
-      .catch(err => reject(err));
-    });
+  });
   }
 };

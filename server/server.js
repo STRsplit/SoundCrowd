@@ -2,19 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const handler = require('./requestHandler');
-
-const router = require('./routes/router');
-const spotifyRouter = require('./routes/spotifyRouter');
-const spotifyCronJob = require('./spotifyCron');
-spotifyCronJob.start();
-
 const spotify = require('./spotify');
 const db = require('../database/db');
 const dbHelpers = require('../database/dbHelpers');
-
-
-
-
 
 
 /* * Authentication * */
@@ -42,6 +32,9 @@ const server = app.listen(port, function(){
 const io = require ('socket.io').listen(server);
 const socketManager = require('./sockets.js')(io);
 
+/* * Routers * */
+const router = require('./routes/router');
+const spotifyRouter = require('./routes/spotifyRouter')(io);
 
 /* *  Authentication * */
 app.use(session({
@@ -71,7 +64,7 @@ app.use('/api/spotify', spotifyRouter);
 
 // REPLACE IF NEEDED
 // passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private', 'playlist-read-private'], showDialog: true})
-app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private', 'user-read-currently-playing', 'user-read-playback-state'], responseType: 'token', showDialog: true}));
+app.get('/auth/spotify', passport.authenticate('spotify', {scope: ['playlist-modify', 'playlist-modify-public', 'playlist-modify-private', 'user-read-currently-playing', 'user-read-playback-state', 'user-modify-playback-state'], responseType: 'token', showDialog: true}));
 
 app.get('/auth/spotify/callback', 
   passport.authenticate('spotify', { successRedirect: '/', failureRedirect: '/login' })

@@ -97,6 +97,24 @@ module.exports = {
     requestPromise(options)
       .then(info => cb(null, info))
       .catch(err => cb(err, null));    
+  },
+
+  startPlaylist: function(playlistId, cb) {
+    const options = {
+      uri: 'https://api.spotify.com/v1/me/player/play',
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${spotify._credentials.accessToken}`
+      },
+      data: {
+        context_uri: `spotify:playlist:${playlistId}`
+      }
+    }; 
+    requestPromise(options)
+      .then(info => cb(null, info))
+      .catch(err => cb(err, null));
   }
 };
 

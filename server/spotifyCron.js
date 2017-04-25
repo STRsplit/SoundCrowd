@@ -1,25 +1,30 @@
-var cron = require('node-cron');
-var spotify = require('./spotify');
-var dbHelpers = require('../database/dbHelpers');
+const cron = require('node-cron');
+const spotify = require('./spotify');
+const socketManager = require('./sockets')
+const dbHelpers = require('../database/dbHelpers');
 
-var currentSong;
-var job = cron.schedule('*/10 * * * * *', function() {
-  spotify.getCurrentSong((err, song) => {
-    if (err) console.log('cron err', err);
-    else {
-      console.log('cron song:', song.item.id, song.item.name);
-      if (currentSong) {
-        if (currentSong !== song.item.id) {
-          // assume the last song ended
-          // reset vote count to 0 and sort playlist
-          // emit new playlist order with socket event
-          // update current song bar & slider position
-        } else {
-          // update slider position ?
-        }
-      } else currentSong = song.item.id;
-    }
-  })
-});
+module.exports = io => {
+  let task = cron.schedule('*/10 * * * * *', () => {
+    spotify.getCurrentSong((err, song) => {
+      if (err) console.log('cron err', err);
+      else {
+        const { id, name } = song.item;
+        let playlistId = song.context.uri.slice(-22);
+        dbHelpers.getTrackByPosition(playlistId, 0)
+        .then(track => {
+          if (track) {
+            if (track.song_id !== id) {
+              dbHelpers.resetTrack(track.song_id, playlistId)
+              .then(dbHelpers.reorderPlaylist(playlistId)
+              .then(playlist => {
+                io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+              }));
+            }
+          }
+        });
+      }
+    });
+  });
 
-module.exports = job;
+  return task;
+}

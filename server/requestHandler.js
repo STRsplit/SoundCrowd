@@ -28,35 +28,22 @@ const validateVote = voteData => {
     };
     if (user_id.length) {
       voteObj.user_id = user_id
-      return db.Vote.find({ where: voteObj })
-      .then(result => {
-        if (!result) {
-          db.Vote.create(voteObj);
-          dbHelpers.updateVoteCount(songId, playlistId, vote)
-          .then(song => {
-            resolve(song);
-          })
-        } else {
-          resolve(null);
-        }
-      })
-      .catch(err => console.log('requestHandler > validateVote error: ', err));
     } else {
       voteObj.session_id = session_id;
-      return db.Vote.find({ where: voteObj })
-      .then(result => {
-        if (!result) {
-          db.Vote.create(voteObj);
-          dbHelpers.updateVoteCount(songId, playlistId, vote)
-          .then(song => {
-            resolve(song);
-          })
-        } else {
-          resolve(null);
-        }
-      })
-      .catch(err => console.log('requestHandler > validateVote error: ', err));
     }
+    db.Vote.findOne({ where: voteObj })
+    .then(result => {
+      if (!result) {
+        db.Vote.create(voteObj);
+        dbHelpers.updateVoteCount(songId, playlistId, vote)
+        .then(song => {
+          resolve(song);
+        })
+      } else {
+        resolve(null);
+      }
+    })
+    .catch(err => console.log('requestHandler > validateVote error: ', err));
   });
 };
 
