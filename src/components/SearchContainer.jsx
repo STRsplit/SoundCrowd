@@ -50,13 +50,15 @@ class SearchContainer extends Component {
         return song;
       }})[0];
 
-    let { artist, artists, id, name } = targetSong;
+    let { artist, artists, id, name, images } = targetSong;
+    var image = images[2].url;
     artist = artist ? artist[0].name : artists[0].name;
     let trackInfo = {
       song_id: id,
       artist: artist,
       title: name,
-      playlist_id: this.props.playlist.id
+      playlist_id: this.props.playlist.id,
+      image: image
     };
 
     axios.post('/api/tracks/', { 
@@ -125,7 +127,7 @@ class SearchContainer extends Component {
           selectedOption={filter} 
           handleSelect={this.setSelected} 
           handleSearch={this.searchSpotify} 
-          handleChange={this.enterSearch} 
+          handleChange={this.enterSearch}
         />
         
         <div>

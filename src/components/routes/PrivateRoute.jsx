@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verifyUser, setVerifying } from '../../actions/userActions';
-import { privateRoutes } from './routes';
+import { privateRoutes } from './routes.jsx';
 
 import RouteContainer from './RouteContainer.jsx';
 
