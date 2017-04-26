@@ -38,21 +38,16 @@ class FullPageSearchOverlay extends Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Close"
         primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
         onTouchTap={this.handleClose}
       />,
     ];
 
     return (
       <div>
-        <RaisedButton label="Search" onTouchTap={this.handleOpen} />
+        <RaisedButton className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
+        <div className="search-modal-container">
         <Dialog
           title="Scrollable Dialog"
           actions={actions}
@@ -64,6 +59,7 @@ class FullPageSearchOverlay extends Component {
         >
           <SearchContainer />
         </Dialog>
+        </div>
       </div>
     );
   }

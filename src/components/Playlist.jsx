@@ -60,6 +60,10 @@ class Playlist extends Component {
     });
   } 
 
+  componentWillUnmount(){
+    this.socket.disconnect();
+  }
+
   getSessionInfo() {
     axios.get('/api/user/session_info')
       .then(res => {
@@ -155,7 +159,6 @@ class Playlist extends Component {
       <div>
         <div>
           <CurrentSongBar />
-          <SearchPopup />
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
               <Button type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>

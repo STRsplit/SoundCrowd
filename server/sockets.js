@@ -7,6 +7,7 @@ const handler = require('./requestHandler');
 module.exports = io => {
   io.on('connection', socket => {
     socket.on('playlistId', playlistId => {
+      socket.rooms = {};
       socket.join(playlistId);
       io.to(playlistId).emit('join', `Joined: ${playlistId}`)
     });

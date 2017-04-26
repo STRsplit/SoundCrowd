@@ -119,13 +119,13 @@ class SearchContainer extends Component {
 
   render(){
     let { search, filter, songs } = this.props.search;
-    const searchSongs = songs.map((song, idx) => (
-        <div>
-          <SongEntry songInfo={song} addSong={this.addSongToPlaylist} images={song.album.images}/>
-        </div>
-    ));
+    // const searchSongs = songs.map((song, idx) => (
+    //     <div>
+    //       <SongEntry songInfo={song} addSong={this.addSongToPlaylist} images={song.album.images}/>
+    //     </div>
+    // ));
     return (
-      <div className="searchcontainer-container">
+      <div className={"searchcontainer-container"}>
         <SearchBar stats={this.props.search} text={search} 
           selectedOption={filter} 
           handleSelect={this.setSelected} 
