@@ -136,7 +136,9 @@ const style = {
   },
   slider: {
     margin: '0 auto', 
-    width: '98%'
+    width: '98%',
+    trackColor: '#FFF ! important',
+    selectionColor: 'green ! important'
   },
   button: {
     display: 'inline-block'

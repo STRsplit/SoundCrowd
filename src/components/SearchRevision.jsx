@@ -56,7 +56,7 @@ class FullPageSearchOverlay extends Component {
           autoScrollBodyContent={true}
           contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
           bodyStyle={{padding: 0}}
-          style={{paddingTop: 20, height: '100vh'}}
+          style={{paddingTop: 10, height: '100vh'}}
         >
           <SearchContainer />
         </Dialog>

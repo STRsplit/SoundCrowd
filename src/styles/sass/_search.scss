@@ -9,6 +9,7 @@
 
 .mui-btn {
   float: right ! important;
+  font-size: 1.25vw ! important;
 }
 .mui-dropdown {
   width: 100%;
@@ -33,18 +34,17 @@
   position: fixed ! important;
   transition: none ! important;
   transform: none ! important;
-  padding-top: none ! important;
-  height: 200vh ! important;
   margin-top: 10vh ! important;
    div {
     height: auto;
     transform: none ! important;
       div {
-      background-color: rgba(255, 255, 255, 0.8) ! important;
+      background-color: rgba(0, 0, 0, 0.5) ! important;
       // margin: 10vh auto ! important;
       div {
         background-color: rgba(255, 255, 255, 0) ! important;
         transition: none ! important;
+        padding: 0% 1% ! important;
         .track-image {
           display: none;
         }
@@ -59,13 +59,12 @@
     }
   }
   .track-dual-container {
-    background-color: rgba(0, 0, 0, .5) ! important;
+    background-color: rgba(0, 0, 0, .8) ! important;
   }
 }
 .search-popup-modal > div >  div:nth-child(1) {
     transform: none ! important;
     transition: none ! important;
-    margin: 10vh auto ! important;
     // > div:first-child {
     // margin: 25vh auto ! important;
     // transform: none ! important;
