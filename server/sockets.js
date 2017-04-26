@@ -30,11 +30,11 @@ module.exports = io => {
       });
     });
 
-    socket.on('addSong', data => {
-      dbHelpers.reorderPlaylist(data)
+    socket.on('addSong', playlistId => {
+      dbHelpers.reorderPlaylist(playlistId)
       .then(tracks => {
         if (tracks) {
-          io.sockets.in(data).emit('updatePlaylist', tracks);
+          io.sockets.in(playlistId).emit('updatePlaylist', tracks);
         } else {
           console.log('add song error');
         }

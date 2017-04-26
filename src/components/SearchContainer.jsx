@@ -50,12 +50,12 @@ class SearchContainer extends Component {
         return song;
       }})[0];
     console.log('this is target song ', targetSong);
-    let { artists, id, name, album } = targetSong;
+    let { artist, artists, id, name, album } = targetSong;
     var image = album.images[2].url;
-    artists = artists[0].name;
+    artist = artist ? artist[0].name : artists[0].name;
     let trackInfo = {
       song_id: id,
-      artist: artists,
+      artist: artist,
       title: name,
       playlist_id: this.props.playlist.id,
       image: image
