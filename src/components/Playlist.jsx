@@ -14,7 +14,7 @@ import { Button } from 'elemental';
 
 class Playlist extends Component {
 
-  componentWillMount () { console.log('Playlist > componentWillMount');    
+  componentWillMount () { 
     this.votingError = false;
     
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
@@ -32,7 +32,7 @@ class Playlist extends Component {
     this.getPlaylistTracks();
   } 
 
-  componentWillUnmount(){ console.log('Playlist > componentWillUnmount');
+  componentWillUnmount(){ 
     this.socket.disconnect();
   }
 
@@ -145,7 +145,7 @@ class Playlist extends Component {
     ));
   }
 
-  render() { console.log('Playlist > render');
+  render() { 
     const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
     const { open, message } = voteErrorPopup;
     return (
