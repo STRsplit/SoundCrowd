@@ -17,7 +17,7 @@ module.exports = io => {
               dbHelpers.resetTrack(track.song_id, playlistId)
               .then(dbHelpers.reorderPlaylist(playlistId)
               .then(playlist => {
-                io.to(playlistId).emit('updatePlaylist', playlist);
+                io.sockets.in(playlistId).emit('updatePlaylist', playlist);
               }));
             }
           }

@@ -140,8 +140,6 @@ class Playlist extends Component {
 
   displayTracks() {
     const { tracks, id } = this.props.playlist;
-    console.log('TRACKS as IS', tracks)
-    console.log('TRACKS SORTED', tracks.sort((a,b) => a.position - b.position));
     return tracks.sort((a,b) => a.position - b.position).map((track, ind) => (
       <Track key={track.song_id} 
       playlist={id}
