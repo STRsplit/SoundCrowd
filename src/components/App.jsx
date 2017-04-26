@@ -10,7 +10,6 @@ import PublicRoute from './routes/PublicRoute.jsx';
 class App extends Component {
 
 	render() {
-
 	  return (       
       <Switch>
         <Route path="/login" component={ Login } />              

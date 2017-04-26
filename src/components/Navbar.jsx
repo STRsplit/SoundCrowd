@@ -20,7 +20,6 @@ class Navbar extends Component {
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <MenuItem><Link to="/" style={style.link}><div>Home</div></Link></MenuItem>
-        <MenuItem><Link to="/search" style={style.link}><div>Search</div></Link></MenuItem>
         <MenuItem><Link to="/aboutus" style={style.link}><div>About Us</div></Link></MenuItem>
         <MenuItem><Link to="/login" style={style.link}  onClick={this.props.logoutUser}><div>Logout</div></Link></MenuItem>
       </IconMenu>
@@ -36,7 +35,6 @@ class Navbar extends Component {
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <MenuItem><Link to="/login" style={style.link} ><div>Login</div></Link></MenuItem>
-        <MenuItem><Link to="/public/search" style={style.link}><div>Search</div></Link></MenuItem>
         <MenuItem><Link to="/public/aboutus" style={style.link}><div>About Us</div></Link></MenuItem>
       </IconMenu>
     );

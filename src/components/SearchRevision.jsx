@@ -6,9 +6,6 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import SearchContainer from './SearchContainer.jsx'
 const styles = {
-  radioButton: {
-    marginTop: 16,
-  },
   dialog : {
     backgroundColor: 'rgba(0, 0, 0, .5)',
   }
@@ -38,44 +35,32 @@ class FullPageSearchOverlay extends Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Close"
         primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
         onTouchTap={this.handleClose}
       />,
     ];
 
-    const radios = [];
-    for (let i = 0; i < 30; i++) {
-      radios.push(
-        <RadioButton
-          key={i}
-          value={`value${i + 1}`}
-          label={`Option ${i + 1}`}
-          style={styles.radioButton}
-        />
-      );
-    }
-
     return (
       <div>
-        <RaisedButton label="Scrollable Dialog" onTouchTap={this.handleOpen} />
+        <RaisedButton className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
+        <div className="search-modal-container">
         <Dialog
           title="Scrollable Dialog"
           actions={actions}
           className="search-popup-modal"
           modal={false}
+          repositionOnUpdate={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
+          contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
+          bodyStyle={{padding: 0}}
+          style={{paddingTop: 20, height: '100vh'}}
         >
           <SearchContainer />
         </Dialog>
+        </div>
       </div>
     );
   }
