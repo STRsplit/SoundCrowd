@@ -58,7 +58,7 @@ class Playlist extends Component {
       this.handleVoteError(true, voteErrorInfo);
       console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
-  }
+  } 
 
   getSessionInfo() {
     axios.get('/api/user/session_info')
@@ -125,6 +125,7 @@ class Playlist extends Component {
     this.props.setVoteErrorPopup(true, message);
     this.votingError = false;
   }
+
 
   startPlaylist() {
     axios.post('/api/spotify/play', { playlist: this.props.match.params.playlistId })

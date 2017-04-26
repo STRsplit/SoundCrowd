@@ -7,6 +7,7 @@ import { setRecentAddedTracks } from '../actions/playlistActions';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
@@ -47,14 +48,20 @@ class SearchContainer extends Component {
       if(e.target.value === song.id){
         return song;
       }})[0];
-
-    let { artist, artists, id, name } = targetSong;
-    artist = artist ? artist[0].name : artists[0].name;
+    let artist;
+    if (targetSong.artist === undefined) {
+      artist = targetSong.artists[0].name;
+    } else {
+      artist = targetSong.artist[0].name;
+    }
+    let { id, name, album } = targetSong;
+    let image = album.images[2].url;
     let trackInfo = {
       song_id: id,
       artist: artist,
       title: name,
-      playlist_id: this.props.playlist.id
+      playlist_id: this.props.playlist.id,
+      image: image
     };
 
     axios.post('/api/tracks/', { 
@@ -107,6 +114,7 @@ class SearchContainer extends Component {
     let currentList = this.props.playlist.recentlyAddedTracks;
     currentList.unshift(track);
     this.props.setRecentAddedTracks(currentList);
+    
   }
 
   render(){
@@ -122,7 +130,7 @@ class SearchContainer extends Component {
           selectedOption={filter} 
           handleSelect={this.setSelected} 
           handleSearch={this.searchSpotify} 
-          handleChange={this.enterSearch} 
+          handleChange={this.enterSearch}
         />
         
         <div>

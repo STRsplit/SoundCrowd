@@ -138,8 +138,9 @@ module.exports = {
         title: song.title,
         song_id: song.song_id,
         playlist_id: song.playlist_id,
+        img_url: song.image,
         vote_count: 0
-      });
+      }); 
 
     addedSong.save()
     .then(result => {

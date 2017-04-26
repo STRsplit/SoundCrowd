@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { publicRoutes } from './routes';
+import { publicRoutes } from './routes.jsx';
 import RouteContainer from './RouteContainer.jsx';
 
 class PublicRoute extends Component {
