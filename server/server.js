@@ -33,7 +33,7 @@ const io = require ('socket.io').listen(server);
 const socketManager = require('./sockets.js')(io);
 
 /* * Routers * */
-const router = require('./routes/router');
+const router = require('./routes/router')(io);
 const spotifyRouter = require('./routes/spotifyRouter')(io);
 
 /* *  Authentication * */

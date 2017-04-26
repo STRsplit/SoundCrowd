@@ -29,16 +29,5 @@ module.exports = io => {
         }
       });
     });
-
-    socket.on('addSong', playlistId => {
-      dbHelpers.reorderPlaylist(playlistId)
-      .then(tracks => {
-        if (tracks) {
-          io.sockets.in(playlistId).emit('updatePlaylist', tracks);
-        } else {
-          console.log('add song error');
-        }
-      });
-    });
-  })
+  });
 }

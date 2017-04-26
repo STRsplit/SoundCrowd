@@ -17,7 +17,6 @@ import AccordionTest from './AccordionTest.jsx';
 class SearchContainer extends Component {
 
   componentWillMount() {
-    this.socket = io.connect();
     this.props.setSearchDefaults();
     this.handleSongAdd = this.handleSongAdd.bind(this);
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
@@ -111,7 +110,7 @@ class SearchContainer extends Component {
     let currentList = this.props.playlist.recentlyAddedTracks;
     currentList.unshift(track);
     this.props.setRecentAddedTracks(currentList);
-    this.socket.emit('addSong', this.props.playlist.id);
+    
   }
 
   render(){
