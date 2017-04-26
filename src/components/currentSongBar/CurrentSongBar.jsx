@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Row, Col } from 'elemental';
 import Avatar from 'material-ui/Avatar';
 import Slider from 'material-ui/Slider';
+import SearchPopup from '../SearchRevision.jsx';
 
 class CurrentSongBar extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class CurrentSongBar extends Component {
     return(
       <div className="csb-container">
         <Row className="3-col-row">
-          <Col sm="1/3">          
+          <Col sm="1/4">          
             <div className="csb-album-image">
               { avatar }
             </div>
@@ -99,13 +100,13 @@ class CurrentSongBar extends Component {
               <span>{`${artist}  ${album}`}</span>
             </div>
           </Col>
-          <Col sm="1/3"> 
+          <Col sm="2/4"> 
             <span>{this.convertToTime(progress)}</span>
             <span style={style.duration}>{this.convertToTime(duration)}</span>
             <Slider sliderStyle={style.slider} value={sliderValue} />
           </Col>
-          <Col sm="1/3">
-            Search Song || Add Song Section
+          <Col sm="1/4">
+            <SearchPopup />
           </Col>
         </Row>
       </div>  
