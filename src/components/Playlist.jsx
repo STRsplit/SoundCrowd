@@ -83,8 +83,8 @@ class Playlist extends Component {
     this.socket.emit('recordVote', voteData)
   }
 
-  getPlaylistTracks() {
-    const playlistId = this.props.match.params.playlistId;
+  getPlaylistTracks(playlistId) {
+    playlistId = playlistId || this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
     .then(res => {
       this.props.setPlaylist({
@@ -152,7 +152,7 @@ class Playlist extends Component {
     return (
       <div>
         <div>
-          <CurrentSongBar />
+          <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} />
           <SearchPopup />
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
