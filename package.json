@@ -12,7 +12,7 @@
     "compile": "webpack --watch",
     "production": "webpack && node server/server.js",
     "start": "npm run build-css && npm run init-webpack && npm run init-server",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/specs.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
     "init-webpack": "webpack -p",
@@ -91,10 +91,12 @@
     "webpack-dev-middleware": "^1.10.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
+    "mocha": "^3.3.0",
     "node-sass": "^4.5.2",
     "react-router": "^4.0.0",
     "sass-loader": "^6.0.3",
