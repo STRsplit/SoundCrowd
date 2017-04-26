@@ -7,7 +7,6 @@ import { setRecentAddedTracks } from '../actions/playlistActions';
 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
-import io from 'socket.io-client';
 
 import SongGenreSection from './SearchCriteria.jsx'
 import SongEntry from './SongEntry.jsx';
@@ -37,6 +36,7 @@ class SearchContainer extends Component {
       console.log(err);
     })
   }
+
   setSelected(event){
     const filter = event.target.value;
     this.props.setFilter(filter);
@@ -125,7 +125,7 @@ class SearchContainer extends Component {
     //     </div>
     // ));
     return (
-      <div className={"searchcontainer-container"}>
+      <div className="searchcontainer-container">
         <SearchBar stats={this.props.search} text={search} 
           selectedOption={filter} 
           handleSelect={this.setSelected} 
