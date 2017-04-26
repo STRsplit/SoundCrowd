@@ -62,7 +62,7 @@ module.exports = io => {
           if (tracks) {
             io.sockets.in(playlistId).emit('updatePlaylist', tracks);
           } else {
-            console.log('add song error');
+            res.status(500).send('error adding song');
           }
         });
         res.sendStatus(201);

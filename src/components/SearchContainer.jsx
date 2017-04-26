@@ -48,9 +48,14 @@ class SearchContainer extends Component {
       if(e.target.value === song.id){
         return song;
       }})[0];
-    let { artist, artists, id, name, album } = targetSong;
-    var image = album.images[2].url;
-    artist = artist ? artist[0].name : artists[0].name;
+    let artist;
+    if (targetSong.artist === undefined) {
+      artist = targetSong.artists[0].name;
+    } else {
+      artist = targetSong.artist[0].name;
+    }
+    let { id, name, album } = targetSong;
+    let image = album.images[2].url;
     let trackInfo = {
       song_id: id,
       artist: artist,
