@@ -1,6 +1,5 @@
 const cron = require('node-cron');
 const spotify = require('./spotify');
-const socketManager = require('./sockets')
 const dbHelpers = require('../database/dbHelpers');
 
 module.exports = (tokens, io) => {

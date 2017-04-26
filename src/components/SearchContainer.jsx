@@ -112,9 +112,9 @@ class SearchContainer extends Component {
   }
 
   updateRecentSongs(track) {
-    let currentList = this.props.playlist.recentlyAddedTracks;
-    currentList.unshift(track);
-    this.props.setRecentAddedTracks(currentList);
+    // let currentList = this.props.playlist.recentlyAddedTracks;
+    // currentList.unshift(track);
+    // this.props.setRecentAddedTracks(currentList);
     
   }
 
