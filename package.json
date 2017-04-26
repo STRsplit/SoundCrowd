@@ -101,6 +101,7 @@
     "react-router": "^4.0.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "webpack": "^2.3.3"
+    "webpack": "^2.3.3",
+    "zombie": "^5.0.5"
   }
 }
