@@ -1,6 +1,7 @@
 var request = require('request');
 var requestPromise = require('request-promise');
 var db = require('../database/db');
+var dbHelpers = require('../database/dbHelpers');
 var customPlaylist = require('./customPlaylist');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
@@ -33,18 +34,72 @@ module.exports = {
       });
   },
 
-  moveTrack: function(username, playlistId, cb) {
-    // var options = { 'range_length': 2 };
-    var i1 = Math.floor(Math.random()*10);
-    var i2 = Math.floor(Math.random()*10);
-    spotify.reorderTracksInPlaylist(username, playlistId, i1, i2)
-      .then(data => {
-        cb(null);
+  removeFirstSong: function(playlistId) {
+    let username;
+    let trackID;
+    dbHelpers.getPlaylistOwner(playlistId)
+    .then(owner => {
+      username = owner.user_id;
+      dbHelpers.getTrackByPosition(playlistId, 0)
+      .then(track => {
+        trackID = [{ "uri": `spotify:track:${track.song_id}`}];
+        spotify.removeTracksFromPlaylist(username, playlistId, trackID)
+        .then(data => {
+          this.moveTracks(username, playlistId, (err, results) => {
+            if(err) console.log(err)
+            else {
+              console.log(results)
+            }
+          })
+        })
       })
-      .catch(err => {
-        cb(err);
-      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
+
+  moveTracks: function(username, playlistId, cb) {
+    let tracks;
+    spotify.getPlaylistTracks(username, playlistId)
+    .then(data => {
+      tracks = data.body.items.reduce((allTracks, item, ind) => {
+        allTracks.push({"uri": item.track.uri})
+        return allTracks;
+      }, []);
+    })
+    .then(() => {
+      tracks.splice(1, 1);
+      spotify.removeTracksFromPlaylist(username, playlistId, tracks)
+    })
+    .then(data => {
+      dbHelpers.getPlaylist(playlistId)
+      .then(playlist => {
+        let tracksToAdd = playlist.map(track => {
+          return `spotify:track:${track.song_id}`;
+        })
+        spotify.addTracksToPlaylist(username, playlistId, tracksToAdd)
+        .then(data => {
+          cb(null, data);
+        })
+      })
+    })
+    .catch(err => {
+      cb(err, null)
+    });
+  },
+
+    // var i1 = Math.floor(Math.random()*10);
+    // var i2 = Math.floor(Math.random()*10);
+
+    // spotify.reorderTracksInPlaylist(username, playlistId, i1, i2)
+    //   .then(data => {
+    //     cb(null);
+    //   })
+    //   .catch(err => {
+    //     cb(err);
+    //   });
+
 
   searchFor: function(name, filter, cb) {
     spotify.searchTracks(`${filter}:${name}`)

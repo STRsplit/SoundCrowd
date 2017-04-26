@@ -286,7 +286,8 @@
   width: 100%; }
 
 .mui-btn {
-  float: right !important; }
+  float: right !important;
+  font-size: 1.25vw !important; }
 
 .mui-dropdown {
   width: 100%;
@@ -309,17 +310,16 @@
   position: fixed !important;
   transition: none !important;
   transform: none !important;
-  padding-top: none !important;
-  height: 200vh !important;
   margin-top: 10vh !important; }
   .search-popup-modal div {
     height: auto;
     transform: none !important; }
     .search-popup-modal div div {
-      background-color: rgba(255, 255, 255, 0.8) !important; }
+      background-color: rgba(0, 0, 0, 0.5) !important; }
       .search-popup-modal div div div {
         background-color: rgba(255, 255, 255, 0) !important;
-        transition: none !important; }
+        transition: none !important;
+        padding: 0% 1% !important; }
         .search-popup-modal div div div .track-image {
           display: none; }
         .search-popup-modal div div div .song-entry-header {
@@ -328,12 +328,11 @@
           .search-popup-modal div div div .song-entry-header h3 {
             font-size: 1.25em; }
   .search-popup-modal .track-dual-container {
-    background-color: rgba(0, 0, 0, 0.5) !important; }
+    background-color: rgba(0, 0, 0, 0.8) !important; }
 
 .search-popup-modal > div > div:nth-child(1) {
   transform: none !important;
-  transition: none !important;
-  margin: 10vh auto !important; }
+  transition: none !important; }
 
 .searchcontainer-container {
   width: 100%;
