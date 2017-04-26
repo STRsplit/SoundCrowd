@@ -6,9 +6,6 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import SearchContainer from './SearchContainer.jsx'
 const styles = {
-  radioButton: {
-    marginTop: 16,
-  },
   dialog : {
     backgroundColor: 'rgba(0, 0, 0, .5)',
   }
@@ -53,9 +50,13 @@ class FullPageSearchOverlay extends Component {
           actions={actions}
           className="search-popup-modal"
           modal={false}
+          repositionOnUpdate={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
+          contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
+          bodyStyle={{padding: 0}}
+          style={{paddingTop: 20, height: '100vh'}}
         >
           <SearchContainer />
         </Dialog>

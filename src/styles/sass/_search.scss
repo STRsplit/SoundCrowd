@@ -1,18 +1,6 @@
 
 @import 'mixins_functions';
 
-.searchcontainer-container {
-  width: 100%;
-}
-.searchresults-container {
-  background-color: #fff;
-}
-.searchcontainer-container {
-  
-}
-.searchcontainer-container {
-
-}
 
 .mui-dropdown__menu,
 .mui--is-open{
@@ -43,12 +31,20 @@
 }
 .search-popup-modal {
   position: fixed ! important;
+  transition: none ! important;
+  transform: none ! important;
+  padding-top: none ! important;
+  height: 200vh ! important;
+  margin-top: 10vh ! important;
    div {
     height: auto;
+    transform: none ! important;
       div {
       background-color: rgba(255, 255, 255, 0.8) ! important;
+      // margin: 10vh auto ! important;
       div {
         background-color: rgba(255, 255, 255, 0) ! important;
+        transition: none ! important;
         .track-image {
           display: none;
         }
@@ -66,11 +62,23 @@
     background-color: rgba(0, 0, 0, .5) ! important;
   }
 }
-.search-popup-modal > div:first-child {
-   margin: -25vh auto ! important;
-    > div:first-child {
-    margin: 25vh auto ! important;
-    }
+.search-popup-modal > div >  div:nth-child(1) {
+    transform: none ! important;
+    transition: none ! important;
+    margin: 10vh auto ! important;
+    // > div:first-child {
+    // margin: 25vh auto ! important;
+    // transform: none ! important;
+    // transition: none ! important;
+    // }
 }
 
-
+.searchcontainer-container {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 0 ! important;
+}
+md-backdrop.md-opaque.md-default-theme,
+.md-dialog-container {
+  position:fixed;
+}

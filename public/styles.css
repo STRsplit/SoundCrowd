@@ -281,12 +281,6 @@
 .playlists-hr {
   margin-bottom: 1em; }
 
-.searchcontainer-container {
-  width: 100%; }
-
-.searchresults-container {
-  background-color: #fff; }
-
 .mui-dropdown__menu,
 .mui--is-open {
   width: 100%; }
@@ -312,13 +306,20 @@
   width: 100%; }
 
 .search-popup-modal {
-  position: fixed !important; }
+  position: fixed !important;
+  transition: none !important;
+  transform: none !important;
+  padding-top: none !important;
+  height: 200vh !important;
+  margin-top: 10vh !important; }
   .search-popup-modal div {
-    height: auto; }
+    height: auto;
+    transform: none !important; }
     .search-popup-modal div div {
       background-color: rgba(255, 255, 255, 0.8) !important; }
       .search-popup-modal div div div {
-        background-color: rgba(255, 255, 255, 0) !important; }
+        background-color: rgba(255, 255, 255, 0) !important;
+        transition: none !important; }
         .search-popup-modal div div div .track-image {
           display: none; }
         .search-popup-modal div div div .song-entry-header {
@@ -329,10 +330,19 @@
   .search-popup-modal .track-dual-container {
     background-color: rgba(0, 0, 0, 0.5) !important; }
 
-.search-popup-modal > div:first-child {
-  margin: -25vh auto !important; }
-  .search-popup-modal > div:first-child > div:first-child {
-    margin: 25vh auto !important; }
+.search-popup-modal > div > div:nth-child(1) {
+  transform: none !important;
+  transition: none !important;
+  margin: 10vh auto !important; }
+
+.searchcontainer-container {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 0 !important; }
+
+md-backdrop.md-opaque.md-default-theme,
+.md-dialog-container {
+  position: fixed; }
 
 hr {
   margin-top: 2% !important; }
