@@ -13,8 +13,12 @@
   position: fixed;
   display: block;
   padding-top: 5px;
-  }
+}
 
+.main-navigation-site h1, path {
+  color: white !important;
+  fill: white !important;
+}
 
 .nav-container-name {
   float: left;

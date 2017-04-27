@@ -190,9 +190,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
-
-const style = {
-  button: {
-    margin: '5px'
-  }
-};
