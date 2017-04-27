@@ -28,6 +28,7 @@ node_modules/
 bower_components/
 
 #ENVIRONMENT VARIABLES
+config/keys.js
 
 #DS
 .DS_Store
