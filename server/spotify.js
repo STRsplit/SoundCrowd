@@ -68,48 +68,11 @@ module.exports = {
     })
   },
 
-  moveTracks: function(tokens, username, playlistId, cb) {
-    const spotify = this.authorizeSpotify(tokens);
-    let tracks;
-    spotify.getPlaylistTracks(username, playlistId)
-    .then(data => {
-      tracks = data.body.items.reduce((allTracks, item, ind) => {
-        allTracks.push({"uri": item.track.uri})
-        return allTracks;
-      }, []);
-    })
-    .then(() => {
-      tracks.splice(1, 1);
-      spotify.removeTracksFromPlaylist(username, playlistId, tracks)
-    })
-    .then(data => {
-      dbHelpers.getPlaylist(playlistId)
-      .then(playlist => {
-        let tracksToAdd = playlist.map(track => {
-          return `spotify:track:${track.song_id}`;
-        })
-        spotify.addTracksToPlaylist(username, playlistId, tracksToAdd)
-        .then(data => {
-          cb(null, data);
-        })
-      })
-    })
-    .catch(err => {
-      cb(err, null)
-    });
-  },
-
   addTracksToPlaylist: function(username, playlistId, tracks) {
     return new Promise((resolve, reject) => {
       spotify.addTracksToPlaylist(username, playlistId, tracks)
-      .then(data => {
-        console.log('no add error', data);
-        resolve(data);
-      })
-      .catch(err => {
-        console.log('add tracks err', err);
-        reject(err);
-      });
+      .then(data => resolve(data))
+      .catch(err => reject(err));
     });
   },
 
@@ -119,17 +82,12 @@ module.exports = {
         return { 'uri': track };
       });
       spotify.removeTracksFromPlaylist(username, playlistId, tracks)
-      .then(data => {
-        console.log('snapshot', data.snapshot_id);
-        resolve(data.snapshot_id);
-      })
-      .catch(err => {
-        console.log('remove tracks error', err);
-        reject(err);
-      });
+      .then(data => resolve(data.snapshot_id))
+      .catch(err => reject(err));
     });
   },
 
+<<<<<<< HEAD
     // var i1 = Math.floor(Math.random()*10);
     // var i2 = Math.floor(Math.random()*10);
 
@@ -144,6 +102,9 @@ module.exports = {
 
   searchFor: function(tokens, name, filter, cb) {
     const spotify = this.authorizeSpotify(tokens);
+=======
+  searchFor: function(name, filter, cb) {
+>>>>>>> Cleaning up reordering in spotify
     spotify.searchTracks(`${filter}:${name}`)
     .then((data) => {
       let { items } = data.body.tracks;
