@@ -151,7 +151,7 @@ class Playlist extends Component {
     return (
       <div>
         <div>
-          <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} />
+          <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} playlistId={id} />
 
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">

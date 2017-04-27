@@ -23,7 +23,9 @@ const db = new Sequelize(database, user, password, {
 const User = db.define('User', {
   id: {type: Sequelize.STRING, primaryKey: true},
   name: Sequelize.STRING,
-  email: Sequelize.STRING
+  email: Sequelize.STRING,
+  access_token: Sequelize.TEXT,
+  refresh_token: Sequelize.TEXT
   }, 
   {
     timestamps: false

@@ -1,4 +1,4 @@
-const { Playlist, Song, Vote } = require('./db.js');
+const { Playlist, Song, Vote, User } = require('./db.js');
 
 module.exports = {
   checkForReorder: function(song, playlistId, vote) {
@@ -178,18 +178,27 @@ module.exports = {
         song_id: songId,
         playlist_id: playlistId
       }})
-    .then(song => {
-      song.update({ vote_count: 0, position: null })
-      .then(() => {
-        Vote.destroy({ where: {
-          song_id: songId,
-          playlist_id: playlistId
-        }})
-        .then(resolve(null));
-      });
-    })
-    .catch(err => reject(err));
+      .then(song => {
+        song.update({ vote_count: 0, position: null })
+        .then(() => {
+          Vote.destroy({ where: {
+            song_id: songId,
+            playlist_id: playlistId
+          }})
+          .then(resolve(null));
+        });
+      })
+      .catch(err => reject(err));
 
-  });
+    });
+  },
+  getUser: function(userId) {
+    return new Promise((resolve, reject) => {
+      User.findById(userId)
+      .then(user => {
+        resolve(user);
+      })
+      .catch(err => reject(err));
+    });
   }
 };

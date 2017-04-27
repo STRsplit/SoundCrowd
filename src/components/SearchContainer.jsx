@@ -82,10 +82,11 @@ class SearchContainer extends Component {
 
   searchSpotify() {
     const { search, filter } = this.props.search
-    axios.get('/api/spotify/search/', { 
+    axios.get('/api/search/', { 
       params: {
         name: search,
-        filter: filter
+        filter: filter,
+        playlist: this.props.playlist.id
       }
     })
     .then(data => {
