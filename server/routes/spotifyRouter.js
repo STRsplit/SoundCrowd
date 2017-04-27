@@ -20,7 +20,7 @@ module.exports = io => {
 
   router.get('/search', function(req, res) {
     const { name, filter } = req.query;
-    spotify.searchFor(nreq.session.tokens, name, filter, function(err, items) {
+    spotify.searchFor(req.session.tokens, name, filter, function(err, items) {
       if(err) res.status(err.statusCode).send(err);
       else res.status(200).send(items);
     });
