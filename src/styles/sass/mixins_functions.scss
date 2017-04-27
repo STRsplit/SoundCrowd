@@ -1,11 +1,56 @@
 //SCSS functions / Mixins
-$radius : 2em;
+$radius : 1em;
+$headerStart: 36px;
 $fullWidth: 100%;
 $half: 50%;
+$featureWidth: 60%;
 $offsetHalf: 50%;
 $third:  33%;
 $smallPad: 2%;
+$interiorPad: 5%;
 $font-stack: Helvetica, sans-serif;
+$blueAccent: #1385e5;
+$goldAccent: #daa520;
+$max-breakpoint: 1025;
+
+$h1-font-sizes: (
+  smallBP : 48px,
+  mediumBP : 48px,
+  largeBP : 42px,
+  maxBP: 36px
+);
+
+$breakpoints: (
+  smallBP : 480px,
+  mediumBP : 720px,
+  largeBP : 900px, // Previously 640px
+  maxBP : 1025px
+);
+
+@mixin font-size($fs-map, $fs-breakpoints: $breakpoints) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    }
+    @else {
+      @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+        $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+      }
+      @media screen and (min-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}
+// @function set-vw($targetSize){
+//   $vw-content: ($max-breakpoint * 0.01) * 1px;
+//   @return ($targetSize / $vw-content) * 1vw; 
+// }
+
+@function get-vw($target) { 
+  $vw-context: ($max-breakpoint*.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
 
 @function colorOpacity($color, $opacity) {
   @return rgba($color, $opacity)
@@ -24,9 +69,9 @@ $font-stack: Helvetica, sans-serif;
 }
 
 @mixin border-radius($value){
-  -moz-border-radius: $value;
-  -webkit--radius: $value;
-  border-radius: $value;
+  -moz-border-radius: $value ! important;
+  -webkit--radius: $value ! important;
+  border-radius: $value ! important;
 }
 @mixin center($width: null, $height: null) {
   position: absolute;
@@ -66,3 +111,8 @@ $font-stack: Helvetica, sans-serif;
   -webkit-transition: $value;
   transition: $value;
 }
+// @mixin padding() {
+//   @if ($featureWidth < 300px){
+//     padding: 
+//   }
+// }

@@ -1,12 +1,15 @@
 .playlist-container {
   margin-top: 60px;
 }
+.playlist-tracks-outer-container {
+  padding: 10px $smallPad;
+}
 
 /* * Error multiple votes popup * */
 
 .playlist-vote-error-popup {
   width: 100%;
-  background-color: rgba(3, 21, 39, .7);
+  background-color: rgba(0, 0, 0, .7);
   div {
     margin: 0 auto;
     width: 100%;

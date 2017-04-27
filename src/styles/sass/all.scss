@@ -12,7 +12,7 @@
 @import '_playlistSuggester';
 @import 'mixins_functions';
 
-$step-size-heading: 0.4;
+$step-size-heading: 0.5;
 
 
 // @function colorOpacity($color, $opacity) {
@@ -25,7 +25,11 @@ $step-size-heading: 0.4;
 
 
 @mixin heading-size($size) {
-    font-size: $size * $step-size-heading + em;
+    @if ($size * $step-size-heading) < 3 {
+      font-size: 2vw;
+    } @else {
+      font-size: $size * $step-size-heading + vw;
+    }
 }
 
 @function colorOpacity($color, $opacity) {
@@ -40,7 +44,7 @@ h1 {
     @include heading-size(6);
 }
 h2 {
-    @include heading-size(5);
+     @include heading-size(5);
 }
 h3 {
     @include heading-size(4);
@@ -48,7 +52,10 @@ h3 {
 
 html,
 body {
-  background-color: colorOpacity(#6dbcdb, 1);
+  background-color: colorOpacity(#272727, 0.4);
+  min-width: 420px ! important;
+  margin:0;
+  padding:0;
 }
 ul,
 ol {
@@ -56,6 +63,75 @@ ol {
   padding: 0;
 }
 
+.main-button {
+  // color: black ! important;
+  // border-color: black ! important;
+  display: block ! important;
+  width: $featureWidth;
+  max-width: $featureWidth + 10%;
+  padding: 30px $interiorPad;
+  position: relative;
+  margin: 5% auto;
+    span {
+      display: block;
+      width: 100%;
+      font-size: 2em;
+      margin: 2px auto;
+      padding: $interiorPad;
+      @include center
+    }
+}
+.main-button:active {
+  color: none ! important;
+  background-color: none ! important;
+}
+
+
+
+@media screen and (max-width: 1025px) {
+  h1 {
+    @include heading-size(8)
+  }
+  h2 {
+       @include heading-size(7);
+  }
+  h3 {
+      @include heading-size(6);
+  }
+  .button-container {
+    display: block;
+    margin: 5% 0;
+    width: 100%;
+  }
+
+  .main-button {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    padding: 30px $interiorPad;
+    position: relative;
+    margin: 5% auto;
+      span {
+        display: block;
+        width: 100%;
+        font-size: 1.75em;
+        padding: $interiorPad;
+        @include center
+      }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    @include heading-size(12);
+  }
+  h2 {
+       @include heading-size(10);
+  }
+  h3 {
+      @include heading-size(8);
+  }
+}
 .spinner-div {
   @include center;
 }

@@ -18,7 +18,7 @@
   margin: centerContent(120px);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .mui-col-xs-0 {
     display: none
   }
@@ -28,10 +28,13 @@
     clear: both;
     margin: centerContent(120px);
   }
+  .column-mid {
+    width: 100% ! important;
+    display: block;
+  }
 
 }
 .main-left-column {
-
   background-color: pink;
 
 }
@@ -42,7 +45,6 @@
 
 .main-right-column {
 
-  background-color: purple;
 }
 
 .column-left {
@@ -53,7 +55,7 @@
 
 }
 .column-right {
-  background-color: #d7dadb;
+  background-color: transparent;
   min-height: 100%;
   position: fixed;
   top: 80px;

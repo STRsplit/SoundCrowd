@@ -22,7 +22,9 @@
     background-color: white;
   }
 }
-
+.search-button {
+  color: white ! important;
+}
 .search-modal-button {
   display: block;
   margin: 1.5%;
@@ -35,16 +37,26 @@
   transition: none ! important;
   transform: none ! important;
   margin-top: 10vh ! important;
+  h3 {
+    border-bottom: 0px ! important;
+  }
+  .song-entry-inner-details {
+    color: #000 ! important;
+  }
+  .mui-form {
+    .row {
+      color: #FFF ! important;
+    }
+  }
    div {
     height: auto;
     transform: none ! important;
       div {
-      background-color: rgba(0, 0, 0, 0.5) ! important;
+      background-color: rgba(0, 0, 0, 0.7) ! important;
       // margin: 10vh auto ! important;
       div {
         background-color: rgba(255, 255, 255, 0) ! important;
         transition: none ! important;
-        padding: 0% 1% ! important;
         .track-image {
           display: none;
         }
@@ -53,23 +65,24 @@
           text-align: right;
           h3 {
             font-size: 1.25em;
+            color: #000;
           }
         }
       }
     }
   }
   .track-dual-container {
-    background-color: rgba(0, 0, 0, .8) ! important;
+    background-color: rgba(255, 255, 255, 0.75) ! important;
+    padding: 8px 0 important;
   }
 }
 .search-popup-modal > div >  div:nth-child(1) {
     transform: none ! important;
     transition: none ! important;
-    // > div:first-child {
-    // margin: 25vh auto ! important;
-    // transform: none ! important;
-    // transition: none ! important;
-    // }
+   
+}
+.search-popup-modal > div >  div > div > div:nth-child(2) {
+  border-top: 0px ! important;
 }
 
 .searchcontainer-container {

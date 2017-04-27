@@ -16,6 +16,7 @@
   width: 60%;
   // background-color: colorOpacity(black, 1);
   @include center;
+
 }
 .login-container h2 {
   color: colorOpacity(white, 1);
@@ -25,7 +26,7 @@
 .login-container-inner {
   width: 80%;
   padding: 10% 0;
-  margin: 5%;
+  margin: 0%;
   display: block;
   position: relative;
   background-color: colorOpacity(white, 1);
@@ -40,25 +41,19 @@
   margin: 5% 0;
 }
 
-.button {
-  display: block;
-  width: $offsetHalf;
-  max-width: $offsetHalf + 10%;
-  padding: $smallPad;
-  position: relative;
-  margin: 5% auto;
-  @include border-radius($radius);
-    span {
-      @include center
-    }
-}
+
 .center-content {
   display: block;
-  margin: 10% auto 0%;
+  // margin: 10% auto 0%;
   text-align: center;
-  width: 100%;
+  width: 80%;
+  margin: centerContent(0%);
 }
-
+.enter-room-login {
+  display: inline;
+    width: 60% ! important;
+    margin: 2%;
+}
 .about-brief {
   width: $offsetHalf;
   padding: $smallPad;
@@ -85,26 +80,7 @@
 
 
 /* * MOBILE STYLES * */
-@media screen and (max-width: 768px) {
-  .button-container {
-    display: block;
-    margin: 5% 0;
-  }
-
-  .button {
-    display: block;
-    width: 80%;
-    max-width: 80%;
-    padding: 5%;
-    position: relative;
-    margin: 5% auto;
-    @include border-radius($radius);
-      span {
-        font-size: 5vw;
-        padding: $smallPad;
-        @include center
-      }
-  }
+@media screen and (max-width: 1024px) {
 
   .login-container {
     display: block;
@@ -112,6 +88,14 @@
     width: 100%;
     // background-color: colorOpacity(black, 1);
     @include center;
+  }
+  .secondary-button {
+    display: block;
+    width: 100%;
+  }
+  .enter-room-login {
+    width: 100% ! important;
+    margin: 0 auto;
   }
 
   .login-container h2 {
@@ -131,6 +115,7 @@
     @include center(80%);
     @include vertical-align(10%);
   }
+
 }
 
 
