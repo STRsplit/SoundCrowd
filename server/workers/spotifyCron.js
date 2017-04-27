@@ -3,32 +3,39 @@ const spotify = require('../spotify');
 const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = io => {
-  let task = cron.schedule('*/15 * * * * *', () => {
-    // spotify.getCurrentSong((err, song) => {
-    //   if (err) console.log('cron err', err);
-    //   else {
-    //     const { id, name } = song.item;
-    //     let playlistId = song.context.uri.slice(-22);
-    //     dbHelpers.getTrackByPosition(playlistId, 0)
-    //     .then(track => {
-    //       if (track) {
-    //         if (track.song_id !== id) {
-    //           dbHelpers.resetTrack(track.song_id, playlistId)
-    //           .then(dbHelpers.reorderPlaylist(playlistId)
-    //           .then(playlist => {
-    //             io.sockets.in(playlistId).emit('updatePlaylist', playlist);
-    //             io.sockets.in(playlistId).emit('recentlyPlayed', track);
-    //           }));
-    //         } else {
-    //           // song is still playing, execute regular reorder
-    //           reorderPlaylist(playlistId);
-    //         }
-    //       }
-    //     });
-    //   }
-    // });
+  // let task = cron.schedule('*/30 * * * * *', () => {
+  let task = cron.schedule('*/10 * * * * *', () => {
+    spotify.getCurrentSong((err, song) => {
+      if (err) console.log('cron err', err);
+      else {
+        const { id, name, duration_ms } = song.item;
+        const { progress_ms } = song;
+        console.log((duration_ms - progress_ms) / 1000 + ' seconds left');
+        if ((duration_ms - progress_ms) / 1000 < 30) {
+          console.log('less than 30 seconds left');
+        } else {
+          let playlistId = song.context.uri.slice(-22);
+          dbHelpers.getTrackByPosition(playlistId, 0)
+          .then(track => {
+            if (track) {
+              if (track.song_id !== id) {
+                dbHelpers.resetTrack(track.song_id, playlistId)
+                .then(dbHelpers.reorderPlaylist(playlistId)
+                .then(playlist => {
+                  io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+                  io.sockets.in(playlistId).emit('recentlyPlayed', track);
+                }));
+              } else {
+                // song is still playing, execute regular spotify reorder
+                // reorderPlaylist(playlistId);
+              }
+            }
+          });
+        }
+      }
+    });
 
-    reorderPlaylist('7aKQOzNgVw8r72iH14TLxk');
+    // reorderPlaylist('4aPj9tROQjnmojwPbNmj2K');
   });
 
   return task;
@@ -48,4 +55,8 @@ function reorderPlaylist(playlistId) {
       .then(spotify.addTracksToPlaylist(user, playlistId, tracks));
     });
   });
+}
+
+function getNextSong() {
+  
 }

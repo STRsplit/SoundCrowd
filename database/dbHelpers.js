@@ -1,6 +1,16 @@
 const { Playlist, Song, Vote, User } = require('./db.js');
 
 module.exports = {
+  getUser: function(userId) {
+    return new Promise((resolve, reject) => {
+      User.findById(userId)
+      .then(user => {
+        resolve(user);
+      })
+      .catch(err => reject(err));
+    });
+  },
+  
   checkForReorder: function(song, playlistId, vote) {
     return new Promise((resolve, reject) => {
       Song.findAll({
@@ -105,7 +115,8 @@ module.exports = {
         let updating = true;
         while (updating) {
           allSongs.forEach(song => {
-            if (song.position !== 0){
+            console.log('reorder track', song.position);
+            if (song.position !== 0 || song.position === null) {
               song.update({ position: position++ });
             }
             if (position === allSongs.length) {
@@ -181,30 +192,28 @@ module.exports = {
   resetTrack: function(songId, playlistId) {
     return new Promise((resolve, reject) => {
       Song.findOne({ where: {
-        song_id: songId,
-        playlist_id: playlistId
+        playlist_id: playlistId,
+        position: 1
       }})
-      .then(song => {
-        song.update({ vote_count: 0, position: null })
-        .then(() => {
-          Vote.destroy({ where: {
-            song_id: songId,
-            playlist_id: playlistId
-          }})
-          .then(resolve(null));
+      .then(nextSong => {
+        nextSong.update({ position: 0 });
+        Song.findOne({ where: {
+          song_id: songId,
+          playlist_id: playlistId
+        }})
+        .then(song => {
+          song.update({ vote_count: 0, position: null })
+          .then(() => {
+            Vote.destroy({ where: {
+              song_id: songId,
+              playlist_id: playlistId
+            }})
+            .then(resolve(null));
+          });
         });
       })
       .catch(err => reject(err));
 
-    });
-  },
-  getUser: function(userId) {
-    return new Promise((resolve, reject) => {
-      User.findById(userId)
-      .then(user => {
-        resolve(user);
-      })
-      .catch(err => reject(err));
     });
   }
 };
