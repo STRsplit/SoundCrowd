@@ -1,11 +1,15 @@
 //SCSS functions / Mixins
-$radius : 2em;
+$radius : 1em;
 $fullWidth: 100%;
 $half: 50%;
+$featureWidth: 60%;
 $offsetHalf: 50%;
 $third:  33%;
 $smallPad: 2%;
+$interiorPad: 5%;
 $font-stack: Helvetica, sans-serif;
+$blueAccent: #1385e5;
+$goldAccent: #daa520;
 
 @function colorOpacity($color, $opacity) {
   @return rgba($color, $opacity)
@@ -24,9 +28,9 @@ $font-stack: Helvetica, sans-serif;
 }
 
 @mixin border-radius($value){
-  -moz-border-radius: $value;
-  -webkit--radius: $value;
-  border-radius: $value;
+  -moz-border-radius: $value ! important;
+  -webkit--radius: $value ! important;
+  border-radius: $value ! important;
 }
 @mixin center($width: null, $height: null) {
   position: absolute;
@@ -66,3 +70,8 @@ $font-stack: Helvetica, sans-serif;
   -webkit-transition: $value;
   transition: $value;
 }
+// @mixin padding() {
+//   @if ($featureWidth < 300px){
+//     padding: 
+//   }
+// }

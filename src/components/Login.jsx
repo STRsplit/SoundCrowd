@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button } from 'elemental';
+// import { Button } from 'elemental';
+import { RaisedButton as Button } from 'material-ui';
+
 
 class Login extends Component {
   constructor(props) {
@@ -25,13 +27,13 @@ class Login extends Component {
             <h2>SoundCrowd</h2>
           </div>
           <div className="button-container">
-            <a style={{"color": "white"}} href="auth/spotify"><Button type="primary"><span>Log into Spotify</span></Button></a>
+            <a style={{"color": "white"}} href="auth/spotify"><Button disableTouchRipple={true} className="main-button" type="primary"><span>Log into Spotify</span></Button></a>
           </div>
         </div>
         <div>
           <div className="button-container">
             <Link to={`/public/playlist/${this.state.playlist}`}>
-              <Button type="primary"><span>Join a Room</span></Button>
+              <Button disableTouchRipple={true} className="main-button" type="primary"><span>Join a Room</span></Button>
             </Link>
             <div className="center-content">
               <input type="text" placeholder="Enter room code here..." onChange={this.setPlaylist}/>

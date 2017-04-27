@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
-
 import { TextField, Dialog, RaisedButton } from 'material-ui/';
+import style from '../../styles/additionalStyles-css.js';
+
 import { Button } from 'elemental';
 
 class PlaylistSuggester extends Component {
@@ -115,13 +116,13 @@ class PlaylistSuggester extends Component {
     ];
     return (
       <div>
-        <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.button} />
+        <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
         <Dialog
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={style.dialog}
+          contentStyle={style.plDialog}
         >
           <div id="recommended-container">    
             <h2>Get Suggested Playlist</h2> 
@@ -184,12 +185,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
-
-const style = {
-  button: {
-    margin: '5px'
-  },
-  dialog: {
-    width: '500px'
-  }
-};

@@ -55,14 +55,17 @@
   clear: both;
   margin: 120px auto; }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .mui-col-xs-0 {
     display: none; }
   .inner-app-container {
     width: 100%;
     display: block;
     clear: both;
-    margin: 120px auto; } }
+    margin: 120px auto; }
+  .column-mid {
+    width: 100% !important;
+    display: block; } }
 
 .main-left-column {
   background-color: pink; }
@@ -117,22 +120,6 @@
   display: block;
   margin: 5% 0; }
 
-.button {
-  display: block;
-  width: 50%;
-  max-width: 60%;
-  padding: 2%;
-  position: relative;
-  margin: 5% auto;
-  -moz-border-radius: 2em;
-  -webkit--radius: 2em;
-  border-radius: 2em; }
-  .button span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-
 .center-content {
   display: block;
   margin: 10% auto 0%;
@@ -160,27 +147,7 @@
   margin: 0% auto; }
 
 /* * MOBILE STYLES * */
-@media screen and (max-width: 768px) {
-  .button-container {
-    display: block;
-    margin: 5% 0; }
-  .button {
-    display: block;
-    width: 80%;
-    max-width: 80%;
-    padding: 5%;
-    position: relative;
-    margin: 5% auto;
-    -moz-border-radius: 2em;
-    -webkit--radius: 2em;
-    border-radius: 2em; }
-    .button span {
-      font-size: 5vw;
-      padding: 2%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); }
+@media screen and (max-width: 900px) {
   .login-container {
     display: block;
     position: relative;
@@ -216,6 +183,9 @@
 
 .playlist-container {
   margin-top: 60px; }
+
+.playlist-tracks-outer-container {
+  padding: 10px 2%; }
 
 /* * Error multiple votes popup * */
 .playlist-vote-error-popup {
@@ -311,28 +281,38 @@
   transition: none !important;
   transform: none !important;
   margin-top: 10vh !important; }
+  .search-popup-modal h3 {
+    border-bottom: 0px !important; }
+  .search-popup-modal .song-entry-inner-details {
+    color: #000 !important; }
+  .search-popup-modal .mui-form .row {
+    color: #FFF !important; }
   .search-popup-modal div {
     height: auto;
     transform: none !important; }
     .search-popup-modal div div {
-      background-color: rgba(0, 0, 0, 0.5) !important; }
+      background-color: rgba(0, 0, 0, 0.7) !important; }
       .search-popup-modal div div div {
         background-color: rgba(255, 255, 255, 0) !important;
-        transition: none !important;
-        padding: 0% 1% !important; }
+        transition: none !important; }
         .search-popup-modal div div div .track-image {
           display: none; }
         .search-popup-modal div div div .song-entry-header {
           clear: both;
           text-align: right; }
           .search-popup-modal div div div .song-entry-header h3 {
-            font-size: 1.25em; }
+            font-size: 1.25em;
+            color: #000; }
   .search-popup-modal .track-dual-container {
-    background-color: rgba(0, 0, 0, 0.8) !important; }
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    padding: 8px 0 important; }
 
 .search-popup-modal > div > div:nth-child(1) {
   transform: none !important;
   transition: none !important; }
+
+.search-popup-modal > div > div > div > div:nth-child(2) {
+  border-top: 0px !important; }
 
 .searchcontainer-container {
   width: 100%;
@@ -353,6 +333,10 @@ hr {
 
 .track-add-song-button {
   background-color: #d7dadb; }
+
+.track-add-song-button:hover {
+  background-color: #000;
+  color: white; }
 
 *,
 *:after,
@@ -540,7 +524,7 @@ body {
   .triangle-down:hover {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 20px solid #fc4349; }
+    border-top: 20px solid #daa520; }
 
 .triangle-up {
   width: 0;
@@ -553,7 +537,7 @@ body {
   .triangle-up:hover {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 20px solid #fc4349; }
+    border-bottom: 20px solid #daa520; }
 
 .topTrack-main-container .track-dual-container {
   background-color: rgba(0, 0, 0, 0.5); }
@@ -594,12 +578,12 @@ body {
   width: 0;
   height: 0;
   margin: 2px auto;
-  border-left: 40px solid white;
+  border-left: 40px solid #daa520;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent; }
   @media (max-width: 900px) {
     .topTrack-main-container .right-triangle {
-      border-left: 30px solid white;
+      border-left: 30px solid #daa520;
       border-top: 15px solid transparent;
       border-bottom: 15px solid transparent; } }
 
@@ -608,7 +592,11 @@ body {
   padding-top: 10px; }
 
 #recommended-container {
-  margin-bottom: 40px; }
+  padding: 5%;
+  width: 100%; }
+  #recommended-container > div {
+    width: 100% !important;
+    margin: 2px auto; }
 
 #mood {
   height: 28px;
@@ -696,12 +684,19 @@ body {
 #activity-menu div:hover {
   background: #b2ddea; }
 
-#recommended-link {
-  color: inherit;
-  text-decoration: none; }
-
 #loading {
   color: black; }
+
+#recommended-container #activity-menu div:hover,
+#recommended-container #mood-menu div:hover {
+  color: white;
+  background-color: #1385e5; }
+
+@media screen and (max-width: 900px) {
+  #recommended-container,
+  #preferences,
+  #recommended-container > div {
+    width: 100% !important; } }
 
 h1 {
   font-size: 2.4em; }
@@ -714,12 +709,51 @@ h3 {
 
 html,
 body {
-  background-color: #6dbcdb; }
+  background-color: rgba(39, 39, 39, 0.4); }
 
 ul,
 ol {
   margin: 0;
   padding: 0; }
+
+.main-button {
+  display: block;
+  width: 60%;
+  max-width: 70%;
+  padding: 30px 5%;
+  position: relative;
+  margin: 5% auto; }
+  .main-button span {
+    display: block;
+    width: 100%;
+    font-size: 2em;
+    margin: 2px auto;
+    padding: 5%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+@media screen and (max-width: 900px) {
+  .button-container {
+    display: block;
+    margin: 5% 0; }
+  .main-button {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    padding: 30px 5%;
+    position: relative;
+    margin: 5% auto; }
+    .main-button span {
+      display: block;
+      width: 100%;
+      font-size: 1.25em;
+      padding: 5%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); } }
 
 .spinner-div {
   position: absolute;

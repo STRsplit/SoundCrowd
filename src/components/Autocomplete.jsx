@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
+import style from '../styles/additionalStyles-css.js';
 
 /**
  * The input is used to create the `dataSource`, so the input always matches three entries.
@@ -31,6 +32,7 @@ class AutoCompleteSearch extends Component {
 
     return (
         <AutoComplete
+          underlineFocusStyle={style.focusTextField}
           onUpdateInput={(e) => this.handleUpdateInput(e)}
           listStyle={{ maxHeight: 200, overflow: 'auto' }}
           dataSource={dataSource}

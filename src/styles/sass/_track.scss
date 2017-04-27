@@ -104,8 +104,7 @@
 .track-song-details {
   padding: 2%;
 }
-.track-song-entry-header {
-}
+
 
 .container {
     width: 100%;
@@ -150,7 +149,7 @@
   &:hover {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 20px solid #fc4349;
+    border-top: 20px solid $goldAccent;
   }
 }
 .triangle-up {
@@ -164,7 +163,7 @@
   &:hover {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 20px solid #fc4349;
+    border-bottom: 20px solid $goldAccent;
   }
 }
 
@@ -209,11 +208,11 @@
    width: 0;
    height: 0;
    margin: 2px auto;
-   border-left: 40px solid white;
+   border-left: 40px solid $goldAccent;
    border-top: 20px solid transparent;
    border-bottom: 20px solid transparent;
    @media (max-width: 900px) {
-    border-left: 30px solid white;
+    border-left: 30px solid $goldAccent;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     }

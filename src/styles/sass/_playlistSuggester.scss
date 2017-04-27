@@ -1,6 +1,11 @@
 
 #recommended-container {
-  margin-bottom: 40px;
+  padding: $interiorPad;
+  width: $fullWidth;
+   > div {
+    width: $fullWidth ! important;
+    margin: 2px auto;
+  }
 }
 
 #mood {
@@ -105,11 +110,29 @@
   background: #b2ddea;
 }
 
-#recommended-link {
-  color: inherit;
-  text-decoration: none;
-}
+// #recommended-link {
+//   color: inherit;
+//   text-decoration: none;
+// }
 
 #loading {
   color: black;
+}
+
+#recommended-container {
+  #activity-menu, 
+  #mood-menu {
+    div:hover {
+      color: white;
+      background-color: $blueAccent;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #recommended-container,
+  #preferences, 
+  #recommended-container > div {
+    width: $fullWidth ! important;
+  }
 }

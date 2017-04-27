@@ -48,12 +48,59 @@ h3 {
 
 html,
 body {
-  background-color: colorOpacity(#6dbcdb, 1);
+  background-color: colorOpacity(#272727, 0.4);
+  //linear-gradient(#000, white 8%)
 }
 ul,
 ol {
   margin: 0;
   padding: 0;
+}
+
+.main-button {
+  // color: black ! important;
+  // border-color: black ! important;
+  display: block ! important;
+  width: $featureWidth;
+  max-width: $featureWidth + 10%;
+  padding: 30px $interiorPad;
+  position: relative;
+  margin: 5% auto;
+    span {
+      display: block;
+      width: 100%;
+      font-size: 2em;
+      margin: 2px auto;
+      padding: $interiorPad;
+      @include center
+    }
+}
+.main-button:active {
+  color: none ! important;
+  background-color: none ! important;
+}
+
+@media screen and (max-width: 900px) {
+  .button-container {
+    display: block;
+    margin: 5% 0;
+  }
+
+  .main-button {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    padding: 30px $interiorPad;
+    position: relative;
+    margin: 5% auto;
+      span {
+        display: block;
+        width: 100%;
+        font-size: 1.25em;
+        padding: $interiorPad;
+        @include center
+      }
+  }
 }
 
 .spinner-div {
