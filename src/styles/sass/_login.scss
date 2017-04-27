@@ -47,6 +47,7 @@
   // margin: 10% auto 0%;
   text-align: center;
   width: 80%;
+  margin: centerContent(0%);
 }
 .enter-room-login {
   display: inline;
@@ -94,7 +95,7 @@
   }
   .enter-room-login {
     width: 100% ! important;
-    margin: 0;
+    margin: 0 auto;
   }
 
   .login-container h2 {

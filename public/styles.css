@@ -120,7 +120,8 @@
 .center-content {
   display: block;
   text-align: center;
-  width: 80%; }
+  width: 80%;
+  margin: 0% auto; }
 
 .enter-room-login {
   display: inline;
@@ -162,7 +163,7 @@
     width: 100%; }
   .enter-room-login {
     width: 100% !important;
-    margin: 0; }
+    margin: 0 auto; }
   .login-container h2 {
     color: white;
     font: Helvetica, sans-serif; }
