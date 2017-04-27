@@ -52,20 +52,45 @@ describe('Database Schema:', function() {
 
 describe('Spotify Login:', function() {
 	var browser = new Browser();
-	before(function(done) {
-		browser.visit('http://127.0.0.1:3000/login');
-    browser.pressButton('Log into Spotify');
-    browser.pressButton('LOG IN TO SPOTIFY', done);
-	})
-	it('logs in user with correct password', function(done) {
-    browser
-    .fill('email', keys.email)
-    .fill('password', keys.password)
-    .pressButton('LOG IN')
-    .pressButton('OKAY', function() {
-    	browser.assert.success();
-    	done();
-    });
+
+	beforeEach(function(done) {
+		browser.visit('http://127.0.0.1:3000/auth/spotify')
+		.then(function() {
+		  browser.clickLink('Log in to Spotify')
+		  .then(function() {
+		  	done();
+		  });
+		})
+		.catch(function(err) {
+			done(err);
+		});
 	});
-})
+
+	it('does not login user with incorrect password', function(done) {
+    this.timeout(10000);
+    browser
+    .fill('Username or email address', 'a')
+    .fill('Password', 'a')
+    .pressButton('Log In')
+    .then(function() {
+      expect(browser.query('.alert.alert-warning')).to.exist;
+	    done();
+	  });
+	});
+
+	it('logs in user with correct password', function(done) {
+		this.timeout(10000);
+    browser
+    .fill('Username or email address', keys.email)
+    .fill('Password', keys.password)
+    .pressButton('Log In')
+    .then(function() {
+	    browser.pressButton('Okay')
+	    .then(function() {
+	    	browser.assert.success();
+	    	done();
+	    });
+	  });
+	});
+});
 
