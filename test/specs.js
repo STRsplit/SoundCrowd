@@ -1,7 +1,8 @@
 var expect = require('chai').expect;
 var Sequelize = require('sequelize');
-var db = require('../database/db.js');
 var Browser = require('zombie');
+var db = require('../database/db.js');
+var keys = require('../config/keys.js');
 
 describe('Database Schema:', function() {
 	it('contains a User table', function(done) {
@@ -57,6 +58,14 @@ describe('Spotify Login:', function() {
     browser.pressButton('LOG IN TO SPOTIFY', done);
 	})
 	it('logs in user with correct password', function(done) {
-
+    browser
+    .fill('email', keys.email)
+    .fill('password', keys.password)
+    .pressButton('LOG IN')
+    .pressButton('OKAY', function() {
+    	browser.assert.success();
+    	done();
+    });
 	});
 })
+
