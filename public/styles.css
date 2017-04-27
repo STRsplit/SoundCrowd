@@ -4,7 +4,7 @@
 .nav-container {
   width: 100%;
   height: 80px;
-  background-color: #031527;
+  background-color: #000 !important;
   position: fixed;
   display: block;
   z-index: 25; }
@@ -12,7 +12,7 @@
 .main-navigation-site {
   width: 100%;
   height: 80px !important;
-  background-color: #031527 !important;
+  background-color: #000 !important;
   position: fixed;
   display: block;
   padding-top: 5px; }
@@ -70,11 +70,8 @@
 .main-left-column {
   background-color: pink; }
 
-.main-right-column {
-  background-color: purple; }
-
 .column-right {
-  background-color: #d7dadb;
+  background-color: transparent;
   min-height: 100%;
   position: fixed;
   top: 80px;
@@ -97,7 +94,7 @@
 .login-container-inner {
   width: 80%;
   padding: 10% 0;
-  margin: 5%;
+  margin: 0%;
   display: block;
   position: relative;
   background-color: white;
@@ -122,9 +119,13 @@
 
 .center-content {
   display: block;
-  margin: 10% auto 0%;
   text-align: center;
-  width: 100%; }
+  width: 80%; }
+
+.enter-room-login {
+  display: inline;
+  width: 60% !important;
+  margin: 2%; }
 
 .about-brief {
   width: 50%;
@@ -147,7 +148,7 @@
   margin: 0% auto; }
 
 /* * MOBILE STYLES * */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
   .login-container {
     display: block;
     position: relative;
@@ -156,6 +157,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
+  .secondary-button {
+    display: block;
+    width: 100%; }
+  .enter-room-login {
+    width: 100% !important;
+    margin: 0; }
   .login-container h2 {
     color: white;
     font: Helvetica, sans-serif; }
@@ -699,17 +706,20 @@ body {
     width: 100% !important; } }
 
 h1 {
-  font-size: 2.4em; }
+  font-size: 3vw; }
 
 h2 {
-  font-size: 2em; }
+  font-size: 2vw; }
 
 h3 {
-  font-size: 1.6em; }
+  font-size: 2vw; }
 
 html,
 body {
-  background-color: rgba(39, 39, 39, 0.4); }
+  background-color: rgba(39, 39, 39, 0.4);
+  min-width: 420px !important;
+  margin: 0;
+  padding: 0; }
 
 ul,
 ol {
@@ -717,7 +727,7 @@ ol {
   padding: 0; }
 
 .main-button {
-  display: block;
+  display: block !important;
   width: 60%;
   max-width: 70%;
   padding: 30px 5%;
@@ -734,10 +744,21 @@ ol {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-@media screen and (max-width: 900px) {
+.main-button:active {
+  color: none !important;
+  background-color: none !important; }
+
+@media screen and (max-width: 1025px) {
+  h1 {
+    font-size: 4vw; }
+  h2 {
+    font-size: 3.5vw; }
+  h3 {
+    font-size: 3vw; }
   .button-container {
     display: block;
-    margin: 5% 0; }
+    margin: 5% 0;
+    width: 100%; }
   .main-button {
     display: block;
     width: 80%;
@@ -748,12 +769,20 @@ ol {
     .main-button span {
       display: block;
       width: 100%;
-      font-size: 1.25em;
+      font-size: 1.75em;
       padding: 5%;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); } }
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 6vw; }
+  h2 {
+    font-size: 5vw; }
+  h3 {
+    font-size: 4vw; } }
 
 .spinner-div {
   position: absolute;
