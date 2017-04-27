@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import keys from '../../config/keys.js';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
 
+import { TextField, Dialog, RaisedButton } from 'material-ui/';
 import { Button } from 'elemental';
-import { Spinner } from 'elemental';
-import TextField from 'material-ui/TextField';
 
 class PlaylistSuggester extends Component {
   constructor(props) {
@@ -16,7 +14,8 @@ class PlaylistSuggester extends Component {
       showActivity: false,
       mood: 'Choose One',
       activity: 'Choose One',
-      error: false
+      error: false,
+      open: false
     }
     this.playlistName = '';
 
@@ -27,6 +26,8 @@ class PlaylistSuggester extends Component {
     this.toggleMood = this.toggleMood.bind(this);
     this.toggleActivity = this.toggleActivity.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   findPlaylist() {
@@ -89,47 +90,80 @@ class PlaylistSuggester extends Component {
     }
   }
 
+  handleOpen() {
+    this.setState({open: true});
+  }
+
+  handleClose() {
+    this.setState({open: false});
+  }
+
+
   render() {
+    const actions = [
+      <RaisedButton
+        label="Cancel"
+        onTouchTap={this.handleClose}
+        style={style.button}
+      />,
+      <RaisedButton
+        label="Create Playlist"
+        keyboardFocused={true}
+        onTouchTap={this.joinPlaylist}
+        style={style.button}
+      />,
+    ];
     return (
-      <div id="recommended-container">    
-        <h2>Get Suggested Playlist</h2> 
-        <TextField hintText="Name" onChange={this.setPlaylistName} />  
-        <div id="preferences">
-          <div id="mood">
-            <h3 id="mood-label">Mood</h3>
-            <div id="mood-container">
-            <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
-            {this.state.showMood ? <div id="mood-menu">
-              <div onClick={this.setMood}>Happy</div>
-              <div onClick={this.setMood}>Calm</div>
-              <div onClick={this.setMood}>Sad</div>
-              <div onClick={this.setMood}>Focused</div>
-              <div onClick={this.setMood}>Excited</div>
-            </div> : null}
+      <div>
+        <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.button} />
+        <Dialog
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+          contentStyle={style.dialog}
+        >
+          <div id="recommended-container">    
+            <h2>Get Suggested Playlist</h2> 
+            <TextField hintText="Name" onChange={this.setPlaylistName} />  
+            <div id="preferences">
+              <div id="mood">
+                <h3 id="mood-label">Mood</h3>
+                <div id="mood-container">
+                <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
+                {this.state.showMood ? <div id="mood-menu">
+                  <div onClick={this.setMood}>Happy</div>
+                  <div onClick={this.setMood}>Calm</div>
+                  <div onClick={this.setMood}>Sad</div>
+                  <div onClick={this.setMood}>Focused</div>
+                  <div onClick={this.setMood}>Excited</div>
+                </div> : null}
+                </div>
+              </div>
+              <div id="activity">
+                <h3 id="activity-label">Activity</h3>
+                <div id="activity-container">
+                <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
+                {this.state.showActivity ? <div id="activity-menu">
+                  <div onClick={this.setActivity}>Exercising</div>
+                  <div onClick={this.setActivity}>Studying</div>
+                  <div onClick={this.setActivity}>Partying</div>
+                  <div onClick={this.setActivity}>Chilling</div>
+                  <div onClick={this.setActivity}>Driving</div>
+                </div> : null}
+                </div>
+              </div>
+            </div>
+            <div>                    
+              <div id="recommended-link" onClick={this.findPlaylist}>
+                <Button type="primary"><span>Create</span></Button>
+              </div>
+              {this.state.error ? <div className="recommended-error">
+                Select mood and activity before creating playlist
+              </div> : null}
             </div>
           </div>
-          <div id="activity">
-            <h3 id="activity-label">Activity</h3>
-            <div id="activity-container">
-            <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
-            {this.state.showActivity ? <div id="activity-menu">
-              <div onClick={this.setActivity}>Exercising</div>
-              <div onClick={this.setActivity}>Studying</div>
-              <div onClick={this.setActivity}>Partying</div>
-              <div onClick={this.setActivity}>Chilling</div>
-              <div onClick={this.setActivity}>Driving</div>
-            </div> : null}
-            </div>
-          </div>
-        </div>
-        <div>                    
-          <div id="recommended-link" onClick={this.findPlaylist}>
-            <Button type="primary"><span>Create</span></Button>
-          </div>
-          {this.state.error ? <div className="recommended-error">
-            Select mood and activity before creating playlist
-          </div> : null}
-        </div>
+        </Dialog>
       </div>
     );
   }
@@ -150,3 +184,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
+
+const style = {
+  button: {
+    margin: '5px'
+  },
+  dialog: {
+    width: '500px'
+  }
+};

@@ -54,7 +54,7 @@ class JoinRoom extends Component {
 
     return (
       <div>
-        <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.joinRoomButton} />
+        <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.button} />
         <Dialog
           actions={actions}
           modal={false}
