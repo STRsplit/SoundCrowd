@@ -102,11 +102,17 @@ module.exports = {
       })
       .then(allSongs => {
         let position = 1;
-        allSongs.forEach(song => {
-          if(song.position !== 0){
-            song.update({ position: position++ });
-          }
-        });
+        let updating = true;
+        while (updating) {
+          allSongs.forEach(song => {
+            if (song.position !== 0){
+              song.update({ position: position++ });
+            }
+            if (position === allSongs.length) {
+              updating = false;
+            }
+          });
+        }
         resolve(allSongs);
       })
       .catch(err => reject(err));

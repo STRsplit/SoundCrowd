@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const spotify = require('./spotify');
-const dbHelpers = require('../database/dbHelpers');
+const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = (tokens, io) => {
   let task = cron.schedule('*/10 * * * * *', () => {
@@ -17,6 +17,7 @@ module.exports = (tokens, io) => {
               .then(dbHelpers.reorderPlaylist(playlistId)
               .then(playlist => {
                 io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+                io.sockets.in(playlistId).emit('recentlyPlayed', track);
               }));
             }
           }

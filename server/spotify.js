@@ -44,17 +44,15 @@ module.exports = {
       });
   },
 
-  removeFirstSong: function(tokens, playlistId) {
-    const spotify = this.authorizeSpotify(tokens);
-    let username;
-    let trackID;
+  removeFirstSong: function(playlistId) {
+    let username, trackId;
     dbHelpers.getPlaylistOwner(playlistId)
     .then(owner => {
       username = owner.user_id;
       dbHelpers.getTrackByPosition(playlistId, 0)
       .then(track => {
-        trackID = [{ "uri": `spotify:track:${track.song_id}`}];
-        spotify.removeTracksFromPlaylist(username, playlistId, trackID)
+        trackId = [{ "uri": `spotify:track:${track.song_id}`}];
+        spotify.removeTracksFromPlaylist(username, playlistId, trackId)
         .then(data => {
           this.moveTracks(username, playlistId, (err, results) => {
             if(err) console.log(err)
@@ -98,6 +96,37 @@ module.exports = {
     })
     .catch(err => {
       cb(err, null)
+    });
+  },
+
+  addTracksToPlaylist: function(username, playlistId, tracks) {
+    return new Promise((resolve, reject) => {
+      spotify.addTracksToPlaylist(username, playlistId, tracks)
+      .then(data => {
+        console.log('no add error', data);
+        resolve(data);
+      })
+      .catch(err => {
+        console.log('add tracks err', err);
+        reject(err);
+      });
+    });
+  },
+
+  removeTracksFromPlaylist: function(username, playlistId, tracks) {
+    return new Promise((resolve, reject) => {
+      tracks = tracks.map(track => {
+        return { 'uri': track };
+      });
+      spotify.removeTracksFromPlaylist(username, playlistId, tracks)
+      .then(data => {
+        console.log('snapshot', data.snapshot_id);
+        resolve(data.snapshot_id);
+      })
+      .catch(err => {
+        console.log('remove tracks error', err);
+        reject(err);
+      });
     });
   },
 
