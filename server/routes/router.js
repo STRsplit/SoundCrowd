@@ -10,7 +10,7 @@ module.exports = io => {
     res.send(req.user);
   });
 
-  router.get('/currently-playing/:playlist', function(req, res) {
+  router.get('/currently_playing/:playlist', function(req, res) {
     const playlistId = req.params.playlist; 
     const userTokens = req.session.tokens;
 

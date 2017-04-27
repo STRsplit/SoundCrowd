@@ -14,7 +14,7 @@ var spotifyCreditials = {
 };
 
 module.exports = {
-  createSpotify: function(tokens){ 
+  authorizeSpotify: function(tokens){ 
     const { accessToken, refreshToken } = tokens;
     let spotify = new SpotifyWebApi(spotifyCreditials);
     spotify.setAccessToken(accessToken);
@@ -23,7 +23,7 @@ module.exports = {
   },
   
   getUserPlaylists: function(tokens, username, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     spotify.getUserPlaylists(username)
       .then(data => {
         cb(null, data.body);
@@ -34,7 +34,7 @@ module.exports = {
   },  
 
   getPlaylist: function(tokens, username, playlistId, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     spotify.getPlaylistTracks(username, playlistId)
       .then(data => {
         cb(null, data.body);
@@ -45,7 +45,7 @@ module.exports = {
   },
 
   removeFirstSong: function(tokens, playlistId) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     let username;
     let trackID;
     dbHelpers.getPlaylistOwner(playlistId)
@@ -71,7 +71,7 @@ module.exports = {
   },
 
   moveTracks: function(tokens, username, playlistId, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     let tracks;
     spotify.getPlaylistTracks(username, playlistId)
     .then(data => {
@@ -114,7 +114,7 @@ module.exports = {
 
 
   searchFor: function(tokens, name, filter, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     spotify.searchTracks(`${filter}:${name}`)
     .then((data) => {
       let { items } = data.body.tracks;
@@ -127,7 +127,7 @@ module.exports = {
   },
 
   createPlaylist: function(tokens, userId, preferences, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     var date = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
     var playlistName = `SoundCrowd - ${preferences.playlistName || date.slice(5, 11) + ' ' + date.slice(17, 25)}`;
     spotify.createPlaylist(userId, playlistName, {public: true})
@@ -151,12 +151,12 @@ module.exports = {
   },
 
   hasAccessToken: function(tokens) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     return Boolean(spotify._credentials.accessToken);
   },
 
   getCurrentSong: function(tokens, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     const options = {
       uri: 'https://api.spotify.com/v1/me/player',
       headers: {
@@ -171,7 +171,7 @@ module.exports = {
   },
 
   startPlaylist: function(tokens, playlistId, cb) {
-    const spotify = this.createSpotify(tokens);
+    const spotify = this.authorizeSpotify(tokens);
     const options = {
       uri: 'https://api.spotify.com/v1/me/player/play',
       method: 'PUT',
