@@ -119,7 +119,7 @@ class PlaylistSuggester extends Component {
         label="Create Playlist"
         keyboardFocused={true}
         onTouchTap={this.findPlaylist}
-        style={style.button}
+        style={style.plButton}
       />,
     ];
     return (
