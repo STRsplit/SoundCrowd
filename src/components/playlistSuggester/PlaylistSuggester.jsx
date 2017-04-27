@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
-
 import { TextField, Dialog, RaisedButton } from 'material-ui/';
+import style from '../../styles/additionalStyles-css.js';
+
 import { Button } from 'elemental';
 
 class PlaylistSuggester extends Component {
@@ -104,28 +105,28 @@ class PlaylistSuggester extends Component {
       <RaisedButton
         label="Cancel"
         onTouchTap={this.handleClose}
-        style={style.button}
+        style={style.plButton}
       />,
       <RaisedButton
         label="Create Playlist"
         keyboardFocused={true}
         onTouchTap={this.joinPlaylist}
-        style={style.button}
+        style={style.plButton}
       />,
     ];
     return (
       <div>
-        <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.button} />
+        <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
         <Dialog
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={style.dialog}
+          contentStyle={style.plDialog}
         >
           <div id="recommended-container">    
             <h2>Get Suggested Playlist</h2> 
-            <TextField hintText="Name" onChange={this.setPlaylistName} />  
+            <TextField underlineFocusStyle={style.focusTextField} hintText="Name" onChange={this.setPlaylistName} />  
             <div id="preferences">
               <div id="mood">
                 <h3 id="mood-label">Mood</h3>
@@ -184,12 +185,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
-
-const style = {
-  button: {
-    margin: '5px'
-  },
-  dialog: {
-    width: '500px'
-  }
-};

@@ -7,7 +7,7 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import SearchContainer from './SearchContainer.jsx'
 const styles = {
   dialog : {
-    backgroundColor: 'rgba(0, 0, 0, .5)',
+    backgroundColor: 'rgba(0, 0, 0, .8)',
   }
 };
 
@@ -38,6 +38,7 @@ class FullPageSearchOverlay extends Component {
         label="Close"
         primary={true}
         onTouchTap={this.handleClose}
+        className="search-button secondary-button"
       />,
     ];
 
@@ -46,7 +47,7 @@ class FullPageSearchOverlay extends Component {
         <RaisedButton className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
         <div className="search-modal-container">
         <Dialog
-          title="Scrollable Dialog"
+          title="Add a Song from Spotify"
           actions={actions}
           className="search-popup-modal"
           modal={false}
@@ -55,7 +56,7 @@ class FullPageSearchOverlay extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
           contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
-          bodyStyle={{padding: 0}}
+          bodyStyle={{padding: '0 2%'}}
           style={{paddingTop: 10, height: '100vh'}}
         >
           <SearchContainer />
