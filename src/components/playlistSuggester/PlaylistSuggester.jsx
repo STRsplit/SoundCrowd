@@ -118,19 +118,19 @@ class PlaylistSuggester extends Component {
       <RaisedButton
         label="Create Playlist"
         keyboardFocused={true}
-        onTouchTap={this.joinPlaylist}
-        style={style.plButton}
+        onTouchTap={this.findPlaylist}
+        style={style.button}
       />,
     ];
     return (
       <div>
         <RaisedButton label="Get Suggest Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
         <Dialog
+          contentClassName="dialog"
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={style.plDialog}
         >
           <div id="recommended-container">    
             <h2>Get Suggested Playlist</h2> 
@@ -163,10 +163,7 @@ class PlaylistSuggester extends Component {
                 </div>
               </div>
             </div>
-            <div>                    
-              <div id="recommended-link" onClick={this.findPlaylist}>
-                <Button type="primary"><span>Create</span></Button>
-              </div>
+            <div>
               {this.state.error ? <div className="recommended-error">
                 Select mood and activity before creating playlist
               </div> : null}
@@ -193,3 +190,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSuggester);
+
+const style = {
+  button: {
+    margin: '5px'
+  }
+};

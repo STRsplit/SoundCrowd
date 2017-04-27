@@ -6,6 +6,24 @@
     width: $fullWidth ! important;
     margin: 2px auto;
   }
+  height: 270px;
+}
+
+#recommended-container h2, h3 {
+  color: white;
+}
+
+.dialog {
+  width: 500px !important;
+}
+
+.dialog div {
+  overflow-y: visible !important; 
+}
+
+.recommended-error {
+  margin-top: 20px;
+  color: red;
 }
 
 #mood {

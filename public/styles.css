@@ -608,6 +608,17 @@ body {
   #recommended-container > div {
     width: 100% !important;
     margin: 2px auto; }
+  height: 250px; }
+
+.dialog {
+  width: 500px !important; }
+
+.dialog div {
+  overflow-y: visible !important; }
+
+.recommended-error {
+  margin-top: 20px;
+  color: red; }
 
 #mood {
   height: 28px;
@@ -617,7 +628,8 @@ body {
   display: inline-block;
   vertical-align: top;
   position: relative;
-  top: 4px; }
+  top: 4px;
+  margin-right: 10px; }
 
 #mood-container {
   display: inline-block;
@@ -629,6 +641,7 @@ body {
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   border: none;
   opacity: .5;
   background-color: #fff; }
@@ -647,7 +660,8 @@ body {
 #mood-menu div {
   height: 24px;
   width: 150px;
-  background-color: #fff; }
+  background-color: #fff;
+  color: black; }
 
 #mood-menu div:hover {
   background: #b2ddea; }
@@ -671,6 +685,7 @@ body {
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   display: inline-block;
   border: none;
   opacity: .5;
@@ -690,7 +705,8 @@ body {
 #activity-menu div {
   height: 24px;
   width: 150px;
-  background-color: #fff; }
+  background-color: #fff;
+  color: black; }
 
 #activity-menu div:hover {
   background: #b2ddea; }
