@@ -26,8 +26,8 @@ module.exports = io => {
         dbHelpers.getUser(playlistOwner.user_id)
         .then(owner => {
           const ownerTokens = {
-            accessToken: access_token,
-            refreshToken: refresh_token
+            accessToken: owner.access_token,
+            refreshToken: owner.refresh_token
           };
           spotify.startPlaylist(ownerTokens, playlist, function(err) {
             if (err) res.status(err.statusCode).send(err);
