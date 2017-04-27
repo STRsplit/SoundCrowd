@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import keys from '../../config/keys.js';
 import { connect } from 'react-redux';
 import { setFilters } from '../../actions/filtersActions';
 
