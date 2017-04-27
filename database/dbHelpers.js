@@ -115,7 +115,6 @@ module.exports = {
         let updating = true;
         while (updating) {
           allSongs.forEach(song => {
-            console.log('reorder track', song.position);
             if (song.position !== 0 || song.position === null) {
               song.update({ position: position++ });
             }

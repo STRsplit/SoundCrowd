@@ -19,7 +19,6 @@ module.exports = io => {
   });
 
   router.post('/play', function(req, res) {
-<<<<<<< HEAD
     const playlist = req.body.playlist;
     dbHelpers.getPlaylistOwner(playlist)
     .then(playlistOwner => {

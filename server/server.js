@@ -36,10 +36,6 @@ const socketManager = require('./sockets.js')(io);
 const router = require('./routes/router')(io);
 const spotifyRouter = require('./routes/spotifyRouter')(io);
 
-/* * Workers * */
-const trendingSongs = require('./workers/trendingSongs')(io);
-trendingSongs.start();
-
 /* *  Authentication * */
 app.use(session({
   secret: 'badum tsss', 
