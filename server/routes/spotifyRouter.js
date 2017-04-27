@@ -18,14 +18,6 @@ module.exports = io => {
     });
   });
 
-  router.get('/search', function(req, res) {
-    const { name, filter } = req.query;
-    spotify.searchFor(req.session.tokens, name, filter, function(err, items) {
-      if(err) res.status(err.statusCode).send(err);
-      else res.status(200).send(items);
-    });
-  });
-
   router.post('/play', function(req, res) {
     const playlist = req.body.playlist;
     dbHelpers.getPlaylistOwner(playlist)

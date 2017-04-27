@@ -74,6 +74,32 @@ module.exports = io => {
       });
   });
 
+  router.get('/search', function(req, res) {
+    const { name, filter, playlist } = req.query;
+    dbHelpers.getPlaylistOwner(playlist)
+    .then(playlistOwner => {
+      if (!req.user || playlistOwner.user_id !== req.user.id) {
+        dbHelpers.getUser(playlistOwner.user_id)
+        .then(owner => {
+          const ownerTokens = {
+            accessToken: owner.access_token,
+            refreshToken: owner.refresh_token
+          };
+          spotify.searchFor(ownerTokens, name, filter, function(err, items) {
+            if(err) res.status(err.statusCode).send(err);
+            else res.status(200).send(items);
+          });
+        })
+      } else {
+        spotify.searchFor(req.session.tokens, name, filter, function(err, items) {
+          if(err) res.status(err.statusCode).send(err);
+          else res.status(200).send(items);
+        });
+      }
+    })
+    .catch(err => console.log('router.js > /search > getPlaylistOwner error: ', err)); 
+  });
+
   router.post('/vote', function(req, res) {
     handler.validateVote(req, res);
     spotify.moveTrack(req.session.tokens, req.user.id, req.body.playlistId, function(err) {

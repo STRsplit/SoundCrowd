@@ -21,6 +21,7 @@ module.exports = {
     spotify.setRefreshToken(refreshToken);
     return spotify;
   },
+  
   getUserPlaylists: function(tokens, username, cb) {
     const spotify = this.createSpotify(tokens);
     spotify.getUserPlaylists(username)
