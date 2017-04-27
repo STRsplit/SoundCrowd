@@ -3,9 +3,9 @@ const spotify = require('./spotify');
 const socketManager = require('./sockets')
 const dbHelpers = require('../database/dbHelpers');
 
-module.exports = io => {
+module.exports = (tokens, io) => {
   let task = cron.schedule('*/10 * * * * *', () => {
-    spotify.getCurrentSong((err, song) => {
+    spotify.getCurrentSong(tokens, (err, song) => {
       if (err) console.log('cron err', err);
       else {
         const { id, name } = song.item;

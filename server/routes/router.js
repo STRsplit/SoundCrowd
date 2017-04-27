@@ -10,6 +10,40 @@ module.exports = io => {
     res.send(req.user);
   });
 
+  router.get('/currently-playing/:playlist', function(req, res) {
+    const playlistId = req.params.playlist;
+    const userTokens = req.session.tokens;
+
+    dbHelpers.getPlaylistOwner(playlistId)
+    .then(playlistOwner => {
+      if (playlistOwner.user_id !== req.user.id) {
+        dbHelpers.getUser(playlistOwner.user_id)
+        .then(owner => {
+          const ownerTokens = {
+            accessToken: access_token,
+            refreshToken: refresh_token
+          };
+          spotify.getCurrentSong(ownerTokens, function(err, info) {
+            if (err) res.status(err.statusCode).send(err);
+            else res.status(200).send(info);
+          });
+        })
+      } else {
+        if (spotify.hasAccessToken(userTokens)) {   
+          spotify.getCurrentSong(userTokens, function(err, info) {
+            if (err) res.status(err.statusCode).send(err);
+            else res.status(200).send(info);
+          });   
+        } else {
+          req.logout();
+          req.session.destroy();
+          res.status(401).send('User is not logged in.');    
+        }
+      }
+    })
+    .catch(err => console.log('router.js > /currently-playing/:playlist > getPlaylistOwner error: ', err));    
+  });
+
   router.get('/playlists/:playlist', function(req, res) {
     var playlist = req.params.playlist;
     dbHelpers.getPlaylist(playlist)
@@ -21,7 +55,7 @@ module.exports = io => {
             });
         } else {
           if (req.isAuthenticated()) {
-            spotify.getPlaylist(req.user.id, playlist, function(err, tracks) {
+            spotify.getPlaylist(req.session.tokens, req.user.id, playlist, function(err, tracks) {
               if (err) res.status(err.statusCode).send(err);
               else {
                 dbHelpers.savePlaylist(playlist, req.user.id, tracks)
@@ -42,7 +76,7 @@ module.exports = io => {
 
   router.post('/vote', function(req, res) {
     handler.validateVote(req, res);
-    spotify.moveTrack(req.user.id, req.body.playlistId, function(err) {
+    spotify.moveTrack(req.session.tokens, req.user.id, req.body.playlistId, function(err) {
       if (err) console.log(err);
     });
       // emit socket event
