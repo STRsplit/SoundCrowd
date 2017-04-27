@@ -50,9 +50,13 @@ h3 {
     @include heading-size(4);
 }
 
+span {
+  color: #1385e5 !important;
+}
+
 html,
 body {
-  background-color: colorOpacity(#272727, 0.4);
+  background-color: colorOpacity(#a7a3a5, 1);
   min-width: 420px ! important;
   margin:0;
   padding:0;
@@ -64,12 +68,9 @@ ol {
 }
 
 .main-button {
-  // color: black ! important;
-  // border-color: black ! important;
   display: block ! important;
   width: $featureWidth;
   max-width: $featureWidth + 10%;
-  padding: 30px $interiorPad;
   position: relative;
   margin: 5% auto;
     span {
@@ -108,14 +109,13 @@ ol {
     display: block;
     width: 80%;
     max-width: 80%;
-    padding: 30px $interiorPad;
     position: relative;
+    padding: none;
     margin: 5% auto;
       span {
         display: block;
         width: 100%;
         font-size: 1.75em;
-        padding: $interiorPad;
         @include center
       }
   }

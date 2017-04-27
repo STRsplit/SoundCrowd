@@ -17,6 +17,10 @@
   display: block;
   padding-top: 5px; }
 
+.main-navigation-site h1, path {
+  color: white !important;
+  fill: white !important; }
+
 .nav-container-name {
   float: left;
   margin-left: 30px; }
@@ -78,6 +82,9 @@
   right: 0;
   bottom: 0; }
 
+.login-title {
+  color: black !important; }
+
 .login-container {
   display: block;
   position: relative;
@@ -87,8 +94,14 @@
   left: 50%;
   transform: translate(-50%, -50%); }
 
+.login-container button {
+  height: 80px !important; }
+
+.main-button div {
+  height: 80px !important; }
+
 .login-container h2 {
-  color: white;
+  color: black;
   font: Helvetica, sans-serif; }
 
 .login-container-inner {
@@ -221,7 +234,7 @@
 .csb-container {
   width: 100%;
   height: 50px;
-  background-color: #FB8900;
+  background-color: white;
   position: relative;
   position: fixed;
   top: 80px;
@@ -231,6 +244,9 @@
 
 .csb-album-image {
   display: inline-block; }
+
+.open {
+  color: white !important; }
 
 .csb-song-info {
   display: inline-block;
@@ -600,15 +616,22 @@ body {
 
 .rightBar-container {
   margin-top: 50px;
-  padding-top: 10px; }
+  padding-top: 10px;
+  color: black; }
+
+.rightBar-container h2 {
+  color: black !important; }
 
 #recommended-container {
   padding: 5%;
-  width: 100%; }
+  width: 100%;
+  height: 270px; }
   #recommended-container > div {
     width: 100% !important;
     margin: 2px auto; }
-  height: 250px; }
+
+#recommended-container h2, h3 {
+  color: white; }
 
 .dialog {
   width: 500px !important; }
@@ -629,7 +652,7 @@ body {
   vertical-align: top;
   position: relative;
   top: 4px;
-  margin-right: 10px; }
+  margin-right: 12px; }
 
 #mood-container {
   display: inline-block;
@@ -739,9 +762,12 @@ h2 {
 h3 {
   font-size: 2vw; }
 
+span {
+  color: #1385e5 !important; }
+
 html,
 body {
-  background-color: rgba(39, 39, 39, 0.4);
+  background-color: #a7a3a5;
   min-width: 420px !important;
   margin: 0;
   padding: 0; }
@@ -755,7 +781,6 @@ ol {
   display: block !important;
   width: 60%;
   max-width: 70%;
-  padding: 30px 5%;
   position: relative;
   margin: 5% auto; }
   .main-button span {
@@ -788,14 +813,13 @@ ol {
     display: block;
     width: 80%;
     max-width: 80%;
-    padding: 30px 5%;
     position: relative;
+    padding: none;
     margin: 5% auto; }
     .main-button span {
       display: block;
       width: 100%;
       font-size: 1.75em;
-      padding: 5%;
       position: absolute;
       top: 50%;
       left: 50%;

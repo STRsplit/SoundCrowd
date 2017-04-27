@@ -8,7 +8,9 @@
 //   @return ($target-px / $context) * 1em;
 // }
 
-
+.login-title {
+  color: black !important;
+}
 
 .login-container {
   display: block;
@@ -16,10 +18,18 @@
   width: 60%;
   // background-color: colorOpacity(black, 1);
   @include center;
-
 }
+
+.login-container button {
+  height: 80px !important;
+}
+
+.main-button div {
+  height: 80px !important;
+}
+
 .login-container h2 {
-  color: colorOpacity(white, 1);
+  color: colorOpacity(black, 1);
   font: $font-stack;
 }
 
