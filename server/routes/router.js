@@ -11,17 +11,17 @@ module.exports = io => {
   });
 
   router.get('/currently-playing/:playlist', function(req, res) {
-    const playlistId = req.params.playlist;
+    const playlistId = req.params.playlist; 
     const userTokens = req.session.tokens;
 
     dbHelpers.getPlaylistOwner(playlistId)
     .then(playlistOwner => {
-      if (playlistOwner.user_id !== req.user.id) {
+      if (!req.user || playlistOwner.user_id !== req.user.id) {
         dbHelpers.getUser(playlistOwner.user_id)
         .then(owner => {
           const ownerTokens = {
-            accessToken: access_token,
-            refreshToken: refresh_token
+            accessToken: owner.access_token,
+            refreshToken: owner.refresh_token
           };
           spotify.getCurrentSong(ownerTokens, function(err, info) {
             if (err) res.status(err.statusCode).send(err);

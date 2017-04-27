@@ -14,7 +14,7 @@ var spotifyCreditials = {
 };
 
 module.exports = {
-  createSpotify: function(tokens){ console.log('createSpotify > tokens', tokens);
+  createSpotify: function(tokens){ 
     const { accessToken, refreshToken } = tokens;
     let spotify = new SpotifyWebApi(spotifyCreditials);
     spotify.setAccessToken(accessToken);

@@ -20,22 +20,45 @@ module.exports = io => {
 
   router.get('/search', function(req, res) {
     const { name, filter } = req.query;
-    spotify.searchFor(nreq.session.tokens, ame, filter, function(err, items) {
+    spotify.searchFor(nreq.session.tokens, name, filter, function(err, items) {
       if(err) res.status(err.statusCode).send(err);
       else res.status(200).send(items);
     });
   });
 
   router.post('/play', function(req, res) {
-    if (spotify.hasAccessToken(req.session.tokens)) {
-      spotify.startPlaylist(req.session.tokens, req.body.playlist, function(err) {
-        if (err) res.status(err.statusCode).send(err);
-        else {
-          require('../spotifyCron')(req.session.tokens, io).start();
-          res.sendStatus(201);
+    const playlist = req.body.playlist;
+    dbHelpers.getPlaylistOwner(playlist)
+    .then(playlistOwner => {
+      if (playlistOwner.user_id !== req.user.id) {
+        dbHelpers.getUser(playlistOwner.user_id)
+        .then(owner => {
+          const ownerTokens = {
+            accessToken: access_token,
+            refreshToken: refresh_token
+          };
+          spotify.startPlaylist(ownerTokens, playlist, function(err) {
+            if (err) res.status(err.statusCode).send(err);
+            else {              
+              require('../spotifyCron')(ownerTokens, io).start();
+              res.sendStatus(201);
+            }
+          });
+        })
+      } else {
+        const userTokens = req.session.tokens;
+        if (spotify.hasAccessToken(userTokens)) {
+          spotify.startPlaylist(userTokens, playlist, function(err) {
+            if (err) res.status(err.statusCode).send(err);
+            else {                            
+              require('../spotifyCron')(userTokens, io).start();
+              res.sendStatus(201);
+            }
+          });
         }
-      });
-    }
+      }
+    })
+    .catch(err => console.log('spotifyRouter.js > /play > getPlaylistOwner error: ', err)); 
   });
   return router;
 }
