@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVoteErrorPopup } from '../actions/playlistActions';
 
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import VoteErrorPopup from './VoteErrorPopup.jsx';
-import SearchPopup from './SearchRevision.jsx';
-
 import Track from './Track.jsx';
-import { Button } from 'elemental';
 
-import io from 'socket.io-client';
 import FlipMove from 'react-flip-move';
+import { Button } from 'elemental';
 
 class Playlist extends Component {
 
-  componentWillMount () {
-    this.socket = io.connect();
+  componentWillMount () { 
     this.votingError = false;
+    
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
     this.handlePlaylistUpdate = this.handlePlaylistUpdate.bind(this);
@@ -27,23 +24,20 @@ class Playlist extends Component {
     this.handleSongVoteUpdate = this.handleSongVoteUpdate.bind(this);
     this.displayTracks = this.displayTracks.bind(this);
     this.startPlaylist = this.startPlaylist.bind(this);
-  }
-
-  handlePlaylistVote(song_id, playlist_id, vote_val){
-    const { user_id, session_id } = this.socket;
-    let voteData = {
-      songId: song_id,
-      playlistId: playlist_id,
-      vote: vote_val,
-      user_id: user_id,
-      session_id: session_id
-    }
-    this.socket.emit('recordVote', voteData);
     this.handleVoteError = this.handleVoteError.bind(this);
+    this.startSocket = this.startSocket.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { 
     this.getPlaylistTracks();
+  } 
+
+  componentWillUnmount(){ 
+    this.socket.disconnect();
+  }
+
+  startSocket() { 
+    this.socket = io.connect();
     this.socket.emit('playlistId', this.props.match.params.playlistId);
     this.socket.on('join', joinedRoom => {
       this.getSessionInfo();
@@ -58,10 +52,18 @@ class Playlist extends Component {
       this.handleVoteError(true, voteErrorInfo);
       console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
-  } 
+  }
 
-  componentWillUnmount(){
-    this.socket.disconnect();
+  handlePlaylistVote(song_id, playlist_id, vote_val){
+    const { user_id, session_id } = this.socket;
+    const voteData = {
+      songId: song_id,
+      playlistId: playlist_id,
+      vote: vote_val,
+      user_id: user_id,
+      session_id: session_id
+    }
+    this.socket.emit('recordVote', voteData);
   }
 
   getSessionInfo() {
@@ -76,19 +78,11 @@ class Playlist extends Component {
       });
   }
 
-  handlePlaylistVote(song_id, playlist_id, vote_val){
-    let voteData = {
-      songId: song_id,
-      playlistId: playlist_id,
-      vote: vote_val,
-      user_id: this.socket.user_id,
-      session_id: this.socket.session_id
+  getPlaylistTracks(playlistId) {
+    if(this.socket) {
+      this.socket.disconnect();
     }
-    this.socket.emit('recordVote', voteData)
-  }
-
-  getPlaylistTracks() {
-    const playlistId = this.props.match.params.playlistId;
+    playlistId = playlistId || this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
     .then(res => {
       this.props.setPlaylist({
@@ -96,6 +90,7 @@ class Playlist extends Component {
         owner: res.data.owner,
         tracks: res.data.tracks
       });
+      this.startSocket();  
     })
     .catch(err => {
       console.log(err);
@@ -150,13 +145,14 @@ class Playlist extends Component {
     ));
   }
 
-  render() {
+  render() { 
     const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
     const { open, message } = voteErrorPopup;
     return (
       <div>
         <div>
-          <CurrentSongBar />
+          <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} />
+
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
               <Button type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>

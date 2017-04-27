@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'elemental';
-import Avatar from 'material-ui/Avatar';
-import Slider from 'material-ui/Slider';
+
 import SearchPopup from '../SearchRevision.jsx';
+import JoinRoom from '../joinRoom/JoinRoom.jsx';
+
+import { Row, Col } from 'elemental';
+import { Avatar, Slider } from 'material-ui/';
 
 class CurrentSongBar extends Component {
   constructor(props) {
@@ -43,11 +45,12 @@ class CurrentSongBar extends Component {
       this.updateInfo();
     } else {
       let { progress, duration, isPlaying } = this.state;
-      progress += 1000;
-      if(progress >= duration) {
+      const next = progress + 1000;
+      if(next >= duration) {        
         this.counter = 0;
         this.updateInfo();
       } else if(isPlaying) {
+        progress += 1000;
         this.setState({progress: progress, sliderValue: progress/duration});        
       }
     }
@@ -71,8 +74,7 @@ class CurrentSongBar extends Component {
       });
     })
     .catch(err => {
-      console.log('CurrentSongBar error: ', err);
-      /* * REDIRECTS TO LOGIN IF API CALL THROWS AN ERROR * */
+      console.log('CurrentSongBar.jsx > updateInfo error: ', err);
       this.context.router.history.push('/login');
     });    
   }
@@ -85,7 +87,7 @@ class CurrentSongBar extends Component {
   }
 
   render() {
-    const { image, name, artist, album, duration, progress, isPlaying, sliderValue } = this.state;
+    const { image, name, artist, album, duration, progress, isPlaying, sliderValue, open } = this.state;
     const avatar = image ? <Avatar src={image} size={40} style={style.avatar} /> : <Avatar size={40} style={style.avatar} >S</Avatar>;
 
     return(
@@ -106,7 +108,12 @@ class CurrentSongBar extends Component {
             <Slider sliderStyle={style.slider} value={sliderValue} />
           </Col>
           <Col sm="1/4">
-            <SearchPopup />
+            <Col sm="1/2" style={style.button} >
+              <SearchPopup />
+            </Col>
+            <Col sm="1/2" style={style.button} >
+              <JoinRoom getPlaylistTracks={this.props.getPlaylistTracks} />
+            </Col>
           </Col>
         </Row>
       </div>  
@@ -132,5 +139,8 @@ const style = {
     width: '98%',
     trackColor: '#FFF ! important',
     selectionColor: 'green ! important'
+  },
+  button: {
+    display: 'inline-block'
   }
 };
