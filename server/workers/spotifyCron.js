@@ -19,15 +19,34 @@ module.exports = io => {
           .then(track => {
             if (track) {
               if (track.song_id !== id) {
-                dbHelpers.resetTrack(track.song_id, playlistId)
-                .then(dbHelpers.reorderPlaylist(playlistId)
-                .then(playlist => {
-                  io.sockets.in(playlistId).emit('updatePlaylist', playlist);
-                  io.sockets.in(playlistId).emit('recentlyPlayed', track);
-                }));
+                dbHelpers.getTrackByPosition(playlistId, 1)
+                .then(expectedTrack => {
+                  if (expectedTrack.song_id !== id) {
+                    // handle
+                    console.log('not what we thought', expectedTrack.song_id);
+                  } else {
+                    dbHelpers.resetTrack(track.song_id, playlistId)
+                    .then(() => {
+                      reorderPlaylist(playlistId);
+                      dbHelpers.reorderPlaylist(playlistId)
+                      .then(playlist => {
+                        io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+                        io.sockets.in(playlistId).emit('recentlyPlayed', track);
+                      });
+                    });
+                  }
+                });
+
+
+                // dbHelpers.resetTrack(track.song_id, playlistId)
+                // .then(dbHelpers.reorderPlaylist(playlistId)
+                // .then(playlist => {
+                //   io.sockets.in(playlistId).emit('updatePlaylist', playlist);
+                //   io.sockets.in(playlistId).emit('recentlyPlayed', track);
+                // }));
               } else {
                 // song is still playing, execute regular spotify reorder
-                // reorderPlaylist(playlistId);
+                reorderPlaylist(playlistId);
               }
             }
           });
