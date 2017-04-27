@@ -3,17 +3,13 @@ const spotify = require('../spotify');
 const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = io => {
-  // let task = cron.schedule('*/30 * * * * *', () => {
   let task = cron.schedule('*/10 * * * * *', () => {
     spotify.getCurrentSong((err, song) => {
       if (err) console.log('cron err', err);
       else {
         const { id, name, duration_ms } = song.item;
         const { progress_ms } = song;
-        console.log((duration_ms - progress_ms) / 1000 + ' seconds left');
-        if ((duration_ms - progress_ms) / 1000 < 30) {
-          console.log('less than 30 seconds left');
-        } else {
+        if ((duration_ms - progress_ms) / 1000 > 30) {
           let playlistId = song.context.uri.slice(-22);
           dbHelpers.getTrackByPosition(playlistId, 0)
           .then(track => {
@@ -27,23 +23,15 @@ module.exports = io => {
                   } else {
                     dbHelpers.resetTrack(track.song_id, playlistId)
                     .then(() => {
-                      reorderPlaylist(playlistId);
                       dbHelpers.reorderPlaylist(playlistId)
                       .then(playlist => {
+                        reorderPlaylist(playlistId);
                         io.sockets.in(playlistId).emit('updatePlaylist', playlist);
                         io.sockets.in(playlistId).emit('recentlyPlayed', track);
                       });
                     });
                   }
                 });
-
-
-                // dbHelpers.resetTrack(track.song_id, playlistId)
-                // .then(dbHelpers.reorderPlaylist(playlistId)
-                // .then(playlist => {
-                //   io.sockets.in(playlistId).emit('updatePlaylist', playlist);
-                //   io.sockets.in(playlistId).emit('recentlyPlayed', track);
-                // }));
               } else {
                 // song is still playing, execute regular spotify reorder
                 reorderPlaylist(playlistId);
@@ -66,6 +54,7 @@ function reorderPlaylist(playlistId) {
     let user = owner.user_id;
     dbHelpers.getPlaylist(playlistId)
     .then(tracks => {
+      console.log('first track:', tracks[0]);
       tracks.splice(0, 1);
       tracks = tracks.map(track => {
         return `spotify:track:${track.dataValues.song_id}`;

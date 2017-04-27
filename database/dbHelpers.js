@@ -173,9 +173,7 @@ module.exports = {
 
   getTrackByPosition: function(playlistId, position) {
     return new Promise((resolve, reject) => {
-      Song.findOne({ 
-        attributes: ['song_id'],
-        where: {
+      Song.findOne({ where: {
           playlist_id: playlistId,
           position: position
         }
