@@ -38,6 +38,7 @@ class FullPageSearchOverlay extends Component {
         label="Close"
         primary={true}
         onTouchTap={this.handleClose}
+        className="search-button secondary-button"
       />,
     ];
 
@@ -46,7 +47,7 @@ class FullPageSearchOverlay extends Component {
         <RaisedButton className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
         <div className="search-modal-container">
         <Dialog
-          title="Scrollable Dialog"
+          title="Add a Song from Spotify"
           actions={actions}
           className="search-popup-modal"
           modal={false}

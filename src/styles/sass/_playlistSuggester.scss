@@ -110,10 +110,11 @@
   background: #b2ddea;
 }
 
-// #recommended-link {
-//   color: inherit;
-//   text-decoration: none;
-// }
+#recommended-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
 
 #loading {
   color: black;

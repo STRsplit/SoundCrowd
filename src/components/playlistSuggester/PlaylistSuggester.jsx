@@ -105,13 +105,13 @@ class PlaylistSuggester extends Component {
       <RaisedButton
         label="Cancel"
         onTouchTap={this.handleClose}
-        style={style.button}
+        style={style.plButton}
       />,
       <RaisedButton
         label="Create Playlist"
         keyboardFocused={true}
         onTouchTap={this.joinPlaylist}
-        style={style.button}
+        style={style.plButton}
       />,
     ];
     return (
@@ -126,7 +126,7 @@ class PlaylistSuggester extends Component {
         >
           <div id="recommended-container">    
             <h2>Get Suggested Playlist</h2> 
-            <TextField hintText="Name" onChange={this.setPlaylistName} />  
+            <TextField underlineFocusStyle={style.focusTextField} hintText="Name" onChange={this.setPlaylistName} />  
             <div id="preferences">
               <div id="mood">
                 <h3 id="mood-label">Mood</h3>

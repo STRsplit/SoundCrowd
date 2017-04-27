@@ -3,7 +3,7 @@ const style = {
     border: '1px solid #daa520'
   },
   plButton: {
-    margin: '5px'
+    margin: '25px'
   },
   plDialog: {
     width: '500px'
