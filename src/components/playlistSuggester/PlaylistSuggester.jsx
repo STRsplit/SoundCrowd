@@ -31,6 +31,14 @@ class PlaylistSuggester extends Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  componentWillMount() {
+    document.addEventListener('click', this.closeMenu, false);
+  }
+
+  componentWillUnmount() {
+    document.addEventListener('click', this.closeMenu, false);  
+  }
+
   findPlaylist() {
     if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
       this.setState({error: true});
@@ -83,10 +91,10 @@ class PlaylistSuggester extends Component {
   }
 
   closeMenu(e) {
-    if (e.target.id !== 'mood-menu' && this.state.showMood === true) {
+    if ((e.target.className !== 'option' && e.target.id !== 'mood-button') && this.state.showMood === true) {
       this.toggleMood();
     }
-    if (e.target.id !== 'activity-menu' && this.state.showActivity === true) {
+    if ((e.target.className !== 'option' && e.target.id !== 'activity-button') && this.state.showActivity === true) {
       this.toggleActivity();
     }
   }
@@ -133,11 +141,11 @@ class PlaylistSuggester extends Component {
                 <div id="mood-container">
                 <button id="mood-button" onClick={this.toggleMood}>{this.state.mood}</button>
                 {this.state.showMood ? <div id="mood-menu">
-                  <div onClick={this.setMood}>Happy</div>
-                  <div onClick={this.setMood}>Calm</div>
-                  <div onClick={this.setMood}>Sad</div>
-                  <div onClick={this.setMood}>Focused</div>
-                  <div onClick={this.setMood}>Excited</div>
+                  <div className="option" onClick={this.setMood}>Happy</div>
+                  <div className="option" onClick={this.setMood}>Calm</div>
+                  <div className="option" onClick={this.setMood}>Sad</div>
+                  <div className="option" onClick={this.setMood}>Focused</div>
+                  <div className="option" onClick={this.setMood}>Excited</div>
                 </div> : null}
                 </div>
               </div>
@@ -146,11 +154,11 @@ class PlaylistSuggester extends Component {
                 <div id="activity-container">
                 <button id="activity-button" onClick={this.toggleActivity}>{this.state.activity}</button>
                 {this.state.showActivity ? <div id="activity-menu">
-                  <div onClick={this.setActivity}>Exercising</div>
-                  <div onClick={this.setActivity}>Studying</div>
-                  <div onClick={this.setActivity}>Partying</div>
-                  <div onClick={this.setActivity}>Chilling</div>
-                  <div onClick={this.setActivity}>Driving</div>
+                  <div className="option" onClick={this.setActivity}>Exercising</div>
+                  <div className="option" onClick={this.setActivity}>Studying</div>
+                  <div className="option" onClick={this.setActivity}>Partying</div>
+                  <div className="option" onClick={this.setActivity}>Chilling</div>
+                  <div className="option" onClick={this.setActivity}>Driving</div>
                 </div> : null}
                 </div>
               </div>

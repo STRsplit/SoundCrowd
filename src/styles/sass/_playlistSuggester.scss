@@ -18,6 +18,7 @@
   vertical-align: top;
   position: relative;
   top: 4px;
+  margin-right: 10px;
 }
 
 #mood-container {
@@ -31,6 +32,7 @@
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   border: none;
   opacity: .5;
   background-color: #fff;
@@ -53,6 +55,7 @@
   height: 24px;
   width: 150px;
   background-color: #fff;
+  color: black;
 }
 
 #mood-menu div:hover {
@@ -81,6 +84,7 @@
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   display: inline-block;
   border: none;
   opacity: .5;
@@ -104,6 +108,7 @@
   height: 24px;
   width: 150px;
   background-color: #fff;
+  color: black;
 }
 
 #activity-menu div:hover {
