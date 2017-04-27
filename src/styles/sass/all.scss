@@ -50,10 +50,6 @@ h3 {
     @include heading-size(4);
 }
 
-span {
-  color: #1385e5 !important;
-}
-
 html,
 body {
   background-color: colorOpacity(#a7a3a5, 1);
