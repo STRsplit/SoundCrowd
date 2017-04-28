@@ -6,6 +6,24 @@
     width: $fullWidth ! important;
     margin: 2px auto;
   }
+  height: 270px;
+}
+
+#recommended-container h2, h3 {
+  color: white;
+}
+
+.dialog {
+  width: 500px !important;
+}
+
+.dialog div {
+  overflow-y: visible !important; 
+}
+
+.recommended-error {
+  margin-top: 20px;
+  color: red;
 }
 
 #mood {
@@ -18,6 +36,7 @@
   vertical-align: top;
   position: relative;
   top: 4px;
+  margin-right: 12px;
 }
 
 #mood-container {
@@ -31,6 +50,7 @@
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   border: none;
   opacity: .5;
   background-color: #fff;
@@ -53,6 +73,7 @@
   height: 24px;
   width: 150px;
   background-color: #fff;
+  color: black;
 }
 
 #mood-menu div:hover {
@@ -81,6 +102,7 @@
   height: 28px;
   width: 150px;
   text-align-last: center;
+  color: black;
   display: inline-block;
   border: none;
   opacity: .5;
@@ -104,6 +126,7 @@
   height: 24px;
   width: 150px;
   background-color: #fff;
+  color: black;
 }
 
 #activity-menu div:hover {

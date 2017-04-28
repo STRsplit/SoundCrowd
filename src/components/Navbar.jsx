@@ -77,7 +77,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
 const style = {
   menu: {
-    width: '200px'
+    width: '200px',
+    color: 'white'
   },
   link: {
     textDecoration: 'none',

@@ -1,9 +1,9 @@
 .rightBar-container {
   margin-top: 50px;
   padding-top: 10px;
-//   & > div { 
-//     & h3 {
-//     border-bottom: 10px solid red;
-//   }
-// }
+  color: black;
+}
+
+.rightBar-container h2 {
+  color: black !important;
 }

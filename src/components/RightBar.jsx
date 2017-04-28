@@ -12,15 +12,15 @@ class RightBar extends Component {
       <div className="rightBar-container">
         <div><h2>Playlist Stats:</h2></div>
           <div>
-         <h3>Recently Added</h3>
+         <h2>Recently Added</h2>
           <div>{recentlyAddedTracks.map(track => (
             <div>{track.title}</div>
             ))}</div>
-          <h3>Trending Songs</h3>
+          <h2>Trending Songs</h2>
           <div>{trendingTracks.map(track => (
             <div>{track.title}</div>
             ))}</div>
-          <h3>Recently Played</h3>
+          <h2>Recently Played</h2>
           <div>{recentlyPlayedTracks.map(track => (
             <div>{track.title}</div>
             ))}</div>

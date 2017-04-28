@@ -155,7 +155,7 @@ class Playlist extends Component {
 
           <div>
             <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
-              <Button className="main-button" type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>
+              <Button className="main-button" type="primary" onClick={this.startPlaylist}><span className="open">Open in Spotify</span></Button>
             </a>
           </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
