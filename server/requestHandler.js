@@ -6,14 +6,16 @@ const verifyUser = (req, res) => {
   if (req.isAuthenticated() && spotify.hasAccessToken(req.session.tokens)) {
     res.send({
       login: true, 
-      name: req.user.name
+      name: req.user.name,
+      id: req.user.id
     });
   } else {
     req.logout();
     req.session.destroy();
     res.send({
       login: false, 
-      name: ''
+      name: '',
+      id: ''
     });
   }
 };
