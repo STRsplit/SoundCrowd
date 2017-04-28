@@ -96,6 +96,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+  .login-container hr:nth-child(2) {
+    border: 1px solid #daa520 !important; }
 
 .login-container h2 {
   color: black;

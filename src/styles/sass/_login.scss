@@ -18,9 +18,13 @@
   width: 60vw;
   // background-color: colorOpacity(black, 1);
   @include center;
+  hr:nth-child(2) {
+    border: 1px solid #daa520 ! important;
+  }
 }
 
 .login-container button {
+
 }
 
 
