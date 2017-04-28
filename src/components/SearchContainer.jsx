@@ -21,7 +21,6 @@ class SearchContainer extends Component {
     this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
     this.searchSpotify = this.searchSpotify.bind(this);
     this.autoCompleteSearchSpotify = this.autoCompleteSearchSpotify.bind(this);
-    this.updateRecentSongs = this.updateRecentSongs.bind(this);
     this.enterSearch = this.enterSearch.bind(this);
     this.setSelected = this.setSelected.bind(this);
   }
@@ -109,13 +108,6 @@ class SearchContainer extends Component {
     .catch(error => {
       console.log('Request resulted in an error', error);
     })
-  }
-
-  updateRecentSongs(track) {
-    // let currentList = this.props.playlist.recentlyAddedTracks;
-    // currentList.unshift(track);
-    // this.props.setRecentAddedTracks(currentList);
-    
   }
 
   render(){

@@ -44,31 +44,8 @@ module.exports = {
       });
   },
 
-  removeFirstSong: function(playlistId) {
-    let username, trackId;
-    dbHelpers.getPlaylistOwner(playlistId)
-    .then(owner => {
-      username = owner.user_id;
-      dbHelpers.getTrackByPosition(playlistId, 0)
-      .then(track => {
-        trackId = [{ "uri": `spotify:track:${track.song_id}`}];
-        spotify.removeTracksFromPlaylist(username, playlistId, trackId)
-        .then(data => {
-          this.moveTracks(username, playlistId, (err, results) => {
-            if(err) console.log(err)
-            else {
-              console.log(results)
-            }
-          })
-        })
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  },
-
-  addTracksToPlaylist: function(username, playlistId, tracks) {
+  addTracksToPlaylist: function(tokens, username, playlistId, tracks) {
+    const spotify = this.authorizeSpotify(tokens);
     return new Promise((resolve, reject) => {
       spotify.addTracksToPlaylist(username, playlistId, tracks)
       .then(data => resolve(data))
@@ -76,7 +53,8 @@ module.exports = {
     });
   },
 
-  removeTracksFromPlaylist: function(username, playlistId, tracks) {
+  removeTracksFromPlaylist: function(tokens, username, playlistId, tracks) {
+    const spotify = this.authorizeSpotify(tokens);
     return new Promise((resolve, reject) => {
       tracks = tracks.map(track => {
         return { 'uri': track };
@@ -87,24 +65,8 @@ module.exports = {
     });
   },
 
-<<<<<<< HEAD
-    // var i1 = Math.floor(Math.random()*10);
-    // var i2 = Math.floor(Math.random()*10);
-
-    // spotify.reorderTracksInPlaylist(username, playlistId, i1, i2)
-    //   .then(data => {
-    //     cb(null);
-    //   })
-    //   .catch(err => {
-    //     cb(err);
-    //   });
-
-
   searchFor: function(tokens, name, filter, cb) {
     const spotify = this.authorizeSpotify(tokens);
-=======
-  searchFor: function(name, filter, cb) {
->>>>>>> Cleaning up reordering in spotify
     spotify.searchTracks(`${filter}:${name}`)
     .then((data) => {
       let { items } = data.body.tracks;

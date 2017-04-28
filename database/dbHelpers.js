@@ -170,6 +170,17 @@ module.exports = {
     })
   },
 
+  getTrackById: function(songId, playlistId) {
+    return new Promise((resolve, reject) => {
+      Song.findOne({ where: {
+        song_id: songId,
+        playlist_id: playlistId
+      }})
+      .then(song => resolve(song))
+      .catch(err => reject(err));
+    });
+  },
+
   getTrackByPosition: function(playlistId, position) {
     return new Promise((resolve, reject) => {
       Song.findOne({ where: {

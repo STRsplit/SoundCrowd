@@ -1,5 +1,6 @@
 const express = require('express');
 const spotify = require('../spotify');
+const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = io => {
   const router = express.Router();
