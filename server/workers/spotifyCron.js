@@ -3,7 +3,7 @@ const spotify = require('../spotify');
 const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = (tokens, io) => {
-  let task = cron.schedule('*/30 * * * * *', () => {
+  let task = cron.schedule('*/15 * * * * *', () => {
     spotify.getCurrentSong(tokens, (err, song) => {
       if (err) console.log('cron err', err);
       else {
@@ -13,18 +13,19 @@ module.exports = (tokens, io) => {
           let playlistId = song.context.uri.slice(-22);
           dbHelpers.getTrackByPosition(playlistId, 0)
           .then(track => {
+            console.log('updating playlist ' + playlistId + '............');
               if (track.song_id !== id) {
                 dbHelpers.getTrackByPosition(playlistId, 1)
                 .then(expectedTrack => {
                   if (expectedTrack.song_id !== id) {
                     dbHelpers.getTrackById(id, playlistId)
-                    .then(track => {
-                      expectedTrack.update({ position: track.position })
-                      .then(track.update({ position: expectedTrack.position }))
-                      .then(reorderPlaylist(tokens, playlistId));
+                    .then(playingTrack => {
+                      expectedTrack.update({ position: playingTrack.position })
+                      .then(playingTrack.update({ position: expectedTrack.position }))
+                      .then(reorderPlaylist(tokens, io, playlistId, track));
                     });
                   } else {
-                    reorderPlaylist(tokens, playlistId);
+                    reorderPlaylist(tokens, io, playlistId, track);
                   }
                 });
               } else reorderInSpotify(tokens, playlistId);
@@ -37,7 +38,7 @@ module.exports = (tokens, io) => {
   return task;
 }
 
-function reorderPlaylist(tokens, playlistId) {
+function reorderPlaylist(tokens, io, playlistId, track) {
   dbHelpers.resetTrack(track.song_id, playlistId)
   .then(() => {
     dbHelpers.reorderPlaylist(playlistId)
