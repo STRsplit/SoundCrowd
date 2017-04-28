@@ -27,7 +27,8 @@ class Track extends Component {
 
   render() {
     const { voted } = this.state;
-    const { title, artist, vote_count, img_url } = this.props.track;
+    let { title, artist, vote_count, img_url, image } = this.props.track;
+    img_url = img_url ? img_url : image;
     const { isTop } = this.props
     const voteUp = (
       <div>

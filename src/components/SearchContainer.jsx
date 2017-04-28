@@ -59,8 +59,8 @@ class SearchContainer extends Component {
       song_id: id,
       artist: artist,
       title: name,
-      playlist: this.props.playlist.id,
-      img_url: image
+      playlist_id: this.props.playlist.id,
+      image: image
     };
 
     axios.post('/api/tracks/', { 
