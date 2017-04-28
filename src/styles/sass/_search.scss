@@ -10,7 +10,14 @@
   display: inline-block;
   .mui-btn {
     font-size: 1em ! important;
+    background-color: rgb(48, 48, 48) ! important;
+    color: white ! important;
+    &:hover {
+      background-color: white ! important;
+      color: black ! important;
+    }
   }
+
 }
 
 .mui-dropdown__menu,
@@ -25,9 +32,9 @@
 }
 .mui-dropdown:hover {
   width: 100%;
-  background-color: white;
+  background-color: rgb(48, 48, 48) ! important;
   .mui-btn {
-    background-color: white;
+    background-color: rgb(48, 48, 48) ! important;
   }
 }
 .search-button {

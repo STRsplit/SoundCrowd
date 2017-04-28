@@ -13,7 +13,7 @@ class RightBar extends Component {
     const playlistButton = this.props.playlist.id ? (
       <div className="right-display-feature">
           <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
-            <Button className="secondary-button" type="primary" onClick={this.startPlaylist}><span>Open in Spotify</span></Button>
+            <Button className="secondary-button" label="Open in Spotify" type="primary" onClick={this.startPlaylist}></Button>
           </a>
         </div>
     ) : <div></div>;

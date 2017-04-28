@@ -128,20 +128,19 @@ class PlaylistSuggester extends Component {
     ];
     return (
       <div>
-        <RaisedButton disableTouchRipple={true} className="main-button" label="Get Suggested Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
+        <RaisedButton disableTouchRipple={true} className="main-button" label="Get Suggested Playlist" onTouchTap={this.handleOpen} />
         <Dialog
-          contentClassName="dialog"
+          title="Get Suggested Playlist"
           actions={actions}
           className="playlist-suggester-container"
           modal={false}
           open={this.state.open}
-          onRequestClose={this.handleClose}
-          contentStyle={{width: '100%'}}
+          contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
           contentClassName="dialog-content"
+          onRequestClose={this.handleClose}
           bodyClassName="dialog-body"
         >
           <div id="recommended-container">    
-            <h2>Get Suggested Playlist</h2> 
             <TextField underlineFocusStyle={style.focusTextField} hintText="Name" onChange={this.setPlaylistName} />  
             <div id="preferences">
               <div id="mood">

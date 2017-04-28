@@ -5,6 +5,9 @@ const style = {
   plDialog: {
     width: '500px'
   },
+  plButton: {
+    margin: '0 5px'
+  },
   dialog: {
     width: '500px'
   },

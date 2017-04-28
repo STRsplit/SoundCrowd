@@ -67,23 +67,27 @@ class JoinRoom extends Component {
     ];
 
     return (
-      <div className="join-room-modal">
+      <div>
         <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.button} />
+        <div className="join-room-modal">
         <Dialog
-          contentClassName="dialog"
+          title="Join a Room"
           actions={actions}
-          className="playlist-suggester-container"
+          className="join-room-container"
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={{width: '100%'}}
+          contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
           contentClassName="dialog-content"
           bodyClassName="dialog-body"
+          bodyStyle={{padding: '0 2%'}}
+          style={{paddingTop: '10px ! important', height: '100vh'}}
         >
-
+        <div>
           <TextField hintText="Enter room code." underlineFocusStyle={style.focusTextField} fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
-
+          </div>
         </Dialog>
+        </div>
       </div>
     );
   }

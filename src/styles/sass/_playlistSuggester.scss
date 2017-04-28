@@ -163,10 +163,10 @@
   height: 100% !important;
   max-width: none !important;
 
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
+  padding-top: 10vh ! important;
 
 }
 
@@ -178,6 +178,7 @@
   display: flex;
   flex-direction: column;
   background-color: $modalBG ! important;
+  margin: 0 auto ! important;
 }
 
 .playlist-suggester-container > div:first-child > .dialog-content > div > div:nth-child(2) > div{

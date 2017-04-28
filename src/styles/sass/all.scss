@@ -97,9 +97,9 @@ h3 {
     span {
       display: block;
       width: 100%;
-      font-size: 2em;
+      font-size: 1.75em ! important;
       margin: 2px auto;
-      padding: $interiorPad;
+      padding: 15px $interiorPad;;
       @include center
     }
 }
@@ -135,7 +135,7 @@ h3 {
   margin: 4% auto;
   width: 100%;
   span {
-    font-size: 18px;
+    font-size: 1em ! important;
   }
 }
 .small-feature-button {
@@ -160,7 +160,7 @@ h3 {
       span {
         display: block;
         width: 100%;
-        font-size: 1.75em;
+        font-size: 1.75em ! important;
         @include center
       }
   }
@@ -168,7 +168,7 @@ h3 {
     padding: 15px $interiorPad ! important;
     margin: 4% auto;
     span {
-      font-size: 18px;
+      font-size: 1em ! important;
     }
   }
   .small-feature-button {
@@ -176,7 +176,7 @@ h3 {
     padding: 3px $interiorPad;
     margin: 4% auto;
     span {
-      font-size: 14px;
+      font-size: 18px ! important;
     }
   }
 
