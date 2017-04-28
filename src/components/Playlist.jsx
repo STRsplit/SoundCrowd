@@ -16,6 +16,7 @@ class Playlist extends Component {
 
   componentWillMount () { 
     this.votingError = false;
+    this.showOpenSpotifyButton = false;
     
     this.getPlaylistTracks = this.getPlaylistTracks.bind(this);
     this.handlePlaylistVote = this.handlePlaylistVote.bind(this);
@@ -95,6 +96,8 @@ class Playlist extends Component {
     playlistId = playlistId || this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
     .then(res => {
+      let { owner, tracks } = res.data
+      this.showOpenSpotifyButton = this.props.user.id === owner;
       this.props.setPlaylist({
         id: playlistId,
         owner: res.data.owner,
@@ -158,16 +161,19 @@ class Playlist extends Component {
   render() { 
     const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
     const { open, message } = voteErrorPopup;
+    const openSpotifyButton = this.showOpenSpotifyButton ? 
+      (<div>
+        <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
+          <Button className="main-button" type="primary" onClick={this.startPlaylist}><span className="open">Open in Spotify</span></Button>
+        </a>
+      </div>) : '';
+
     return (
       <div>
         <div>
           <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} playlistId={id} />
 
-          <div>
-            <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
-              <Button className="main-button" type="primary" onClick={this.startPlaylist}><span className="open">Open in Spotify</span></Button>
-            </a>
-          </div>
+          { openSpotifyButton }
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
           <div className="playlist-tracks-outer-container">
             <FlipMove>
@@ -182,7 +188,8 @@ class Playlist extends Component {
 
 const mapStateToProps = state => {
   return {
-    playlist: state.playlist 
+    playlist: state.playlist,
+    user: state.user
   };
 };
 

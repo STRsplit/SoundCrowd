@@ -20,16 +20,18 @@ const verifyUser = () => {
     payload: new Promise((resolve, reject) => {
       axios.get('/api/verify_user')
       .then(result => {
-        const { login, name } = result.data;
+        const { id, login, name } = result.data;
         if (login) {
           resolve({
             loggedIn: true,
-            name: name
+            name: name,
+            id: id
           });
         } else {
           resolve({
             loggedIn: false,
-            name: ''
+            name: '',
+            id: ''
           });
         }
       })

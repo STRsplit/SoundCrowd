@@ -1,4 +1,5 @@
 const initialState = {
+  id: '',
   name: '',
   loggedIn: false,
   verifying: true,
