@@ -36,7 +36,7 @@ class JoinRoom extends Component {
   
   joinPlaylist() {
     axios.get(`/api/validate/${this.state.playlistId}`)
-    .then(result => { console.log(result)
+    .then(result => { 
       if (result.data) {
         this.setState({open: false}, () => {
           this.context.router.history.push(`/playlist/${this.state.playlistId}`);

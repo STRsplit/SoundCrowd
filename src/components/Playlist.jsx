@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVoteErrorPopup } from '../actions/playlistActions';
+import { setPlaylist, setPlaylistId, setPlaylistTracks, setPlaylistOwner, setVoteErrorPopup, setRecentAddedTracks, setRecentPlayedTracks } from '../actions/playlistActions';
 
 import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
@@ -52,7 +52,17 @@ class Playlist extends Component {
       this.handleVoteError(true, voteErrorInfo);
       console.log('Sorry, but you\'ve already voted:', voteErrorInfo);
     });
-  }
+    this.socket.on('addTrack', track => {
+      let currentList = this.props.playlist.recentlyAddedTracks;
+      currentList.unshift(track);
+      this.props.setRecentAddedTracks(currentList);
+    });
+    this.socket.on('recentlyPlayed', track => {
+      let currentList = this.props.playlist.recentlyPlayedTracks;
+      currentList.unshift(track);
+      this.props.setRecentPlayedTracks(currentList);
+    })
+  } 
 
   handlePlaylistVote(song_id, playlist_id, vote_val){
     const { user_id, session_id } = this.socket;

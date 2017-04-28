@@ -1,5 +1,6 @@
 const express = require('express');
 const spotify = require('../spotify');
+const dbHelpers = require('../../database/dbHelpers');
 
 module.exports = io => {
   const router = express.Router();
@@ -32,7 +33,7 @@ module.exports = io => {
           spotify.startPlaylist(ownerTokens, playlist, function(err) {
             if (err) res.status(err.statusCode).send(err);
             else {              
-              require('../spotifyCron')(ownerTokens, io).start();
+              require('../workers/spotifyCron')(ownerTokens, io).start();
               res.sendStatus(201);
             }
           });
@@ -42,8 +43,8 @@ module.exports = io => {
         if (spotify.hasAccessToken(userTokens)) {
           spotify.startPlaylist(userTokens, playlist, function(err) {
             if (err) res.status(err.statusCode).send(err);
-            else {                            
-              require('../spotifyCron')(userTokens, io).start();
+            else {        
+              require('../workers/spotifyCron')(userTokens, io).start();                    
               res.sendStatus(201);
             }
           });

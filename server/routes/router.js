@@ -125,10 +125,12 @@ module.exports = io => {
   });
 
   router.post('/tracks', function(req, res) {
-    var playlistId = req.body.track.playlist_id;
-    dbHelpers.addTrack(req.body.track, function(err, success) {
+    var track = req.body.track;
+    var playlistId = track.playlist_id;
+    dbHelpers.addTrack(track, function(err, success) {
       if (err) res.status(err.statusCode).send(err);
       else {
+        io.sockets.in(playlistId).emit('addTrack', track);
         dbHelpers.reorderPlaylist(playlistId)
         .then(tracks => {
           if (tracks) {
