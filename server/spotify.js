@@ -44,74 +44,26 @@ module.exports = {
       });
   },
 
-  removeFirstSong: function(tokens, playlistId) {
+  addTracksToPlaylist: function(tokens, username, playlistId, tracks) {
     const spotify = this.authorizeSpotify(tokens);
-    let username;
-    let trackID;
-    dbHelpers.getPlaylistOwner(playlistId)
-    .then(owner => {
-      username = owner.user_id;
-      dbHelpers.getTrackByPosition(playlistId, 0)
-      .then(track => {
-        trackID = [{ "uri": `spotify:track:${track.song_id}`}];
-        spotify.removeTracksFromPlaylist(username, playlistId, trackID)
-        .then(data => {
-          this.moveTracks(username, playlistId, (err, results) => {
-            if(err) console.log(err)
-            else {
-              console.log(results)
-            }
-          })
-        })
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  },
-
-  moveTracks: function(tokens, username, playlistId, cb) {
-    const spotify = this.authorizeSpotify(tokens);
-    let tracks;
-    spotify.getPlaylistTracks(username, playlistId)
-    .then(data => {
-      tracks = data.body.items.reduce((allTracks, item, ind) => {
-        allTracks.push({"uri": item.track.uri})
-        return allTracks;
-      }, []);
-    })
-    .then(() => {
-      tracks.splice(1, 1);
-      spotify.removeTracksFromPlaylist(username, playlistId, tracks)
-    })
-    .then(data => {
-      dbHelpers.getPlaylist(playlistId)
-      .then(playlist => {
-        let tracksToAdd = playlist.map(track => {
-          return `spotify:track:${track.song_id}`;
-        })
-        spotify.addTracksToPlaylist(username, playlistId, tracksToAdd)
-        .then(data => {
-          cb(null, data);
-        })
-      })
-    })
-    .catch(err => {
-      cb(err, null)
+    return new Promise((resolve, reject) => {
+      spotify.addTracksToPlaylist(username, playlistId, tracks)
+      .then(data => resolve(data))
+      .catch(err => reject(err));
     });
   },
 
-    // var i1 = Math.floor(Math.random()*10);
-    // var i2 = Math.floor(Math.random()*10);
-
-    // spotify.reorderTracksInPlaylist(username, playlistId, i1, i2)
-    //   .then(data => {
-    //     cb(null);
-    //   })
-    //   .catch(err => {
-    //     cb(err);
-    //   });
-
+  removeTracksFromPlaylist: function(tokens, username, playlistId, tracks) {
+    const spotify = this.authorizeSpotify(tokens);
+    return new Promise((resolve, reject) => {
+      tracks = tracks.map(track => {
+        return { 'uri': track };
+      });
+      spotify.removeTracksFromPlaylist(username, playlistId, tracks)
+      .then(data => resolve(data.snapshot_id))
+      .catch(err => reject(err));
+    });
+  },
 
   searchFor: function(tokens, name, filter, cb) {
     const spotify = this.authorizeSpotify(tokens);
