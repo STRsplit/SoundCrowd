@@ -28,10 +28,6 @@ class RightBar extends Component {
               <Track track={track}/>
             </div>
             ))}</div>
-          <h2>Trending Songs</h2>
-          <div>{trendingTracks.map(track => (
-            <div>{track.title}</div>
-            ))}</div>
           <h2>Recently Played</h2>
           <div>{recentlyPlayedTracks.map(track => (
             <div>
