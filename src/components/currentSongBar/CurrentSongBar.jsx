@@ -123,7 +123,7 @@ class CurrentSongBar extends Component {
 
 CurrentSongBar.contextTypes = {
   router: PropTypes.object
-}
+};
 
 export default CurrentSongBar;
 

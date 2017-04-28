@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { Button } from 'elemental';
 import style from '../styles/additionalStyles-css.js';
-import { RaisedButton as Button } from 'material-ui';
-import TextField from 'material-ui/TextField';
-
-
+import { RaisedButton as Button , TextField } from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       playlist: '',
-      showInput: false
+      showInput: false,
+      errorMessage: ''
     };
+
     this.showJoinRoom = this.showJoinRoom.bind(this);
     this.setPlaylist = this.setPlaylist.bind(this);
+    this.validatePlaylist = this.validatePlaylist.bind(this);
   }
 
-  setPlaylist(e) {
-    this.setState({ playlist: e.target.value });
+  setPlaylist(e) { 
+    this.setState({ 
+      playlist: e.target.value,
+      errorMessage: ''
+    });
   }
 
   showJoinRoom(e) {
@@ -28,13 +30,23 @@ class Login extends Component {
     this.setState({showInput: true})
   }
 
+  validatePlaylist() {
+    axios.get(`/api/validate/${this.state.playlist}`)
+    .then(result => {
+      if (result.data) {
+        this.props.history.push(`/public/playlist/${this.state.playlist}`);    
+      } else {
+        this.setState({errorMessage: 'Invalid room code.'});
+      }
+    })
+    .catch(err => console.log('Login.js > validatePlaylist err: ', err)); 
+  }
+
   render() {
     const inputRoom = (
       <div className="center-content">
-        <TextField className="enter-room-login" underlineFocusStyle={style.focusTextField} hintText="Enter room code here" onChange={this.setPlaylist} />
-        <Link to={`/public/playlist/${this.state.playlist}`}>
-          <Button disableTouchRipple={true} className="secondary-button" type="primary"><span>Join a Room</span></Button>
-        </Link>
+        <TextField className="enter-room-login" underlineFocusStyle={style.focusTextField} hintText="Enter room code." onChange={this.setPlaylist} errorText={this.state.errorMessage} />
+        <Button disableTouchRipple={true} className="secondary-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
       </div>
     )
 
@@ -67,5 +79,9 @@ class Login extends Component {
   }
 
 }
+
+Login.contextTypes = {
+  route: PropTypes.object
+};
 
 export default Login;

@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+import axios from 'axios';
 
-import { RaisedButton, Dialog, TextField } from 'material-ui/';
+import { RaisedButton, Dialog, TextField } from 'material-ui';
 
 class JoinRoom extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false
+      playlistId: '',
+      open: false,
+      errorMessage: ''
     };
-
-    this.playlistId = '';
 
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -27,14 +28,25 @@ class JoinRoom extends Component {
   }
 
   setPlaylistId(e, newValue) {
-    this.playlistId = newValue;
+    this.setState({
+      playlistId: newValue,
+      errorMessage: ''
+    });
   }
   
   joinPlaylist() {
-    this.setState({open: false}, () => {
-      this.context.router.history.push(`/playlist/${this.playlistId}`);
-      this.props.getPlaylistTracks(this.playlistId);
-    });
+    axios.get(`/api/validate/${this.state.playlistId}`)
+    .then(result => { console.log(result)
+      if (result.data) {
+        this.setState({open: false}, () => {
+          this.context.router.history.push(`/playlist/${this.state.playlistId}`);
+          this.props.getPlaylistTracks(this.state.playlistId);
+        });
+      } else {
+        this.setState({errorMessage: 'Invalid room code.'});
+      }
+    })
+    .catch(err => console.log('JoinRoom.js > validatePlaylist err: ', err));     
   }
 
   render() {
@@ -62,7 +74,7 @@ class JoinRoom extends Component {
           onRequestClose={this.handleClose}
           contentStyle={style.dialog}
         >
-          <TextField hintText="Enter room code." fullWidth={true} onChange={this.setPlaylistId} />
+          <TextField hintText="Enter room code." fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
         </Dialog>
       </div>
     );
@@ -72,7 +84,7 @@ class JoinRoom extends Component {
 
 JoinRoom.contextTypes = {
   router: PropTypes.object
-}
+};
 
 export default JoinRoom;
 

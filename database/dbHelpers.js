@@ -192,11 +192,22 @@ module.exports = {
 
     });
   },
+
   getUser: function(userId) {
     return new Promise((resolve, reject) => {
       User.findById(userId)
       .then(user => {
         resolve(user);
+      })
+      .catch(err => reject(err));
+    });
+  },
+
+  findPlaylist: function(playlistId) {
+    return new Promise((resolve, reject) => {
+      Playlist.findById(playlistId)
+      .then(playlist => {
+        resolve(playlist);
       })
       .catch(err => reject(err));
     });
