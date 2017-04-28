@@ -96,7 +96,7 @@ class Playlist extends Component {
     playlistId = playlistId || this.props.match.params.playlistId;
     axios.get('/api/playlists/' + playlistId)
     .then(res => {
-      let { owner, tracks } = res.data
+      let { owner, tracks } = res.data;
       this.showOpenSpotifyButton = this.props.user.id === owner;
       this.props.setPlaylist({
         id: playlistId,
