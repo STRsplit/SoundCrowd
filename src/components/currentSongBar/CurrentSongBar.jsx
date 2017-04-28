@@ -6,6 +6,7 @@ import JoinRoom from '../joinRoom/JoinRoom.jsx';
 
 import { Row, Col } from 'elemental';
 import { Avatar, Slider } from 'material-ui/';
+import style from '../../styles/additionalStyles-css.js';
 
 class CurrentSongBar extends Component {
   constructor(props) {
@@ -108,10 +109,10 @@ class CurrentSongBar extends Component {
             <Slider sliderStyle={style.slider} value={sliderValue} />
           </Col>
           <Col sm="1/4">
-            <Col sm="1/2" style={style.button} >
+            <Col sm="1/2" className="search-pop-up-small-container" style={style.button} >
               <SearchPopup />
             </Col>
-            <Col sm="1/2" style={style.button} >
+            <Col className="join-room-popup-small-container" sm="1/2" style={style.button} >
               <JoinRoom getPlaylistTracks={this.props.getPlaylistTracks} />
             </Col>
           </Col>
@@ -127,20 +128,3 @@ CurrentSongBar.contextTypes = {
 
 export default CurrentSongBar;
 
-const style = {
-  avatar: {
-    margin: '5px'
-  },
-  duration: {
-    float: 'right'
-  },
-  slider: {
-    margin: '0 auto', 
-    width: '98%',
-    trackColor: '#FFF ! important',
-    selectionColor: 'green ! important'
-  },
-  button: {
-    display: 'inline-block'
-  }
-};

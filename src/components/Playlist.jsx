@@ -8,6 +8,8 @@ import AccordionTest from './AccordionTest.jsx';
 import CurrentSongBar from './currentSongBar/CurrentSongBar.jsx';
 import VoteErrorPopup from './VoteErrorPopup.jsx';
 import Track from './Track.jsx';
+import SearchPopup from './SearchRevision.jsx';
+import JoinRoom from './joinRoom/JoinRoom.jsx';
 
 import FlipMove from 'react-flip-move';
 import { RaisedButton as Button } from 'material-ui';
@@ -173,6 +175,14 @@ class Playlist extends Component {
         <div>
           <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} playlistId={id} />
                     { openSpotifyButton }
+          <div className="feature-actions-responsive">
+            <div>
+              <SearchPopup/>
+            </div>
+            <div>
+              <JoinRoom getPlaylistTracks={this.props.getPlaylistTracks} />
+            </div>
+          </div>
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
           <div className="playlist-tracks-outer-container">
             <FlipMove>

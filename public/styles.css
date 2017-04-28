@@ -91,17 +91,11 @@
 .login-container {
   display: block;
   position: relative;
-  width: 60%;
+  width: 60vw;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
-
-.login-container button {
-  height: 80px !important; }
-
-.main-button div, .secondary-button div {
-  height: 80px !important; }
 
 .login-container h2 {
   color: black;
@@ -823,11 +817,39 @@ body {
   color: white;
   background-color: #1385e5; }
 
+.playlist-suggester-container > div:first-child > .dialog-content > div > .dialog-body {
+  overflow-y: visible !important;
+  background-color: transparent !important; }
+
+.playlist-suggester-container > div:first-child > .dialog-content {
+  transform: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent; }
+
+.playlist-suggester-container > div:first-child > .dialog-content > div {
+  width: 100%;
+  max-width: 700px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8) !important; }
+
+.playlist-suggester-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
+  margin: 0 5px; }
+
 @media screen and (max-width: 900px) {
   #recommended-container,
   #preferences,
   #recommended-container > div {
     width: 100% !important; } }
+
+* {
+  font-family: 'Roboto',  sans-serif; }
 
 html,
 body {
@@ -881,6 +903,11 @@ h3 {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+.feature-actions-responsive {
+  display: none !important; }
+  .feature-actions-responsive div {
+    width: 80% !important; }
+
 .main-button:active, .secondary-button:active {
   color: none !important;
   background-color: none !important; }
@@ -893,11 +920,16 @@ h3 {
   h3 {
     font-size: 24px; } }
 
+.search-pop-up-small-container,
+.join-room-popup-small-container {
+  display: inline-block !important; }
+
 .secondary-button {
   padding: 0px 5%;
-  margin: 4% auto; }
+  margin: 4% auto;
+  width: 100%; }
   .secondary-button span {
-    font-size: 14px; }
+    font-size: 18px; }
 
 @media screen and (max-width: 1025px) {
   .button-container {
@@ -921,10 +953,10 @@ h3 {
       left: 50%;
       transform: translate(-50%, -50%); }
   .secondary-button {
-    padding: 3px 5%;
+    padding: 15px 5% !important;
     margin: 4% auto; }
     .secondary-button span {
-      font-size: 14px; }
+      font-size: 18px; }
   .small-feature-button {
     width: 100%;
     padding: 3px 5%;
@@ -938,7 +970,12 @@ h3 {
   h2 {
     font-size: 4vw; }
   h3 {
-    font-size: 3vw; } }
+    font-size: 3vw; }
+  .search-pop-up-small-container,
+  .join-room-popup-small-container {
+    display: none !important; }
+  .feature-actions-responsive {
+    display: block !important; } }
 
 @media screen and (max-width: 600px) {
   h1 {

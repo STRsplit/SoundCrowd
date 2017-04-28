@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 
-import { RaisedButton, Dialog, TextField } from 'material-ui';
+
+import { RaisedButton, Dialog, TextField } from 'material-ui/';
+import style from '../../styles/additionalStyles-css.js';
 
 class JoinRoom extends Component {
   constructor(props) {
@@ -65,7 +67,7 @@ class JoinRoom extends Component {
     ];
 
     return (
-      <div>
+      <div className="join-room-modal">
         <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.button} />
         <Dialog
           actions={actions}
@@ -74,7 +76,8 @@ class JoinRoom extends Component {
           onRequestClose={this.handleClose}
           contentStyle={style.dialog}
         >
-          <TextField hintText="Enter room code." fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
+          <TextField hintText="Enter room code." style={style.focusTextField} fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
+
         </Dialog>
       </div>
     );
@@ -87,12 +90,3 @@ JoinRoom.contextTypes = {
 };
 
 export default JoinRoom;
-
-const style = {
-  button: {
-    margin: '5px'
-  },
-  dialog: {
-    width: '500px'
-  }
-};

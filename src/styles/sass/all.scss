@@ -10,7 +10,9 @@
 @import '_track';
 @import '_rightBar';
 @import '_playlistSuggester';
+@import '_joinRoom';
 @import 'mixins_functions';
+
 
 $step-size-heading: 0.5;
 
@@ -39,7 +41,10 @@ $step-size-heading: 0.5;
 @function centerContent($margin-top){
   @return $margin-top auto;
 }
-
+* {
+  font-family: 'Roboto', 
+  sans-serif;
+}
 
 html,
 body {
@@ -81,6 +86,7 @@ h3 {
 /* * Buttons * */
 
 
+
 .main-button {
   display: block ! important;
   width: $featureWidth;
@@ -96,6 +102,12 @@ h3 {
       padding: $interiorPad;
       @include center
     }
+}
+.feature-actions-responsive {
+  display: none ! important;
+  div {
+    width: 80% ! important;
+  }
 }
 .main-button:active {
   color: none ! important;
@@ -113,13 +125,17 @@ h3 {
       font-size: 24px;
   }
 }
-
+ .search-pop-up-small-container,
+  .join-room-popup-small-container {
+    display: inline-block ! important;
+  }
 .secondary-button {
   @extend .main-button;
   padding: 0px $interiorPad;
   margin: 4% auto;
+  width: 100%;
   span {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 .small-feature-button {
@@ -149,10 +165,10 @@ h3 {
       }
   }
   .secondary-button {
-    padding: 3px $interiorPad;
+    padding: 15px $interiorPad ! important;
     margin: 4% auto;
     span {
-      font-size: 14px;
+      font-size: 18px;
     }
   }
   .small-feature-button {
@@ -163,6 +179,7 @@ h3 {
       font-size: 14px;
     }
   }
+
 }
 @media screen and (max-width: 900px) {
   h1 {
@@ -173,6 +190,13 @@ h3 {
   }
   h3 {
     @include heading-size(6);
+  }
+  .search-pop-up-small-container,
+  .join-room-popup-small-container {
+    display: none ! important;
+  }
+  .feature-actions-responsive {
+    display: block ! important;
   }
 }
 
