@@ -31,7 +31,7 @@ const validateVote = voteData => {
     } else {
       voteObj.session_id = session_id;
     }
-    console.log('VOTE OBJ', voteObj)
+
     db.Vote.findOne({ where: voteObj })
     .then(result => {
       if (!result) {

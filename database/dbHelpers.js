@@ -223,5 +223,16 @@ module.exports = {
       .catch(err => reject(err));
 
     });
+  },
+
+  findPlaylist: function(playlistId) {
+    return new Promise((resolve, reject) => {
+      Playlist.findById(playlistId)
+      .then(playlist => {
+        resolve(playlist);
+      })
+      .catch(err => reject(err));
+    });
   }
+  
 };

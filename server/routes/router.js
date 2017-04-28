@@ -100,6 +100,18 @@ module.exports = io => {
     .catch(err => console.log('router.js > /search > getPlaylistOwner error: ', err)); 
   });
 
+  router.get('/validate/:playlist', function(req, res) {
+    dbHelpers.findPlaylist(req.params.playlist)
+    .then(playlist => {
+      if (playlist) {
+        res.status(200).send(true);
+      } else {
+        res.status(200).send(false);
+      }
+    })
+    .catch(err => res.sendStatus(500));
+  });
+
   router.post('/vote', function(req, res) {
     handler.validateVote(req, res);
     spotify.moveTrack(req.session.tokens, req.user.id, req.body.playlistId, function(err) {
