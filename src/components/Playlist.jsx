@@ -100,8 +100,8 @@ class Playlist extends Component {
       this.showOpenSpotifyButton = this.props.user.id === owner;
       this.props.setPlaylist({
         id: playlistId,
-        owner: res.data.owner,
-        tracks: res.data.tracks
+        owner: owner,
+        tracks: tracks
       });
       this.startSocket();  
     })
