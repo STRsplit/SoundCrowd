@@ -46,7 +46,7 @@ class Login extends Component {
     const inputRoom = (
       <div className="center-content">
         <TextField className="enter-room-login" underlineFocusStyle={style.focusTextField} hintText="Enter room code." onChange={this.setPlaylist} errorText={this.state.errorMessage} />
-        <Button disableTouchRipple={true} className="secondary-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
+        <Button disableTouchRipple={true} className="small-feature-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
       </div>
     )
 

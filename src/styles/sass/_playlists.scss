@@ -3,6 +3,7 @@
 .playlists-single-container {
   display: flex;
   margin: 15px;
+  background: transparent;
 }
 
 .playlists-single-details {
@@ -10,13 +11,14 @@
   margin-left: 10px;
   padding: 5px;
   padding-top: 10px;
-  background-color: #fff;
-  box-shadow: 5px 5px 5px 0 #000;
+  background-color: $bgDarkOp;
+  word-wrap: break-word;
+  overflow-x: scroll;
 }
 
 .playlists-h3 {
-  margin-top: 10px; 
-  color: black;
+  margin-top: 10px;
+  text-overflow: break-all;
 }
 
 .playlists-hr {

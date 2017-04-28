@@ -1,16 +1,24 @@
 
 @import 'mixins_functions';
-
+.main-search-text-field {
+  width: 70%;
+  display: inline-block;
+  padding: 0 2%;
+}
+.main-search-button-container {
+  width: 25%;
+  display: inline-block;
+  .mui-btn {
+    font-size: 1em ! important;
+  }
+}
 
 .mui-dropdown__menu,
 .mui--is-open{
   width: 100%;
 }
 
-.mui-btn {
-  float: right ! important;
-  font-size: 1.25vw ! important;
-}
+
 .mui-dropdown {
   width: 100%;
   background-color: blue;
@@ -24,6 +32,7 @@
 }
 .search-button {
   color: white ! important;
+
 }
 .search-modal-button {
   display: block;
@@ -33,6 +42,9 @@
   width: 100%;
 }
 .search-popup-modal {
+  .track-vote-container-inner {
+    padding: 6px ! important;
+  }
   position: fixed ! important;
   transition: none ! important;
   transform: none ! important;
@@ -57,9 +69,6 @@
       div {
         background-color: rgba(255, 255, 255, 0) ! important;
         transition: none ! important;
-        .track-image {
-          display: none;
-        }
         .song-entry-header {
           clear: both;
           text-align: right;
@@ -94,3 +103,23 @@ md-backdrop.md-opaque.md-default-theme,
 .md-dialog-container {
   position:fixed;
 }
+@media screen and (max-width: 900px) {
+  .main-search-text-field {
+    width: 100%;
+    display: block ! important;
+    div {
+      width: 100%;
+      display: block ! important;
+    }
+  }
+  .main-search-button-container {
+    width: 100%;
+    display: block ! important;
+    .mui-btn {
+      width: 80%;
+      display: block ! important;
+      margin: 0 auto ! important;
+    }
+  }
+}
+

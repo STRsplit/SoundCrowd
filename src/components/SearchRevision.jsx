@@ -38,7 +38,7 @@ class FullPageSearchOverlay extends Component {
         label="Close"
         primary={true}
         onTouchTap={this.handleClose}
-        className="search-button secondary-button"
+        className="search-button"
       />,
     ];
 

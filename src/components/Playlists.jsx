@@ -50,9 +50,9 @@ class Playlists extends Component {
             style={style.link} 
             onClick={() => this.props.setPlaylistId(id)}
           >  
-          <Paper zDepth={5} >
+          <div>
             <img src={imageUrl} style={style.image} />            
-          </Paper> 
+          </div> 
           </Link>   
           <div className="playlists-single-details">
             <h3 className="playlists-h3" >{name}</h3>

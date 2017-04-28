@@ -10,7 +10,7 @@ import VoteErrorPopup from './VoteErrorPopup.jsx';
 import Track from './Track.jsx';
 
 import FlipMove from 'react-flip-move';
-import { Button } from 'elemental';
+import { RaisedButton as Button } from 'material-ui';
 
 class Playlist extends Component {
 
@@ -162,9 +162,9 @@ class Playlist extends Component {
     const { tracks, id, owner, voteErrorPopup } = this.props.playlist;
     const { open, message } = voteErrorPopup;
     const openSpotifyButton = this.showOpenSpotifyButton ? 
-      (<div>
+      (<div className="no-display-feature">
         <a href={`http://open.spotify.com/user/${owner}/playlist/${id}`} target="_blank">
-          <Button className="main-button" type="primary" onClick={this.startPlaylist}><span className="open">Open in Spotify</span></Button>
+          <Button className="main-button" type="primary" label="Open in Spotify" onClick={this.startPlaylist}></Button>
         </a>
       </div>) : '';
 
@@ -172,8 +172,7 @@ class Playlist extends Component {
       <div>
         <div>
           <CurrentSongBar getPlaylistTracks={this.getPlaylistTracks} playlistId={id} />
-
-          { openSpotifyButton }
+                    { openSpotifyButton }
           <div><VoteErrorPopup open={this.votingError} message={message} onVoteError={this.handleVoteError}/></div>
           <div className="playlist-tracks-outer-container">
             <FlipMove>

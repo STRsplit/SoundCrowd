@@ -7,7 +7,6 @@ import $ from 'jquery';
 
 import { Form, Input, Textarea, Button, Radio } from 'muicss/react';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import { Button as ColorButton } from 'elemental';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import AutoCompleteSearch from './Autocomplete.jsx';
 import AccordionTest from './AccordionTest.jsx';
@@ -44,10 +43,10 @@ class SearchBar extends Component {
             </Row>
             <div>
               <Row middle="xs" around="xs">
-                <Col xs={8}>
+                <Col className="main-search-text-field">
                   <AutoCompleteSearch handleInput={handleChange} handleSongAdd={handleSongAdd} stats={stats} />
                 </Col>
-                <Col xs={4}>
+                <Col className="main-search-button-container">
                   <Button onClick={this.handleClick}>Search Spotify</Button> 
                 </Col>
               </Row>

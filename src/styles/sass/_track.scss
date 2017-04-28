@@ -138,6 +138,8 @@
 }
 
 .triangle-down {
+  cursor: pointer;
+  cursor: hand;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -153,6 +155,8 @@
   }
 }
 .triangle-up {
+  cursor: pointer;
+  cursor: hand;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
