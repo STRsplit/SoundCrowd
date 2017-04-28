@@ -142,7 +142,7 @@ h3 {
 
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 1024px) {
   .button-container {
     display: block;
     margin: 5% 0;
@@ -198,6 +198,18 @@ h3 {
   .feature-actions-responsive {
     display: block ! important;
   }
+    .far-right-disappear {
+    display: none ! important;
+    padding: 0 5% 0 0 ! important;
+  }
+  .csb-album-image {
+    display: none ! important;
+  }
+  .csb-song-info{
+    padding-left: 5% ! important;
+    
+  }
+
 }
 
 @media screen and (max-width: 600px) {

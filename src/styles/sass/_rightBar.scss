@@ -52,6 +52,13 @@
 .right-display-feature {
     display: none ! important;
 }
+@media screen and (max-width: 900px) {
+  .rightBar-container {
+    .secondary-button {
+      display: none ! important;
+    }
+  }
+}
 
 @media screen and (min-width: 900px) {
   .right-display-feature {

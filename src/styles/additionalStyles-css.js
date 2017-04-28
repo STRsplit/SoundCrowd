@@ -22,7 +22,9 @@ const style = {
   },
   slider: {
     margin: '0 auto', 
-    width: '98%',
+    width: '75%',
+    padding: '0 ! important',
+    float: 'left',
     trackColor: '#FFF ! important',
     selectionColor: 'green ! important'
   },

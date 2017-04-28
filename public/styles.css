@@ -255,6 +255,14 @@
 .csb-song-name {
   color: #0090e0; }
 
+.mdl-slider > div > div > div {
+  background-color: black !important; }
+
+.csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1) {
+  background-color: black !important; }
+  .csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1):hover {
+    color: transparent; }
+
 .no-display-feature {
   display: block !important; }
 
@@ -695,6 +703,10 @@ body {
 .right-display-feature {
   display: none !important; }
 
+@media screen and (max-width: 900px) {
+  .rightBar-container .secondary-button {
+    display: none !important; } }
+
 @media screen and (min-width: 900px) {
   .right-display-feature {
     display: block !important; } }
@@ -835,7 +847,8 @@ body {
   max-width: none !important;
   justify-content: center;
   align-items: center;
-  background-color: transparent; }
+  background-color: transparent;
+  padding-top: 10vh !important; }
 
 .playlist-suggester-container > div:first-child > .dialog-content > div {
   width: 100%;
@@ -874,7 +887,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  padding-top: 10vh !important;
   margin: 0 auto; }
 
 .join-room-container > div:first-child > .dialog-content > div {
@@ -974,7 +986,7 @@ h3 {
   .secondary-button span {
     font-size: 1em !important; }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 1024px) {
   .button-container {
     display: block;
     margin: 5% 0;
@@ -1018,7 +1030,14 @@ h3 {
   .join-room-popup-small-container {
     display: none !important; }
   .feature-actions-responsive {
-    display: block !important; } }
+    display: block !important; }
+  .far-right-disappear {
+    display: none !important;
+    padding: 0 5% 0 0 !important; }
+  .csb-album-image {
+    display: none !important; }
+  .csb-song-info {
+    padding-left: 5% !important; } }
 
 @media screen and (max-width: 600px) {
   h1 {
