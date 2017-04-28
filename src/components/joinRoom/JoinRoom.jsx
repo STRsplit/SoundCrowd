@@ -56,13 +56,13 @@ class JoinRoom extends Component {
       <RaisedButton
         label="Cancel"
         onTouchTap={this.handleClose}
-        style={style.button}
+        style={style.plButton}
       />,
       <RaisedButton
         label="Join"
-        keyboardFocused={true}
+        keyboardFocused={false}
         onTouchTap={this.joinPlaylist}
-        style={style.button}
+        style={style.plButton}
       />,
     ];
 
@@ -70,13 +70,18 @@ class JoinRoom extends Component {
       <div className="join-room-modal">
         <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.button} />
         <Dialog
+          contentClassName="dialog"
           actions={actions}
+          className="playlist-suggester-container"
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={style.dialog}
+          contentStyle={{width: '100%'}}
+          contentClassName="dialog-content"
+          bodyClassName="dialog-body"
         >
-          <TextField hintText="Enter room code." style={style.focusTextField} fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
+
+          <TextField hintText="Enter room code." underlineFocusStyle={style.focusTextField} fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
 
         </Dialog>
       </div>

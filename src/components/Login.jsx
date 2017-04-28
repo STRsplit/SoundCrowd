@@ -46,12 +46,12 @@ class Login extends Component {
     const inputRoom = (
       <div className="center-content">
         <TextField className="enter-room-login" underlineErrorStyle={style.errorStyle} underlineFocusStyle={style.focusTextField} hintText="Enter room code." onChange={this.setPlaylist} errorText={this.state.errorMessage} />
-        <Button disableTouchRipple={true} className="small-feature-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
+        <Button disableFocusRipple={true} disableTouchRipple={true} className="small-feature-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
       </div>
     )
 
     const joinButton = (
-        <Button onClick={this.showJoinRoom} disableTouchRipple={true} className="main-button" type="primary"><span>Join a Room</span></Button>
+        <Button onClick={this.showJoinRoom} disableFocusRipple={true} disableTouchRipple={true} className="main-button" type="primary"><span>Join a Room</span></Button>
     )
 
     let actionElement = this.state.showInput ? inputRoom : joinButton; 

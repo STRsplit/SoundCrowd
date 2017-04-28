@@ -128,7 +128,7 @@ class PlaylistSuggester extends Component {
     ];
     return (
       <div>
-        <RaisedButton className="main-button" label="Get Suggested Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
+        <RaisedButton disableTouchRipple={true} className="main-button" label="Get Suggested Playlist" onTouchTap={this.handleOpen} style={style.plButton} />
         <Dialog
           contentClassName="dialog"
           actions={actions}
