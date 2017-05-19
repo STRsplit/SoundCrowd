@@ -12,10 +12,11 @@
   padding: 0px;
 }
 .inner-app-container {
-  width: 80%;
+  width: 100%;
   display: block;
   clear: both;
   margin: centerContent(120px);
+  max-width: 900px;
 }
 
 @media screen and (max-width: 900px) {
@@ -60,4 +61,6 @@
   top: 80px;
   right: 0;
   bottom: 0;
+  overflow-y: scroll;
+  padding-bottom: 30%;
 }

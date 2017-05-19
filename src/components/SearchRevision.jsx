@@ -3,6 +3,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import style from '../styles/additionalStyles-css.js';
+
 
 import SearchContainer from './SearchContainer.jsx'
 const styles = {
@@ -38,13 +40,13 @@ class FullPageSearchOverlay extends Component {
         label="Close"
         primary={true}
         onTouchTap={this.handleClose}
-        className="search-button secondary-button"
+        className="search-button"
       />,
     ];
 
     return (
       <div>
-        <RaisedButton className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
+        <RaisedButton style={style.button} className="search-modal-button" label="Search" onTouchTap={this.handleOpen} />
         <div className="search-modal-container">
         <Dialog
           title="Add a Song from Spotify"

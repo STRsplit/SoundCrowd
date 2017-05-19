@@ -54,10 +54,11 @@
   padding: 0px; }
 
 .inner-app-container {
-  width: 80%;
+  width: 100%;
   display: block;
   clear: both;
-  margin: 120px auto; }
+  margin: 120px auto;
+  max-width: 900px; }
 
 @media screen and (max-width: 900px) {
   .mui-col-xs-0 {
@@ -80,7 +81,9 @@
   position: fixed;
   top: 80px;
   right: 0;
-  bottom: 0; }
+  bottom: 0;
+  overflow-y: scroll;
+  padding-bottom: 30%; }
 
 .login-title {
   color: black !important; }
@@ -88,17 +91,13 @@
 .login-container {
   display: block;
   position: relative;
-  width: 60%;
+  width: 60vw;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
-
-.login-container button {
-  height: 80px !important; }
-
-.main-button div {
-  height: 80px !important; }
+  .login-container hr:nth-child(2) {
+    border: 1px solid #daa520 !important; }
 
 .login-container h2 {
   color: black;
@@ -234,7 +233,7 @@
 .csb-container {
   width: 100%;
   height: 50px;
-  background-color: white;
+  background-color: #FFF;
   position: relative;
   position: fixed;
   top: 80px;
@@ -256,32 +255,62 @@
 .csb-song-name {
   color: #0090e0; }
 
+.mdl-slider > div > div > div {
+  background-color: black !important; }
+
+.csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1) {
+  background-color: black !important; }
+  .csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1):hover {
+    color: transparent; }
+
+.no-display-feature {
+  display: block !important; }
+
+@media screen and (min-width: 900px) {
+  .no-display-feature {
+    display: none !important; } }
+
 /* Playlist.jsx styles */
 .playlists-single-container {
   display: flex;
-  margin: 15px; }
+  margin: 15px;
+  background: transparent; }
 
 .playlists-single-details {
   flex-grow: 1;
   margin-left: 10px;
   padding: 5px;
   padding-top: 10px;
-  background-color: #fff;
-  box-shadow: 5px 5px 5px 0 #000; }
+  background-color: rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+  overflow-x: scroll; }
 
 .playlists-h3 {
-  margin-top: 10px; }
+  margin-top: 10px;
+  text-overflow: break-all; }
 
 .playlists-hr {
   margin-bottom: 1em; }
 
+.main-search-text-field {
+  width: 70%;
+  display: inline-block;
+  padding: 0 2%; }
+
+.main-search-button-container {
+  width: 25%;
+  display: inline-block; }
+  .main-search-button-container .mui-btn {
+    font-size: 1em !important;
+    background-color: #303030 !important;
+    color: white !important; }
+    .main-search-button-container .mui-btn:hover {
+      background-color: white !important;
+      color: black !important; }
+
 .mui-dropdown__menu,
 .mui--is-open {
   width: 100%; }
-
-.mui-btn {
-  float: right !important;
-  font-size: 1.25vw !important; }
 
 .mui-dropdown {
   width: 100%;
@@ -289,9 +318,9 @@
 
 .mui-dropdown:hover {
   width: 100%;
-  background-color: white; }
+  background-color: #303030 !important; }
   .mui-dropdown:hover .mui-btn {
-    background-color: white; }
+    background-color: #303030 !important; }
 
 .search-button {
   color: white !important; }
@@ -308,6 +337,8 @@
   transition: none !important;
   transform: none !important;
   margin-top: 10vh !important; }
+  .search-popup-modal .track-vote-container-inner {
+    padding: 6px !important; }
   .search-popup-modal h3 {
     border-bottom: 0px !important; }
   .search-popup-modal .song-entry-inner-details {
@@ -322,8 +353,6 @@
       .search-popup-modal div div div {
         background-color: rgba(255, 255, 255, 0) !important;
         transition: none !important; }
-        .search-popup-modal div div div .track-image {
-          display: none; }
         .search-popup-modal div div div .song-entry-header {
           clear: both;
           text-align: right; }
@@ -349,6 +378,21 @@
 md-backdrop.md-opaque.md-default-theme,
 .md-dialog-container {
   position: fixed; }
+
+@media screen and (max-width: 900px) {
+  .main-search-text-field {
+    width: 100%;
+    display: block !important; }
+    .main-search-text-field div {
+      width: 100%;
+      display: block !important; }
+  .main-search-button-container {
+    width: 100%;
+    display: block !important; }
+    .main-search-button-container .mui-btn {
+      width: 80%;
+      display: block !important;
+      margin: 0 auto !important; } }
 
 hr {
   margin-top: 2% !important; }
@@ -541,6 +585,8 @@ body {
   object-fit: contain; }
 
 .triangle-down {
+  cursor: pointer;
+  cursor: hand;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -554,6 +600,8 @@ body {
     border-top: 20px solid #daa520; }
 
 .triangle-up {
+  cursor: pointer;
+  cursor: hand;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -616,11 +664,52 @@ body {
 
 .rightBar-container {
   margin-top: 50px;
-  padding-top: 10px;
-  color: black; }
+  padding-top: 10px; }
+  .rightBar-container > div > div:before {
+    content: '';
+    width: 80%;
+    border-bottom: solid 10px #000;
+    margin: -10px auto 5px;
+    position: relative;
+    display: block;
+    z-index: 1; }
+  .rightBar-container .track-image, .rightBar-container .box {
+    width: 100% !important;
+    margin: 0 auto !important; }
+  .rightBar-container .box img {
+    height: auto;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    max-width: 80px;
+    margin: auto;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    display: block;
+    object-fit: contain; }
+  .rightBar-container .track-main-container:after {
+    display: none !important; }
+  .rightBar-container .track-dual-container {
+    width: 80%;
+    margin: 0 auto; }
+    .rightBar-container .track-dual-container h3 {
+      font-size: 14px; }
+  .rightBar-container .track-vote-container {
+    display: none !important; }
 
-.rightBar-container h2 {
-  color: black !important; }
+.right-display-feature {
+  display: none !important; }
+
+@media screen and (max-width: 900px) {
+  .rightBar-container .secondary-button {
+    display: none !important; } }
+
+@media screen and (min-width: 900px) {
+  .right-display-feature {
+    display: block !important; } }
 
 #recommended-container {
   padding: 5%;
@@ -747,11 +836,98 @@ body {
   color: white;
   background-color: #1385e5; }
 
+.playlist-suggester-container > div:first-child > .dialog-content > div > .dialog-body {
+  overflow-y: visible !important;
+  background-color: transparent !important; }
+
+.playlist-suggester-container > div:first-child > .dialog-content {
+  transform: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding-top: 10vh !important; }
+
+.playlist-suggester-container > div:first-child > .dialog-content > div {
+  width: 100%;
+  max-width: 700px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  margin: 0 auto !important; }
+
+.playlist-suggester-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
+  margin: 0 5px; }
+
 @media screen and (max-width: 900px) {
   #recommended-container,
   #preferences,
   #recommended-container > div {
     width: 100% !important; } }
+
+.join-room-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
+  margin: 0 5px; }
+
+.join-room-container > div > div:nth-child(1) > div > div > div:nth-child(3) > div {
+  margin: 0 5px !important; }
+
+.join-room-container > div:first-child > .dialog-content > div > .dialog-body {
+  overflow-y: visible !important;
+  background-color: transparent !important;
+  padding: 5% !important; }
+
+.join-room-container > div:first-child > .dialog-content {
+  transform: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  margin: 0 auto; }
+
+.join-room-container > div:first-child > .dialog-content > div {
+  width: 100%;
+  max-width: 700px;
+  max-height: 100%;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  margin: 0 auto !important; }
+
+.join-room-container {
+  margin-top: 10vh !important;
+  position: fixed !important;
+  transition: none !important;
+  transform: none !important; }
+
+* {
+  font-family: 'Roboto',  sans-serif; }
+
+html,
+body {
+  background-color: #a7a3a5;
+  min-width: 360px !important;
+  margin: 0;
+  padding: 0; }
+
+ul,
+ol {
+  margin: 0;
+  padding: 0; }
+
+a {
+  cursor: pointer;
+  cursor: hand; }
+
+button {
+  cursor: pointer;
+  cursor: hand; }
+
+h1, h2, h3, h4 {
+  color: #FFF; }
 
 h1 {
   font-size: 3vw; }
@@ -762,65 +938,106 @@ h2 {
 h3 {
   font-size: 2vw; }
 
-html,
-body {
-  background-color: #a7a3a5;
-  min-width: 420px !important;
-  margin: 0;
-  padding: 0; }
-
-ul,
-ol {
-  margin: 0;
-  padding: 0; }
-
-.main-button {
+/* * Site Wide Styles * */
+/* * Buttons * */
+.main-button, .secondary-button {
   display: block !important;
   width: 60%;
   max-width: 70%;
+  padding: 15px 5%;
   position: relative;
   margin: 5% auto; }
-  .main-button span {
+  .main-button span, .secondary-button span {
     display: block;
     width: 100%;
-    font-size: 2em;
+    font-size: 1.75em !important;
     margin: 2px auto;
-    padding: 5%;
+    padding: 15px 5%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
 
-.main-button:active {
+.feature-actions-responsive {
+  display: none !important; }
+  .feature-actions-responsive div {
+    width: 80% !important; }
+
+.main-button:active, .secondary-button:active {
   color: none !important;
   background-color: none !important; }
 
-@media screen and (max-width: 1025px) {
+@media screen and (min-width: 900px) {
   h1 {
-    font-size: 4vw; }
+    font-size: 36px; }
   h2 {
-    font-size: 3.5vw; }
+    font-size: 30px; }
   h3 {
-    font-size: 3vw; }
+    font-size: 24px; } }
+
+.search-pop-up-small-container,
+.join-room-popup-small-container {
+  display: inline-block !important; }
+
+.secondary-button {
+  padding: 0px 5%;
+  margin: 4% auto;
+  width: 100%; }
+  .secondary-button span {
+    font-size: 1em !important; }
+
+@media screen and (max-width: 1024px) {
   .button-container {
     display: block;
     margin: 5% 0;
     width: 100%; }
-  .main-button {
+  .main-button, .secondary-button {
     display: block;
     width: 80%;
     max-width: 80%;
+    padding: 15px 5%;
     position: relative;
     padding: none;
     margin: 5% auto; }
-    .main-button span {
+    .main-button span, .secondary-button span {
       display: block;
       width: 100%;
-      font-size: 1.75em;
+      font-size: 1.75em !important;
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); } }
+      transform: translate(-50%, -50%); }
+  .secondary-button {
+    padding: 15px 5% !important;
+    margin: 4% auto; }
+    .secondary-button span {
+      font-size: 1em !important; }
+  .small-feature-button {
+    width: 100%;
+    padding: 3px 5%;
+    margin: 4% auto; }
+    .small-feature-button span {
+      font-size: 18px !important; } }
+
+@media screen and (max-width: 900px) {
+  h1 {
+    font-size: 5vw; }
+  h2 {
+    font-size: 4vw; }
+  h3 {
+    font-size: 3vw; }
+  .search-pop-up-small-container,
+  .join-room-popup-small-container {
+    display: none !important; }
+  .feature-actions-responsive {
+    display: block !important; }
+  .far-right-disappear {
+    display: none !important;
+    padding: 0 5% 0 0 !important; }
+  .csb-album-image {
+    display: none !important; }
+  .csb-song-info {
+    padding-left: 5% !important; } }
 
 @media screen and (max-width: 600px) {
   h1 {

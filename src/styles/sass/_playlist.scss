@@ -36,7 +36,7 @@
 .csb-container {
   width: 100%;
   height: 50px;
-  background-color: white;
+  background-color: #FFF;
   position: relative;
   position: fixed;
   top: 80px; 
@@ -61,4 +61,38 @@
 
 .csb-song-name {
   color: #0090e0;
+}
+// .mdl-slider {
+//     &:active::-webkit-slider-thumb,
+//     &::-webkit-slider-thumb {
+//         background: black !important;
+//     }
+
+//     &:active::-moz-range-thumb,
+//     &::-moz-range-thumb {
+//         background: black !important;
+//     }
+
+//     &:active::-ms-thumb,
+//     &::-ms-thumb {
+//         background: black !important;
+//     }
+// }
+.mdl-slider > div > div > div {
+  background-color: black ! important;
+}
+.csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1) {
+  background-color: black ! important;
+  &:hover {
+    color: transparent;
+  }
+}
+.no-display-feature {
+    display: block ! important;
+}
+
+  @media screen and (min-width: 900px) {
+  .no-display-feature {
+    display: none ! important;
+  }
 }

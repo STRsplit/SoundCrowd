@@ -1,9 +1,67 @@
 .rightBar-container {
   margin-top: 50px;
   padding-top: 10px;
-  color: black;
+   > div > div:before {
+    content: '';
+    width: 80%;
+    border-bottom: solid 10px #000;
+    margin: -10px auto 5px;
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
+
+  .track-image, .box {
+    width: 100% ! important;
+    margin: 0 auto ! important;
+  }
+  .box img {
+    height: auto;
+    height: 100%;
+    max-height: 100%;
+//    min-height: 100%;
+    width: 100%;
+    max-width: 80px;
+    margin: auto;
+    position:absolute;
+    top:0%;
+    bottom:0%;
+    left:0%;
+    right:0%;
+    display:block;
+    object-fit: contain;
+}
+  .track-main-container {
+    &:after {
+      display: none ! important;
+    }
+  }
+  .track-dual-container {
+    width: 80%;
+    margin: 0 auto;
+    h3 {
+      font-size: 14px;
+    } 
+  }
+  .track-vote-container {
+    display: none ! important;
+  }
 }
 
-.rightBar-container h2 {
-  color: black !important;
+
+.right-display-feature {
+    display: none ! important;
+}
+@media screen and (max-width: 900px) {
+  .rightBar-container {
+    .secondary-button {
+      display: none ! important;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .right-display-feature {
+    display: block ! important;
+  }
 }

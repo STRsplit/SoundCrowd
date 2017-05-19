@@ -33,7 +33,7 @@ const SongEntry = ({ songInfo, images, addSong }) => (
                     <h3>{songInfo.name}</h3>
                      <div className="song-entry-inner-details">
                       {songInfo.artists.slice(0, 3).map((artist, idx) => (
-                        <div key={songInfo.id + idx}>{artist.name}</div>
+                        <div key={songInfo.id}>{artist.name}</div>
                       ))}
              
                     </div>

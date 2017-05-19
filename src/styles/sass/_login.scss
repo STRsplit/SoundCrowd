@@ -15,18 +15,18 @@
 .login-container {
   display: block;
   position: relative;
-  width: 60%;
+  width: 60vw;
   // background-color: colorOpacity(black, 1);
   @include center;
+  hr:nth-child(2) {
+    border: 1px solid #daa520 ! important;
+  }
 }
 
 .login-container button {
-  height: 80px !important;
+
 }
 
-.main-button div {
-  height: 80px !important;
-}
 
 .login-container h2 {
   color: colorOpacity(black, 1);

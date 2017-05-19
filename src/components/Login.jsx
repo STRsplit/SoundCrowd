@@ -45,13 +45,13 @@ class Login extends Component {
   render() {
     const inputRoom = (
       <div className="center-content">
-        <TextField className="enter-room-login" underlineFocusStyle={style.focusTextField} hintText="Enter room code." onChange={this.setPlaylist} errorText={this.state.errorMessage} />
-        <Button disableTouchRipple={true} className="secondary-button" type="primary" onTouchTap={this.validatePlaylist} ><span>Join a Room</span></Button>
+        <TextField className="enter-room-login" underlineErrorStyle={style.errorStyle} underlineFocusStyle={style.focusTextField} hintText="Enter room code." onChange={this.setPlaylist} errorText={this.state.errorMessage} />
+        <Button disableFocusRipple={true} label="Join Room" disableTouchRipple={true} className="small-feature-button" type="primary" onTouchTap={this.validatePlaylist} ></Button>
       </div>
     )
 
     const joinButton = (
-        <Button onClick={this.showJoinRoom} disableTouchRipple={true} className="main-button" type="primary"><span>Join a Room</span></Button>
+        <Button onClick={this.showJoinRoom} label="Join a Room" disableFocusRipple={true} disableTouchRipple={true} className="main-button" type="primary"></Button>
     )
 
     let actionElement = this.state.showInput ? inputRoom : joinButton; 
@@ -62,7 +62,7 @@ class Login extends Component {
             <h2 className="login-title">SoundCrowd</h2>
           </div>
           <div className="button-container">
-            <a style={{"color": "white"}} href="auth/spotify"><Button disableTouchRipple={true} className="main-button" type="primary"><span>Log into Spotify</span></Button></a>
+            <a style={{"color": "white"}} href="auth/spotify"><Button label="Sign into Spotify" disableTouchRipple={true} className="main-button" type="primary"></Button></a>
           </div>
         </div>
           <div className="button-container">

@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 
-import { RaisedButton, Dialog, TextField } from 'material-ui';
+
+import { RaisedButton, Dialog, TextField } from 'material-ui/';
+import style from '../../styles/additionalStyles-css.js';
 
 class JoinRoom extends Component {
   constructor(props) {
@@ -54,28 +56,38 @@ class JoinRoom extends Component {
       <RaisedButton
         label="Cancel"
         onTouchTap={this.handleClose}
-        style={style.button}
+        style={style.plButton}
       />,
       <RaisedButton
         label="Join"
-        keyboardFocused={true}
+        keyboardFocused={false}
         onTouchTap={this.joinPlaylist}
-        style={style.button}
+        style={style.plButton}
       />,
     ];
 
     return (
       <div>
         <RaisedButton label="Join" onTouchTap={this.handleOpen} style={style.button} />
+        <div className="join-room-modal">
         <Dialog
+          title="Join a Room"
           actions={actions}
+          className="join-room-container"
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
-          contentStyle={style.dialog}
+          contentStyle={{width: '100%', transform: 'translate(0, 0)'}}
+          contentClassName="dialog-content"
+          bodyClassName="dialog-body"
+          bodyStyle={{padding: '0 2%'}}
+          style={{paddingTop: '10px ! important', height: '100vh'}}
         >
-          <TextField hintText="Enter room code." fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
+        <div>
+          <TextField hintText="Enter room code." underlineFocusStyle={style.focusTextField} fullWidth={true} onChange={this.setPlaylistId} errorText={this.state.errorMessage} />
+          </div>
         </Dialog>
+        </div>
       </div>
     );
   }
@@ -87,12 +99,3 @@ JoinRoom.contextTypes = {
 };
 
 export default JoinRoom;
-
-const style = {
-  button: {
-    margin: '5px'
-  },
-  dialog: {
-    width: '500px'
-  }
-};
