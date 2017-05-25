@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One');
 @import 'mixins_functions';
 
 // @function property-value($property, $selector: null) {
@@ -10,6 +11,8 @@
 
 .login-title {
   color: black !important;
+  font-size: 6em;
+  font-family: 'Fugaz One', cursive;
 }
 
 .login-container {

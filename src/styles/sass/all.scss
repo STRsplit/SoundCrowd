@@ -72,7 +72,7 @@ h1, h2, h3, h4 {
   color: $white;
 }
 h1 {
-    @include heading-size(6);
+    @include heading-size(8);
 }
 h2 {
      @include heading-size(5);

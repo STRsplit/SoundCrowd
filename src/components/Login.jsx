@@ -59,7 +59,8 @@ class Login extends Component {
       <div className="login-container">
         <div>
           <div className="center-content">
-            <h2 className="login-title">SoundCrowd</h2>
+          <i class="fa fa-volume-up" aria-hidden="true"></i>
+            <h1 className="login-title">SoundCrowd</h1>
           </div>
           <div className="button-container">
             <a style={{"color": "white"}} href="auth/spotify"><Button label="Sign into Spotify" disableTouchRipple={true} className="main-button" type="primary"></Button></a>
