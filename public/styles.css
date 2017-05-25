@@ -82,7 +82,7 @@
   top: 80px;
   right: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-bottom: 30%; }
 
 .login-title {
@@ -283,7 +283,7 @@
   padding-top: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   word-wrap: break-word;
-  overflow-x: scroll; }
+  overflow-x: auto; }
 
 .playlists-h3 {
   margin-top: 10px;
