@@ -1,6 +1,7 @@
 /**
  * MUI Colors module
  */
+@import url("https://fonts.googleapis.com/css?family=Fugaz+One");
 .nav-container {
   width: 100%;
   height: 80px;
@@ -86,7 +87,9 @@
   padding-bottom: 30%; }
 
 .login-title {
-  color: black !important; }
+  color: black !important;
+  font-size: 6em;
+  font-family: 'Fugaz One', cursive; }
 
 .login-container {
   display: block;
@@ -930,7 +933,7 @@ h1, h2, h3, h4 {
   color: #FFF; }
 
 h1 {
-  font-size: 3vw; }
+  font-size: 4vw; }
 
 h2 {
   font-size: 2vw; }
