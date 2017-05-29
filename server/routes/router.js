@@ -117,10 +117,6 @@ module.exports = io => {
     spotify.moveTrack(req.session.tokens, req.user.id, req.body.playlistId, function(err) {
       if (err) console.log(err);
     });
-      // emit socket event
-        // update vote count for that track
-        // needs updated playlist order
-      // respond to client
     res.sendStatus(201);
   });
 

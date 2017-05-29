@@ -14,11 +14,8 @@ const redisStore = require('connect-redis')(session);
 const passport = require('passport');
 const client = process.env.REDIS_URL ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
 
-
 const app = express();
 const port = process.env.PORT || 3000;
-
-
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
@@ -83,7 +80,6 @@ app.get('/api/user/session_info', function(req, res){
 });
 
 /* *  Authentication * */
-
 
 app.get('/logout', handler.logoutUser);
 app.get('*', function(req, res) {
