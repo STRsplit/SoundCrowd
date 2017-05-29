@@ -50,9 +50,9 @@
 
 ## Requirements
 
-- Node 6.4.x
-- Redis 2.6.x
-- MongoDB
+- Node 6.4
+- Redis 2.6
+- MySQL 2.13
 
 ## Development
 
