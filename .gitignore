@@ -3,7 +3,7 @@
 # Logs
 logs
 *.log
-dump*
+dump.rdb
 
 # Runtime data
 pids
