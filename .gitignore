@@ -3,6 +3,7 @@
 # Logs
 logs
 *.log
+dump*
 
 # Runtime data
 pids
