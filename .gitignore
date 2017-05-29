@@ -3,6 +3,8 @@
 # Logs
 logs
 *.log
+
+#DB
 dump.rdb
 
 # Runtime data
