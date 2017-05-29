@@ -84,14 +84,6 @@ app.get('/api/user/session_info', function(req, res){
 
 /* *  Authentication * */
 
-// app.get('/api/trackTest', function(req, res) {
-//   spotify.moveTrack('stevie_reed', '3QcrAjiWGfmgDABjGdi5Ru', function(err) {
-//     if (err) res.status(err.statusCode).send(err);
-//     else res.status(200).send();
-//   });
-// });
-
-
 
 app.get('/logout', handler.logoutUser);
 app.get('*', function(req, res) {
@@ -103,7 +95,4 @@ app.get('/*', function(req, res) {
   res.redirect('/');
 });
 
-// app.listen(port, function() {
-//   console.log(`listening on port!${port}`);
-// });
 
