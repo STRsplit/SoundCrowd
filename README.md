@@ -26,17 +26,17 @@
 
 ## Introduction 
 ### About
-> SoundCrowd - a social jukebox application that extends Spotify's platform enabling multiple users to vote on the track order of a playlist. 
+ SoundCrowd - a social jukebox application that extends Spotify's platform enabling multiple users to vote on the track order of a playlist. 
 
-> Upon signing in, users are presented with a list of their Spotify playlists. Users then select one of their playlists, or use our playlist generator to enable realtime voting on the track order of that playlist. Once the playlist owner is ready to start the first song, a one-click "play" button from the screen initializes the playlist on Spotify and begins reordering the playlist's tracks based on vote count. 
+ Upon signing in, users are presented with a list of their Spotify playlists. Users then select one of their playlists, or use our playlist generator to enable realtime voting on the track order of that playlist. Once the playlist owner is ready to start the first song, a one-click "play" button from the screen initializes the playlist on Spotify and begins reordering the playlist's tracks based on vote count. 
 
-> Any user with the playlist's custom URL can access the voting system, however, users are limited to one vote per track (voter is able to change their mind once ie if they vote up, but meant down they can edit their vote and vice versa). All users see the tracks reorder to reflect vote count in realtime on their screens and the actual Spotify playlist reorders once every 10 seconds.
+ Any user with the playlist's custom URL can access the voting system, however, users are limited to one vote per track (voter is able to change their mind once ie if they vote up, but meant down they can edit their vote and vice versa). All users see the tracks reorder to reflect vote count in realtime on their screens and the actual Spotify playlist reorders once every 10 seconds.
 
-> Once the current track has finished, the highest voted song is queued up and the prior song is placed back into the voting system with a vote count of 0. 
+ Once the current track has finished, the highest voted song is queued up and the prior song is placed back into the voting system with a vote count of 0. 
 
-> All users can add songs to the playlist using our in-app Spotify search feature. Autocompleted search functionality and filter capability allow users to add songs to the playlist while remain in our application - no back and forth navigation from SoundCrowd to Spotify. A convenient side bar shows users the most recently added and played songs so they are privvy to changes.
+ All users can add songs to the playlist using our in-app Spotify search feature. Autocompleted search functionality and filter capability allow users to add songs to the playlist while remain in our application - no back and forth navigation from SoundCrowd to Spotify. A convenient side bar shows users the most recently added and played songs so they are privvy to changes.
 
-> SoundCrowd was engineered to help enhance Spotify's already amazing application of which we are all fans and users. Their continued support and extension of their API affords our application a great deal of room to grow. Some of the features we are excited to work on include: 
+ SoundCrowd was engineered to help enhance Spotify's already amazing application of which we are all fans and users. Their continued support and extension of their API affords our application a great deal of room to grow. Some of the features we are excited to work on include: 
 - Song addition filters set by playlist owner
 - Reverting playlist to original
 - Locking of next song in queue
