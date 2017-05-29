@@ -22,7 +22,7 @@ SoundCrowd - Social jukebox
     1. [Built With](#builtwith)
 1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
-1. [Acknowledgements](#acknowledgements)
+1. [Acknowledgments](#acknowledgments)
 
 ## Introduction 
 ### About
@@ -100,7 +100,7 @@ View the project roadmap [here](LINK_TO_DOC)
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
-## Acknowledgements
+## Acknowledgments
 - [Michael Thelin](https://github.com/thelinmichael) - Michael's [Spotify Web API Wrapper](https://github.com/thelinmichael/spotify-web-api-node) was incredibly useful for a majority of the simpler API calls our application needed to make.
 - [Joshua Comeau](https://github.com/joshwcomeau) - Josh's [React Flip Move](https://github.com/joshwcomeau/react-flip-move) module brought our track reordering to life. Our front-end engineer was ecstatic he didn't have to write CSS animations for the application. 
 - [React Training](https://github.com/ReactTraining) - The documentation for React-Router v4 at [ReactTraining.com](https://reacttraining.com/react-router/web/guides/quick-start) was an invaluable resource.
