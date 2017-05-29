@@ -1,6 +1,6 @@
 # Project Name
 
-> SoundCrowd - Social jukebox
+SoundCrowd - Social jukebox
 
 ## Team
 
@@ -44,7 +44,6 @@
 - Simpler song change mechanism (Spotify "end of song" hook API addition would make it much simpler)
 
 ### How to Use
-...
 ## Usage
 > 
 
