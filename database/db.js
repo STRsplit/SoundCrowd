@@ -74,11 +74,10 @@ module.exports = {
   Vote: Vote
 };
 
-/* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED * * 
+/* * ADD THIS AT LINE 1 DURING SETUP, COMMENT IT BACK AFTER DB IS CREATED - all good * * 
 const mysql = require('mysql');
 const Promise = require('bluebird');
 const dbName = 'music';
-
 const connection = mysql.createConnection({
   user: 'root',
   password: ''
