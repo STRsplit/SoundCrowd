@@ -965,7 +965,7 @@ h3 {
 .feature-actions-responsive {
   display: none !important; }
   .feature-actions-responsive div {
-    width: 80% !important; }
+    padding: 0 10px; }
 
 .main-button:active, .secondary-button:active {
   color: none !important;
