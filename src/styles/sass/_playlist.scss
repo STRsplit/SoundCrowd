@@ -95,9 +95,9 @@
 
 .csb-album-image,
 .csb-song-info {
-  // display: inline-block;
   display: flex;
   flex: 1 0 auto;
+  justify-content: flex-end;
    p {
     width: inherit;
     word-wrap: break-word;
