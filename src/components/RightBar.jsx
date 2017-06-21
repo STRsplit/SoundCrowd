@@ -23,17 +23,13 @@ class RightBar extends Component {
         <div><h2>Playlist Stats:</h2></div>
           <div>
          <h2>Recently Added</h2>
-          <div>{recentlyAddedTracks.map(track => (
-            <div>
-              <Track track={track}/>
-            </div>
-            ))}</div>
-          <h2>Recently Played</h2>
-          <div>{recentlyPlayedTracks.map(track => (
-            <div>
-              <Track track={track}/>
-            </div>
-            ))}</div>
+          <div>
+            {recentlyAddedTracks.map(track => (
+              <div>
+                <Track track={track}/>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -48,7 +44,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-  
   };
 };
 

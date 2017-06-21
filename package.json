@@ -11,7 +11,7 @@
     "build": "react-scripts build",
     "compile": "webpack --watch",
     "production": "webpack && node server/server.js",
-    "start": "npm run build-css && npm run init-webpack && npm run init-server",
+    "start": "npm run production",
     "test": "mocha test/specs.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
