@@ -20,7 +20,6 @@ class RightBar extends Component {
     return (
       <div className="rightBar-container">
         {playlistButton}
-        <div><h2>Playlist Stats:</h2></div>
           <div>
          <h2>Recently Added</h2>
           <div>
