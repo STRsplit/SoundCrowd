@@ -40,20 +40,19 @@ class PlaylistSuggester extends Component {
   }
 
   findPlaylist() {
-    if (this.state.mood === 'Choose One' || this.state.activity === 'Choose One') {
+    let { mood, activity } = this.state
+    if (mood === 'Choose One' || activity === 'Choose One') {
       this.setState({error: true});
     } else {
       this.props.loading();
-      var mood = this.state.mood;
-      var activity = this.state.activity;
-      var playlistName = this.playlistName;
+      let playlistName = this.playlistName;
       axios.post('/api/spotify/playlists', { 
         mood,
         activity,
         playlistName
       }) 
-      .then(res => {
-        var id = res.data;
+      .then(playlist => {
+        let id = playlist.data;
         this.props.methods.history.push(`/playlist/${id}`);
       })
       .catch(err => console.log(err));
@@ -91,10 +90,11 @@ class PlaylistSuggester extends Component {
   }
 
   closeMenu(e) {
-    if ((e.target.className !== 'option' && e.target.id !== 'mood-button') && this.state.showMood === true) {
+    let { className, id } = e.target
+    if ((className !== 'option' && id !== 'mood-button') && this.state.showMood === true) {
       this.toggleMood();
     }
-    if ((e.target.className !== 'option' && e.target.id !== 'activity-button') && this.state.showActivity === true) {
+    if ((className !== 'option' && id !== 'activity-button') && this.state.showActivity === true) {
       this.toggleActivity();
     }
   }
@@ -128,7 +128,12 @@ class PlaylistSuggester extends Component {
     ];
     return (
       <div>
-        <RaisedButton disableTouchRipple={true} className="main-button" label="Get Suggested Playlist" onTouchTap={this.handleOpen} />
+        <RaisedButton disableTouchRipple={true} 
+        className="main-button" 
+        label="Get Suggested Playlist" 
+        onTouchTap={this.handleOpen} 
+        />
+
         <Dialog
           title="Get Suggested Playlist"
           actions={actions}

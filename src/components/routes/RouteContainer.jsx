@@ -9,7 +9,6 @@ import Col from 'muicss/lib/react/col';
 class RouteContainer extends Component {
 
   render() {
-    
     return (
       <div>
         <NavBar />

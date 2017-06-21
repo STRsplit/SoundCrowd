@@ -49,30 +49,30 @@ class Track extends Component {
 
     return (
       <div>
-      <div className={`${trackClass}-main-container`}>
-        <div>
-        </div>
-        <div className="track-dual-container">
+        <div className={`${trackClass}-main-container`}>
+          <div>
+          </div>
+          <div className="track-dual-container">
             <div className="track-vote-container">
-                <div className="track-vote-container-inner">     
-                   {voteActions}
-                </div>
+              <div className="track-vote-container-inner">     
+                 {voteActions}
               </div>
+            </div>
            
             <div className="track-song-details">
               <div className="track-song-details-inner flexbox-container container">
                 <div className="track-image box">
                   <img src={img_url}/>
                 </div>
-                  <div className="song-entry-header">
-                    <h3>{title}</h3>
-                    <h4>{artist}</h4>
-                  </div>
+                <div className="song-entry-header">
+                  <h3>{title}</h3>
+                  <h4>{artist}</h4>
                 </div>
+              </div>
             </div>
           </div>
+        </div>
       </div>
-    </div>
     )
   }
 }

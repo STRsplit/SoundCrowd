@@ -78,14 +78,16 @@ class Playlists extends Component {
   }
 
   displayAll() {
-    return <div>
-      <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
-      <hr />
-      <h2>PLAYLISTS</h2>
+    return (
       <div>
-        { this.loaded ? this.displayPlaylists() : <Spinner size="lg" /> }
+        <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
+        <hr />
+        <h2>PLAYLISTS</h2>
+        <div>
+          { this.loaded ? this.displayPlaylists() : <Spinner size="lg" /> }
+        </div>
       </div>
-    </div>
+    )
   }
 
   render() {

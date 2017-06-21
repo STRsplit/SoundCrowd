@@ -26,7 +26,7 @@ $h1-font-sizes: (
 $breakpoints: (
   smallBP : 480px,
   mediumBP : 720px,
-  largeBP : 900px, // Previously 640px
+  largeBP : 900px,
   maxBP : 1025px
 );
 
@@ -45,10 +45,6 @@ $breakpoints: (
     }
   }
 }
-// @function set-vw($targetSize){
-//   $vw-content: ($max-breakpoint * 0.01) * 1px;
-//   @return ($targetSize / $vw-content) * 1vw; 
-// }
 
 @function get-vw($target) { 
   $vw-context: ($max-breakpoint*.01) * 1px;
@@ -114,8 +110,3 @@ $breakpoints: (
   -webkit-transition: $value;
   transition: $value;
 }
-// @mixin padding() {
-//   @if ($featureWidth < 300px){
-//     padding: 
-//   }
-// }
