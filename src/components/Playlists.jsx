@@ -80,9 +80,7 @@ class Playlists extends Component {
   displayAll() {
     return (
       <div>
-        <PlaylistSuggester methods={this.props} loading={this.showLoading}/>
-        <hr />
-        <h2>PLAYLISTS</h2>
+        <h2 className="main-sub-heading">PLAYLISTS</h2>
         <div>
           { this.loaded ? this.displayPlaylists() : <Spinner size="lg" /> }
         </div>

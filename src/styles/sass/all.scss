@@ -84,6 +84,9 @@ h2 {
 h3 {
     @include heading-size(4);
 }
+.main-sub-heading {
+  @include heading-size(6);
+}
 
 /* * Site Wide Styles * */
 
@@ -117,30 +120,6 @@ h3 {
   background-color: none ! important;
 }
 
-@media screen and (min-width: 900px) {
- h1 {
-    font-size: 36px;
-  }
-  h2 {
-      font-size: 30px;
-  }
-  h3 {
-      font-size: 24px;
-  }
-}
- .search-pop-up-small-container,
-  .join-room-popup-small-container {
-    display: inline-block ! important;
-  }
-.secondary-button {
-  @extend .main-button;
-  padding: 0px $interiorPad;
-  margin: 4% auto;
-  width: 100%;
-  span {
-    font-size: 1em ! important;
-  }
-}
 
 
 @media screen and (max-width: 1024px) {
@@ -182,6 +161,34 @@ h3 {
   }
 
 }
+@media screen and (min-width: 900px) {
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+      font-size: 30px;
+  }
+  h3 {
+      font-size: 24px;
+  }
+  .main-sub-heading {
+    @include heading-size(6);
+  }
+}
+ .search-pop-up-small-container,
+  .join-room-popup-small-container {
+    display: inline-block ! important;
+  }
+.secondary-button {
+  @extend .main-button;
+  padding: 0px $interiorPad;
+  margin: 4% auto;
+  width: 100%;
+  span {
+    font-size: 1em ! important;
+  }
+}
+
 @media screen and (max-width: 900px) {
   h1 {
     @include heading-size(10);
@@ -191,6 +198,9 @@ h3 {
   }
   h3 {
     @include heading-size(6);
+  }
+  .main-sub-heading {
+    @include heading-size(12);
   }
   .search-pop-up-small-container,
   .join-room-popup-small-container {
@@ -226,6 +236,9 @@ h3 {
   }
   h3 {
     @include heading-size(8);
+  }
+  .main-sub-heading {
+    @include heading-size(12);
   }
   .main-button {
     span {

@@ -149,8 +149,6 @@
   text-align: center; }
 
 .spotifyLogoContainer {
-  display: table-cell;
-  vertical-align: middle;
   text-align: center;
   margin: 0% auto; }
 
@@ -1012,6 +1010,9 @@ h2 {
 h3 {
   font-size: 2vw; }
 
+.main-sub-heading {
+  font-size: 3vw; }
+
 /* * Site Wide Styles * */
 /* * Buttons * */
 .main-button, .secondary-button {
@@ -1039,25 +1040,6 @@ h3 {
 .main-button:active, .secondary-button:active {
   color: none !important;
   background-color: none !important; }
-
-@media screen and (min-width: 900px) {
-  h1 {
-    font-size: 36px; }
-  h2 {
-    font-size: 30px; }
-  h3 {
-    font-size: 24px; } }
-
-.search-pop-up-small-container,
-.join-room-popup-small-container {
-  display: inline-block !important; }
-
-.secondary-button {
-  padding: 0px 5%;
-  margin: 4% auto;
-  width: 100%; }
-  .secondary-button span {
-    font-size: 1em !important; }
 
 @media screen and (max-width: 1024px) {
   .button-container {
@@ -1092,6 +1074,27 @@ h3 {
     .small-feature-button span {
       font-size: 18px !important; } }
 
+@media screen and (min-width: 900px) {
+  h1 {
+    font-size: 36px; }
+  h2 {
+    font-size: 30px; }
+  h3 {
+    font-size: 24px; }
+  .main-sub-heading {
+    font-size: 3vw; } }
+
+.search-pop-up-small-container,
+.join-room-popup-small-container {
+  display: inline-block !important; }
+
+.secondary-button {
+  padding: 0px 5%;
+  margin: 4% auto;
+  width: 100%; }
+  .secondary-button span {
+    font-size: 1em !important; }
+
 @media screen and (max-width: 900px) {
   h1 {
     font-size: 5vw; }
@@ -1099,6 +1102,8 @@ h3 {
     font-size: 4vw; }
   h3 {
     font-size: 3vw; }
+  .main-sub-heading {
+    font-size: 6vw; }
   .search-pop-up-small-container,
   .join-room-popup-small-container {
     display: none !important; }
@@ -1125,6 +1130,8 @@ h3 {
     font-size: 5vw; }
   h3 {
     font-size: 4vw; }
+  .main-sub-heading {
+    font-size: 6vw; }
   .main-button span, .secondary-button span {
     display: block;
     width: 100%;
