@@ -64,6 +64,9 @@ a {
   cursor: pointer;
   cursor: hand;
 }
+p {
+  margin: 0;
+}
 button {
   cursor: pointer;
   cursor: hand;
@@ -90,7 +93,6 @@ h3 {
 
 .main-button {
   display: block ! important;
-  width: $featureWidth;
   max-width: $featureWidth + 10%;
   padding: 15px $interiorPad;
   position: relative;
@@ -206,11 +208,15 @@ h3 {
   .csb-album-image {
     display: none ! important;
   }
-  .csb-song-info{
-    padding-left: 5% ! important;
-    
-  }
 
+  .main-button {
+    span {
+      display: block;
+      width: 100%;
+      font-size: 3vw ! important;
+      @include center
+    }
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -222,6 +228,14 @@ h3 {
   }
   h3 {
     @include heading-size(8);
+  }
+  .main-button {
+    span {
+      display: block;
+      width: 100%;
+      font-size: 4vw ! important;
+      @include center
+    }
   }
 }
 

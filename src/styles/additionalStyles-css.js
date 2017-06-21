@@ -17,9 +17,6 @@ const style = {
   avatar: {
     margin: '5px'
   },
-  duration: {
-    float: 'right'
-  },
   slider: {
     margin: '0 auto', 
     width: '75%',

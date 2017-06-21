@@ -78,8 +78,9 @@ module.exports = io => {
     const { name, filter, playlist } = req.query;
     dbHelpers.getPlaylistOwner(playlist)
     .then(playlistOwner => {
-      if (!req.user || playlistOwner.dataValues.user_id !== req.user.id) {
-        dbHelpers.getUser(playlistOwner.dataValues.user_id)
+      const { user_id } = playlistOwner.dataValues
+      if (!req.user || user_id !== req.user.id) {
+        dbHelpers.getUser(user_id)
         .then(owner => {
           const ownerTokens = {
             accessToken: owner.access_token,

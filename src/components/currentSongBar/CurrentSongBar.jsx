@@ -93,30 +93,32 @@ class CurrentSongBar extends Component {
 
     return(
       <div className="csb-container">
-        <Row className="3-col-row">
-          <Col sm="1/4" style={{display: 'flex'}}>          
+        <div className="csb-inner-container">
+          <div className="csb-album-container">          
             <div className="csb-album-image">
               { avatar }
             </div>
             <div className="csb-song-info">
-              <span className="csb-song-name">{name}</span><br/>
-              <span>{`${artist}  ${album}`}</span>
+              <p className="csb-song-name">{name}</p>
+              <p>{`${artist}  ${album}`}</p>
             </div>
-          </Col>
-          <Col sm="2/4"> 
-            <span>{this.convertToTime(progress)}</span>
-            <span style={style.duration}>{this.convertToTime(duration)}</span>
+          </div>
+          <div className="csb-song-progress-container">
+            <div className="csb-song-progress-time"> 
+              <span>{this.convertToTime(progress)}</span>
+              <span>{this.convertToTime(duration)}</span>
+            </div>
             <Slider className="mdl-slider" sliderStyle={style.slider} value={sliderValue} />
-          </Col>
-          <Col sm="1/4" className="far-right-disappear">
-            <Col sm="1/2" className="search-pop-up-small-container" style={style.button} >
+          </div>
+          <div className="csb-buttons far-right-disappear">
+            <div className="search-pop-up-small-container" style={style.button} >
               <SearchPopup />
-            </Col>
-            <Col className="join-room-popup-small-container" sm="1/2" style={style.button} >
+            </div>
+            <div className="join-room-popup-small-container" style={style.button} >
               <JoinRoom getPlaylistTracks={this.props.getPlaylistTracks} />
-            </Col>
-          </Col>
-        </Row>
+            </div>
+          </div>
+        </div>
       </div>  
     );
   }

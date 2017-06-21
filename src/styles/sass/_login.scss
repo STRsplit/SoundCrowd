@@ -12,16 +12,12 @@
   display: block;
   position: relative;
   width: 60vw;
-  // background-color: colorOpacity(black, 1);
   @include center;
   hr:nth-child(2) {
     border: 1px solid #daa520 ! important;
   }
 }
 
-.login-container button {
-
-}
 
 
 .login-container h2 {
@@ -50,7 +46,6 @@
 
 .center-content {
   display: block;
-  // margin: 10% auto 0%;
   text-align: center;
   width: 80%;
   margin: centerContent(0%);
@@ -92,7 +87,6 @@
     display: block;
     position: relative;
     width: 100%;
-    // background-color: colorOpacity(black, 1);
     @include center;
   }
   .secondary-button {
@@ -121,7 +115,13 @@
     @include center(80%);
     @include vertical-align(10%);
   }
-
+  @media screen and (max-width: 900px) {
+    .login-title {
+      color: black !important;
+      font-size: 10vw;
+      font-family: 'Fugaz One', cursive;
+    }
+  }
 }
 
 

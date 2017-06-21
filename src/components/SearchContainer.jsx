@@ -100,9 +100,15 @@ class SearchContainer extends Component {
 
   autoCompleteSearchSpotify() {
     let { search, filter } = this.props.search;
-    axios.get(`https://api.spotify.com/v1/search?q=${filter}:${search}&type=track`)
+    axios.get('/api/search/', { 
+      params: {
+        name: search,
+        filter: filter,
+        playlist: this.props.playlist.id
+      }
+    })
     .then(data => {
-      let songs = data.data.tracks.items;
+      let songs = data.data;
       this.props.setDataSource(songs);
     })
     .catch(error => {

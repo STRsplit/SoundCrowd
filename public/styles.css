@@ -40,12 +40,6 @@
 .nav-container .container {
   width: 100%; }
 
-.nav-container-name {
-  float: left; }
-
-.nav-container-logout {
-  float: right; }
-
 .main-app-container {
   display: block;
   padding-top: 20px;
@@ -73,9 +67,6 @@
   .column-mid {
     width: 100% !important;
     display: block; } }
-
-.main-left-column {
-  background-color: pink; }
 
 .column-right {
   background-color: transparent;
@@ -205,6 +196,12 @@
     -webkit-transform: translateY(-10%);
     -ms-transform: translateY(-10%); } }
 
+@media screen and (max-width: 1024px) and (max-width: 900px) {
+  .login-title {
+    color: black !important;
+    font-size: 10vw;
+    font-family: 'Fugaz One', cursive; } }
+
 .playlist-container {
   margin-top: 60px; }
 
@@ -236,28 +233,84 @@
 /* * Current Song Bar * */
 .csb-container {
   width: 100%;
-  height: 50px;
-  background-color: #FFF;
-  position: relative;
+  background-color: #fff;
   position: fixed;
   top: 80px;
   z-index: 20;
   left: 0;
-  right: 0; }
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 0 auto; }
 
-.csb-album-image {
-  display: inline-block; }
+.csb-inner-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 100%; }
+
+.csb-album-container {
+  min-height: 1px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  display: flex; }
+
+.csb-song-progress-container {
+  flex: 4 0 auto;
+  align-items: stretch;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+.csb-song-progress-time {
+  flex: 1 0 auto;
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex; }
+  .csb-song-progress-time span {
+    flex: 1 0 auto; }
+
+.csb-buttons {
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  display: flex; }
+
+.csb-album-image,
+.csb-song-info {
+  display: flex;
+  flex: 1 0 auto; }
+  .csb-album-image p,
+  .csb-song-info p {
+    width: inherit;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word; }
+
+.csb-song-info {
+  padding: 0 5px;
+  flex: 1 0 auto;
+  flex-direction: column;
+  display: flex; }
 
 .open {
   color: white !important; }
 
-.csb-song-info {
-  display: inline-block;
-  margin: auto 0;
-  vertical-align: middle; }
-
 .csb-song-name {
   color: #0090e0; }
+
+.mdl-slider {
+  display: flex;
+  flex: 1 .5   auto; }
 
 .mdl-slider > div > div > div {
   background-color: black !important; }
@@ -273,6 +326,17 @@
 @media screen and (min-width: 900px) {
   .no-display-feature {
     display: none !important; } }
+
+@media screen and (max-width: 600px) {
+  .csb-song-progress-container {
+    display: none; }
+  .csb-album-container {
+    min-height: 1px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    flex: 1 0 80%;
+    display: inline-block; } }
 
 /* Playlist.jsx styles */
 .playlists-single-container {
@@ -926,6 +990,9 @@ a {
   cursor: pointer;
   cursor: hand; }
 
+p {
+  margin: 0; }
+
 button {
   cursor: pointer;
   cursor: hand; }
@@ -946,7 +1013,6 @@ h3 {
 /* * Buttons * */
 .main-button, .secondary-button {
   display: block !important;
-  width: 60%;
   max-width: 70%;
   padding: 15px 5%;
   position: relative;
@@ -1040,8 +1106,14 @@ h3 {
     padding: 0 5% 0 0 !important; }
   .csb-album-image {
     display: none !important; }
-  .csb-song-info {
-    padding-left: 5% !important; } }
+  .main-button span, .secondary-button span {
+    display: block;
+    width: 100%;
+    font-size: 3vw !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); } }
 
 @media screen and (max-width: 600px) {
   h1 {
@@ -1049,7 +1121,15 @@ h3 {
   h2 {
     font-size: 5vw; }
   h3 {
-    font-size: 4vw; } }
+    font-size: 4vw; }
+  .main-button span, .secondary-button span {
+    display: block;
+    width: 100%;
+    font-size: 4vw !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); } }
 
 .spinner-div {
   position: absolute;
