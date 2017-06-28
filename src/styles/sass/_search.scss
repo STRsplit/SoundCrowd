@@ -9,12 +9,12 @@
   width: 25%;
   display: inline-block;
   .mui-btn {
-    font-size: 1em ! important;
-    background-color: rgb(48, 48, 48) ! important;
-    color: white ! important;
+    font-size: 1em !important;
+    background-color: $darkGrey !important;
+    color: white !important;
     &:hover {
-      background-color: white ! important;
-      color: black ! important;
+      background-color: white !important;
+      color: black !important;
     }
   }
 
@@ -32,13 +32,13 @@
 }
 .mui-dropdown:hover {
   width: 100%;
-  background-color: rgb(48, 48, 48) ! important;
+  background-color: $darkGrey !important;
   .mui-btn {
-    background-color: rgb(48, 48, 48) ! important;
+    background-color: $darkGrey !important;
   }
 }
 .search-button {
-  color: white ! important;
+  color: white !important;
 
 }
 .search-modal-button {
@@ -50,61 +50,63 @@
 }
 .search-popup-modal {
   .track-vote-container-inner {
-    padding: 6px ! important;
+    padding: 6px !important;
+    display: flex;
+    justify-content: center;
   }
-  position: fixed ! important;
-  transition: none ! important;
-  transform: none ! important;
-  margin-top: 10vh ! important;
+  position: fixed !important;
+  transition: none !important;
+  transform: none !important;
+  margin-top: 10vh !important;
   h3 {
-    border-bottom: 0px ! important;
+    border-bottom: 0px !important;
   }
   .song-entry-inner-details {
-    color: #000 ! important;
+    color: #FFF !important;
   }
   .mui-form {
     .row {
-      color: #FFF ! important;
+      color: #FFF !important;
     }
   }
    div {
     height: auto;
-    transform: none ! important;
+    transform: none !important;
       div {
-      background-color: rgba(0, 0, 0, 0.7) ! important;
-      // margin: 10vh auto ! important;
+      background-color: colorOpacity(#000, 0.7) !important;
+      // margin: 10vh auto !important;
       div {
-        background-color: rgba(255, 255, 255, 0) ! important;
-        transition: none ! important;
+        background-color: colorOpacity(#FFF, 0) !important;
+        transition: none !important;
         .song-entry-header {
           clear: both;
           text-align: right;
           h3 {
             font-size: 1.25em;
-            color: #000;
+            color: #FFF;
           }
         }
       }
     }
   }
   .track-dual-container {
-    background-color: rgba(255, 255, 255, 0.75) ! important;
-    padding: 8px 0 important;
+    background-color: colorOpacity(#2980b9, 0.75) !important;
+    padding: 8px 0important;
   }
 }
 .search-popup-modal > div >  div:nth-child(1) {
-    transform: none ! important;
-    transition: none ! important;
+    transform: none !important;
+    transition: none !important;
    
 }
 .search-popup-modal > div >  div > div > div:nth-child(2) {
-  border-top: 0px ! important;
+  border-top: 0px !important;
 }
 
 .searchcontainer-container {
   width: 100%;
-  background-color: #fff;
-  margin-top: 0 ! important;
+  background-color: $white;
+  margin-top: 0 !important;
 }
 md-backdrop.md-opaque.md-default-theme,
 .md-dialog-container {
@@ -113,19 +115,19 @@ md-backdrop.md-opaque.md-default-theme,
 @media screen and (max-width: 900px) {
   .main-search-text-field {
     width: 100%;
-    display: block ! important;
+    display: block !important;
     div {
       width: 100%;
-      display: block ! important;
+      display: block !important;
     }
   }
   .main-search-button-container {
     width: 100%;
-    display: block ! important;
+    display: block !important;
     .mui-btn {
       width: 80%;
-      display: block ! important;
-      margin: 0 auto ! important;
+      display: block !important;
+      margin: 0 auto !important;
     }
   }
 }

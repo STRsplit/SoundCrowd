@@ -13,6 +13,7 @@ import axios from 'axios';
 import $ from 'jquery';
 
 const SongEntry = ({ songInfo, images, addSong }) => (
+  
   <div>
     <div className="track-main-container">
       <div>

@@ -16,11 +16,6 @@ class AutoCompleteSearch extends Component {
     this.props.handleInput(value);
   }
 
-
-  // handleClick(e) {
-  //  
-  // }
-
   render() {
 
     let { stats, handleInput, handleSongAdd } = this.props

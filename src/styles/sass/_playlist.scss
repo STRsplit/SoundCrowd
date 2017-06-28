@@ -1,3 +1,5 @@
+@import 'mixins_functions';
+
 .playlist-container {
   margin-top: 60px;
 }
@@ -9,24 +11,24 @@
 
 .playlist-vote-error-popup {
   width: 100%;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: colorOpacity(#000, 0.7);
   div {
     margin: 0 auto;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0) ! important;
+    background-color: colorOpacity(#000, 0) !important;
     font-weight: 600;
-    font-color: #FB8900 ! important;
+    font-color: $white !important;
       div {
         width: 100%;
-        font-color: #FB8900 ! important;
-        font-size: 2vw ! important;
+        font-color: $white !important;
+        font-size: 2vw !important;
         white-space: nowrap;
         @media screen and (max-width: 768px) {
-          font-size: 4vw ! important;
+          font-size: 4vw !important;
         }
           span {
             width: 100%;
-            color: #FFF ! important;
+            color: $white !important;
           }
       }
   }
@@ -36,7 +38,7 @@
 /* * Current Song Bar * */
 .csb-container {
   width: 100%;
-  background-color: #fff;
+  background-color: $white;
   position: fixed;
   top: 80px;
   z-index: 20;
@@ -71,6 +73,10 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+.csb-song-progress-container span {
+  color: $darkGrey;
+  font-weight: 500;
 }
 
 .csb-song-progress-time {
@@ -124,23 +130,27 @@
   display: flex;
   flex: 1 .5   auto;
 }
-
-.mdl-slider > div > div > div {
-  background-color: black ! important;
+.mdl-slider > div > div > div:nth-child(3) {
+  width: 12px !important;
+  height: 12px !important;
 }
+.mdl-slider > div > div > div {
+  background-color: $goldAccent !important;
+}
+
 .csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1) {
-  background-color: black ! important;
+  background-color: $goldAccent !important;
   &:hover {
     color: transparent;
   }
 }
 .no-display-feature {
-    display: block ! important;
+    display: block !important;
 }
 
 @media screen and (min-width: 900px) {
   .no-display-feature {
-    display: none ! important;
+    display: none !important;
   }
 }
 @media screen and (max-width: 600px) {

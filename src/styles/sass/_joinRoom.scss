@@ -1,14 +1,16 @@
+@import 'mixins_functions';
+
 .join-room-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
     margin: 0 5px;
 }
 .join-room-container > div > div:nth-child(1) > div > div > div:nth-child(3) > div {
-   margin: 0 5px ! important;
+   margin: 0 5px !important;
 }
 
 .join-room-container > div:first-child > .dialog-content > div > .dialog-body{
     overflow-y: visible !important;
-    background-color: transparent ! important;
-    padding: 5% ! important;
+    background-color: transparent !important;
+    padding: 5% !important;
 }
 
 .join-room-container > div:first-child > .dialog-content {
@@ -20,7 +22,7 @@
 
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: colorOpacity(#000, 0);
   margin: 0 auto;
 }
 
@@ -29,12 +31,12 @@
   max-width: 700px;
   max-height: 100%;
   flex-direction: column;
-  background-color: $modalBG ! important;
-  margin: 0 auto ! important;
+  background-color: $modalBG !important;
+  margin: 0 auto !important;
 }
 .join-room-container {
-  margin-top: 10vh ! important;
-  position: fixed ! important;
-  transition: none ! important;
-  transform: none ! important;
+  margin-top: 10vh !important;
+  position: fixed !important;
+  transition: none !important;
+  transform: none !important;
 }

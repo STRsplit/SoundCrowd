@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { RaisedButton as Button } from 'material-ui';
 import Track from './Track.jsx';
 import style from '../styles/additionalStyles-css.js';
-// import { } from '../actions/playlistStatActions';
 
 class RightBar extends Component {
 

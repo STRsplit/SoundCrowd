@@ -5,7 +5,7 @@
 .nav-container {
   width: 100%;
   height: 80px;
-  background-color: #000 !important;
+  background-color: #303030 !important;
   position: fixed;
   display: block;
   z-index: 25; }
@@ -13,7 +13,7 @@
 .main-navigation-site {
   width: 100%;
   height: 80px !important;
-  background-color: #000 !important;
+  background-color: #303030 !important;
   position: fixed;
   display: block;
   padding-top: 5px; }
@@ -218,10 +218,10 @@
     width: 100%;
     background-color: transparent !important;
     font-weight: 600;
-    font-color: #FB8900 !important; }
+    font-color: #FFF !important; }
     .playlist-vote-error-popup div div {
       width: 100%;
-      font-color: #FB8900 !important;
+      font-color: #FFF !important;
       font-size: 2vw !important;
       white-space: nowrap; }
       @media screen and (max-width: 768px) {
@@ -234,7 +234,7 @@
 /* * Current Song Bar * */
 .csb-container {
   width: 100%;
-  background-color: #fff;
+  background-color: #FFF;
   position: fixed;
   top: 80px;
   z-index: 20;
@@ -268,6 +268,10 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column; }
+
+.csb-song-progress-container span {
+  color: #303030;
+  font-weight: 500; }
 
 .csb-song-progress-time {
   flex: 1 0 auto;
@@ -314,11 +318,15 @@
   display: flex;
   flex: 1 .5   auto; }
 
+.mdl-slider > div > div > div:nth-child(3) {
+  width: 12px !important;
+  height: 12px !important; }
+
 .mdl-slider > div > div > div {
-  background-color: black !important; }
+  background-color: #daa520 !important; }
 
 .csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1) {
-  background-color: black !important; }
+  background-color: #daa520 !important; }
   .csb-container > div > div:nth-child(2) > div > div > div > div:nth-child(1):hover {
     color: transparent; }
 
@@ -340,7 +348,6 @@
     flex: 1 0 80%;
     display: inline-block; } }
 
-/* Playlist.jsx styles */
 .playlists-single-container {
   display: flex;
   margin: 15px;
@@ -408,11 +415,13 @@
   transform: none !important;
   margin-top: 10vh !important; }
   .search-popup-modal .track-vote-container-inner {
-    padding: 6px !important; }
+    padding: 6px !important;
+    display: flex;
+    justify-content: center; }
   .search-popup-modal h3 {
     border-bottom: 0px !important; }
   .search-popup-modal .song-entry-inner-details {
-    color: #000 !important; }
+    color: #FFF !important; }
   .search-popup-modal .mui-form .row {
     color: #FFF !important; }
   .search-popup-modal div {
@@ -428,10 +437,10 @@
           text-align: right; }
           .search-popup-modal div div div .song-entry-header h3 {
             font-size: 1.25em;
-            color: #000; }
+            color: #FFF; }
   .search-popup-modal .track-dual-container {
-    background-color: rgba(255, 255, 255, 0.75) !important;
-    padding: 8px 0 important; }
+    background-color: rgba(41, 128, 185, 0.75) !important;
+    padding: 8px 0important; }
 
 .search-popup-modal > div > div:nth-child(1) {
   transform: none !important;
@@ -442,7 +451,7 @@
 
 .searchcontainer-container {
   width: 100%;
-  background-color: #fff;
+  background-color: #FFF;
   margin-top: 0 !important; }
 
 md-backdrop.md-opaque.md-default-theme,
@@ -473,11 +482,11 @@ hr {
   padding: 5%; }
 
 .track-add-song-button {
-  background-color: #d7dadb; }
+  background-color: #FFF; }
 
 .track-add-song-button:hover {
-  background-color: #000;
-  color: white; }
+  background-color: #daa520;
+  color: #FFF; }
 
 *,
 *:after,
@@ -558,7 +567,6 @@ body {
   .track-main-container:after {
     content: '';
     width: 100%;
-    border-bottom: solid 3px #fff;
     margin-top: 2%;
     position: relative;
     display: block;
@@ -606,8 +614,7 @@ body {
 .track-dual-container > div:first-child {
   display: flex;
   object-fit: contain;
-  flex: 0.75;
-  margin-right: 20px; }
+  flex: 0.75 1 0; }
 
 .flexbox-container {
   display: -ms-flex;
@@ -703,7 +710,7 @@ body {
 .topTrack-main-container:after {
   content: '';
   width: 100%;
-  border-bottom: dashed 5px #fff;
+  border-bottom: solid 10px #daa520;
   margin: 0 auto;
   margin-top: 2%;
   position: relative;
@@ -738,7 +745,7 @@ body {
   .rightBar-container > div > div:before {
     content: '';
     width: 80%;
-    border-bottom: solid 10px #000;
+    border-bottom: solid 10px #303030;
     margin: -10px auto 5px;
     position: relative;
     display: block;
@@ -781,163 +788,6 @@ body {
   .right-display-feature {
     display: block !important; } }
 
-#recommended-container {
-  padding: 5%;
-  width: 100%;
-  height: 270px; }
-  #recommended-container > div {
-    width: 100% !important;
-    margin: 2px auto; }
-
-#recommended-container h2, h3 {
-  color: white; }
-
-.dialog {
-  width: 500px !important; }
-
-.dialog div {
-  overflow-y: visible !important; }
-
-.recommended-error {
-  margin-top: 20px;
-  color: red; }
-
-#mood {
-  height: 28px;
-  margin-bottom: 15px; }
-
-#mood-label {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 4px;
-  margin-right: 12px; }
-
-#mood-container {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  left: 20px; }
-
-#mood-button {
-  height: 28px;
-  width: 150px;
-  text-align-last: center;
-  color: black;
-  border: none;
-  opacity: .5;
-  background-color: #fff; }
-
-#mood-button:focus {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none; }
-
-#mood-menu {
-  position: relative;
-  cursor: pointer;
-  z-index: 100; }
-
-#mood-menu div {
-  height: 24px;
-  width: 150px;
-  background-color: #fff;
-  color: black; }
-
-#mood-menu div:hover {
-  background: #b2ddea; }
-
-#activity {
-  height: 28px; }
-
-#activity-label {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 4px; }
-
-#activity-container {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  left: 13px; }
-
-#activity-button {
-  height: 28px;
-  width: 150px;
-  text-align-last: center;
-  color: black;
-  display: inline-block;
-  border: none;
-  opacity: .5;
-  background-color: #fff; }
-
-#activity-button:focus {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none; }
-
-#activity-menu {
-  position: relative;
-  cursor: pointer;
-  z-index: 10; }
-
-#activity-menu div {
-  height: 24px;
-  width: 150px;
-  background-color: #fff;
-  color: black; }
-
-#activity-menu div:hover {
-  background: #b2ddea; }
-
-#recommended-link {
-  color: inherit;
-  text-decoration: none;
-  display: block; }
-
-#loading {
-  color: black; }
-
-#recommended-container #activity-menu div:hover,
-#recommended-container #mood-menu div:hover {
-  color: white;
-  background-color: #1385e5; }
-
-.playlist-suggester-container > div:first-child > .dialog-content > div > .dialog-body {
-  overflow-y: visible !important;
-  background-color: transparent !important; }
-
-.playlist-suggester-container > div:first-child > .dialog-content {
-  transform: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  padding-top: 10vh !important; }
-
-.playlist-suggester-container > div:first-child > .dialog-content > div {
-  width: 100%;
-  max-width: 700px;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  margin: 0 auto !important; }
-
-.playlist-suggester-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
-  margin: 0 5px; }
-
-@media screen and (max-width: 900px) {
-  #recommended-container,
-  #preferences,
-  #recommended-container > div {
-    width: 100% !important; } }
-
 .join-room-container > div:first-child > .dialog-content > div > div:nth-child(2) > div {
   margin: 0 5px; }
 
@@ -978,7 +828,7 @@ body {
 
 html,
 body {
-  background-color: #a7a3a5;
+  background-color: #2980b9;
   min-width: 360px !important;
   margin: 0;
   padding: 0; }
@@ -990,7 +840,8 @@ ol {
 
 a {
   cursor: pointer;
-  cursor: hand; }
+  cursor: hand;
+  color: #daa520; }
 
 p {
   margin: 0; }
@@ -1009,7 +860,11 @@ h2 {
   font-size: 2vw; }
 
 h3 {
-  font-size: 2vw; }
+  font-size: 2vw;
+  font-weight: 400 !important; }
+
+h4 {
+  font-weight: 400 !important; }
 
 .main-sub-heading {
   font-size: 3vw; }

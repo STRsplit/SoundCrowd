@@ -14,6 +14,7 @@ class Navbar extends Component {
   privateNavItems() {
     return (
       <IconMenu
+        className="main-menu"
         listStyle={ style.menu }
         iconButtonElement={<IconButton><Menu /></IconButton>}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -29,6 +30,7 @@ class Navbar extends Component {
   publicNavItems() {
     return (
       <IconMenu
+        className="main-menu"
         listStyle={ style.menu }
         iconButtonElement={<IconButton><Menu /></IconButton>}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}

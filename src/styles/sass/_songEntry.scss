@@ -1,7 +1,7 @@
 @import 'mixins_functions';
 
 hr {
- margin-top: 2% ! important;
+ margin-top: 2% !important;
 }
 
 .song-entry-container {
@@ -11,19 +11,10 @@ hr {
 }
 
 .track-add-song-button {
-  background-color: #d7dadb;
+  background-color: $white;
 }
 .track-add-song-button:hover {
-  background-color: #000;
-  color: white;
-}
-.song-entry-header {
-
-}
-.song-entry-inner-details {
-
+  background-color: $goldAccent;
+  color: $white;
 }
 
-.song-entry-container button {
-
-}

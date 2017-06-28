@@ -108,7 +108,7 @@ class CurrentSongBar extends Component {
               <span>{this.convertToTime(progress)}</span>
               <span>{this.convertToTime(duration)}</span>
             </div>
-            <Slider className="mdl-slider" sliderStyle={style.slider} value={sliderValue} />
+            <Slider disabled className="mdl-slider" sliderStyle={style.slider} value={sliderValue} />
           </div>
           <div className="csb-buttons far-right-disappear">
             <div className="search-pop-up-small-container" style={style.button} >

@@ -10,21 +10,11 @@
 @import '_accordion';
 @import '_track';
 @import '_rightBar';
-@import '_playlistSuggester';
 @import '_joinRoom';
 @import 'mixins_functions';
 
 
 $step-size-heading: 0.5;
-
-
-// @function colorOpacity($color, $opacity) {
-//   @return rgba($color, $opacity)
-// }
-
-// @function centerContent($margin-top){
-//   @return $margin-top auto;
-// }
 
 
 @mixin heading-size($size) {
@@ -49,8 +39,8 @@ $step-size-heading: 0.5;
 
 html,
 body {
-  background-color: colorOpacity(#a7a3a5, 1);
-  min-width: 360px ! important;
+  background-color: colorOpacity($mainBlue, 1);
+  min-width: 360px !important;
   margin:0;
   padding:0;
 }
@@ -63,6 +53,7 @@ ol {
 a {
   cursor: pointer;
   cursor: hand;
+  color: $goldAccent;
 }
 p {
   margin: 0;
@@ -83,6 +74,10 @@ h2 {
 }
 h3 {
     @include heading-size(4);
+    font-weight: 400 !important;
+}
+h4 {
+  font-weight: 400 !important;
 }
 .main-sub-heading {
   @include heading-size(6);
@@ -95,7 +90,7 @@ h3 {
 
 
 .main-button {
-  display: block ! important;
+  display: block !important;
   max-width: $featureWidth + 10%;
   padding: 15px $interiorPad;
   position: relative;
@@ -103,21 +98,21 @@ h3 {
     span {
       display: block;
       width: 100%;
-      font-size: 1.75em ! important;
+      font-size: 1.75em !important;
       margin: 2px auto;
       padding: 15px $interiorPad;;
       @include center
     }
 }
 .feature-actions-responsive {
-  display: none ! important;
+  display: none !important;
   div {
     padding: 0 10px;
   }
 }
 .main-button:active {
-  color: none ! important;
-  background-color: none ! important;
+  color: none !important;
+  background-color: none !important;
 }
 
 
@@ -140,15 +135,15 @@ h3 {
       span {
         display: block;
         width: 100%;
-        font-size: 1.75em ! important;
+        font-size: 1.75em !important;
         @include center
       }
   }
   .secondary-button {
-    padding: 15px $interiorPad ! important;
+    padding: 15px $interiorPad !important;
     margin: 4% auto;
     span {
-      font-size: 1em ! important;
+      font-size: 1em !important;
     }
   }
   .small-feature-button {
@@ -156,7 +151,7 @@ h3 {
     padding: 3px $interiorPad;
     margin: 4% auto;
     span {
-      font-size: 18px ! important;
+      font-size: 18px !important;
     }
   }
 
@@ -177,7 +172,7 @@ h3 {
 }
  .search-pop-up-small-container,
   .join-room-popup-small-container {
-    display: inline-block ! important;
+    display: inline-block !important;
   }
 .secondary-button {
   @extend .main-button;
@@ -185,7 +180,7 @@ h3 {
   margin: 4% auto;
   width: 100%;
   span {
-    font-size: 1em ! important;
+    font-size: 1em !important;
   }
 }
 
@@ -204,24 +199,24 @@ h3 {
   }
   .search-pop-up-small-container,
   .join-room-popup-small-container {
-    display: none ! important;
+    display: none !important;
   }
   .feature-actions-responsive {
-    display: block ! important;
+    display: block !important;
   }
     .far-right-disappear {
-    display: none ! important;
-    padding: 0 5% 0 0 ! important;
+    display: none !important;
+    padding: 0 5% 0 0 !important;
   }
   .csb-album-image {
-    display: none ! important;
+    display: none !important;
   }
 
   .main-button {
     span {
       display: block;
       width: 100%;
-      font-size: 3vw ! important;
+      font-size: 3vw !important;
       @include center
     }
   }
@@ -244,7 +239,7 @@ h3 {
     span {
       display: block;
       width: 100%;
-      font-size: 4vw ! important;
+      font-size: 4vw !important;
       @include center
     }
   }

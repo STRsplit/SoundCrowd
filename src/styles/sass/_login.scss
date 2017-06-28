@@ -1,4 +1,3 @@
-
 @import 'mixins_functions';
 
 
@@ -14,7 +13,7 @@
   width: 60vw;
   @include center;
   hr:nth-child(2) {
-    border: 1px solid #daa520 ! important;
+    border: 1px solid #daa520 !important;
   }
 }
 
@@ -52,7 +51,7 @@
 }
 .enter-room-login {
   display: inline;
-    width: 60% ! important;
+    width: 60% !important;
     margin: 2%;
 }
 .about-brief {
@@ -92,7 +91,7 @@
     width: 100%;
   }
   .enter-room-login {
-    width: 100% ! important;
+    width: 100% !important;
     margin: 0 auto;
   }
 

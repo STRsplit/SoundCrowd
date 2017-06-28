@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { setPlaylists } from '../actions/playlistsActions';
 import { setPlaylistId, setPlaylistTracks, setPlaylistOwner } from '../actions/playlistActions';
 
-import PlaylistSuggester from './playlistSuggester/PlaylistSuggester.jsx';
-
 import { Spinner } from 'elemental';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
