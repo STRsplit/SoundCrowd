@@ -16,15 +16,15 @@
   background-color: #303030 !important;
   position: fixed;
   display: block;
-  padding-top: 5px; }
+  padding-top: 8px !important; }
 
 .main-navigation-site h1, path {
-  color: white !important;
-  fill: white !important;
+  color: #FFF !important;
+  fill: #FFF !important;
   font-family: 'Fugaz One', cursive; }
 
 .main-navigation-site h1 {
-  padding-top: 2px; }
+  padding-top: 2px !important; }
 
 .nav-container-name {
   float: left;
@@ -82,7 +82,7 @@
   padding-bottom: 30%; }
 
 .login-title {
-  color: black !important;
+  color: #daa520 !important;
   font-size: 6em;
   font-family: 'Fugaz One', cursive; }
 
@@ -139,14 +139,15 @@
   margin: 2%; }
 
 .about-brief {
-  width: 50%;
+  width: 65%;
   padding: 2%;
   display: block;
   margin: 0% auto; }
 
 .tagline {
-  font: Helvetica, sans-serif;
-  text-align: center; }
+  font-size: 18px;
+  text-align: center;
+  color: #303030; }
 
 .spotifyLogoContainer {
   text-align: center;
@@ -199,7 +200,7 @@
 
 @media screen and (max-width: 1024px) and (max-width: 900px) {
   .login-title {
-    color: black !important;
+    color: #daa520 !important;
     font-size: 10vw;
     font-family: 'Fugaz One', cursive; } }
 

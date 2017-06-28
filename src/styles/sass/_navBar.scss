@@ -14,16 +14,16 @@
   background-color: $darkGrey !important;
   position: fixed;
   display: block;
-  padding-top: 5px;
+  padding-top: 8px !important;
 }
 
 .main-navigation-site h1, path {
-  color: white !important;
-  fill: white !important;
+  color: $white !important;
+  fill: $white !important;
   font-family: 'Fugaz One', cursive;
 }
 .main-navigation-site h1 {
-  padding-top: 2px;
+  padding-top: 2px !important;
 }
 
 .nav-container-name {

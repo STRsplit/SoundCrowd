@@ -2,7 +2,7 @@
 
 
 .login-title {
-  color: black !important;
+  color: $goldAccent !important;
   font-size: 6em;
   font-family: 'Fugaz One', cursive;
 }
@@ -55,15 +55,16 @@
     margin: 2%;
 }
 .about-brief {
-  width: $offsetHalf;
+  width: $offsetHalf + 15%;
   padding: $smallPad;
   display: block;
   margin: centerContent(0%);
 }
 
 .tagline {
-  font: $font-stack;
+  font-size: 18px;
   text-align: center;
+  color: $darkGrey;
 }
 
 .spotifyLogoContainer {
@@ -114,7 +115,7 @@
   }
   @media screen and (max-width: 900px) {
     .login-title {
-      color: black !important;
+      color: $goldAccent !important;
       font-size: 10vw;
       font-family: 'Fugaz One', cursive;
     }
