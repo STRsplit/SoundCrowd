@@ -125,7 +125,9 @@ const style = {
     textDecoration: 'none'
   },
   labelstyle: {
-    paddingLeft: '5px'
+    paddingLeft: '5px',
+    color: '#daa520',
+    fontColor: '#daa520'
   },
   flatbutton: {
     paddingLeft: '12px',
