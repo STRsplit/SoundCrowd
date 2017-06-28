@@ -81,6 +81,7 @@ h4 {
 }
 .main-sub-heading {
   @include heading-size(6);
+  font-weight: 500;
 }
 
 /* * Site Wide Styles * */
@@ -168,6 +169,7 @@ h4 {
   }
   .main-sub-heading {
     @include heading-size(6);
+    font-weight: 500;
   }
 }
  .search-pop-up-small-container,
@@ -196,6 +198,8 @@ h4 {
   }
   .main-sub-heading {
     @include heading-size(12);
+    font-weight: 500;
+
   }
   .search-pop-up-small-container,
   .join-room-popup-small-container {
@@ -234,6 +238,7 @@ h4 {
   }
   .main-sub-heading {
     @include heading-size(12);
+    font-weight: 500;
   }
   .main-button {
     span {
