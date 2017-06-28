@@ -82,8 +82,12 @@
 }
 
 .flexbox-container > div:first-child {
+  margin-right: 20px;
   width: 20%;
   object-fit: contain;
+}
+.track-vote-container {
+  margin-right: 0 !important;
 }
 
 .track-song-details {
@@ -166,6 +170,7 @@
     display: flex;
     object-fit: contain;
     flex: 0.75;
+    margin-right: 20px;
   }
   .voteCount { 
     font-size: 4em;
