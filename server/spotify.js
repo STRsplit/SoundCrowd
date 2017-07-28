@@ -2,7 +2,6 @@ var request = require('request');
 var requestPromise = require('request-promise');
 var db = require('../database/db');
 var dbHelpers = require('../database/dbHelpers');
-var customPlaylist = require('./customPlaylist');
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -78,29 +77,7 @@ module.exports = {
       });
   },
 
-  createPlaylist: function(tokens, userId, preferences, cb) {
-    const spotify = this.authorizeSpotify(tokens);
-    var date = new Date( new Date().getTime() + -7 * 3600 * 1000).toUTCString();
-    var playlistName = `SoundCrowd - ${preferences.playlistName || date.slice(5, 11) + ' ' + date.slice(17, 25)}`;
-    spotify.createPlaylist(userId, playlistName, {public: true})
-      .then((data) => {
-        var newPlaylistId = data.body.id;
-        spotify.getPlaylistsForCategory('mood', { limit: 50 })
-          .then((info) => {
-            var playlistId = customPlaylist.selectPlaylist(info.body.playlists.items, preferences.mood)
-            spotify.getPlaylist('spotify', playlistId)
-              .then((resp) => {
-                var result = customPlaylist.selectTracks(resp, preferences.activity, userId, newPlaylistId);
-                spotify.addTracksToPlaylist(userId, newPlaylistId, result.uri)
-                .then((res) => console.log('added tracks'));
-                cb(null, result.id);
-              });
-          })
-      })
-      .catch(err => {
-        cb(err);
-      });
-  },
+  
 
   hasAccessToken: function(tokens) {
     const spotify = this.authorizeSpotify(tokens);
