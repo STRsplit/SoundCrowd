@@ -18,13 +18,6 @@ describe('Login', function() {
     const wrapper = shallow(<Login/>);
     const JoinButton = wrapper.find('.button-container').at(0).find({label: 'Sign into Spotify'})
     expect(JoinButton.exists()).to.be.true
-    // JoinButton.simulate('click', { preventDefault() {} })
-    // const x = wrapper.find('.button-container').at(1).childAt(0).hasClass('small-feature-button');
   });
   
 });
-// const expect = require('chai').expect;
-// const Sequelize = require('sequelize');
-// const Browser = require('zombie');
-// const db = require('../database/db.js');
-// const { keys }= require('./config/keys.js');
