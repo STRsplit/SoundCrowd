@@ -489,14 +489,6 @@ hr {
   background-color: #daa520;
   color: #FFF; }
 
-*,
-*:after,
-*:before {
-  box-sizing: border-box; }
-
-body {
-  font-family: 'Nobile', sans-serif; }
-
 .demo-container {
   padding: 40px;
   width: 100%; }

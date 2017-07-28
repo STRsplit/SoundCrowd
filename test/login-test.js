@@ -2,7 +2,8 @@ var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 var Browser = require('zombie');
 var db = require('../database/db.js');
-var keys = require('../config/keys.js');
+var { keys }= require('./config/keys.js');
+
 
 describe('Database Schema:', function() {
 	it('contains a User table', function(done) {
@@ -51,6 +52,7 @@ describe('Database Schema:', function() {
 });
 
 describe('Spotify Login:', function() {
+	  this.timeout(15000);
 	var browser = new Browser();
 
 	beforeEach(function(done) {
@@ -67,7 +69,7 @@ describe('Spotify Login:', function() {
 	});
 
 	it('does not login user with incorrect password', function(done) {
-    this.timeout(10000);
+    
     browser
     .fill('Username or email address', 'a')
     .fill('Password', 'a')
@@ -79,17 +81,17 @@ describe('Spotify Login:', function() {
 	});
 
 	it('logs in user with correct password', function(done) {
-		this.timeout(10000);
+		this.timeout(18000);
     browser
     .fill('Username or email address', keys.email)
     .fill('Password', keys.password)
     .pressButton('Log In')
     .then(function() {
-	    browser.pressButton('Okay')
+    	browser.pressButton('Okay')
 	    .then(function() {
-	    	browser.assert.success();
-	    	done();
-	    });
+    	browser.assert.success();
+    	done();
+    });
 	  });
 	});
 });

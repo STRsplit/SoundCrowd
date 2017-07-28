@@ -13,6 +13,7 @@ module.exports = {
     jQuery: 'jQuery',
     foundation: 'Foundation'
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
