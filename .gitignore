@@ -33,7 +33,7 @@ bower_components/
 #ENVIRONMENT VARIABLES
 config/keys.js
 test/config/keys.js
-server/setup.js
+server/setupConfig.js
 
 #DS
 .DS_Store
